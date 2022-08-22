@@ -1,0 +1,69 @@
+apply from: rootProject.file("scripts/custom/versions.gradle")
+apply plugin: 'io.codearte.nexus-staging'
+
+buildscript {
+    // Project-wide variables
+    ext {
+        kotlin_version = "1.6.10"
+    }
+    
+    /**
+     * The repositories block configures the repositories Gradle uses to
+     * search or download the dependencies.
+     */
+    repositories {
+        google()
+        mavenCentral()
+        gradlePluginPortal()
+        // maven { url "https://jitpack.io"  }
+        // jcenter()
+    }
+    
+    /**
+     * The dependencies block configures the dependencies Gradle needs to use
+     * to build your project.
+     */
+    dependencies {
+        classpath "com.android.tools.build:gradle:7.1.2"
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
+        
+        // Dependency update checking plugin
+        classpath "com.github.ben-manes:gradle-versions-plugin:0.42.0"
+        
+        // Hilt DI plugin
+        classpath 'com.google.dagger:hilt-android-gradle-plugin:2.41'
+    
+        // Plugin to deploy library modules
+        classpath "io.codearte.gradle.nexus:gradle-nexus-staging-plugin:0.30.0"
+    }
+}
+
+/**
+ * The allprojects block is where you configure the repositories and
+ * dependencies used by all modules in your project, such as third-party plugins
+ * or libraries. However, you should configure module-specific dependencies in
+ * each module-level build.gradle file. For new projects.
+ */
+allprojects {
+    repositories {
+        google()
+        mavenCentral()
+        gradlePluginPortal()
+        // maven { url "https://jitpack.io"  }
+        // jcenter()
+    }
+}
+
+subprojects {
+    tasks.withType(org.jetbrains.kotlin.gradle.tasks.KotlinCompile).all {
+        // Kotlin compiler JVM-target version (as string)
+        kotlinOptions {
+            jvmTarget = JavaVersion.VERSION_1_8
+            freeCompilerArgs += ["-module-name", project.path.replace(':', '')]
+        }
+    
+        // Kotlin compiler JVM-target version (as int)
+        sourceCompatibility = JavaVersion.VERSION_1_8
+        targetCompatibility = JavaVersion.VERSION_1_8
+    }
+}
