@@ -48,7 +48,7 @@ jobs:
                 run: bash ./gradlew assembleDebug --stacktrace
 
             -   name: Upload APK
-                uses: actions/upload-artifact@v1
+                uses: actions/upload-artifact@v3
                 with:
                     name: debug-apk-artifact
                     path: sample/build/outputs/apk/debug/sample-debug.apk # appears 2 times

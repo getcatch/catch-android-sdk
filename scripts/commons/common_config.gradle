@@ -2,6 +2,11 @@
  * Common code between App and Library modules
  * */
 apply plugin: "kotlin-android"
+apply plugin: "io.gitlab.arturbosch.detekt"
+
+detekt {
+    autoCorrect = true
+}
 
 android {
     compileSdkVersion 31
@@ -35,4 +40,8 @@ android {
         exclude("DebugProbesKt.bin")
         exclude("LICENSE.txt")
     }
+}
+
+dependencies {
+    detektPlugins "io.gitlab.arturbosch.detekt:detekt-formatting:1.21.0"
 }
