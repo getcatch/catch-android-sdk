@@ -10,6 +10,10 @@ class CatchTest {
     fun greet() {
         assertThat(
             Catch.greet()
+        ).isEqualTo("Not yet initialized.")
+        Catch.initialize("test-public-key")
+        assertThat(
+            Catch.greet()
         ).isEqualTo("Hello from Catch!")
     }
 }

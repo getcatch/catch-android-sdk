@@ -1,5 +1,3 @@
-apply from: rootProject.file("scripts/custom/versions.gradle")
-apply plugin: 'io.codearte.nexus-staging'
 
 buildscript {
     // Project-wide variables
@@ -32,11 +30,15 @@ buildscript {
         
         // Hilt DI plugin
         classpath 'com.google.dagger:hilt-android-gradle-plugin:2.41'
-    
-        // Plugin to deploy library modules
-        classpath "io.codearte.gradle.nexus:gradle-nexus-staging-plugin:0.30.0"
     }
 }
+
+plugins {
+    id "io.gitlab.arturbosch.detekt" version "1.21.0"
+    id 'io.codearte.nexus-staging' version "0.30.0"
+}
+
+//apply from: rootProject.file("scripts/custom/versions.gradle")
 
 /**
  * The allprojects block is where you configure the repositories and
@@ -65,5 +67,8 @@ subprojects {
         // Kotlin compiler JVM-target version (as int)
         sourceCompatibility = JavaVersion.VERSION_1_8
         targetCompatibility = JavaVersion.VERSION_1_8
+    }
+    detekt {
+        autoCorrect = true
     }
 }
