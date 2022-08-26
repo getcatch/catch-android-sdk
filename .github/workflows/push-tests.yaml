@@ -25,9 +25,6 @@ jobs:
             -   name: System Information         
                 run: printf "\nKernel:\n " && uname -a && printf "\n\nMemory:\n " && free -h && printf "\n\nStorage:\n" && df -h && ls -la && pwd
 
-            -   name: Build
-                run: ./gradlew build --stacktrace
-
             -   name: Run tests
                 run: ./gradlew test --stacktrace # testDebug or testRelease (if you have any)
 
@@ -52,9 +49,6 @@ jobs:
 
             -   name: System Information         
                 run: printf "\nKernel:\n " && uname -a && printf "\n\nMemory:\n " && free -h && printf "\n\nStorage:\n" && df -h && ls -la && pwd
-
-            -   name: Build
-                run: ./gradlew build --stacktrace
 
             -   name: Lint
                 run: ./gradlew lint --stacktrace
@@ -81,14 +75,13 @@ jobs:
             -   name: System Information
                 run: printf "\nKernel:\n " && uname -a && printf "\n\nMemory:\n " && free -h && printf "\n\nStorage:\n" && df -h && ls -la && pwd
 
-            -   name: Build
-                run: ./gradlew build --stacktrace
-
             -   name: Run Detekt
                 run: ./gradlew detekt --stacktrace
 
-            -   name: Detekt SDK results
+            -   name: Detekt results
                 uses: actions/upload-artifact@v3
                 with:
                     name: detekt-reports
-                    path: ./**/*detekt.html
+                    path: |
+                        catch-android-sdk/build/reports/detekt/detekt.html
+                        sample/build/reports/detekt/detekt.html
