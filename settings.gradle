@@ -1,2 +1,1 @@
-// TODO update module names to your project
-include ':sample', ':complex_numbers'
+include ':sample', ':catch-android-sdk'

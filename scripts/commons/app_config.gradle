@@ -3,7 +3,6 @@
  * */
 apply plugin: "com.android.application"
 
-// TODO update sample package name according to your project
-android.defaultConfig.applicationId = "com.cioccarellia.buildsample"
+android.defaultConfig.applicationId = "com.getcatch.buildsample"
 
 apply from: rootProject.file("scripts/commons/common_config.gradle")

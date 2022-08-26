@@ -9,7 +9,6 @@ plugins {
 }
 
 // Module
-// TODO update module name & data according to your project
 ext.module_name = "sample"
 
 // Android app script
@@ -20,7 +19,7 @@ apply from: rootProject.file("scripts/commons/app_config.gradle")
  * */
 android {
     defaultConfig {
-        versionName "1.0.0-app-sample"
+        versionName "0.0.0-app-sample"
         versionCode 3
     }
     
@@ -74,7 +73,7 @@ android {
  * App dependencies
  * */
 dependencies {
-    implementation project(":complex_numbers")
+    implementation project(":catch-android-sdk")
     
     implementation "androidx.core:core-ktx:1.7.0"
     implementation "androidx.appcompat:appcompat:1.4.1"

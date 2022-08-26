@@ -1,4 +1,4 @@
-package com.cioccarellia.sample
+package com.getcatch.sample
 
 import android.app.Application
 import dagger.hilt.android.HiltAndroidApp

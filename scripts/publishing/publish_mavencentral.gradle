@@ -4,8 +4,7 @@ apply plugin: 'signing'
 /**
  * Current module coordinate object which is chosen to be deployed.
  * */
-// TODO rename `deployModuleName` to the target module for deployment.
-def deployModuleName = "complex_numbers"
+def deployModuleName = "catch-android-sdk"
 
 // Do not edit this
 def currentDeployModule = project.ext.get("module_${deployModuleName}")
@@ -88,27 +87,24 @@ publishing {
                 url = currentDeployModule.PUBLISH_ARTIFACT_WEBSITE
                 
                 licenses {
-                    // TODO update license according to your project
                     license {
-                        name = 'APACHE LICENSE'
-                        url = 'https://github.com/cioccarellia/lib-template-android/blob/master/LICENSE.md'
+                        name = 'MIT LICENSE'
+                        url = 'https://github.com/getcatch/catch-android-sdk/blob/master/LICENSE'
                     }
                 }
                 
                 developers {
-                    // TODO update developer(s) data according to your project
                     developer {
-                        id = 'cioccarellia'
-                        name = 'Andrea Cioccarelli'
-                        email = 'andrea.cioccarelli01@gmail.com'
+                        id = 'clarksandholtz'
+                        name = 'Clark Sandholtz'
+                        email = 'clark.sandholtz@getcatch.com'
                     }
                 }
                 
                 scm {
-                    // TODO update connection parameters according to your project
-                    connection = 'scm:git:github.com/cioccarellia/lib-template-android.git'
-                    developerConnection = 'scm:git:ssh://github.com/cioccarellia/lib-template-android.git'
-                    url = 'https://github.com/cioccarellia/lib-template-android/tree/main'
+                    connection = 'scm:git:github.com/getcatch/catch-android-sdk.git'
+                    developerConnection = 'scm:git:ssh://github.com/getcatch/catch-android-sdk.git'
+                    url = 'https://github.com/getcatch/catch-android-sdk/tree/main'
                 }
                 
                 withXml {
@@ -127,7 +123,7 @@ publishing {
     repositories {
         maven {
             name = "sonatype"
-            url = "https://oss.sonatype.org/service/local/staging/deploy/maven2/"
+            url = "https://s01.oss.sonatype.org/service/local/staging/deploy/maven2/"
             
             credentials {
                 username ossrhUsername
