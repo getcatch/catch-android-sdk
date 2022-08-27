@@ -5,7 +5,7 @@ apply plugin: "kotlin-android"
 apply plugin: "io.gitlab.arturbosch.detekt"
 
 detekt {
-    autoCorrect = true
+    // TODO: Decide on any additional config
 }
 
 android {
