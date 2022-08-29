@@ -1,4 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="hello_x">Hello, %1$s!</string>
+    <string name="tofu_earn_placeholder">Earn 10% when you pay with</string>
+    <string name="tofu_redeem_amount">Redeem %1$s! when you pay with</string>
+    <string name="content_description_catch_logo">The Catch logo</string>
 </resources>
