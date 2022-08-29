@@ -1,4 +1,4 @@
-package com.getcatch.sampletest
+package com.getcatch.sample
 
 import com.getcatch.android.Catch
 import com.google.common.truth.Truth.assertThat
