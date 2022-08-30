@@ -53,6 +53,16 @@
             </LinearLayout>
         </com.google.android.material.card.MaterialCardView>
 
+        <com.getcatch.android.view.TOFUView
+            android:id="@+id/test_tofu_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            android:padding="16dp"/>
+
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

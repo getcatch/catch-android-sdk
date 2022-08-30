@@ -85,3 +85,58 @@ jobs:
                     path: |
                         catch-android-sdk/build/reports/detekt/detekt.html
                         sample/build/reports/detekt/detekt.html
+
+    ui-test:
+        name: UI Test
+        runs-on: macos-latest
+        strategy:
+            matrix:
+                api-level: [ 21, 23, 29 ]
+                arch: [ x86, x86_64 ]
+                exclude:
+                    -   api-level: 21
+                        arch: x86_64
+                    -   api-level: 29
+                        arch: x86
+        steps:
+            -   name: checkout
+                uses: actions/checkout@v2
+
+            -   name: Setup java 11
+                uses: actions/setup-java@v3
+                with:
+                    distribution: 'adopt'
+                    java-version: '11'
+
+            -   name: Gradle cache
+                uses: gradle/gradle-build-action@v2
+
+            -   name: AVD cache
+                uses: actions/cache@v3
+                id: avd-cache
+                with:
+                    path: |
+                        ~/.android/avd/*
+                        ~/.android/adb*
+                    key: avd-${{ matrix.api-level }}
+
+            -   name: create AVD and generate snapshot for caching
+                if: steps.avd-cache.outputs.cache-hit != 'true'
+                uses: reactivecircus/android-emulator-runner@v2
+                with:
+                    api-level: ${{ matrix.api-level }}
+                    force-avd-creation: false
+                    emulator-build: 7425822
+                    emulator-options: -no-window -gpu swiftshader_indirect -noaudio -no-boot-anim -camera-back none
+                    disable-animations: false
+                    script: echo "Generated AVD snapshot for caching."
+
+            -   name: run tests
+                uses: reactivecircus/android-emulator-runner@v2
+                with:
+                    api-level: ${{ matrix.api-level }}
+                    arch: ${{ matrix.arch }}
+                    force-avd-creation: false
+                    emulator-options: -no-snapshot-save -no-window -gpu swiftshader_indirect -noaudio -no-boot-anim -camera-back none
+                    disable-animations: true
+                    script: ./gradlew connectedCheck
