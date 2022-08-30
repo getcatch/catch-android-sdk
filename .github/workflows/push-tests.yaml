@@ -118,13 +118,14 @@ jobs:
                     path: |
                         ~/.android/avd/*
                         ~/.android/adb*
-                    key: avd-${{ matrix.api-level }}
+                    key: avd-${{ matrix.api-level }}-${{ matrix.arch }}
 
             -   name: create AVD and generate snapshot for caching
                 if: steps.avd-cache.outputs.cache-hit != 'true'
                 uses: reactivecircus/android-emulator-runner@v2
                 with:
                     api-level: ${{ matrix.api-level }}
+                    arch: ${{ matrix.arch }}
                     force-avd-creation: false
                     emulator-build: 7425822
                     emulator-options: -no-window -gpu swiftshader_indirect -noaudio -no-boot-anim -camera-back none
@@ -137,6 +138,7 @@ jobs:
                     api-level: ${{ matrix.api-level }}
                     arch: ${{ matrix.arch }}
                     force-avd-creation: false
+                    emulator-build: 7425822
                     emulator-options: -no-snapshot-save -no-window -gpu swiftshader_indirect -noaudio -no-boot-anim -camera-back none
                     disable-animations: true
                     script: ./gradlew connectedCheck

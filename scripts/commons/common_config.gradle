@@ -9,7 +9,7 @@ detekt {
 }
 
 android {
-    compileSdkVersion 31
+    compileSdkVersion 33
     
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
@@ -21,8 +21,8 @@ android {
     }
     
     defaultConfig {
-        minSdkVersion 15
-        targetSdkVersion 31
+        minSdkVersion 21
+        targetSdkVersion 33
     }
     
     sourceSets {
