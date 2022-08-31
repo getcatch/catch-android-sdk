@@ -24,7 +24,7 @@ class MainViewModel @Inject constructor() : ViewModel() {
         }
     }
 
-    val complexFLow = _complexFlow.stateIn(
+    val secondsFlow = _complexFlow.stateIn(
         viewModelScope,
         SharingStarted.WhileSubscribed(FIVE_SECONDS_IN_MILLIS),
         0
