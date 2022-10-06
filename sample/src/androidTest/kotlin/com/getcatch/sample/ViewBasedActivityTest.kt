@@ -26,34 +26,7 @@ class ViewBasedActivityTest {
 
     @Test
     fun onCreated_earnText() {
-        onView(withText("Earn 10% when you pay with")).check(matches(isDisplayed()))
-        composeTestRule.onNodeWithText("Earn 10% when you pay with").assertIsDisplayed()
+        onView(withId(R.id.test_callout_view)).check(matches(isDisplayed()))
+        composeTestRule.onNodeWithText("earn 10% credit").assertIsDisplayed()
     }
-
-    @Test
-    fun onClickTofuView_redeemText() {
-        // Check earn text
-        val classicalView =
-            onView(allOf(withId(R.id.test_tofu_view), withChild(withSubstring("Earn"))))
-        classicalView.check(
-            matches(
-                isDisplayed()
-            )
-        )
-        composeTestRule.onNodeWithText("Earn", substring = true).assertIsDisplayed()
-
-        // Click views
-        classicalView.perform(click())
-        onView(withId(R.id.test_compose_tofu_view)).perform(click())
-
-        // Check text updated
-        onView(
-            allOf(
-                withId(R.id.test_tofu_view),
-                withChild(withSubstring("Redeem"))
-            )
-        ).check(matches(isDisplayed()))
-        composeTestRule.onNodeWithText("Redeem", substring = true).assertIsDisplayed()
-    }
-
 }

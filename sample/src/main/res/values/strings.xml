@@ -3,4 +3,5 @@
     <string name="overline_counter">Seconds passed</string>
     <string name="go_to_compose_activity_btn_label">Go to ComposeActivity</string>
     <string name="go_to_view_based_activity_btn_label">Go to ViewBasedActivity</string>
+    <string name="toggle_theme">Toggle Theme</string>
 </resources>

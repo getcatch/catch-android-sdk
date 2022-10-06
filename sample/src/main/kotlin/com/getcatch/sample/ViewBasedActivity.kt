@@ -4,12 +4,12 @@ import android.content.Intent
 import android.os.Bundle
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatDelegate
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
-import com.getcatch.android.view.ComposeBackedTOFUView
-import com.getcatch.android.view.TOFUView
+import com.getcatch.android.views.CalloutView
 import com.getcatch.sample.databinding.ActivityViewBasedBinding
 import com.google.android.material.button.MaterialButton
 import dagger.hilt.android.AndroidEntryPoint
@@ -23,14 +23,12 @@ class ViewBasedActivity : AppCompatActivity() {
     private val vm: MainViewModel by viewModels()
 
     private lateinit var binding: ActivityViewBasedBinding
-    private lateinit var tofuView: TOFUView
-    private lateinit var composeBackedTOFUView: ComposeBackedTOFUView
+    private lateinit var calloutView: CalloutView
     private lateinit var goToComposeActivityBtn: MaterialButton
+    private lateinit var toggleThemeBtn: MaterialButton
 
     private fun goToComposeActivity() {
-        val intent = Intent(this, ComposeActivity::class.java).apply {
-            flags = Intent.FLAG_ACTIVITY_NO_HISTORY
-        }
+        val intent = Intent(this, ComposeActivity::class.java)
         startActivity(intent)
     }
 
@@ -41,13 +39,17 @@ class ViewBasedActivity : AppCompatActivity() {
         goToComposeActivityBtn.setOnClickListener {
             goToComposeActivity()
         }
-        tofuView = binding.testTofuView
-        tofuView.setOnClickListener {
-            tofuView.setRedeemableRewards(Random.nextInt(from = 0, until = 10000))
+        calloutView = binding.testCalloutView
+        calloutView.setOnClickListener {
+            calloutView.redeemableRewards = Random.nextInt(from = 0, until = 10000)
         }
-        composeBackedTOFUView = binding.testComposeTofuView
-        composeBackedTOFUView.setOnClickListener {
-            composeBackedTOFUView.redeemableRewards = Random.nextInt(from = 0, until = 10000)
+        toggleThemeBtn = binding.toggleThemeBtn
+        toggleThemeBtn.setOnClickListener {
+            val newMode = when (AppCompatDelegate.getDefaultNightMode()) {
+                AppCompatDelegate.MODE_NIGHT_NO -> AppCompatDelegate.MODE_NIGHT_YES
+                else -> AppCompatDelegate.MODE_NIGHT_NO
+            }
+            AppCompatDelegate.setDefaultNightMode(newMode)
         }
 
         lifecycleScope.launch {

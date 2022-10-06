@@ -5,27 +5,30 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.viewModels
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.Button
 import androidx.compose.material.Text
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
-import com.getcatch.android.composable.TOFUWidget
+import com.getcatch.android.composables.Callout
+import com.getcatch.android.composables.CampaignLink
+import com.getcatch.android.composables.CatchLogo
+import com.getcatch.android.composables.CatchLogoSize
+import com.getcatch.android.composables.ExpressCheckoutCallout
+import com.getcatch.android.composables.Payment
+import com.getcatch.android.composables.PurchaseConfirmation
+import com.getcatch.android.theming.BorderStyle
+import com.getcatch.android.theming.CalloutBorderStyle
 import dagger.hilt.android.AndroidEntryPoint
-import kotlin.random.Random
 
 @AndroidEntryPoint
 class ComposeActivity : ComponentActivity() {
@@ -33,34 +36,35 @@ class ComposeActivity : ComponentActivity() {
     private val vm: MainViewModel by viewModels()
 
     private fun goToViewBasedActivity() {
-        val intent =
-            Intent(this, ViewBasedActivity::class.java).apply {
-                flags = Intent.FLAG_ACTIVITY_NO_HISTORY
-            }
+        val intent = Intent(this, ViewBasedActivity::class.java)
         startActivity(intent)
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
-            var redeemableRewards by remember { mutableStateOf<Int?>(null) }
             val secondsPassed by vm.secondsFlow.collectAsState()
             Column(
-                modifier = Modifier.fillMaxSize(),
+                modifier = Modifier
+                    .fillMaxSize()
+                    .padding(horizontal = 16.dp)
+                    .padding(top = 32.dp)
+                    .verticalScroll(rememberScrollState()),
                 horizontalAlignment = Alignment.CenterHorizontally,
-                verticalArrangement = Arrangement.Center
+                verticalArrangement = Arrangement.spacedBy(
+                    16.dp,
+                    alignment = Alignment.CenterVertically
+                )
             ) {
                 Text(text = "Seconds passed: $secondsPassed")
-                Box(
-                    modifier = Modifier
-                        .padding(16.dp)
-                        .testTag("TOFUWidgetWrapper")
-                        .clickable {
-                            redeemableRewards = Random.nextInt(from = 0, until = 10000)
-                        }
-                ) {
-                    TOFUWidget(redeemableRewards)
-                }
+                Callout(borderStyle = CalloutBorderStyle.Pill)
+                Payment()
+                ExpressCheckoutCallout(borderStyle = CalloutBorderStyle.SlightRound)
+                PurchaseConfirmation(rewardsAmount = 1000, borderStyle = BorderStyle.SlightRound)
+                CampaignLink(rewardsAmount = 1500, borderStyle = BorderStyle.Square)
+                CatchLogo()
+                CatchLogo(size = CatchLogoSize.MEDIUM)
+                CatchLogo(size = CatchLogoSize.FILL)
                 Button(onClick = { goToViewBasedActivity() }) {
                     Text(text = stringResource(id = R.string.go_to_view_based_activity_btn_label))
                 }

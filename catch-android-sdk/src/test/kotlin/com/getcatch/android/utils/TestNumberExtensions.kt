@@ -1,4 +1,4 @@
-package com.getcatch.android.util
+package com.getcatch.android.utils
 
 import org.junit.Test
 

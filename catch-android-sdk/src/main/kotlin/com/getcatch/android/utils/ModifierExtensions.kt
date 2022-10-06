@@ -1,4 +1,4 @@
-package com.getcatch.android.util
+package com.getcatch.android.utils
 
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.layout

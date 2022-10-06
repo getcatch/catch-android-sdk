@@ -1,7 +1,26 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="hello_x">Hello, %1$s!</string>
-    <string name="tofu_earn_placeholder">Earn 10% when you pay with</string>
-    <string name="tofu_redeem_amount">Redeem %1$s when you pay with</string>
+    <string name="tofu_earn_placeholder">Earn 10%</string>
+    <string name="tofu_redeem_amount">Redeem %1$d</string>
+    <string name="or_prefix">or</string>
+    <string name="em_dash_prefix">– </string>
+    <string name="by_paying_with">by paying with</string>
+    <string name="with">with</string>
+    <string name="info_character">ⓘ</string>
+    <string name="pay_by_bank">Pay by bank.</string>
+    <string name="find_us_at_the">Find us at the\ </string>
+    <string name="payment_step">Payment step</string>
+    <string name="you_earned">You earned %1$s</string>
+    <string name="to_spend_at">\ to spend at %1$s 🎉</string>
+    <string name="to_spend_at_next_time">\ to spend at %1$s next time you pay with Catch 💸</string>
+    <string name="view_your_credit">View your credit</string>
+    <string name="claim_store_credit">Claim %1$s store credit</string>
+    <string name="claim_now_and_start_earning">Claim now and start earning 10% on every order.</string>
+
+    <!--  Content descriptions  -->
     <string name="content_description_catch_logo">The Catch logo</string>
+    <string name="content_description_merchant_logo">The merchant logo</string>
+
+    <string name="merchant_preference_file_key">FILE_KEY_CATCH_SDK_MERCHANT_SHARED_PREFERENCES</string>
 </resources>

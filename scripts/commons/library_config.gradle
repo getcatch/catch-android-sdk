@@ -2,4 +2,5 @@
  * Library-only configuration
  * */
 apply plugin: "com.android.library"
+apply plugin: 'kotlinx-serialization'
 apply from: rootProject.file("scripts/commons/common_config.gradle")

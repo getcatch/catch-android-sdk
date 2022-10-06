@@ -24,7 +24,7 @@
             android:scaleType="fitStart"
             android:adjustViewBounds="true"
             android:contentDescription="@string/content_description_catch_logo"
-            android:src="@drawable/ic_catch_logo"
+            android:src="@drawable/ic_catch_logo_dark"
             app:layout_constraintStart_toEndOf="@id/tofu_text"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
