@@ -1,31 +1,29 @@
 package com.getcatch.android
 
+import android.content.Context
 import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.State
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.ui.text.font.FontFamily
-import com.getcatch.android.exceptions.CatchNotInitializedException
+import com.getcatch.android.di.sdkModule
 import com.getcatch.android.repository.MerchantRepository
 import com.getcatch.android.theming.CatchTypography
 import com.getcatch.android.theming.ThemeVariantOption
 import kotlinx.coroutines.MainScope
 import kotlinx.coroutines.launch
+import org.koin.android.ext.koin.androidContext
+import org.koin.core.context.startKoin
 
 public object Catch {
-    private var publicKey: String? = null
-
-    public fun initialize(publicKey: String): Unit = synchronized(this) {
-        this.publicKey = publicKey
+    public fun initialize(publicKey: String, context: Context): Unit = synchronized(this) {
+        val koinApp = startKoin {
+            androidContext(context)
+            modules(sdkModule)
+        }
+        val merchantRepo = koinApp.koin.get<MerchantRepository>()
         MainScope().launch {
-            MerchantRepository.loadMerchant(publicKey = publicKey)
+            merchantRepo.loadMerchant(publicKey = publicKey)
         }
-    }
-
-    public fun greet(): String = synchronized(this) {
-        if (publicKey == null) {
-            throw CatchNotInitializedException()
-        }
-        return "Hello from Catch!"
     }
 
     private val _customFontFamily: MutableState<FontFamily> =

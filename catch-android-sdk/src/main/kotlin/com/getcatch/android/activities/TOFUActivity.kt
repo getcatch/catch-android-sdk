@@ -20,13 +20,16 @@ import com.getcatch.android.repository.MerchantRepository
 import com.google.accompanist.web.AccompanistWebViewClient
 import com.google.accompanist.web.WebView
 import com.google.accompanist.web.rememberWebViewState
+import org.koin.core.component.KoinComponent
+import org.koin.core.component.inject
 
-internal class TOFUActivity : ComponentActivity() {
+internal class TOFUActivity : ComponentActivity(), KoinComponent {
     private var webView: WebView? = null
+    private val merchantRepo: MerchantRepository by inject()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
-            val activeMerchant by MerchantRepository.activeMerchant.collectAsState()
+            val activeMerchant by merchantRepo.activeMerchant.collectAsState()
             Column(
                 modifier = Modifier.fillMaxSize(),
                 horizontalAlignment = Alignment.CenterHorizontally,

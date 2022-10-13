@@ -59,12 +59,11 @@ android {
     }
 }
 
-
 /**
  * Library dependencies
  * */
 dependencies {
-    // Kotlin dependencies
+    // KOTLIN DEPENDENCIES
     compileOnly "androidx.annotation:annotation:1.2.0"
     implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlinVersion"
     implementation "androidx.core:core-ktx:1.8.0"
@@ -72,11 +71,23 @@ dependencies {
     implementation "androidx.constraintlayout:constraintlayout:2.1.4"
     implementation "androidx.webkit:webkit:1.5.0"
     
-    // Ktor dependencies
+    // KTOR DEPENDENCIES
     implementation "io.ktor:ktor-client-core:2.1.1"
     implementation "io.ktor:ktor-client-android:2.1.1"
     implementation "io.ktor:ktor-serialization-kotlinx-json:2.1.1"
     implementation "io.ktor:ktor-client-content-negotiation:2.1.1"
+    
+    // KOIN DI DEPENDENCIES
+    // Koin Core features
+    implementation "io.insert-koin:koin-core:3.2.2"
+    // Koin Test features
+    testImplementation "io.insert-koin:koin-test:3.2.2"
+    // Koin for JUnit 4
+    testImplementation "io.insert-koin:koin-test-junit4:3.2.2"
+    // Koin main features for Android
+    implementation "io.insert-koin:koin-android:3.2.2"
+    // Jetpack Compose
+    implementation "io.insert-koin:koin-androidx-compose:3.2.1"
     
     // COMPOSE DEPENDENCIES
     // Integration with activities

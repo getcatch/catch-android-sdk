@@ -11,6 +11,8 @@ internal data class Merchant(
     val url: String,
     val rewardsLifetimeInDays: Int,
     val cardBackground: String,
+    val cardBackgroundImageUrl: String? = null,
+    val cardBackgroundColor: String? = null,
     val cardFontColor: String,
     val hasTheme: Boolean,
 ) {
