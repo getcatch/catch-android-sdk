@@ -13,7 +13,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.getcatch.android.R
-import com.getcatch.android.activities.TOFUActivity
+import com.getcatch.android.activities.tofu.TOFUActivity
 import com.getcatch.android.theming.CatchTheme
 import com.getcatch.android.theming.CatchTypography
 
