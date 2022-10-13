@@ -28,10 +28,15 @@ import com.getcatch.android.theming.CatchTheme
 import com.getcatch.android.theming.CatchTypography
 import com.getcatch.android.theming.LocalThemeVariant
 import com.getcatch.android.utils.centsToDollarsString
+import org.koin.androidx.compose.get
 
 @Composable
-public fun CampaignLink(rewardsAmount: Int, borderStyle: BorderStyle? = null) {
-    val merchant by MerchantRepository.activeMerchant.collectAsState()
+public fun CampaignLink(
+    rewardsAmount: Int,
+    borderStyle: BorderStyle? = null,
+) {
+    val merchantRepo = get<MerchantRepository>()
+    val merchant by merchantRepo.activeMerchant.collectAsState()
     CatchTheme {
         var containerModifier = Modifier
             .height(intrinsicSize = IntrinsicSize.Min)

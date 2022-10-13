@@ -23,15 +23,18 @@ import androidx.compose.ui.unit.dp
 import com.getcatch.android.R
 import com.getcatch.android.composables.elements.LinkButton
 import com.getcatch.android.repository.MerchantRepository
+import com.getcatch.android.repository.MerchantRepositoryImpl
 import com.getcatch.android.theming.BorderStyle
 import com.getcatch.android.theming.CatchTheme
 import com.getcatch.android.theming.CatchTypography
 import com.getcatch.android.theming.LocalThemeVariant
 import com.getcatch.android.utils.centsToDollarsString
+import org.koin.androidx.compose.get
 
 @Composable
 public fun PurchaseConfirmation(rewardsAmount: Int, borderStyle: BorderStyle? = null) {
-    val merchant by MerchantRepository.activeMerchant.collectAsState()
+    val merchantRepo = get<MerchantRepository>()
+    val merchant by merchantRepo.activeMerchant.collectAsState()
     CatchTheme {
         var containerModifier = Modifier
             .height(intrinsicSize = IntrinsicSize.Min)

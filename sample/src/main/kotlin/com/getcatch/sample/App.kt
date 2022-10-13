@@ -8,6 +8,6 @@ import dagger.hilt.android.HiltAndroidApp
 class App : Application() {
     override fun onCreate() {
         super.onCreate()
-        Catch.initialize(publicKey = "TEST_MERCHANT_PUBLIC_KEY")
+        Catch.initialize(publicKey = "TEST_MERCHANT_PUBLIC_KEY", context = this)
     }
 }

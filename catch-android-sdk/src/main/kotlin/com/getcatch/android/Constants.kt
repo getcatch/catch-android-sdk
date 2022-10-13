@@ -8,7 +8,6 @@ internal const val LOCAL_URL = "http://10.0.2.2:3000"
 internal const val ASSETS_BASE_URL = "https://dev.assets.getcatch.com"
 
 internal object CatchUrls {
-    val testFrame = "$LOCAL_URL/frame"
     fun eduModal(merchant: Merchant) = Uri.parse("$CATCH_BASE_URL/t/")
         .buildUpon()
         .appendQueryParameter("merchantId", merchant.id)
