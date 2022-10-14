@@ -1,6 +1,6 @@
 package com.getcatch.android.clients.merchant
 
-import com.getcatch.android.CATCH_BASE_URL
+import com.getcatch.android.utils.CatchUrls
 import io.ktor.client.HttpClient
 import io.ktor.client.call.body
 import io.ktor.client.request.get
@@ -11,9 +11,7 @@ internal class MerchantSvcClientImpl(private val httpClient: HttpClient) : Merch
     override suspend fun loadPublicMerchantData(
         publicKey: String
     ): LoadPublicMerchantDataResponse {
-        return httpClient.get {
-            url("$CATCH_BASE_URL/api/merchants-svc/merchants/public_keys/$publicKey/public")
-        }.body()
+        return httpClient.get(CatchUrls.publicMerchantData(publicKey)).body()
     }
 
     override suspend fun getWidgetContent(

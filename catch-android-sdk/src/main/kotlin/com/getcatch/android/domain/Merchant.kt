@@ -1,7 +1,6 @@
 package com.getcatch.android.domain
 
-import com.getcatch.android.CatchUrls
-import com.getcatch.android.MerchantAssetType
+import com.getcatch.android.utils.CatchUrls
 
 internal data class Merchant(
     val id: String,
