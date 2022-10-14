@@ -3,7 +3,7 @@
 
     <application android:networkSecurityConfig="@xml/network_security_config">
         <activity
-            android:name="com.getcatch.android.activities.TOFUActivity"
+            android:name="com.getcatch.android.activities.tofu.TOFUActivity"
             android:theme="@style/Theme.Transparent" />
     </application>
 </manifest>

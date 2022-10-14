@@ -1,4 +1,4 @@
-package com.getcatch.android.activities
+package com.getcatch.android.activities.tofu
 
 import android.util.Log
 import android.webkit.JavascriptInterface

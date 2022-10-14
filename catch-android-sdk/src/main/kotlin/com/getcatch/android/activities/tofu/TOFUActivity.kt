@@ -1,5 +1,6 @@
-package com.getcatch.android.activities
+package com.getcatch.android.activities.tofu
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.webkit.WebView
@@ -15,6 +16,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.core.content.ContextCompat.startActivity
 import com.getcatch.android.CatchUrls
 import com.getcatch.android.repository.MerchantRepository
 import com.google.accompanist.web.AccompanistWebViewClient
@@ -59,8 +61,7 @@ internal class TOFUActivity : ComponentActivity(), KoinComponent {
                         },
                         captureBackPresses = false,
                         modifier = Modifier.weight(fill = true, weight = 1f),
-
-                        )
+                    )
                     Button(onClick = this@TOFUActivity::postMessage) {
                         Text("SEND MESSAGE")
                     }
