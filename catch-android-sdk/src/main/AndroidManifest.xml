@@ -5,5 +5,8 @@
         <activity
             android:name="com.getcatch.android.activities.tofu.TOFUActivity"
             android:theme="@style/Theme.Transparent" />
+        <activity
+            android:name="com.getcatch.android.activities.checkout.CatchCheckoutActivity"
+            android:theme="@style/Theme.Transparent" />
     </application>
 </manifest>
