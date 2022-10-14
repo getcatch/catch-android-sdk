@@ -14,6 +14,7 @@ internal data class Merchant(
     val cardBackgroundColor: String? = null,
     val cardFontColor: String,
     val hasTheme: Boolean,
+    val donationRecipient: DonationRecipient? = null,
 ) {
     val cardLogoImageUrl: String
         get() = CatchUrls.assetUrl(id, MerchantAssetType.CARD_LOGO)
