@@ -1,6 +1,5 @@
 package com.getcatch.android.activities.tofu
 
-import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.webkit.WebView
@@ -16,9 +15,8 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.core.content.ContextCompat.startActivity
-import com.getcatch.android.CatchUrls
 import com.getcatch.android.repository.MerchantRepository
+import com.getcatch.android.utils.CatchUrls
 import com.google.accompanist.web.AccompanistWebViewClient
 import com.google.accompanist.web.WebView
 import com.google.accompanist.web.rememberWebViewState
