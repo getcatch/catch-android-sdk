@@ -1,6 +1,6 @@
 package com.getcatch.android.mappers
 
-import com.getcatch.android.clients.merchant.LoadPublicMerchantDataResponse
+import com.getcatch.android.clients.merchants.LoadPublicMerchantDataResponse
 import com.getcatch.android.domain.Merchant
 
 internal fun LoadPublicMerchantDataResponse.toMerchant(publicKey: String) = Merchant(

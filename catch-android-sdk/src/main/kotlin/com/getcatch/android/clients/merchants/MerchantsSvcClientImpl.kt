@@ -1,4 +1,4 @@
-package com.getcatch.android.clients.merchant
+package com.getcatch.android.clients.merchants
 
 import com.getcatch.android.utils.CatchUrls
 import io.ktor.client.HttpClient
@@ -7,7 +7,7 @@ import io.ktor.client.request.get
 import io.ktor.client.request.parameter
 import io.ktor.client.request.url
 
-internal class MerchantSvcClientImpl(private val httpClient: HttpClient) : MerchantSvcClient {
+internal class MerchantsSvcClientImpl(private val httpClient: HttpClient) : MerchantsSvcClient {
     override suspend fun loadPublicMerchantData(
         publicKey: String
     ): LoadPublicMerchantDataResponse {
