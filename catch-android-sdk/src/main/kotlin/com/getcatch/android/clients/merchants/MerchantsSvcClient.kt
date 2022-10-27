@@ -1,7 +1,9 @@
 package com.getcatch.android.clients.merchants
 
+import com.getcatch.android.domain.PublicKey
+
 internal interface MerchantsSvcClient {
-    suspend fun loadPublicMerchantData(publicKey: String): LoadPublicMerchantDataResponse
+    suspend fun loadPublicMerchantData(publicKey: PublicKey): LoadPublicMerchantDataResponse
 
     suspend fun getWidgetContent(
         orderTotal: Int? = null,

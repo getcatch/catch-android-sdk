@@ -5,6 +5,7 @@ import android.content.Intent
 import android.os.Bundle
 import androidx.lifecycle.lifecycleScope
 import com.getcatch.android.activities.WebViewActivity
+import com.getcatch.android.domain.PublicKey
 import com.getcatch.android.repository.MerchantRepository
 import com.getcatch.android.utils.CatchUrls
 import kotlinx.coroutines.launch
@@ -12,6 +13,7 @@ import org.koin.core.component.inject
 
 internal class CatchCheckoutActivity : WebViewActivity() {
     private val merchantRepo: MerchantRepository by inject()
+    private val publicKey: PublicKey by inject()
     override val javascriptInterface = CheckoutWebViewInterface(this)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -24,6 +26,7 @@ internal class CatchCheckoutActivity : WebViewActivity() {
             merchantRepo.activeMerchant.collect { merchant ->
                 if (merchant != null) {
                     urlFlow.value = CatchUrls.checkout(
+                        publicKey = publicKey,
                         merchant = merchant,
                         checkoutId = checkoutId,
                         prefillUserPhone = prefillUserPhone,

@@ -3,9 +3,8 @@ package com.getcatch.android.mappers
 import com.getcatch.android.clients.merchants.LoadPublicMerchantDataResponse
 import com.getcatch.android.domain.Merchant
 
-internal fun LoadPublicMerchantDataResponse.toMerchant(publicKey: String) = Merchant(
+internal fun LoadPublicMerchantDataResponse.toMerchant() = Merchant(
     id = id,
-    publicKey = publicKey,
     name = name,
     rewardsRatePercent = rewardsRatePercent,
     url = url,
