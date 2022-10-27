@@ -4,7 +4,6 @@ import com.getcatch.android.utils.CatchUrls
 
 internal data class Merchant(
     val id: String,
-    val publicKey: String,
     val name: String,
     val rewardsRatePercent: Float,
     val url: String,

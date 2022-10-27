@@ -8,12 +8,11 @@ internal class CacheManagerImpl(val context: Context) : CacheManager {
     private val merchantPrefs = context.getSharedPreferences(
         context.getString(R.string.merchant_preference_file_key), Context.MODE_PRIVATE
     )
+
     override var merchant: Merchant?
         get() {
             return Merchant(
                 id = merchantPrefs.getString(PREFS_KEY_MERCHANT_ID, null) ?: return null,
-                publicKey = merchantPrefs.getString(PREFS_KEY_MERCHANT_PUBLIC_KEY, null)
-                    ?: return null,
                 name = merchantPrefs.getString(PREFS_KEY_MERCHANT_NAME, null) ?: return null,
                 rewardsRatePercent = merchantPrefs.getFloat(
                     PREFS_KEY_MERCHANT_REWARDS_RATE_PERCENT,
@@ -37,7 +36,6 @@ internal class CacheManagerImpl(val context: Context) : CacheManager {
             } else {
                 val editor = merchantPrefs.edit()
                 editor.putString(PREFS_KEY_MERCHANT_ID, value.id)
-                editor.putString(PREFS_KEY_MERCHANT_PUBLIC_KEY, value.publicKey)
                 editor.putString(PREFS_KEY_MERCHANT_NAME, value.name)
                 editor.putFloat(PREFS_KEY_MERCHANT_REWARDS_RATE_PERCENT, value.rewardsRatePercent)
                 editor.putString(PREFS_KEY_MERCHANT_URL, value.url)
@@ -55,8 +53,8 @@ internal class CacheManagerImpl(val context: Context) : CacheManager {
         const val DEFAULT_REWARDS_LIFETIME_IN_DAYS = 30 // ~1 month
         const val DEFAULT_REWARDS_RATE_PERCENT = 0.1f // 10 percent
 
+        // Merchant prefs keys
         const val PREFS_KEY_MERCHANT_ID = "PREFS_KEY_MERCHANT_ID"
-        const val PREFS_KEY_MERCHANT_PUBLIC_KEY = "PREFS_KEY_MERCHANT_PUBLIC_KEY"
         const val PREFS_KEY_MERCHANT_NAME = "PREFS_KEY_MERCHANT_NAME"
         const val PREFS_KEY_MERCHANT_REWARDS_RATE_PERCENT =
             "PREFS_KEY_MERCHANT_REWARDS_RATE_PERCENT"

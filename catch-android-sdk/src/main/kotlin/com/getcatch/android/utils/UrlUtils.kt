@@ -26,3 +26,6 @@ internal val Uri.baseUrl: String
         .path(this.path)
         .build()
         .toString()
+
+internal fun URLBuilder.parameter(key: String, value: Any?): Unit =
+    value?.let { parameters.append(key, it.toString()) } ?: Unit

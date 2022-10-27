@@ -5,5 +5,5 @@ import kotlinx.coroutines.flow.StateFlow
 
 internal interface MerchantRepository {
     val activeMerchant: StateFlow<Merchant?>
-    suspend fun loadMerchant(publicKey: String)
+    suspend fun loadMerchant()
 }
