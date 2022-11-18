@@ -188,7 +188,7 @@ internal object CatchRawColors {
 
     /** Highlights */
     const val PINK_1 = 0xFFFEDDF1
-    const val PINK_2 = 0xFFE1309C
+    const val PINK_2 = 0xFFD02F90
     const val PURPLE_1 = 0xFFF9F6FE
     const val PURPLE_2 = 0xFF6B27DD
     const val GREEN_1 = 0xFFE6F4E9

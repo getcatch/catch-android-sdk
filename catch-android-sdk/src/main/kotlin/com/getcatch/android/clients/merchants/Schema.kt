@@ -21,8 +21,11 @@ internal data class LoadPublicMerchantDataResponse(
     @SerialName("rewards_lifetime_in_days")
     val rewardsLifetimeInDays: Int,
 
-    @SerialName("card_background")
-    val cardBackground: String,
+    @SerialName("card_background_color")
+    val cardBackgroundColor: String,
+
+    @SerialName("card_background_image_url")
+    val cardBackgroundImageUrl: String?,
 
     @SerialName("card_font_color")
     val cardFontColor: String,

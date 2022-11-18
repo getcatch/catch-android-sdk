@@ -27,7 +27,6 @@ import com.getcatch.android.composables.elements.InfoIcon
 import com.getcatch.android.theming.CalloutBorderStyle
 import com.getcatch.android.theming.CatchTheme
 import com.getcatch.android.theming.LocalThemeVariant
-import com.getcatch.android.utils.constrainToParentHeight
 
 @Composable
 public fun Callout(

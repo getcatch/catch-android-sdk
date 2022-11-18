@@ -23,7 +23,7 @@ internal class CacheManagerImpl(val context: Context) : CacheManager {
                     PREFS_KEY_MERCHANT_REWARDS_LIFETIME_IN_DAYS,
                     DEFAULT_REWARDS_LIFETIME_IN_DAYS
                 ),
-                cardBackground = merchantPrefs.getString(PREFS_KEY_MERCHANT_CARD_BACKGROUND, null)
+                cardBackgroundColor = merchantPrefs.getString(PREFS_KEY_MERCHANT_CARD_BACKGROUND_COLOR, null)
                     ?: return null,
                 cardFontColor = merchantPrefs.getString(PREFS_KEY_MERCHANT_CARD_FONT_COLOR, null)
                     ?: return null,
@@ -43,7 +43,7 @@ internal class CacheManagerImpl(val context: Context) : CacheManager {
                     PREFS_KEY_MERCHANT_REWARDS_LIFETIME_IN_DAYS,
                     value.rewardsLifetimeInDays
                 )
-                editor.putString(PREFS_KEY_MERCHANT_CARD_BACKGROUND, value.cardBackground)
+                editor.putString(PREFS_KEY_MERCHANT_CARD_BACKGROUND_COLOR, value.cardBackgroundColor)
                 editor.putString(PREFS_KEY_MERCHANT_CARD_FONT_COLOR, value.cardFontColor)
                 editor.apply()
             }
@@ -61,7 +61,7 @@ internal class CacheManagerImpl(val context: Context) : CacheManager {
         const val PREFS_KEY_MERCHANT_URL = "PREFS_KEY_MERCHANT_URL"
         const val PREFS_KEY_MERCHANT_REWARDS_LIFETIME_IN_DAYS =
             "PREFS_KEY_MERCHANT_REWARDS_LIFETIME_IN_DAYS"
-        const val PREFS_KEY_MERCHANT_CARD_BACKGROUND = "PREFS_KEY_MERCHANT_CARD_BACKGROUND"
+        const val PREFS_KEY_MERCHANT_CARD_BACKGROUND_COLOR = "PREFS_KEY_MERCHANT_CARD_BACKGROUND_COLOR"
         const val PREFS_KEY_MERCHANT_CARD_FONT_COLOR = "PREFS_KEY_MERCHANT_CARD_FONT_COLOR"
         const val PREFS_KEY_MERCHANT_HAS_THEME = "PREFS_KEY_MERCHANT_HAS_THEME"
     }
