@@ -13,8 +13,10 @@ import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.unit.dp
+import com.getcatch.android.theming.CatchTheme
 import com.getcatch.android.theming.CatchTypography
 import com.getcatch.android.theming.LocalColors
+import com.getcatch.android.theming.atomization.atoms.BenefitTextAtom
 import com.getcatch.android.utils.centsToDollarsString
 import com.getcatch.android.utils.toPercentString
 import kotlin.math.min
@@ -26,7 +28,9 @@ internal fun EarnRedeemText(
     prefixComposable: @Composable (() -> Unit)? = null,
     suffixComposable: @Composable (() -> Unit)? = null,
     textStyle: TextStyle = CatchTypography.CatchTextStyles.bodySmall,
+    benefitTextAtom: BenefitTextAtom.Resolved? = null,
 ) {
+    val atoms = benefitTextAtom ?: CatchTheme.atoms.benefitText
     val earnRedeemMessage =
         generateEarnRedeemMessage(price = price ?: 0, capitalize = capitalize)
     val loading = remember { mutableStateOf(false) }
@@ -38,11 +42,15 @@ internal fun EarnRedeemText(
         )
     } else {
         prefixComposable?.invoke()
+        val color = when (earnRedeemMessage.type) {
+            EarnRedeemType.Earn -> atoms.earnColor
+            EarnRedeemType.Redeem -> atoms.redeemColor
+        }
         Text(
             text = earnRedeemMessage.message,
-            color = earnRedeemMessage.color,
+            color = color,
             style = textStyle,
-            fontWeight = FontWeight.W700,
+            fontWeight = atoms.fontWeight.toComposeFontWeight(),
             textDecoration = TextDecoration.Underline
         )
         suffixComposable?.invoke()
@@ -56,6 +64,7 @@ internal fun EarnRedeemText(
     prefix: String? = null,
     suffix: String? = null,
     textStyle: TextStyle = CatchTypography.CatchTextStyles.bodySmall,
+    benefitTextAtom: BenefitTextAtom.Resolved? = null,
 ) = EarnRedeemText(
     price = price,
     capitalize = capitalize,
@@ -78,6 +87,7 @@ internal fun EarnRedeemText(
         }
     },
     textStyle = textStyle,
+    benefitTextAtom,
 )
 
 internal enum class EarnRedeemMessageVariant(val value: String) {

@@ -27,20 +27,25 @@ import com.getcatch.android.composables.elements.InfoIcon
 import com.getcatch.android.theming.CalloutBorderStyle
 import com.getcatch.android.theming.CatchTheme
 import com.getcatch.android.theming.LocalThemeVariant
+import com.getcatch.android.theming.atomization.widgets.CalloutAtoms
 
 @Composable
 public fun Callout(
     hasOrPrefix: Boolean = false,
-    borderStyle: CalloutBorderStyle? = null
+    borderStyle: CalloutBorderStyle? = null,
+    atomOverrides: CalloutAtoms? = null,
 ) {
     CatchTheme {
+        val atoms = CatchTheme.atoms.callout.withOverrides(atomOverrides)
         var rowModifier = Modifier
             .height(intrinsicSize = IntrinsicSize.Min)
             .animateContentSize()
         if (borderStyle != null) {
+            val borderWidth = atoms.border.borderRadius?.dp ?: 1.dp
+            val borderColor = atoms.border.borderColor
             rowModifier =
                 rowModifier
-                    .border(1.dp, CatchTheme.colors.borderDefault, borderStyle.shape)
+                    .border(width = borderWidth, color = borderColor, shape = borderStyle.shape)
                     .padding(horizontal = 8.dp, vertical = 4.dp)
         }
         Row(
@@ -52,7 +57,8 @@ public fun Callout(
                 prefix = if (hasOrPrefix) stringResource(R.string.or_prefix) else null,
                 suffix = stringResource(
                     R.string.by_paying_with
-                )
+                ),
+                benefitTextAtom = atoms.benefitText,
             )
             Spacer(modifier = Modifier.width(2.dp))
             Image(

@@ -19,14 +19,21 @@ import androidx.compose.ui.unit.dp
 import com.getcatch.android.R
 import com.getcatch.android.theming.CatchTheme
 import com.getcatch.android.theming.CatchTypography
+import com.getcatch.android.theming.atomization.atoms.ActionButtonAtom
 
 @Composable
-internal fun LinkButton(label: String, link: String, modifier: Modifier = Modifier) {
+internal fun LinkButton(
+    label: String,
+    link: String,
+    actionButtonAtom: ActionButtonAtom.Resolved? = null,
+    modifier: Modifier = Modifier
+) {
     val context = LocalContext.current
+    val atoms = actionButtonAtom ?: CatchTheme.atoms.actionButton
     Button(
         colors = ButtonDefaults.buttonColors(
-            backgroundColor = CatchTheme.colors.buttonPrimary,
-            contentColor = CatchTheme.colors.textButton
+            backgroundColor = atoms.backgroundColor,
+            contentColor = atoms.fontColor,
         ),
         onClick = {
             val browserIntent = Intent(Intent.ACTION_VIEW, Uri.parse(link))

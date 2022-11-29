@@ -27,6 +27,7 @@ import com.getcatch.android.theming.BorderStyle
 import com.getcatch.android.theming.CatchTheme
 import com.getcatch.android.theming.CatchTypography
 import com.getcatch.android.theming.LocalThemeVariant
+import com.getcatch.android.theming.atomization.widgets.CampaignLinkAtoms
 import com.getcatch.android.utils.centsToDollarsString
 import org.koin.androidx.compose.get
 
@@ -34,10 +35,12 @@ import org.koin.androidx.compose.get
 public fun CampaignLink(
     rewardsAmount: Int,
     borderStyle: BorderStyle? = null,
+    atomOverrides: CampaignLinkAtoms? = null,
 ) {
     val merchantRepo = get<MerchantRepository>()
     val merchant by merchantRepo.activeMerchant.collectAsState()
     CatchTheme {
+        val atoms = CatchTheme.atoms.campaignLink.withOverrides(atomOverrides)
         var containerModifier = Modifier
             .height(intrinsicSize = IntrinsicSize.Min)
             .animateContentSize()
@@ -59,8 +62,8 @@ public fun CampaignLink(
                 text = buildAnnotatedString {
                     withStyle(
                         style = SpanStyle(
-                            fontWeight = FontWeight.W700,
-                            color = CatchTheme.colors.funTextEarning
+                            fontWeight = atoms.benefitText.fontWeight.toComposeFontWeight(),
+                            color = atoms.benefitText.earnColor,
                         )
                     ) {
                         append(
@@ -86,7 +89,8 @@ public fun CampaignLink(
                     id = R.string.claim_store_credit,
                     rewardsAmount.centsToDollarsString()
                 ),
-                link = "https://getcatch.com"
+                link = "https://getcatch.com",
+                actionButtonAtom = atoms.actionButton,
             )
         }
     }

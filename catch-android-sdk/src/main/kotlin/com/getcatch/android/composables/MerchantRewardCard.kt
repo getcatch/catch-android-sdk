@@ -15,8 +15,8 @@ internal fun MerchantRewardCard(rewardsAmount: Int, merchantRepo: MerchantReposi
         RewardCard(
             rewardsAmount = rewardsAmount,
             logoUrl = it.cardLogoImageUrl,
-            cardBgColor = Color.fromHexString(it.cardBackgroundColor, Color.Black),
-            textColor = Color.fromHexString(it.cardFontColor, Color.White),
+            cardBgColor = Color.fromHexString(it.cardBackgroundColor),
+            textColor = Color.fromHexString(it.cardFontColor),
             cardBgImageUrl = it.cardBackgroundImageUrl,
         )
     }

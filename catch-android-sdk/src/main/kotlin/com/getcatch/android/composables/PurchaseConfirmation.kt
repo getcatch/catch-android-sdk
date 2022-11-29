@@ -8,6 +8,7 @@ import androidx.compose.foundation.layout.IntrinsicSize
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
@@ -23,26 +24,34 @@ import androidx.compose.ui.unit.dp
 import com.getcatch.android.R
 import com.getcatch.android.composables.elements.LinkButton
 import com.getcatch.android.repository.MerchantRepository
-import com.getcatch.android.repository.MerchantRepositoryImpl
 import com.getcatch.android.theming.BorderStyle
 import com.getcatch.android.theming.CatchTheme
 import com.getcatch.android.theming.CatchTypography
 import com.getcatch.android.theming.LocalThemeVariant
+import com.getcatch.android.theming.atomization.widgets.PurchaseConfirmationAtoms
 import com.getcatch.android.utils.centsToDollarsString
 import org.koin.androidx.compose.get
 
 @Composable
-public fun PurchaseConfirmation(rewardsAmount: Int, borderStyle: BorderStyle? = null) {
+public fun PurchaseConfirmation(
+    rewardsAmount: Int,
+    borderStyle: BorderStyle? = null,
+    atoms: PurchaseConfirmationAtoms? = null
+) {
     val merchantRepo = get<MerchantRepository>()
     val merchant by merchantRepo.activeMerchant.collectAsState()
     CatchTheme {
+        val atoms = CatchTheme.atoms.purchaseConfirmation.withOverrides(atoms)
         var containerModifier = Modifier
             .height(intrinsicSize = IntrinsicSize.Min)
             .animateContentSize()
         if (borderStyle != null) {
+            val borderColor = atoms.border.borderColor
+            val shape =
+                atoms.border.borderRadius?.let { RoundedCornerShape(it) } ?: borderStyle.shape
             containerModifier =
                 containerModifier
-                    .border(1.dp, CatchTheme.colors.borderDefault, borderStyle.shape)
+                    .border(1.dp, borderColor, shape)
                     .padding(16.dp)
         }
         Column(modifier = containerModifier) {
@@ -59,7 +68,7 @@ public fun PurchaseConfirmation(rewardsAmount: Int, borderStyle: BorderStyle? = 
                     withStyle(
                         style = SpanStyle(
                             fontWeight = FontWeight.W700,
-                            color = CatchTheme.colors.funTextEarning
+                            color = atoms.benefitText.earnColor,
                         )
                     ) {
                         append(
@@ -80,7 +89,8 @@ public fun PurchaseConfirmation(rewardsAmount: Int, borderStyle: BorderStyle? = 
             Spacer(modifier = Modifier.height(24.dp))
             LinkButton(
                 label = stringResource(id = R.string.view_your_credit),
-                link = "https://getcatch.com"
+                link = "https://getcatch.com",
+                actionButtonAtom = atoms.actionButton,
             )
         }
     }
