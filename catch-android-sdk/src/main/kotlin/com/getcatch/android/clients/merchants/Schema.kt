@@ -1,4 +1,4 @@
-package com.getcatch.android.clients.merchant
+package com.getcatch.android.clients.merchants
 
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable

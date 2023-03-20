@@ -1,6 +1,6 @@
-package com.getcatch.android.clients.merchant
+package com.getcatch.android.clients.merchants
 
-internal interface MerchantSvcClient {
+internal interface MerchantsSvcClient {
     suspend fun loadPublicMerchantData(publicKey: String): LoadPublicMerchantDataResponse
 
     suspend fun getWidgetContent(
