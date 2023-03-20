@@ -4,6 +4,7 @@ import android.util.Log
 import com.getcatch.android.cache.CacheManager
 import com.getcatch.android.clients.merchants.MerchantsSvcClient
 import com.getcatch.android.domain.Merchant
+import com.getcatch.android.domain.PublicKey
 import com.getcatch.android.mappers.toMerchant
 import io.ktor.client.call.NoTransformationFoundException
 import io.ktor.serialization.JsonConvertException
@@ -15,16 +16,17 @@ import java.net.UnknownHostException
 internal class MerchantRepositoryImpl(
     val merchantsSvcClient: MerchantsSvcClient,
     val cache: CacheManager,
+    val publicKey: PublicKey,
 ) : MerchantRepository {
     private val _activeMerchant = MutableStateFlow(cache.merchant)
     override val activeMerchant: StateFlow<Merchant?> = _activeMerchant.asStateFlow()
 
-    override suspend fun loadMerchant(publicKey: String) {
+    override suspend fun loadMerchant() {
         try {
             val response = merchantsSvcClient.loadPublicMerchantData(
                 publicKey = publicKey
             )
-            val updatedMerchant = response.toMerchant(publicKey = publicKey)
+            val updatedMerchant = response.toMerchant()
             _activeMerchant.value = updatedMerchant
             cache.merchant = updatedMerchant
         } catch (ex: UnknownHostException) {

@@ -6,6 +6,7 @@ import androidx.compose.runtime.State
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.ui.text.font.FontFamily
 import com.getcatch.android.di.sdkModule
+import com.getcatch.android.domain.PublicKey
 import com.getcatch.android.repository.MerchantRepository
 import com.getcatch.android.theming.CatchTypography
 import com.getcatch.android.theming.ThemeVariantOption
@@ -13,16 +14,24 @@ import kotlinx.coroutines.MainScope
 import kotlinx.coroutines.launch
 import org.koin.android.ext.koin.androidContext
 import org.koin.core.context.startKoin
+import org.koin.dsl.module
 
 public object Catch {
     public fun initialize(publicKey: String, context: Context): Unit = synchronized(this) {
+        // Setup dependency injection
         val koinApp = startKoin {
             androidContext(context)
-            modules(sdkModule)
+            modules(
+                module {
+                    single { PublicKey(value = publicKey) }
+                },
+                sdkModule,
+            )
         }
         val merchantRepo = koinApp.koin.get<MerchantRepository>()
+        // Load merchant on app start
         MainScope().launch {
-            merchantRepo.loadMerchant(publicKey = publicKey)
+            merchantRepo.loadMerchant()
         }
     }
 
