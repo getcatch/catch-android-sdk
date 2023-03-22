@@ -17,7 +17,7 @@ internal suspend inline fun <reified T> handleNetworkResponse(
         response = requestBlock()
     } catch (ex: UnknownHostException) {
         Log.w(
-            "Catch",
+            "handleNetworkResponse",
             "Network request failed. Check network connection and try again.",
             ex
         )
@@ -31,14 +31,14 @@ internal suspend inline fun <reified T> handleNetworkResponse(
             NetworkResponse.Success(response.body())
         } catch (ex: JsonConvertException) {
             Log.e(
-                "Catch",
+                "handleNetworkResponse",
                 "Error deserializing response",
                 ex
             )
             NetworkResponse.Failure(message = "Error deserializing response", ex)
         } catch (ex: NoTransformationFoundException) {
             Log.e(
-                "Catch",
+                "handleNetworkResponse",
                 "Response body did not match expected format",
                 ex
             )

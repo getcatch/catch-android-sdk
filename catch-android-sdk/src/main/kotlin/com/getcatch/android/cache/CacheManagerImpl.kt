@@ -5,7 +5,6 @@ import android.util.Log
 import com.getcatch.android.R
 import com.getcatch.android.models.Merchant
 import com.getcatch.android.serialization.SnakeCaseSerializer
-import io.ktor.utils.io.printStack
 import kotlinx.serialization.SerializationException
 import kotlinx.serialization.decodeFromString
 import kotlinx.serialization.encodeToString
@@ -21,11 +20,11 @@ internal class CacheManagerImpl(val context: Context) : CacheManager {
             return try {
                 SnakeCaseSerializer.decodeFromString(merchantJsonString)
             } catch (ex: SerializationException) {
-                ex.printStack()
+                Log.w(this::class.simpleName, "Error deserializing cached merchant.", ex)
                 merchant = null
                 null
             } catch (ex: IllegalArgumentException) {
-                ex.printStack()
+                Log.w(this::class.simpleName, "Error deserializing cached merchant.", ex)
                 merchant = null
                 null
             }

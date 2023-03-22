@@ -22,14 +22,9 @@ internal class MerchantRepositoryImpl(
         val response = merchantsSvcClient.loadPublicMerchantData(
             publicKey = publicKey
         )
-        when (response) {
-            is NetworkResponse.Success -> {
-                _activeMerchant.value = response.body
-                cache.merchant = response.body
-            }
-            is NetworkResponse.Failure -> {
-                Log.e("Catch", "Failed to load merchant config by public key.", response.error)
-            }
+        if (response is NetworkResponse.Success) {
+            _activeMerchant.value = response.body
+            cache.merchant = response.body
         }
     }
 }
