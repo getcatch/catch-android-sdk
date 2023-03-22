@@ -1,5 +1,8 @@
-package com.getcatch.android.domain
+package com.getcatch.android.models
 
+import kotlinx.serialization.Serializable
+
+@Serializable
 internal data class EarnedReward(
     /**
      * Amount of rewards (in US cents) that the user can earn as a sign up bonus.

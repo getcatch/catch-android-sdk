@@ -2,16 +2,13 @@ package com.getcatch.android.repository
 
 import android.util.Log
 import com.getcatch.android.cache.CacheManager
-import com.getcatch.android.clients.merchants.MerchantsSvcClient
-import com.getcatch.android.domain.Merchant
-import com.getcatch.android.domain.PublicKey
-import com.getcatch.android.mappers.toMerchant
-import io.ktor.client.call.NoTransformationFoundException
-import io.ktor.serialization.JsonConvertException
+import com.getcatch.android.network.clients.merchants.MerchantsSvcClient
+import com.getcatch.android.models.Merchant
+import com.getcatch.android.models.PublicKey
+import com.getcatch.android.network.NetworkResponse
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
-import java.net.UnknownHostException
 
 internal class MerchantRepositoryImpl(
     val merchantsSvcClient: MerchantsSvcClient,
@@ -22,31 +19,17 @@ internal class MerchantRepositoryImpl(
     override val activeMerchant: StateFlow<Merchant?> = _activeMerchant.asStateFlow()
 
     override suspend fun loadMerchant() {
-        try {
-            val response = merchantsSvcClient.loadPublicMerchantData(
-                publicKey = publicKey
-            )
-            val updatedMerchant = response.toMerchant()
-            _activeMerchant.value = updatedMerchant
-            cache.merchant = updatedMerchant
-        } catch (ex: UnknownHostException) {
-            Log.w(
-                MerchantRepositoryImpl::class.simpleName,
-                "Network request failed. Check network connection and try again.",
-                ex
-            )
-        } catch (ex: JsonConvertException) {
-            Log.e(
-                MerchantRepositoryImpl::class.simpleName,
-                "Error deserializing loadMerchant response",
-                ex
-            )
-        } catch (ex: NoTransformationFoundException) {
-            Log.e(
-                MerchantRepositoryImpl::class.simpleName,
-                "Response body did not match expected format",
-                ex
-            )
+        val response = merchantsSvcClient.loadPublicMerchantData(
+            publicKey = publicKey
+        )
+        when (response) {
+            is NetworkResponse.Success -> {
+                _activeMerchant.value = response.body
+                cache.merchant = response.body
+            }
+            is NetworkResponse.Failure -> {
+                Log.e("Catch", "Failed to load merchant config by public key.", response.error)
+            }
         }
     }
 }

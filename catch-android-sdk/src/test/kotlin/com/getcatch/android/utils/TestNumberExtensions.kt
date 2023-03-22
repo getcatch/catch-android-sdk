@@ -5,7 +5,7 @@ import org.junit.Test
 public class TestNumberExtensions {
 
     @Test
-    public fun `Test centsToDollarsString`() {
+    public fun `test all cases centsToDollarsString`() {
         assert(0.centsToDollarsString() == "$0.00")
         assert(12.centsToDollarsString() == "$0.12")
         assert(123.centsToDollarsString() == "$1.23")

@@ -1,8 +1,8 @@
 package com.getcatch.android.utils
 
-import com.getcatch.android.domain.Merchant
-import com.getcatch.android.domain.MerchantAssetType
-import com.getcatch.android.domain.PublicKey
+import com.getcatch.android.models.Merchant
+import com.getcatch.android.models.MerchantAssetType
+import com.getcatch.android.models.PublicKey
 
 /**
  * Helper functions for generating the different URLs needed throughout the SDK
@@ -15,7 +15,7 @@ internal object CatchUrls {
         parameter("publicKey", publicKey.value)
         parameter("merchantId", merchant.id)
         parameter("merchantName", merchant.name)
-        parameter("credit", merchant.rewardsRatePercent.toString())
+        parameter("credit", merchant.defaultEarnedRewardsRate.toPercentString())
         parameter("referer", CATCH_BASE_URL)
         parameter("loadTheme", merchant.hasTheme.toString())
     }
@@ -25,7 +25,7 @@ internal object CatchUrls {
             parameter("publicKey", publicKey.value)
             parameter("merchantId", merchant.id)
             parameter("merchantName", merchant.name)
-            parameter("credit", merchant.rewardsRatePercent.toString())
+            parameter("credit", merchant.defaultEarnedRewardsRate.toPercentString())
             parameter("referer", CATCH_BASE_URL)
             parameter("loadTheme", merchant.hasTheme.toString())
         }

@@ -1,6 +1,6 @@
 package com.getcatch.android.repository
 
-import com.getcatch.android.domain.Merchant
+import com.getcatch.android.models.Merchant
 import kotlinx.coroutines.flow.StateFlow
 
 internal interface MerchantRepository {

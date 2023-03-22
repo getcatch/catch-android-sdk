@@ -6,7 +6,8 @@ import androidx.compose.runtime.State
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.ui.text.font.FontFamily
 import com.getcatch.android.di.sdkModule
-import com.getcatch.android.domain.PublicKey
+import com.getcatch.android.models.PublicKey
+import com.getcatch.android.network.Environment
 import com.getcatch.android.repository.MerchantRepository
 import com.getcatch.android.theming.CatchTypography
 import com.getcatch.android.theming.ThemeVariantOption
@@ -17,13 +18,18 @@ import org.koin.core.context.startKoin
 import org.koin.dsl.module
 
 public object Catch {
-    public fun initialize(publicKey: String, context: Context): Unit = synchronized(this) {
+    public fun initialize(
+        publicKey: String,
+        context: Context,
+        environment: Environment = Environment.SANDBOX,
+    ): Unit = synchronized(this) {
         // Setup dependency injection
         val koinApp = startKoin {
             androidContext(context)
             modules(
                 module {
                     single { PublicKey(value = publicKey) }
+                    single { environment }
                 },
                 sdkModule,
             )

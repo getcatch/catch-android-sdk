@@ -17,3 +17,5 @@ internal fun Int.centsToDollarsString(): String {
 }
 
 internal fun Float.toPercentString() = "${(this * PERCENT_MULTIPLIER).roundToInt()}"
+
+internal fun Double.toPercentString() = "${(this * PERCENT_MULTIPLIER).roundToInt()}"
