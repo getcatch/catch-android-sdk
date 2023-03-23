@@ -70,7 +70,7 @@ internal abstract class WebViewActivity : ComponentActivity(), KoinComponent {
         val script =
             "window.removeEventListener('message', ${CatchSDKWebClient.POST_MESSAGE_HANDLER_FUNCTION_NAME})"
         webView.evaluateJavascript(script) {
-            Log.d("TOFUActivity", "Removing listener")
+            Log.d(this::class.simpleName, "Removing listener")
         }
     }
 

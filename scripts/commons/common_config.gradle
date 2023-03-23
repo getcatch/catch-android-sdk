@@ -34,6 +34,7 @@ android {
         android.sourceSets.all {
             java.srcDir("src/$name/kotlin}")
         }
+        test.resources.srcDirs += 'src/test/resources'
     }
     
     packagingOptions {

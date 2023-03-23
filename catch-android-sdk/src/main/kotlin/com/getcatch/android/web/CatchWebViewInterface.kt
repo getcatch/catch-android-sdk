@@ -16,8 +16,8 @@ internal abstract class CatchWebViewInterface(protected val activity: WebViewAct
             val deserializedMessage = PostMessageBody.fromJsonString(message)
             handlePostMessage(deserializedMessage)
         } catch (ex: SerializationException) {
-            Log.e(
-                TAG,
+            Log.w(
+                this::class.simpleName,
                 "Error deserializing the following into a PostMessageBody: $message",
                 ex
             )
@@ -27,7 +27,6 @@ internal abstract class CatchWebViewInterface(protected val activity: WebViewAct
     protected abstract fun handlePostMessage(message: PostMessageBody)
 
     companion object {
-        private const val TAG = "WebViewInterface"
         private const val EMPTY_JSON_STRING = "\"\""
     }
 }

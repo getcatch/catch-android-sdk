@@ -41,6 +41,7 @@ apply from: rootProject.file("scripts/commons/library_config.gradle")
 
 // MavenCentral publication script
 apply from: rootProject.file("scripts/publishing/publish_mavencentral.gradle")
+apply plugin: 'org.jetbrains.kotlin.android'
 
 /**
  * Library versioning
@@ -55,7 +56,7 @@ android {
         compose true
     }
     composeOptions {
-        kotlinCompilerExtensionVersion = "1.3.0"
+        kotlinCompilerExtensionVersion = "1.4.3"
     }
 }
 
@@ -66,16 +67,19 @@ dependencies {
     // KOTLIN DEPENDENCIES
     compileOnly "androidx.annotation:annotation:1.2.0"
     implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlinVersion"
-    implementation "androidx.core:core-ktx:1.8.0"
-    implementation "androidx.appcompat:appcompat:1.5.0"
+    implementation "androidx.core:core-ktx:1.9.0"
+    implementation "androidx.appcompat:appcompat:1.6.1"
     implementation "androidx.constraintlayout:constraintlayout:2.1.4"
-    implementation "androidx.webkit:webkit:1.5.0"
+    implementation "androidx.webkit:webkit:1.6.0"
+    implementation "org.jetbrains.kotlinx:kotlinx-serialization-json:1.5.0"
     
     // KTOR DEPENDENCIES
-    implementation "io.ktor:ktor-client-core:2.1.1"
-    implementation "io.ktor:ktor-client-android:2.1.1"
-    implementation "io.ktor:ktor-serialization-kotlinx-json:2.1.1"
-    implementation "io.ktor:ktor-client-content-negotiation:2.1.1"
+    implementation "io.ktor:ktor-client-core:2.2.4"
+    implementation "io.ktor:ktor-client-android:2.2.4"
+    implementation "io.ktor:ktor-serialization-kotlinx-json:2.2.4"
+    implementation "io.ktor:ktor-client-content-negotiation:2.2.4"
+    testImplementation "io.ktor:ktor-client-mock:2.2.4"
+    
     
     // KOIN DI DEPENDENCIES
     // Koin Core features
@@ -91,15 +95,15 @@ dependencies {
     
     // COMPOSE DEPENDENCIES
     // Integration with activities
-    api 'androidx.activity:activity-compose:1.5.1'
+    api 'androidx.activity:activity-compose:1.6.1'
     // Compose Material Design
-    api 'androidx.compose.material:material:1.2.1'
+    api 'androidx.compose.material:material:1.3.1'
     // Animations
-    api 'androidx.compose.animation:animation:1.2.1'
+    api 'androidx.compose.animation:animation:1.3.3'
     // Tooling support (Previews, etc.)
-    api 'androidx.compose.ui:ui-tooling:1.2.1'
+    api 'androidx.compose.ui:ui-tooling:1.3.3'
     // Integration with ViewModels
-    api 'androidx.lifecycle:lifecycle-viewmodel-compose:2.5.1'
+    api 'androidx.lifecycle:lifecycle-viewmodel-compose:2.6.0'
     // Accompanist WebView
     implementation "com.google.accompanist:accompanist-webview:0.25.1"
     // Accompanist Flow Layouts
@@ -107,11 +111,11 @@ dependencies {
     // Coil
     implementation("io.coil-kt:coil-compose:2.2.2")
     // UI Tests
-    androidTestImplementation 'androidx.compose.ui:ui-test-junit4:1.2.1'
+    androidTestImplementation 'androidx.compose.ui:ui-test-junit4:1.3.3'
     
     // Testing dependencies
     testImplementation "junit:junit:4.13.2"
-    testImplementation "androidx.test:core:1.4.0"
+    testImplementation "androidx.test:core:1.5.0"
     testImplementation "org.mockito:mockito-core:4.4.0"
     testImplementation "com.google.truth:truth:1.1.3"
     testImplementation "org.robolectric:robolectric:4.7.3"

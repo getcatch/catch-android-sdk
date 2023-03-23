@@ -1,3 +1,6 @@
-package com.getcatch.android.domain
+package com.getcatch.android.models
 
+import kotlinx.serialization.Serializable
+
+@Serializable
 internal data class DonationCampaign(val enabled: Boolean, val donationRecipient: DonationRecipient)

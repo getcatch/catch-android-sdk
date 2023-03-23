@@ -3,7 +3,7 @@ package com.getcatch.android.activities.tofu
 import android.os.Bundle
 import androidx.lifecycle.lifecycleScope
 import com.getcatch.android.activities.WebViewActivity
-import com.getcatch.android.domain.PublicKey
+import com.getcatch.android.models.PublicKey
 import com.getcatch.android.repository.MerchantRepository
 import com.getcatch.android.utils.CatchUrls
 import kotlinx.coroutines.launch
