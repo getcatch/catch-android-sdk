@@ -47,7 +47,7 @@ internal data class Merchant(
     val unrestrictedRewardRuleId: String,
 
     /** ID corresponding to the currently active new catch user reward rule with the highest amount */
-    val newCatchUserRewardRuleId: String,
+    val newCatchUserRewardRuleId: String?,
 
     /** Theme for web views */
     val theme: MerchantThemeConfig?,
@@ -58,5 +58,4 @@ internal data class Merchant(
 
     val hasTheme: Boolean
         get() = theme != null
-
 }
