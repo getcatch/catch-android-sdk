@@ -21,6 +21,4 @@
     <!--  Content descriptions  -->
     <string name="content_description_catch_logo">The Catch logo</string>
     <string name="content_description_merchant_logo">The merchant logo</string>
-
-    <string name="preference_file_key">FILE_KEY_CATCH_SDK_SHARED_PREFERENCES</string>
 </resources>

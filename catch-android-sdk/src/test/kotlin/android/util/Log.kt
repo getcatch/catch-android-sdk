@@ -16,6 +16,15 @@ public fun e(tag: String, msg: String): Int {
     return 0
 }
 
+public fun w(tag: String, msg: String, t: Throwable?): Int {
+    if (t != null) {
+        println("WARN: $tag: $msg (${t.javaClass.simpleName})")
+    } else {
+        println("WARN: $tag: $msg")
+    }
+    return 0
+}
+
 public fun w(tag: String, msg: String): Int {
     println("WARN: $tag: $msg")
     return 0
