@@ -33,7 +33,6 @@ public class TestMerchantsSvcClientImpl {
 
         runBlocking {
             val response = merchantsSvcClient.loadPublicMerchantData(testPublicKey)
-            assertThat(response).isInstanceOf(NetworkResponse.Success::class.java)
             when (response) {
                 is NetworkResponse.Success -> assertThat(response.body.id).isEqualTo("humans-s768ng")
                 is NetworkResponse.Failure -> fail("Request with valid public key should succeed and return merchant")
@@ -58,7 +57,6 @@ public class TestMerchantsSvcClientImpl {
 
         runBlocking {
             val response = merchantsSvcClient.loadPublicMerchantData(testPublicKey)
-            assertThat(response).isInstanceOf(NetworkResponse.Failure::class.java)
             when (response) {
                 is NetworkResponse.Success -> fail("Response with improper body should fail JSON conversion")
                 is NetworkResponse.Failure -> assertThat(response.error).isInstanceOf(JsonConvertException::class.java)
@@ -84,7 +82,6 @@ public class TestMerchantsSvcClientImpl {
 
         runBlocking {
             val response = merchantsSvcClient.loadPublicMerchantData(testPublicKey)
-            assertThat(response).isInstanceOf(NetworkResponse.Failure::class.java)
             when (response) {
                 is NetworkResponse.Success -> fail("Response with non 200 status code should return a Failure")
                 is NetworkResponse.Failure -> assertThat(response.error).isNull()
