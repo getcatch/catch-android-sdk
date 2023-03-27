@@ -1,6 +1,8 @@
 package com.getcatch.android.test.helpers
 
+import com.getcatch.android.models.Item
 import com.getcatch.android.models.Merchant
+import com.getcatch.android.models.checkout.Price
 
 internal object FakeDataProvider {
     private const val fakeMerchantCardBackgroundImageUrl =
@@ -22,5 +24,17 @@ internal object FakeDataProvider {
         unrestrictedRewardRuleId = "unrestrictedId",
         newCatchUserRewardRuleId = "newCatchUserId",
         theme = null
+    )
+
+    fun randomItem() = Item(
+        name="item-${randomString()}",
+        sku="sku-${randomString()}",
+        price= Price(
+            amount=10,
+            currency = "USD",
+        ),
+        quantity = 1,
+        category = listOf(),
+        imageUrl = ""
     )
 }

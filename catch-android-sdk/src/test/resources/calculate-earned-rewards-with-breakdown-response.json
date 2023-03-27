@@ -1,0 +1,30 @@
+{
+  "sign_up_discount_amount": 0,
+  "sign_up_bonus_amount": 1000,
+  "percentage_reward_rate": 0.15,
+  "earned_rewards_total": 1150,
+  "earned_reward_breakdown": [
+    {
+      "earned_reward_amount": 150,
+      "percentage_reward_rate": 0.15,
+      "flat_reward_amount": null,
+      "reward_amount_type": "percentage",
+      "rule_engine_type": "unrestricted",
+      "user_facing_name": "on every order",
+      "sort_order": 0,
+      "details_link": "",
+      "reward_rule_id": "rr-0b04bbcaabc3ff40c7f4cb804a5ac9c0"
+    },
+    {
+      "earned_reward_amount": 1000,
+      "percentage_reward_rate": null,
+      "flat_reward_amount": 1000,
+      "reward_amount_type": "flat",
+      "rule_engine_type": "new_catch_user",
+      "user_facing_name": "First order boost",
+      "sort_order": 0,
+      "details_link": "",
+      "reward_rule_id": "rr-4d7827b349027dbbdd5c9f000b1a1b51"
+    }
+  ]
+}
