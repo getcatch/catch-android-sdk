@@ -8,7 +8,7 @@ internal data class RewardCampaign(
     val rewardCampaignId: String,
 
     /** Amount of the total reward in cents, must be greater than 0. */
-    val totalAmount: Int,
+    val totalAmount: Double,
 
     /** The date when the rewards expire. */
     val rewardsExpiration: String,

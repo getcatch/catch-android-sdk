@@ -1,8 +1,11 @@
 package com.getcatch.android.network.clients.transactions
 
-import com.getcatch.android.models.EarnedRewardsSummary
+
 import com.getcatch.android.models.Item
+import com.getcatch.android.models.EarnedRewardsSummary
+import com.getcatch.android.models.PublicKey
 import com.getcatch.android.models.PublicUserData
+import com.getcatch.android.models.RewardCampaign
 import com.getcatch.android.network.Environment
 import com.getcatch.android.network.NetworkResponse
 import com.getcatch.android.utils.handleNetworkResponse
@@ -44,5 +47,14 @@ internal class TransactionsSvcClientImpl(
             items?.forEach { parameter("items", it.toQueryString()) }
             userCohorts?.forEach { parameter("user_cohorts", it) }
         }
+    }
+
+    override suspend fun fetchRewardCampaign(
+        publicKey: PublicKey,
+        campaignName: String
+    ): NetworkResponse<RewardCampaign> = handleNetworkResponse {
+        httpClient.get(
+            "$baseUrl/api/transactions-svc/merchants/${publicKey.value}/reward_campaigns/$campaignName/public"
+        )
     }
 }
