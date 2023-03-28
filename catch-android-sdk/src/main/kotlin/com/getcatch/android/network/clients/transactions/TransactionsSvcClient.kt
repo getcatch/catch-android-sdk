@@ -1,10 +1,10 @@
 package com.getcatch.android.network.clients.transactions
 
-import com.getcatch.android.models.Item
-import com.getcatch.android.models.RewardCampaign
 import com.getcatch.android.models.EarnedRewardsSummary
+import com.getcatch.android.models.Item
 import com.getcatch.android.models.PublicKey
 import com.getcatch.android.models.PublicUserData
+import com.getcatch.android.models.RewardCampaign
 import com.getcatch.android.network.NetworkResponse
 
 internal interface TransactionsSvcClient {

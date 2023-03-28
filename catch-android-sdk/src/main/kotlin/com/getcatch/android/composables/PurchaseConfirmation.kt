@@ -23,7 +23,6 @@ import androidx.compose.ui.unit.dp
 import com.getcatch.android.R
 import com.getcatch.android.composables.elements.LinkButton
 import com.getcatch.android.repository.MerchantRepository
-import com.getcatch.android.repository.MerchantRepositoryImpl
 import com.getcatch.android.theming.BorderStyle
 import com.getcatch.android.theming.CatchTheme
 import com.getcatch.android.theming.CatchTypography
