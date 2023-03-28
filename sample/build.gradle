@@ -19,6 +19,7 @@ apply from: rootProject.file("scripts/commons/app_config.gradle")
  * App versioning
  * */
 android {
+    namespace = "com.getcatch.sample"
     defaultConfig {
         versionName "0.0.0-app-sample"
         versionCode 1
@@ -105,7 +106,6 @@ dependencies {
     implementation 'androidx.compose.ui:ui-tooling:1.3.3'
     // Integration with ViewModels
     implementation 'androidx.lifecycle:lifecycle-viewmodel-compose:2.6.0'
-    implementation 'androidx.core:core-ktx:+'
     // UI Tests
     androidTestImplementation 'androidx.compose.ui:ui-test-junit4:1.3.3'
     // Needed for createComposeRule, but not createAndroidComposeRule:
