@@ -1,1 +1,25 @@
-{"catch_position": 1, "default_sign_up_discount": 0.0, "live_status": "live", "card_background_color": "#C779D0", "default_earned_rewards_rate": 0.11, "unrestricted_reward_rule_id": "rr-f31675602e426246df73e2a5f8dac7da", "donation_recipient": null, "card_background_image_url": "https://dev.assets.getcatch.com/merchant-assets/humans-s768ng/card_background.png", "url": "humans-dev.myshopify.com", "rewards_lifetime_in_days": 180, "card_font_color": "#FFFFFF", "max_order_total": 600001, "rawyp_link": null, "merchant_id": "humans-s768ng", "enable_configurable_rewards": true, "theme": null, "default_sign_up_bonus": 1000.0, "rewards_rate": 0.11, "has_available_boosts": true, "sdk_experimentation_enabled": true, "name": "Humans", "new_catch_user_reward_rule_id": "rr-ba191143213271854ac145ceeabf314e", "rawyp_amount": null}
+{
+  "catch_position": 1,
+  "default_sign_up_discount": 0.0,
+  "live_status": "live",
+  "card_background_color": "#C779D0",
+  "default_earned_rewards_rate": 0.11,
+  "unrestricted_reward_rule_id": "rr-f31675602e426246df73e2a5f8dac7da",
+  "donation_recipient": null,
+  "card_background_image_url": "https://dev.assets.getcatch.com/merchant-assets/humans-s768ng/card_background.png",
+  "url": "humans-dev.myshopify.com",
+  "rewards_lifetime_in_days": 180,
+  "card_font_color": "#FFFFFF",
+  "max_order_total": 600001,
+  "rawyp_link": null,
+  "merchant_id": "humans-s768ng",
+  "enable_configurable_rewards": true,
+  "theme": null,
+  "default_sign_up_bonus": 1000.0,
+  "rewards_rate": 0.11,
+  "has_available_boosts": true,
+  "sdk_experimentation_enabled": true,
+  "name": "Humans",
+  "new_catch_user_reward_rule_id": "rr-ba191143213271854ac145ceeabf314e",
+  "rawyp_amount": null
+}
