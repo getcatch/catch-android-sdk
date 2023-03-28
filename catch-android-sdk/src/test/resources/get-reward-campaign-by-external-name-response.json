@@ -1,0 +1,16 @@
+{
+  "claimed_reward_redeemable_flat_order_total_min": null,
+  "claimed_reward_redeemable_percentage_order_total_max": null,
+  "eligible_user_type": "new_users_only",
+  "highlight_id": null,
+  "is_second_chance_bonus": null,
+  "merchant_card_background_color": "#C779D0",
+  "merchant_card_background_image_url": "https://dev.assets.getcatch.com/merchant-assets/humans-s768ng/card_background.png",
+  "merchant_card_font_color": "#FFFFFF",
+  "merchant_id": "humans-s768ng",
+  "merchant_name": "Humans",
+  "post_claim_cta_url": null,
+  "reward_campaign_id": "rc-dMetos",
+  "rewards_expiration": "2023-06-26T12:00:00+00:00",
+  "total_amount": 1000.0
+}

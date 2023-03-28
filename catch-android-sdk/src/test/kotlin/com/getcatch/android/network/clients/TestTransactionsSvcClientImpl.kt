@@ -1,5 +1,6 @@
 package com.getcatch.android.network.clients
 
+import com.getcatch.android.models.PublicKey
 import com.getcatch.android.network.Environment
 import com.getcatch.android.network.NetworkResponse
 import com.getcatch.android.network.clients.transactions.TransactionsSvcClientImpl
@@ -13,21 +14,29 @@ import io.ktor.http.HttpMethod
 import io.ktor.http.HttpStatusCode
 import io.ktor.serialization.JsonConvertException
 import kotlinx.coroutines.runBlocking
+import org.junit.Before
 import org.junit.Test
 import kotlin.test.fail
 
 public class TestTransactionsSvcClientImpl {
+    private val mockClient = MockHttpClient()
+    private val transactionsSvcClient = TransactionsSvcClientImpl(
+        mockClient.client,
+        Environment.PRODUCTION,
+    )
+
     private val testDeviceId = "TEST_DEVICE_ID"
     private val testMerchantId = "TEST_MERCHANT_ID"
+    private val testPublicKey = PublicKey("test_public_key")
+
+    @Before
+    public fun setup() {
+        mockClient.reset()
+    }
 
     @Test
     public fun `fetchUserData, success`() {
         val responseJson = ResourceHelpers.loadResource("get-public-user-data-response.json")
-        val mockClient = MockHttpClient()
-        val transactionsSvcClient = TransactionsSvcClientImpl(
-            mockClient.client,
-            Environment.PRODUCTION,
-        )
 
         mockClient.addResponse(
             method = HttpMethod.Get,
@@ -50,11 +59,6 @@ public class TestTransactionsSvcClientImpl {
     @Test
     public fun `fetchUserData, malformed response body`() {
         val responseJson = "not json"
-        val mockClient = MockHttpClient()
-        val transactionsSvcClient = TransactionsSvcClientImpl(
-            mockClient.client,
-            Environment.PRODUCTION,
-        )
 
         mockClient.addResponse(
             method = HttpMethod.Get,
@@ -76,11 +80,6 @@ public class TestTransactionsSvcClientImpl {
     @Test
     public fun `fetchUserData, non 200 status code`() {
         val responseJson = "{\"message\":\"Something went wrong\"}"
-        val mockClient = MockHttpClient()
-        val transactionsSvcClient = TransactionsSvcClientImpl(
-            mockClient.client,
-            Environment.PRODUCTION,
-        )
 
         mockClient.addResponse(
             method = HttpMethod.Get,
@@ -102,11 +101,6 @@ public class TestTransactionsSvcClientImpl {
     public fun `calculateEarnedRewards, success with full query`() {
         val responseJson =
             ResourceHelpers.loadResource("calculate-earned-rewards-with-breakdown-response.json")
-        val mockClient = MockHttpClient()
-        val transactionsSvcClient = TransactionsSvcClientImpl(
-            mockClient.client,
-            Environment.PRODUCTION,
-        )
 
         val items = listOf(FakeDataProvider.randomItem(), FakeDataProvider.randomItem())
         val cohorts = listOf("cohort1", "cohort2")
@@ -154,11 +148,6 @@ public class TestTransactionsSvcClientImpl {
     public fun `calculateEarnedRewards, success with minimal query`() {
         val responseJson =
             ResourceHelpers.loadResource("calculate-earned-rewards-no-breakdown-response.json")
-        val mockClient = MockHttpClient()
-        val transactionsSvcClient = TransactionsSvcClientImpl(
-            mockClient.client,
-            Environment.PRODUCTION,
-        )
 
         val expectedUrl =
             buildUrl("${transactionsSvcClient.baseUrl}/merchants/$testMerchantId/calculate_earned_rewards/public") {
@@ -192,6 +181,37 @@ public class TestTransactionsSvcClientImpl {
                 }
                 is NetworkResponse.Failure -> fail(
                     "Valid request should succeed and return calculated earned rewards"
+                )
+            }
+        }
+    }
+
+    @Test
+    public fun `fetchRewardCampaign, success`() {
+        val responseJson =
+            ResourceHelpers.loadResource("get-reward-campaign-by-external-name-response.json")
+        val testCampaignName = "TEST_CAMPAIGN_NAME"
+
+        mockClient.addResponse(
+            method = HttpMethod.Get,
+            url = "${transactionsSvcClient.baseUrl}/api/transactions-svc" +
+                    "/merchants/${testPublicKey.value}/reward_campaigns/$testCampaignName/public",
+            responseBody = responseJson,
+        )
+
+        runBlocking {
+            val response = transactionsSvcClient.fetchRewardCampaign(
+                publicKey = testPublicKey,
+                campaignName = testCampaignName,
+            )
+            when (response) {
+                is NetworkResponse.Success -> {
+                    assertThat(response.body.rewardCampaignId).isEqualTo("rc-dMetos")
+                    assertThat(response.body.rewardsExpiration).isEqualTo("2023-06-26T12:00:00+00:00")
+                    assertThat(response.body.totalAmount).isEqualTo(1000)
+                }
+                is NetworkResponse.Failure -> fail(
+                    "Valid request should succeed and return reward campaign"
                 )
             }
         }

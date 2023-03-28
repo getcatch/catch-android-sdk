@@ -38,4 +38,8 @@ internal class MockHttpClient {
         val mockResponse = MockResponse(body = responseBody, status = status)
         mockReqToResRegistry[mockRequest] = mockResponse
     }
+
+    fun reset() {
+        mockReqToResRegistry.clear()
+    }
 }
