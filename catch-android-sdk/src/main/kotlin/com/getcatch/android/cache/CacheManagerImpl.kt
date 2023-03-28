@@ -10,7 +10,8 @@ import kotlinx.serialization.encodeToString
 
 internal class CacheManagerImpl(val context: Context) : CacheManager {
     private val sharedPrefs = context.getSharedPreferences(
-        PREFS_FILE_NAME, Context.MODE_PRIVATE
+        PREFS_FILE_NAME,
+        Context.MODE_PRIVATE,
     )
 
     override var merchant: Merchant?
@@ -28,7 +29,6 @@ internal class CacheManagerImpl(val context: Context) : CacheManager {
                 null
             }
         }
-
         set(value) {
             if (value == null) {
                 sharedPrefs.edit()
@@ -41,8 +41,22 @@ internal class CacheManagerImpl(val context: Context) : CacheManager {
             }
         }
 
+    override var deviceToken: String?
+        get() = sharedPrefs.getString(PREFS_KEY_DEVICE_TOKEN, null)
+        set(value) {
+            /*
+            Once a device token has already been generated and saved don't overwrite it
+            since it acts as the unique identifier used to access the user's public data.
+             */
+            if (deviceToken != null) {
+                return
+            }
+            sharedPrefs.edit().putString(PREFS_KEY_DEVICE_TOKEN, value).apply()
+        }
+
     companion object {
         const val PREFS_FILE_NAME = "PREFS_FILE_NAME_CATCH_SDK_SHARED_PREFERENCES"
         const val PREFS_KEY_MERCHANT = "PREFS_KEY_MERCHANT"
+        const val PREFS_KEY_DEVICE_TOKEN = "PREFS_KEY_DEVICE_TOKEN"
     }
 }
