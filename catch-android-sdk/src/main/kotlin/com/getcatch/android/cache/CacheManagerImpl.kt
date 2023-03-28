@@ -2,7 +2,6 @@ package com.getcatch.android.cache
 
 import android.content.Context
 import android.util.Log
-import com.getcatch.android.R
 import com.getcatch.android.models.Merchant
 import com.getcatch.android.serialization.SnakeCaseSerializer
 import kotlinx.serialization.SerializationException
@@ -11,7 +10,7 @@ import kotlinx.serialization.encodeToString
 
 internal class CacheManagerImpl(val context: Context) : CacheManager {
     private val sharedPrefs = context.getSharedPreferences(
-        context.getString(R.string.preference_file_key), Context.MODE_PRIVATE
+        PREFS_FILE_NAME, Context.MODE_PRIVATE
     )
 
     override var merchant: Merchant?
@@ -43,7 +42,7 @@ internal class CacheManagerImpl(val context: Context) : CacheManager {
         }
 
     companion object {
-        // Merchant prefs keys
+        const val PREFS_FILE_NAME = "PREFS_FILE_NAME_CATCH_SDK_SHARED_PREFERENCES"
         const val PREFS_KEY_MERCHANT = "PREFS_KEY_MERCHANT"
     }
 }
