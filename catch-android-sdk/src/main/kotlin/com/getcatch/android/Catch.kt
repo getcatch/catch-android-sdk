@@ -10,6 +10,7 @@ import com.getcatch.android.models.PublicKey
 import com.getcatch.android.network.Environment
 import com.getcatch.android.repository.MerchantRepository
 import com.getcatch.android.theming.CatchTypography
+import com.getcatch.android.theming.DynamicThemeVariant
 import com.getcatch.android.theming.ThemeVariantOption
 import kotlinx.coroutines.MainScope
 import kotlinx.coroutines.launch
@@ -49,7 +50,7 @@ public object Catch {
     }
 
     private val _colorTheme: MutableState<ThemeVariantOption> =
-        mutableStateOf(ThemeVariantOption.Dynamic)
+        mutableStateOf(DynamicThemeVariant.Standard)
     internal val colorTheme: State<ThemeVariantOption> = _colorTheme
     public fun setColorTheme(themeVariantOption: ThemeVariantOption): Unit = synchronized(this) {
         _colorTheme.value = themeVariantOption

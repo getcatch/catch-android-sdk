@@ -10,13 +10,14 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.staticCompositionLocalOf
 import androidx.compose.ui.text.font.FontFamily
 import com.getcatch.android.Catch
+import com.getcatch.android.theming.color.CatchComposeColors
 
 internal val LocalThemeVariant =
     staticCompositionLocalOf<ThemeVariant> { error("No theme variant provided") }
-internal val LocalColors = staticCompositionLocalOf<CatchColors> { error("No colors provided") }
+internal val LocalColors = staticCompositionLocalOf<CatchComposeColors> { error("No colors provided") }
 
 internal object CatchTheme {
-    val colors: CatchColors
+    val colors: CatchComposeColors
         @Composable
         @ReadOnlyComposable
         get() = LocalColors.current
@@ -34,25 +35,25 @@ internal object CatchTheme {
 
 @Composable
 internal fun CatchTheme(
-    variantOption: ThemeVariantOption = ThemeVariantOption.Dynamic,
+    variantOption: ThemeVariantOption = DynamicThemeVariant.Standard,
     defaultFontFamily: FontFamily = CatchTypography.circularFontFamily,
     content: @Composable () -> Unit
 ) {
     val variant: ThemeVariant = when (variantOption) {
         is ThemeVariant -> variantOption
-        ThemeVariantOption.Dynamic -> if (isSystemInDarkTheme()) {
-            ThemeVariant.Dark
+        is DynamicThemeVariant -> if (isSystemInDarkTheme()) {
+            variantOption.darkVariant
         } else {
-            ThemeVariant.Light
-        }
-        ThemeVariantOption.DynamicMono -> if (isSystemInDarkTheme()) {
-            ThemeVariant.DarkMono
-        } else {
-            ThemeVariant.LightMono
+            variantOption.lightVariant
         }
     }
-    val rememberedColors =
-        remember { variant.colors.copy() }.apply { updateColorsFrom(variant.colors) }
+
+    val rememberedColors = remember {
+        variant.composeColors.copy()
+    }.apply {
+        updateColorsFrom(variant.composeColors)
+    }
+
     CompositionLocalProvider(
         LocalThemeVariant provides variant,
         LocalColors provides rememberedColors,

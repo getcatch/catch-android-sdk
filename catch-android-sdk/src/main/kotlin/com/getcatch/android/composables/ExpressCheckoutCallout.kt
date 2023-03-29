@@ -41,7 +41,7 @@ public fun ExpressCheckoutCallout(borderStyle: CalloutBorderStyle? = null) {
         if (borderStyle != null) {
             containerModifier =
                 containerModifier
-                    .border(1.dp, CatchTheme.colors.borderDefault, borderStyle.shape)
+                    .border(1.dp, CatchTheme.colors.border, borderStyle.shape)
                     .padding(horizontal = 8.dp, vertical = 4.dp)
         }
         BoxWithConstraints(modifier = Modifier.fillMaxWidth()) {

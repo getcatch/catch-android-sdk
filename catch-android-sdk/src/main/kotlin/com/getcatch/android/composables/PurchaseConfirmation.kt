@@ -41,7 +41,7 @@ public fun PurchaseConfirmation(rewardsAmount: Int, borderStyle: BorderStyle? = 
         if (borderStyle != null) {
             containerModifier =
                 containerModifier
-                    .border(1.dp, CatchTheme.colors.borderDefault, borderStyle.shape)
+                    .border(1.dp, CatchTheme.colors.border, borderStyle.shape)
                     .padding(16.dp)
         }
         Column(modifier = containerModifier) {
@@ -58,7 +58,7 @@ public fun PurchaseConfirmation(rewardsAmount: Int, borderStyle: BorderStyle? = 
                     withStyle(
                         style = SpanStyle(
                             fontWeight = FontWeight.W700,
-                            color = CatchTheme.colors.funTextEarning
+                            color = CatchTheme.colors.accent
                         )
                     ) {
                         append(

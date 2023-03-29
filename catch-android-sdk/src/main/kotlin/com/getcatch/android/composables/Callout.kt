@@ -40,7 +40,7 @@ public fun Callout(
         if (borderStyle != null) {
             rowModifier =
                 rowModifier
-                    .border(1.dp, CatchTheme.colors.borderDefault, borderStyle.shape)
+                    .border(1.dp, CatchTheme.colors.border, borderStyle.shape)
                     .padding(horizontal = 8.dp, vertical = 4.dp)
         }
         Row(

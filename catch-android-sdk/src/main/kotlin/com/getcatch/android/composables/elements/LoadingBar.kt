@@ -34,7 +34,7 @@ internal fun LoadingBar(modifier: Modifier = Modifier) {
     Box(modifier = modifier.fillMaxSize()) {
         Box(
             modifier = Modifier
-                .background(LocalColors.current.borderDefault, shape = RoundedCornerShape(2.dp))
+                .background(LocalColors.current.border, shape = RoundedCornerShape(2.dp))
                 .fillMaxHeight()
                 .fillMaxWidth(percentage)
         )
