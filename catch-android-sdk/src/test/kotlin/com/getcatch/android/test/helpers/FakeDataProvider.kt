@@ -2,6 +2,7 @@ package com.getcatch.android.test.helpers
 
 import com.getcatch.android.models.Item
 import com.getcatch.android.models.Merchant
+import com.getcatch.android.models.PublicUserData
 import com.getcatch.android.models.checkout.Price
 
 internal object FakeDataProvider {
@@ -26,11 +27,19 @@ internal object FakeDataProvider {
         theme = null
     )
 
+    val user = PublicUserData(
+        userFirstName = "Jimmy",
+        rewardAmount = 1000,
+        firstPurchaseBonusEligibility = false,
+        isCatchEmployee = false,
+        wasReferred = false,
+    )
+
     fun randomItem() = Item(
-        name="item-${randomString()}",
-        sku="sku-${randomString()}",
-        price= Price(
-            amount=10,
+        name = "item-${randomString()}",
+        sku = "sku-${randomString()}",
+        price = Price(
+            amount = 10,
             currency = "USD",
         ),
         quantity = 1,
