@@ -7,7 +7,6 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.ui.text.font.FontFamily
 import com.getcatch.android.di.sdkModule
 import com.getcatch.android.models.PublicKey
-import com.getcatch.android.network.Environment
 import com.getcatch.android.repository.MerchantRepository
 import com.getcatch.android.theming.CatchTypography
 import com.getcatch.android.theming.DynamicThemeVariant
@@ -22,7 +21,7 @@ public object Catch {
     public fun initialize(
         publicKey: String,
         context: Context,
-        environment: Environment = Environment.SANDBOX,
+        options: CatchOptions = CatchOptions(),
     ): Unit = synchronized(this) {
         // Setup dependency injection
         val koinApp = startKoin {
@@ -30,7 +29,7 @@ public object Catch {
             modules(
                 module {
                     single { PublicKey(value = publicKey) }
-                    single { environment }
+                    single { options.environment }
                 },
                 sdkModule,
             )
@@ -40,6 +39,10 @@ public object Catch {
         MainScope().launch {
             merchantRepo.loadMerchant()
         }
+        if (options.customFontFamily != null) {
+            _customFontFamily.value = options.customFontFamily
+        }
+        _colorTheme.value = options.colorTheme
     }
 
     private val _customFontFamily: MutableState<FontFamily> =
