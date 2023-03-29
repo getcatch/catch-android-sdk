@@ -25,8 +25,8 @@ internal fun LinkButton(label: String, link: String, modifier: Modifier = Modifi
     val context = LocalContext.current
     Button(
         colors = ButtonDefaults.buttonColors(
-            backgroundColor = CatchTheme.colors.buttonPrimary,
-            contentColor = CatchTheme.colors.textButton
+            backgroundColor = CatchTheme.colors.accent,
+            contentColor = CatchTheme.colors.buttonText
         ),
         onClick = {
             val browserIntent = Intent(Intent.ACTION_VIEW, Uri.parse(link))

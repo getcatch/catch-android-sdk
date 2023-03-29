@@ -44,7 +44,7 @@ public fun CampaignLink(
         if (borderStyle != null) {
             containerModifier =
                 containerModifier
-                    .border(1.dp, CatchTheme.colors.borderDefault, borderStyle.shape)
+                    .border(1.dp, CatchTheme.colors.border, borderStyle.shape)
                     .padding(16.dp)
         }
         Column(modifier = containerModifier, verticalArrangement = Arrangement.spacedBy(16.dp)) {
@@ -60,7 +60,7 @@ public fun CampaignLink(
                     withStyle(
                         style = SpanStyle(
                             fontWeight = FontWeight.W700,
-                            color = CatchTheme.colors.funTextEarning
+                            color = CatchTheme.colors.accent
                         )
                     ) {
                         append(

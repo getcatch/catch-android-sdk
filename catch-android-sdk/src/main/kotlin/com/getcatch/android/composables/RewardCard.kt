@@ -22,9 +22,9 @@ import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
 import coil.request.ImageRequest
 import com.getcatch.android.R
-import com.getcatch.android.theming.CatchRawColors
 import com.getcatch.android.theming.CatchTheme
 import com.getcatch.android.theming.CatchTypography
+import com.getcatch.android.theming.color.CatchColors
 import com.getcatch.android.utils.centsToDollarsString
 
 @Composable
@@ -42,7 +42,7 @@ internal fun RewardCard(
             .shadow(
                 elevation = 2.dp,
                 shape = cardShape,
-                ambientColor = Color(CatchRawColors.GREY_7)
+                ambientColor = Color(CatchColors.GREY_7)
             )
             .width(224.dp)
             .height(138.44.dp)

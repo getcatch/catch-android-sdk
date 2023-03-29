@@ -13,6 +13,7 @@ import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.unit.dp
+import com.getcatch.android.theming.CatchTheme
 import com.getcatch.android.theming.CatchTypography
 import com.getcatch.android.theming.LocalColors
 import com.getcatch.android.utils.centsToDollarsString
@@ -64,6 +65,7 @@ internal fun EarnRedeemText(
             Text(
                 text = it,
                 style = textStyle,
+                color = CatchTheme.colors.foreground,
             )
             Spacer(modifier = Modifier.width(3.dp))
         }
@@ -74,6 +76,7 @@ internal fun EarnRedeemText(
             Text(
                 text = it,
                 style = textStyle,
+                color = CatchTheme.colors.foreground,
             )
         }
     },
@@ -103,8 +106,8 @@ internal data class EarnRedeemMessage(val message: String, val type: EarnRedeemT
     val color: Color
         @Composable
         get() = when (type) {
-            EarnRedeemType.Earn -> LocalColors.current.funTextEarning
-            EarnRedeemType.Redeem -> LocalColors.current.funTextEarning
+            EarnRedeemType.Earn -> LocalColors.current.accent
+            EarnRedeemType.Redeem -> LocalColors.current.secondaryAccent
         }
 }
 
