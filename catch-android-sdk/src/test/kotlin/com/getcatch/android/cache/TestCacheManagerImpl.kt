@@ -6,7 +6,6 @@ import com.github.ivanshafran.sharedpreferencesmock.SPMockBuilder
 import com.google.common.truth.Truth.assertThat
 import org.junit.Test
 
-
 public class TestCacheManagerImpl {
     private val sharedPrefsMockBuilder: SPMockBuilder = SPMockBuilder()
 
@@ -48,5 +47,18 @@ public class TestCacheManagerImpl {
 
         // Make sure the error handling clears out the shared pref
         assertThat(mockSharedPrefs.getString(CacheManagerImpl.PREFS_KEY_MERCHANT, null)).isNull()
+    }
+
+    @Test
+    public fun `deviceToken, do not overwrite`() {
+        val cacheManager = CacheManagerImpl(sharedPrefsMockBuilder.createContext())
+        val testDeviceToken = "TEST_DEVICE_TOKEN"
+        assertThat(cacheManager.deviceToken).isNull()
+        cacheManager.deviceToken = testDeviceToken
+        assertThat(cacheManager.deviceToken).isEqualTo(testDeviceToken)
+        cacheManager.deviceToken = null
+        assertThat(cacheManager.deviceToken).isEqualTo(testDeviceToken)
+        cacheManager.deviceToken = "SOMETHING NEW"
+        assertThat(cacheManager.deviceToken).isEqualTo(testDeviceToken)
     }
 }
