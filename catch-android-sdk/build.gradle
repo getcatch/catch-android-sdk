@@ -42,6 +42,7 @@ apply from: rootProject.file("scripts/commons/library_config.gradle")
 // MavenCentral publication script
 apply from: rootProject.file("scripts/publishing/publish_mavencentral.gradle")
 apply plugin: 'org.jetbrains.kotlin.android'
+apply plugin: "org.jetbrains.dokka"
 
 /**
  * Library versioning
