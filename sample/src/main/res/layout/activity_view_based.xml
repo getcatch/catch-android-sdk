@@ -8,39 +8,6 @@
         android:layout_gravity="center"
         android:gravity="center">
 
-        <com.google.android.material.card.MaterialCardView
-            android:id="@+id/card"
-            style="?attr/materialCardViewElevatedStyle"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            >
-
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:padding="8dp"
-                android:paddingStart="16dp"
-                android:paddingEnd="16dp"
-                android:orientation="vertical">
-
-                <androidx.appcompat.widget.AppCompatTextView
-                    android:id="@+id/overline"
-                    style="@style/TextAppearance.MaterialComponents.Overline"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/overline_counter" />
-
-                <androidx.appcompat.widget.AppCompatTextView
-                    android:id="@+id/text_view"
-                    style="@style/TextAppearance.Material3.BodyLarge"
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:maxLines="1"
-                    android:layout_gravity="center" />
-
-            </LinearLayout>
-        </com.google.android.material.card.MaterialCardView>
-
         <com.getcatch.android.views.CalloutView
             android:id="@+id/test_callout_view"
             android:layout_width="wrap_content"
