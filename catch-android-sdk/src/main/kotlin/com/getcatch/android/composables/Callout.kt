@@ -43,9 +43,13 @@ public fun Callout(
             .height(intrinsicSize = IntrinsicSize.Min)
             .animateContentSize()
         if (borderStyle != null) {
+            val borderColor = when(borderStyle) {
+                is CalloutBorderStyle.Custom -> borderStyle.color
+                else -> CatchTheme.colors.border
+            }
             rowModifier =
                 rowModifier
-                    .border(1.dp, CatchTheme.colors.border, borderStyle.shape)
+                    .border(1.dp, borderColor, borderStyle.shape)
                     .padding(horizontal = 8.dp, vertical = 4.dp)
         }
         Row(
