@@ -24,16 +24,19 @@ import androidx.compose.ui.unit.dp
 import com.getcatch.android.R
 import com.getcatch.android.composables.elements.EarnRedeemText
 import com.getcatch.android.composables.elements.InfoIcon
+import com.getcatch.android.styling.InfoWidgetStyle
+import com.getcatch.android.styling.StyleResolver
 import com.getcatch.android.theming.CalloutBorderStyle
 import com.getcatch.android.theming.CatchTheme
-import com.getcatch.android.theming.LocalThemeVariant
 
 @Composable
 public fun Callout(
     hasOrPrefix: Boolean = false,
-    borderStyle: CalloutBorderStyle? = null
+    borderStyle: CalloutBorderStyle? = null,
+    styleOverrides: InfoWidgetStyle? = null,
 ) {
     CatchTheme {
+        val styles = StyleResolver.calloutStyles(CatchTheme.variant, styleOverrides)
         var rowModifier = Modifier
             .height(intrinsicSize = IntrinsicSize.Min)
             .animateContentSize()
@@ -56,7 +59,7 @@ public fun Callout(
             )
             Spacer(modifier = Modifier.width(2.dp))
             Image(
-                painter = painterResource(id = LocalThemeVariant.current.logoResId),
+                painter = painterResource(id = CatchTheme.variant.logoResId),
                 contentDescription = stringResource(
                     id = R.string.content_description_catch_logo
                 ),
@@ -64,7 +67,7 @@ public fun Callout(
                 modifier = Modifier.height(18.dp),
             )
             Spacer(modifier = Modifier.width(2.dp))
-            InfoIcon()
+            InfoIcon(styles.composeTextStyle)
         }
     }
 }
