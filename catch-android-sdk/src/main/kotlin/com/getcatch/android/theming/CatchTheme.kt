@@ -67,10 +67,11 @@ internal fun CatchTheme(
 
 @Composable
 internal fun CatchTheme(
+    themeOverride: ThemeVariantOption? = null,
     content: @Composable () -> Unit
 ) {
     CatchTheme(
-        variantOption = Catch.colorTheme.value,
+        variantOption = themeOverride ?: Catch.colorTheme.value,
         defaultFontFamily = Catch.customFontFamily.value,
         content = content
     )
