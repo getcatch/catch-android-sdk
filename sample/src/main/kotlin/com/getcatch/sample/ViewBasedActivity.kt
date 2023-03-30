@@ -2,25 +2,17 @@ package com.getcatch.sample
 
 import android.content.Intent
 import android.os.Bundle
-import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.databinding.DataBindingUtil
-import androidx.lifecycle.Lifecycle
-import androidx.lifecycle.lifecycleScope
-import androidx.lifecycle.repeatOnLifecycle
 import com.getcatch.android.views.CalloutView
 import com.getcatch.sample.databinding.ActivityViewBasedBinding
 import com.google.android.material.button.MaterialButton
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.flow.collectLatest
-import kotlinx.coroutines.launch
 import kotlin.random.Random
 
 @AndroidEntryPoint
 class ViewBasedActivity : AppCompatActivity() {
-
-    private val vm: MainViewModel by viewModels()
 
     private lateinit var binding: ActivityViewBasedBinding
     private lateinit var calloutView: CalloutView
@@ -50,14 +42,6 @@ class ViewBasedActivity : AppCompatActivity() {
                 else -> AppCompatDelegate.MODE_NIGHT_NO
             }
             AppCompatDelegate.setDefaultNightMode(newMode)
-        }
-
-        lifecycleScope.launch {
-            lifecycle.repeatOnLifecycle(Lifecycle.State.STARTED) {
-                vm.secondsFlow.collectLatest {
-                    binding.textView.text = it.toString()
-                }
-            }
         }
     }
 }
