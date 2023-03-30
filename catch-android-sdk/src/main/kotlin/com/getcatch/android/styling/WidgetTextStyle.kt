@@ -8,7 +8,7 @@ import com.getcatch.android.styling.values.FontWeight
 import com.getcatch.android.styling.values.TextTransform
 import androidx.compose.ui.text.font.FontWeight as ComposeFontWeight
 
-public data class TextStyle(
+public data class WidgetTextStyle(
     val fontSize: Float? = null,
     val fontColor: ColorValue? = null,
     val fontWeight: FontWeight? = null,
@@ -17,9 +17,9 @@ public data class TextStyle(
     val textTransform: TextTransform? = null,
 )  {
 
-    internal fun withOverrides(overrides: TextStyle?): TextStyle {
+    internal fun withOverrides(overrides: WidgetTextStyle?): WidgetTextStyle {
         if (overrides == null) return this
-        return TextStyle(
+        return WidgetTextStyle(
             fontSize = overrides.fontSize ?: fontSize,
             fontColor = overrides.fontColor ?: fontColor,
             fontWeight = overrides.fontWeight ?: fontWeight,
@@ -36,7 +36,7 @@ public data class TextStyle(
         val letterSpacing: TextUnit? = null,
         val textTransform: TextTransform? = null,
     ) {
-        fun withOverrides(overrides: TextStyle?): Resolved {
+        fun withOverrides(overrides: WidgetTextStyle?): Resolved {
             if (overrides == null) return this
             return Resolved(
                 fontSize = overrides.fontSize?.sp ?: fontSize,

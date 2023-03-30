@@ -24,7 +24,7 @@ import com.getcatch.android.composables.ExpressCheckoutCallout
 import com.getcatch.android.composables.Payment
 import com.getcatch.android.composables.PurchaseConfirmation
 import com.getcatch.android.styling.InfoWidgetStyle
-import com.getcatch.android.styling.TextStyle
+import com.getcatch.android.styling.WidgetTextStyle
 import com.getcatch.android.styling.values.ColorValue
 import com.getcatch.android.theming.BorderStyle
 import com.getcatch.android.theming.CalloutBorderStyle
@@ -57,7 +57,7 @@ class ComposeActivity : ComponentActivity() {
                     borderStyle = CalloutBorderStyle.Custom(ColorValue("#0000FF"), radius = 9.5f),
                     theme=ThemeVariant.LightMono,
                     styleOverrides = InfoWidgetStyle(
-                        TextStyle(fontColor = ColorValue("#FF0000"))
+                        WidgetTextStyle(fontColor = ColorValue("#FF0000"))
                     )
                 )
                 Payment()

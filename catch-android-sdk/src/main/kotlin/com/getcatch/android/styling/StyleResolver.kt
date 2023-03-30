@@ -12,7 +12,7 @@ internal object StyleResolver {
         instanceOverrides: InfoWidgetStyle?,
     ): InfoWidgetStyle.Resolved {
         val defaults = InfoWidgetStyle.Resolved(
-            textStyle = TextStyle.Resolved(
+            widgetTextStyle = WidgetTextStyle.Resolved(
                 fontSize = 14.sp,
                 lineHeight = 20.sp,
                 fontColor = theme.composeColors.foreground,
@@ -26,7 +26,7 @@ internal object StyleResolver {
         )
         val globalOverrides = Catch.styleConfig.let { globalConfig ->
             val basicOverrides = InfoWidgetStyle(
-                textStyle = globalConfig?.textStyle,
+                widgetTextStyle = globalConfig?.widgetTextStyle,
                 benefitTextStyle = globalConfig?.benefitTextStyle,
             )
             return@let basicOverrides.withOverrides(globalConfig?.calloutStyle)
