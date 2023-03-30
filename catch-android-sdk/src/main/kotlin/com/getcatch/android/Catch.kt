@@ -8,6 +8,7 @@ import androidx.compose.ui.text.font.FontFamily
 import com.getcatch.android.di.sdkModule
 import com.getcatch.android.models.PublicKey
 import com.getcatch.android.repository.MerchantRepository
+import com.getcatch.android.styling.CatchStyleConfig
 import com.getcatch.android.theming.CatchTypography
 import com.getcatch.android.theming.DynamicThemeVariant
 import com.getcatch.android.theming.ThemeVariantOption
@@ -43,7 +44,10 @@ public object Catch {
             _customFontFamily.value = options.customFontFamily
         }
         _colorTheme.value = options.colorTheme
+        styleConfig = options.styleConfig
     }
+
+    internal var styleConfig: CatchStyleConfig? = null
 
     private val _customFontFamily: MutableState<FontFamily> =
         mutableStateOf(CatchTypography.circularFontFamily)
