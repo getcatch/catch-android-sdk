@@ -7,5 +7,7 @@ internal interface UserRepository {
     val activeUser: StateFlow<PublicUserData?>
     val didFetchUserData: StateFlow<Boolean>
     var deviceToken: String?
+
     suspend fun loadUserData(merchantId: String)
+    fun fallbackToNewUser()
 }

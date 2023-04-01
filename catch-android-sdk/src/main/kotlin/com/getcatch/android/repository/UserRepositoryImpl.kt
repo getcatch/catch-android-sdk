@@ -37,4 +37,9 @@ internal class UserRepositoryImpl(
 
         _didFetchUserData.value = true
     }
+
+    override fun fallbackToNewUser() {
+        _activeUser.value = PublicUserData.noData
+        _didFetchUserData.value = true
+    }
 }
