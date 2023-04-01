@@ -28,6 +28,7 @@ import com.getcatch.android.styling.TextStyle
 import com.getcatch.android.styling.values.ColorValue
 import com.getcatch.android.theming.BorderStyle
 import com.getcatch.android.theming.CalloutBorderStyle
+import com.getcatch.android.theming.ThemeVariant
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -53,6 +54,7 @@ class ComposeActivity : ComponentActivity() {
                 )
             ) {
                 Callout(
+                    theme = ThemeVariant.LightMono,
                     styleOverrides = InfoWidgetStyle(
                         TextStyle(fontColor = ColorValue("#FF0000"))
                     )

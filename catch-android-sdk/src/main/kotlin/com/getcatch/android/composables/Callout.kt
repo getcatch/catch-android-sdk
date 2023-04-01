@@ -28,14 +28,16 @@ import com.getcatch.android.styling.InfoWidgetStyle
 import com.getcatch.android.styling.StyleResolver
 import com.getcatch.android.theming.CalloutBorderStyle
 import com.getcatch.android.theming.CatchTheme
+import com.getcatch.android.theming.ThemeVariantOption
 
 @Composable
 public fun Callout(
     hasOrPrefix: Boolean = false,
     borderStyle: CalloutBorderStyle? = null,
+    theme: ThemeVariantOption? = null,
     styleOverrides: InfoWidgetStyle? = null,
 ) {
-    CatchTheme {
+    CatchTheme(theme) {
         val styles = StyleResolver.calloutStyles(CatchTheme.variant, styleOverrides)
         var rowModifier = Modifier
             .height(intrinsicSize = IntrinsicSize.Min)
