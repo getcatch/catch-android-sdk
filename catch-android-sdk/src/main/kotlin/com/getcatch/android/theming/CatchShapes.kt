@@ -1,8 +1,10 @@
 package com.getcatch.android.theming
 
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.unit.dp
+import com.getcatch.android.styling.values.ColorValue
 
 public sealed class BorderStyle {
     internal abstract val shape: Shape
@@ -31,5 +33,10 @@ public sealed class CalloutBorderStyle {
 
     public object Pill : CalloutBorderStyle() {
         override val shape: Shape = RoundedCornerShape(percent = 50)
+    }
+
+    public class Custom(color: ColorValue, radius: Float = 0f): CalloutBorderStyle() {
+        override val shape: Shape = RoundedCornerShape(size = radius.dp)
+        internal val color: Color = color.value
     }
 }

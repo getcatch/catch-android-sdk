@@ -54,7 +54,8 @@ class ComposeActivity : ComponentActivity() {
                 )
             ) {
                 Callout(
-                    theme = ThemeVariant.LightMono,
+                    borderStyle = CalloutBorderStyle.Custom(ColorValue("#0000FF"), radius = 9.5f),
+                    theme=ThemeVariant.LightMono,
                     styleOverrides = InfoWidgetStyle(
                         TextStyle(fontColor = ColorValue("#FF0000"))
                     )
