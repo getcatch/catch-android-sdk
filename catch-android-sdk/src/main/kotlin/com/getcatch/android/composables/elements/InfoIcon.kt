@@ -10,6 +10,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.getcatch.android.R
@@ -18,11 +19,11 @@ import com.getcatch.android.theming.CatchTheme
 import com.getcatch.android.theming.CatchTypography
 
 @Composable
-internal fun InfoIcon() {
+internal fun InfoIcon(textStyle: TextStyle = CatchTypography.CatchTextStyles.bodySmall) {
     val context = LocalContext.current
     Text(
         text = stringResource(R.string.info_character),
-        style = CatchTypography.CatchTextStyles.bodySmall,
+        style = textStyle,
         modifier = Modifier
             .padding(2.dp)
             .clickable(
