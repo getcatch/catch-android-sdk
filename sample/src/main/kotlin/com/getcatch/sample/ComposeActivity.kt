@@ -23,9 +23,6 @@ import com.getcatch.android.composables.CatchLogoSize
 import com.getcatch.android.composables.ExpressCheckoutCallout
 import com.getcatch.android.composables.Payment
 import com.getcatch.android.composables.PurchaseConfirmation
-import com.getcatch.android.styling.InfoWidgetStyle
-import com.getcatch.android.styling.WidgetTextStyle
-import com.getcatch.android.styling.values.ColorValue
 import com.getcatch.android.theming.BorderStyle
 import com.getcatch.android.theming.CalloutBorderStyle
 import com.getcatch.android.theming.ThemeVariant
@@ -53,13 +50,7 @@ class ComposeActivity : ComponentActivity() {
                     alignment = Alignment.CenterVertically
                 )
             ) {
-                Callout(
-                    borderStyle = CalloutBorderStyle.Custom(ColorValue("#0000FF"), radius = 9.5f),
-                    theme=ThemeVariant.LightMono,
-                    styleOverrides = InfoWidgetStyle(
-                        WidgetTextStyle(fontColor = ColorValue("#FF0000"))
-                    )
-                )
+                Callout(theme=ThemeVariant.LightMono)
                 Payment()
                 ExpressCheckoutCallout(borderStyle = CalloutBorderStyle.SlightRound)
                 PurchaseConfirmation(rewardsAmount = 1000, borderStyle = BorderStyle.SlightRound)
