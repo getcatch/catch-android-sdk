@@ -9,6 +9,8 @@ import com.getcatch.android.network.clients.transactions.TransactionsSvcClient
 import com.getcatch.android.network.clients.transactions.TransactionsSvcClientImpl
 import com.getcatch.android.repository.MerchantRepository
 import com.getcatch.android.repository.MerchantRepositoryImpl
+import com.getcatch.android.repository.RewardsRepository
+import com.getcatch.android.repository.RewardsRepositoryImpl
 import com.getcatch.android.repository.UserRepository
 import com.getcatch.android.repository.UserRepositoryImpl
 import org.koin.android.ext.koin.androidContext
@@ -32,5 +34,8 @@ internal val sdkModule = module {
     }
     single<UserRepository> {
         UserRepositoryImpl(transactionsSvcClient = get(), cache = get())
+    }
+    single<RewardsRepository> {
+        RewardsRepositoryImpl(merchantRepo = get(), transactionsSvcClient = get())
     }
 }
