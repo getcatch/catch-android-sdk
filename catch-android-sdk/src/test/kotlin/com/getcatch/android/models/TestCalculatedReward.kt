@@ -21,4 +21,10 @@ public class TestCalculatedReward {
         val oneDollar = CalculatedReward.PercentRate(0.1)
         assertThat(oneDollar.formattedStringValue).isEqualTo("10%")
     }
+
+    @Test
+    public fun `Saved, formats value properly`() {
+        val oneDollar = CalculatedReward.Saved(100)
+        assertThat(oneDollar.formattedStringValue).isEqualTo("$1.00")
+    }
 }

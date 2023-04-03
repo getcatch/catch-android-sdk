@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="hello_x">Hello, %1$s!</string>
-    <string name="tofu_earn_placeholder">Earn 10%</string>
-    <string name="tofu_redeem_amount">Redeem %1$d</string>
+    <string name="benefit_earn_message">Earn %1$s credit</string>
+    <string name="benefit_redeem_message">Redeem %1$s</string>
+    <string name="benefit_saved_message">Redeem %1$s</string>
     <string name="or_prefix">or</string>
     <string name="em_dash_prefix">– </string>
     <string name="by_paying_with">by paying with</string>
