@@ -13,7 +13,9 @@ import com.getcatch.android.repository.RewardsRepository
 import com.getcatch.android.repository.RewardsRepositoryImpl
 import com.getcatch.android.repository.UserRepository
 import com.getcatch.android.repository.UserRepositoryImpl
+import com.getcatch.android.viewmodels.EarnRedeemViewModel
 import org.koin.android.ext.koin.androidContext
+import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.dsl.module
 
 internal val sdkModule = module {
@@ -37,5 +39,8 @@ internal val sdkModule = module {
     }
     single<RewardsRepository> {
         RewardsRepositoryImpl(merchantRepo = get(), transactionsSvcClient = get())
+    }
+    viewModel {
+        EarnRedeemViewModel(userRepo = get(), rewardsRepo = get())
     }
 }
