@@ -18,4 +18,43 @@ internal data class EarnedRewardsSummary(
 
     /** Rewards rules used for the earnings breakdown modal */
     val earnedRewardBreakdown: List<EarnedRewardRuleDetail>? = null,
-)
+) {
+    companion object {
+        fun generateDefaultsForMerchant(
+            merchant: Merchant,
+            price: Int,
+            userRewardAmount: Int,
+            firstPurchaseBonusEligibility: Boolean,
+        ): EarnedRewardsSummary {
+            val unrestrictedEarnedRewardBreakdown = EarnedRewardRuleDetail.unrestrictedEarned(
+                merchant = merchant,
+                price = price,
+                userRewardAmount = userRewardAmount
+            )
+
+            val earnedRewardBreakdown: List<EarnedRewardRuleDetail> = buildList {
+                add(unrestrictedEarnedRewardBreakdown)
+                if (firstPurchaseBonusEligibility) {
+                    EarnedRewardRuleDetail.newCatchUser(merchant)?.let {
+                        add(it)
+                    }
+                }
+            }
+
+            val earnedRewardsTotal = earnedRewardBreakdown.sumOf { it.earnedRewardAmount }
+            val signUpBonusAmount =
+                if (firstPurchaseBonusEligibility) merchant.defaultSignUpBonus.toInt()
+                else 0
+
+            return EarnedRewardsSummary(
+                signUpBonusAmount = signUpBonusAmount,
+                // Leave as zero until we figure out how to enable experiments on mobile
+                // This experiment is currently disabled, so not an issue yet
+                signUpDiscountAmount = 0,
+                percentageRewardRate = merchant.defaultEarnedRewardsRate,
+                earnedRewardsTotal = earnedRewardsTotal,
+                earnedRewardBreakdown = earnedRewardBreakdown,
+            )
+        }
+    }
+}
