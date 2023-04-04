@@ -48,4 +48,15 @@ internal class EarnRedeemViewModel(
             _uiState.value = EarnRedeemUiState.Success(calculatedReward)
         }
     }
+
+    companion object {
+        /**
+         * In order to make it so an instance of the view model is instantiated
+         * per price/items/userCohorts configuration, we need to provide a key
+         * for the view model. This function takes in the parameters used to init
+         * the view model and creates a string key out of them.
+         */
+        fun generateKey(price: Int, items: List<Item>?, userCohorts: List<String>?) =
+            "$price:${items?.hashCode()}:${userCohorts?.joinToString(",")}"
+    }
 }

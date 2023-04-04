@@ -85,15 +85,15 @@ dependencies {
     
     // KOIN DI DEPENDENCIES
     // Koin Core features
-    implementation "io.insert-koin:koin-core:3.2.2"
+    implementation "io.insert-koin:koin-core:3.4.0"
     // Koin Test features
-    testImplementation "io.insert-koin:koin-test:3.2.2"
+    testImplementation "io.insert-koin:koin-test:3.4.0"
     // Koin for JUnit 4
-    testImplementation "io.insert-koin:koin-test-junit4:3.2.2"
+    testImplementation "io.insert-koin:koin-test-junit4:3.4.0"
     // Koin main features for Android
-    implementation "io.insert-koin:koin-android:3.2.2"
+    implementation "io.insert-koin:koin-android:3.4.0"
     // Jetpack Compose
-    implementation "io.insert-koin:koin-androidx-compose:3.2.2"
+    implementation "io.insert-koin:koin-androidx-compose:3.4.3"
     
     // COMPOSE DEPENDENCIES
     // Integration with activities
