@@ -97,15 +97,17 @@ dependencies {
     
     // COMPOSE DEPENDENCIES
     // Integration with activities
-    api 'androidx.activity:activity-compose:1.6.1'
+    api 'androidx.activity:activity-compose:1.7.0'
     // Compose Material Design
-    api 'androidx.compose.material:material:1.3.1'
+    api 'androidx.compose.material:material:1.4.0'
     // Animations
-    api 'androidx.compose.animation:animation:1.3.3'
+    api 'androidx.compose.animation:animation:1.4.0'
     // Tooling support (Previews, etc.)
-    api 'androidx.compose.ui:ui-tooling:1.3.3'
+    api 'androidx.compose.ui:ui-tooling:1.4.0'
     // Integration with ViewModels
-    api 'androidx.lifecycle:lifecycle-viewmodel-compose:2.6.0'
+    api 'androidx.lifecycle:lifecycle-viewmodel-compose:2.6.1'
+    // Lifecycle runtime
+    api 'androidx.lifecycle:lifecycle-runtime-compose:2.6.1'
     // Accompanist WebView
     implementation "com.google.accompanist:accompanist-webview:0.25.1"
     // Accompanist Flow Layouts
@@ -113,7 +115,7 @@ dependencies {
     // Coil
     implementation("io.coil-kt:coil-compose:2.2.2")
     // UI Tests
-    androidTestImplementation 'androidx.compose.ui:ui-test-junit4:1.3.3'
+    androidTestImplementation 'androidx.compose.ui:ui-test-junit4:1.4.0'
     
     // Testing dependencies
     testImplementation "junit:junit:4.13.2"

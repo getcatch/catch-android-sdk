@@ -10,7 +10,6 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
@@ -20,6 +19,7 @@ import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.getcatch.android.R
 import com.getcatch.android.composables.elements.LinkButton
 import com.getcatch.android.repository.MerchantRepository
@@ -28,15 +28,26 @@ import com.getcatch.android.theming.CatchTheme
 import com.getcatch.android.theming.CatchTypography
 import com.getcatch.android.theming.LocalThemeVariant
 import com.getcatch.android.utils.centsToDollarsString
-import org.koin.androidx.compose.get
+import org.koin.compose.koinInject
 
 @Composable
 public fun CampaignLink(
     rewardsAmount: Int,
     borderStyle: BorderStyle? = null,
 ) {
-    val merchantRepo = get<MerchantRepository>()
-    val merchant by merchantRepo.activeMerchant.collectAsState()
+    CampaignLinkInternal(
+        rewardsAmount = rewardsAmount,
+        borderStyle = borderStyle,
+    )
+}
+
+@Composable
+internal fun CampaignLinkInternal(
+    rewardsAmount: Int,
+    borderStyle: BorderStyle? = null,
+    merchantRepo: MerchantRepository = koinInject(),
+) {
+    val merchant by merchantRepo.activeMerchant.collectAsStateWithLifecycle()
     CatchTheme {
         var containerModifier = Modifier
             .height(intrinsicSize = IntrinsicSize.Min)
