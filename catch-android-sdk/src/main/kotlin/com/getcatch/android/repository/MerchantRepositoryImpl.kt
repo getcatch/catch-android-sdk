@@ -17,7 +17,7 @@ internal class MerchantRepositoryImpl(
     private val _activeMerchant = MutableStateFlow(cache.merchant)
     override val activeMerchant: StateFlow<Merchant?> = _activeMerchant.asStateFlow()
 
-    override suspend fun loadMerchant() {
+    override suspend fun loadMerchant(): NetworkResponse<Merchant> {
         val response = merchantsSvcClient.loadPublicMerchantData(
             publicKey = publicKey
         )
@@ -25,5 +25,7 @@ internal class MerchantRepositoryImpl(
             _activeMerchant.value = response.body
             cache.merchant = response.body
         }
+
+        return response
     }
 }
