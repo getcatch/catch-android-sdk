@@ -6,21 +6,18 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.text.TextStyle
-import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.unit.dp
-import com.getcatch.android.theming.CatchTheme
-import com.getcatch.android.theming.CatchTypography
+import com.getcatch.android.styling.InfoWidgetStyle
 import com.getcatch.android.viewmodels.EarnRedeemUiState
 
 @Composable
 internal fun BenefitText(
     uiState: EarnRedeemUiState,
+    styles: InfoWidgetStyle.Resolved,
     capitalize: Boolean = true,
     prefixComposable: @Composable (() -> Unit)? = null,
     suffixComposable: @Composable (() -> Unit)? = null,
-    textStyle: TextStyle = CatchTypography.CatchTextStyles.bodySmall,
 ) {
     when (uiState) {
         is EarnRedeemUiState.Loading -> {
@@ -34,15 +31,14 @@ internal fun BenefitText(
             val reward = uiState.reward
             val message = reward.getMessage(capitalize)
             val color =
-                if (reward.redeemable) CatchTheme.colors.secondaryAccent
-                else CatchTheme.colors.accent
+                if (reward.redeemable) styles.benefitTextStyle.redeemFontColor
+                else styles.benefitTextStyle.earnFontColor
 
             prefixComposable?.invoke()
             Text(
-                text = message,
+                text = styles.applyTextTransform(message),
                 color = color,
-                style = textStyle,
-                fontWeight = FontWeight.W700,
+                style = styles.benefitComposeTextStyle,
                 textDecoration = TextDecoration.Underline
             )
             suffixComposable?.invoke()
@@ -53,19 +49,19 @@ internal fun BenefitText(
 @Composable
 internal fun BenefitText(
     uiState: EarnRedeemUiState,
+    styles: InfoWidgetStyle.Resolved,
     capitalize: Boolean = true,
     prefix: String? = null,
     suffix: String? = null,
-    textStyle: TextStyle = CatchTypography.CatchTextStyles.bodySmall,
 ) = BenefitText(
     uiState = uiState,
+    styles = styles,
     capitalize = capitalize,
     prefixComposable = prefix?.let {
         @Composable {
             Text(
-                text = it,
-                style = textStyle,
-                color = CatchTheme.colors.foreground,
+                text = styles.applyTextTransform(it),
+                style = styles.composeTextStyle,
             )
             Spacer(modifier = Modifier.width(3.dp))
         }
@@ -74,11 +70,9 @@ internal fun BenefitText(
         @Composable {
             Spacer(modifier = Modifier.width(3.dp))
             Text(
-                text = it,
-                style = textStyle,
-                color = CatchTheme.colors.foreground,
+                text = styles.applyTextTransform(it),
+                style = styles.composeTextStyle,
             )
         }
     },
-    textStyle = textStyle,
 )

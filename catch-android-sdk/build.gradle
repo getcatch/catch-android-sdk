@@ -109,9 +109,9 @@ dependencies {
     // Lifecycle runtime
     api 'androidx.lifecycle:lifecycle-runtime-compose:2.6.1'
     // Accompanist WebView
-    implementation "com.google.accompanist:accompanist-webview:0.25.1"
+    implementation "com.google.accompanist:accompanist-webview:0.30.1"
     // Accompanist Flow Layouts
-    implementation "com.google.accompanist:accompanist-flowlayout:0.25.1"
+    implementation "com.google.accompanist:accompanist-flowlayout:0.30.1"
     // Coil
     implementation("io.coil-kt:coil-compose:2.2.2")
     // UI Tests

@@ -1,7 +1,6 @@
 package com.getcatch.android.styling
 
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.sp
 import com.getcatch.android.styling.values.ColorValue
@@ -49,13 +48,5 @@ public data class WidgetTextStyle(
                 textTransform = overrides.textTransform,
             )
         }
-
-        val composeTextStyle = TextStyle(
-            color = fontColor,
-            fontSize = fontSize,
-            fontWeight = fontWeight,
-            lineHeight = lineHeight,
-            letterSpacing = letterSpacing ?: TextUnit.Unspecified,
-        )
     }
 }
