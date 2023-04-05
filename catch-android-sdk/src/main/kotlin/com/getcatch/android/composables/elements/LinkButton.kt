@@ -17,8 +17,8 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import com.getcatch.android.R
-import com.getcatch.android.theming.CatchTextStyles
 import com.getcatch.android.theming.CatchTheme
+import com.getcatch.android.ui.typography.CatchTextStyles
 
 @Composable
 internal fun LinkButton(label: String, link: String, modifier: Modifier = Modifier) {

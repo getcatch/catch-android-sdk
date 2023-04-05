@@ -22,9 +22,9 @@ import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
 import coil.request.ImageRequest
 import com.getcatch.android.R
-import com.getcatch.android.theming.CatchTextStyles
 import com.getcatch.android.theming.CatchTheme
 import com.getcatch.android.theming.color.CatchColors
+import com.getcatch.android.ui.typography.CatchTextStyles
 import com.getcatch.android.utils.centsToDollarsString
 
 @Composable

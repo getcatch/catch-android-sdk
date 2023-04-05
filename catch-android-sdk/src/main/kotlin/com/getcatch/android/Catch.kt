@@ -13,9 +13,9 @@ import com.getcatch.android.network.NetworkResponse
 import com.getcatch.android.repository.MerchantRepository
 import com.getcatch.android.repository.UserRepository
 import com.getcatch.android.styling.CatchStyleConfig
-import com.getcatch.android.theming.CatchTypography
 import com.getcatch.android.theming.DynamicThemeVariant
 import com.getcatch.android.theming.ThemeVariantOption
+import com.getcatch.android.ui.typography.CatchFonts
 import kotlinx.coroutines.MainScope
 import kotlinx.coroutines.launch
 import org.koin.android.ext.koin.androidContext
@@ -88,7 +88,7 @@ public object Catch {
     internal var styleConfig: CatchStyleConfig? = null
 
     private val _customFontFamily: MutableState<FontFamily> =
-        mutableStateOf(CatchTypography.circularFontFamily)
+        mutableStateOf(CatchFonts.circularFontFamily)
     internal val customFontFamily: State<FontFamily> = _customFontFamily
     public fun setCustomFontFamily(fontFamily: FontFamily): Unit = synchronized(this) {
         _customFontFamily.value = fontFamily
