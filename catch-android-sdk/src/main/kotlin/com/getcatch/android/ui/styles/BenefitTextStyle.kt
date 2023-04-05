@@ -1,4 +1,4 @@
-package com.getcatch.android.ui.styling
+package com.getcatch.android.ui.styles
 
 import androidx.compose.ui.graphics.Color
 import com.getcatch.android.styling.values.ColorValue

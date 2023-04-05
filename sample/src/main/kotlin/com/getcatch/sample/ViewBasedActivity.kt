@@ -5,7 +5,7 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.databinding.DataBindingUtil
-import com.getcatch.android.views.CalloutView
+import com.getcatch.android.ui.views.CalloutView
 import com.getcatch.sample.databinding.ActivityViewBasedBinding
 import com.google.android.material.button.MaterialButton
 import dagger.hilt.android.AndroidEntryPoint

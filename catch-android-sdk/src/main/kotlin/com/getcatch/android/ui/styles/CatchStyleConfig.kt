@@ -1,4 +1,4 @@
-package com.getcatch.android.ui.styling
+package com.getcatch.android.ui.styles
 
 public data class CatchStyleConfig(
     val widgetTextStyle: WidgetTextStyle? = null,

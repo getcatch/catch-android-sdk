@@ -1,4 +1,4 @@
-package com.getcatch.android.ui.styling.values
+package com.getcatch.android.ui.styles.values
 
 import androidx.compose.ui.text.font.FontWeight as ComposeFontWeight
 

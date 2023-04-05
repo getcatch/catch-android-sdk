@@ -1,4 +1,4 @@
-package com.getcatch.android.ui.styling
+package com.getcatch.android.ui.styles
 
 import com.getcatch.android.styling.values.ColorValue
 import com.getcatch.android.styling.values.FontWeight

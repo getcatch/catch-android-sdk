@@ -1,4 +1,4 @@
-package com.getcatch.android.ui.styling
+package com.getcatch.android.ui.styles
 
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.sp

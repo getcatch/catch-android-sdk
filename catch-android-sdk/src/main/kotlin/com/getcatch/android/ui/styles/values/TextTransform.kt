@@ -1,4 +1,4 @@
-package com.getcatch.android.ui.styling.values
+package com.getcatch.android.ui.styles.values
 
 import com.getcatch.android.utils.capitalizeWords
 

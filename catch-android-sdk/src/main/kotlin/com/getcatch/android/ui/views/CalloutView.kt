@@ -1,4 +1,4 @@
-package com.getcatch.android.views
+package com.getcatch.android.ui.views
 
 import android.content.Context
 import android.util.AttributeSet
