@@ -17,7 +17,7 @@ internal object CalloutBorderStyleAttrEnum {
     const val CUSTOM = 3
 }
 
-internal object CalloutThemeVariantAttrEnum {
+internal object ThemeVariantAttrEnum {
     const val LIGHT = 0
     const val LIGHT_MONO = 1
     const val DARK = 2
@@ -50,10 +50,10 @@ internal fun TypedArray.getCalloutBorderStyle(): CalloutBorderStyle? =
 
 internal fun TypedArray.getThemeVariant(@StyleableRes styleableResId: Int): ThemeVariant? =
     when (getInt(styleableResId, -1)) {
-        CalloutThemeVariantAttrEnum.LIGHT -> ThemeVariant.Light
-        CalloutThemeVariantAttrEnum.LIGHT_MONO -> ThemeVariant.LightMono
-        CalloutThemeVariantAttrEnum.DARK -> ThemeVariant.Dark
-        CalloutThemeVariantAttrEnum.DARK_MONO -> ThemeVariant.DarkMono
+        ThemeVariantAttrEnum.LIGHT -> ThemeVariant.Light
+        ThemeVariantAttrEnum.LIGHT_MONO -> ThemeVariant.LightMono
+        ThemeVariantAttrEnum.DARK -> ThemeVariant.Dark
+        ThemeVariantAttrEnum.DARK_MONO -> ThemeVariant.DarkMono
         else -> null
     }
 
