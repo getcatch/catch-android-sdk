@@ -1,11 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <attr name="calloutBorderStyle" format="enum">
+        <enum name="square" value="0" />
+        <enum name="slight_round" value="1" />
+        <enum name="pill" value="2" />
+        <enum name="custom" value="3" />
+    </attr>
+    <attr name="themeVariant" format="enum">
+        <enum name="light" value="0" />
+        <enum name="light_mono" value="1" />
+        <enum name="dark" value="2" />
+        <enum name="dark_mono" value="3" />
+    </attr>
     <declare-styleable name="CalloutView">
+        <attr name="calloutBorderStyle" />
         <attr name="hasOrPrefix" format="boolean" />
-        <attr name="borderStyle" format="enum">
-            <enum name="square" value="0" />
-            <enum name="slight_round" value="1" />
-            <enum name="pill" value="2" />
-        </attr>
+        <attr name="customBorderRadius" format="integer" />
+        <attr name="customBorderColor" format="color" />
+        <attr name="themeVariant" />
     </declare-styleable>
 </resources>

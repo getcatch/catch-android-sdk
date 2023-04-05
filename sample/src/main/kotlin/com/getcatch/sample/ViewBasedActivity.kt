@@ -16,6 +16,7 @@ class ViewBasedActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityViewBasedBinding
     private lateinit var calloutView: CalloutView
+    private lateinit var orPrefixCalloutView: CalloutView
     private lateinit var goToComposeActivityBtn: MaterialButton
     private lateinit var toggleThemeBtn: MaterialButton
 
@@ -33,7 +34,19 @@ class ViewBasedActivity : AppCompatActivity() {
         }
         calloutView = binding.testCalloutView
         calloutView.setOnClickListener {
-            calloutView.redeemableRewards = Random.nextInt(from = 0, until = 10000)
+            if (calloutView.price == null) {
+                calloutView.price = Random.nextInt(from = 0, until = 10000)
+            } else {
+                calloutView.price = null
+            }
+        }
+        orPrefixCalloutView = binding.testOrPrefixCalloutView
+        orPrefixCalloutView.setOnClickListener  {
+            if (orPrefixCalloutView.price == null) {
+                orPrefixCalloutView.price = Random.nextInt(from = 0, until = 10000)
+            } else {
+                orPrefixCalloutView.price = null
+            }
         }
         toggleThemeBtn = binding.toggleThemeBtn
         toggleThemeBtn.setOnClickListener {
