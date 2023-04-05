@@ -12,11 +12,12 @@ import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.dp
 import com.getcatch.android.R
 import com.getcatch.android.theming.CatchTheme
+import com.getcatch.android.ui.InfoWidgetType
 import com.getcatch.android.utils.Constants
 
 @Composable
-internal fun InlineLogo(fontSize: TextUnit) {
-    val logoHeight = fontSize.value * Constants.LOGO_TO_FILLER_TEXT_HEIGHT_RATIO
+internal fun InlineLogo(fontSize: TextUnit, widgetType: InfoWidgetType) {
+    val logoHeight = fontSize.value * widgetType.logoToFontSizeRatio
     Image(
         painter = painterResource(id = CatchTheme.variant.logoResId),
         contentDescription = stringResource(

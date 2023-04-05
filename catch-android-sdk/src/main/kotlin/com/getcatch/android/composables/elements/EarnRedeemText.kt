@@ -13,8 +13,8 @@ import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.unit.dp
+import com.getcatch.android.theming.CatchTextStyles
 import com.getcatch.android.theming.CatchTheme
-import com.getcatch.android.theming.CatchTypography
 import com.getcatch.android.theming.LocalColors
 import com.getcatch.android.utils.centsToDollarsString
 import com.getcatch.android.utils.toPercentString
@@ -26,7 +26,7 @@ internal fun EarnRedeemText(
     capitalize: Boolean = true,
     prefixComposable: @Composable (() -> Unit)? = null,
     suffixComposable: @Composable (() -> Unit)? = null,
-    textStyle: TextStyle = CatchTypography.CatchTextStyles.bodySmall,
+    textStyle: TextStyle = CatchTextStyles.bodySmall,
 ) {
     val earnRedeemMessage =
         generateEarnRedeemMessage(price = price ?: 0, capitalize = capitalize)
@@ -56,7 +56,7 @@ internal fun EarnRedeemText(
     capitalize: Boolean = true,
     prefix: String? = null,
     suffix: String? = null,
-    textStyle: TextStyle = CatchTypography.CatchTextStyles.bodySmall,
+    textStyle: TextStyle = CatchTextStyles.bodySmall,
 ) = EarnRedeemText(
     price = price,
     capitalize = capitalize,

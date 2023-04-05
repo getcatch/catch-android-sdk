@@ -5,8 +5,8 @@ import android.util.Log
 import androidx.annotation.StyleableRes
 import com.getcatch.android.R
 import com.getcatch.android.styling.values.ColorValue
-import com.getcatch.android.theming.CalloutBorderStyle
 import com.getcatch.android.theming.ThemeVariant
+import com.getcatch.android.ui.CalloutBorderStyle
 
 internal fun TypedArray.getHasOrPrefix() = getBoolean(R.styleable.CalloutView_hasOrPrefix, false)
 
