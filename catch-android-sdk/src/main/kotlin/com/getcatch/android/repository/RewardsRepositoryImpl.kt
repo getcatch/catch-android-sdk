@@ -32,7 +32,7 @@ internal class RewardsRepositoryImpl(
         ) ?: return CalculatedReward.Default
 
         return getPrioritizedReward(
-            rewardsSummary = earnedRewardsSummary,
+            earnedRewardsSummary = earnedRewardsSummary,
             price = price,
             existingUserRewardAmount = user.rewardAmount ?: 0,
             defaultMerchantRewardRate = merchant.defaultEarnedRewardsRate,
@@ -47,7 +47,7 @@ internal class RewardsRepositoryImpl(
         user: PublicUserData,
     ): EarnedRewardsSummary? {
         if (!merchant.enableConfigurableRewards) {
-            return EarnedRewardsSummary.generateDefaultsForMerchant(
+            return EarnedRewardsSummary.generateLocally(
                 merchant = merchant,
                 price = price,
                 userRewardAmount = user.rewardAmount ?: 0,
@@ -72,8 +72,8 @@ internal class RewardsRepositoryImpl(
         }
     }
 
-    fun getPrioritizedReward(
-        rewardsSummary: EarnedRewardsSummary,
+    private fun getPrioritizedReward(
+        earnedRewardsSummary: EarnedRewardsSummary,
         price: Int,
         existingUserRewardAmount: Int,
         defaultMerchantRewardRate: Double
@@ -81,15 +81,15 @@ internal class RewardsRepositoryImpl(
         // Take the larger of the rewards rates between
         // the default merchant rate and the rate returned in the rewards summary
         val effectiveRewardRate =
-            max(rewardsSummary.percentageRewardRate, defaultMerchantRewardRate)
+            max(earnedRewardsSummary.percentageRewardRate, defaultMerchantRewardRate)
 
         // If the purchase price is less than or equal to 0, fallback on the rewards rate.
         if (price <= 0) {
             return CalculatedReward.PercentRate(effectiveRewardRate)
         }
 
-        val earnedRewardsTotal = rewardsSummary.earnedRewardsTotal ?: 0
-        val discountAmount = rewardsSummary.signUpDiscountAmount
+        val earnedRewardsTotal = earnedRewardsSummary.earnedRewardsTotal ?: 0
+        val discountAmount = earnedRewardsSummary.signUpDiscountAmount
         val savedAmount = discountAmount + existingUserRewardAmount
 
         return when {
