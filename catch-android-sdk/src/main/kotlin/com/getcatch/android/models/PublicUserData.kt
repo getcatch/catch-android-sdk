@@ -20,10 +20,10 @@ internal data class PublicUserData(
     val firstPurchaseBonusEligibility: Boolean,
 
     /** Whether or not the current user is an employee of Catch */
-    val isCatchEmployee: Boolean,
+    val isCatchEmployee: Boolean = false,
 
     /** Whether or not the current user was referred to the merchant by Catch */
-    val wasReferred: Boolean,
+    val wasReferred: Boolean = false,
 ) {
     companion object {
         val noData = PublicUserData(

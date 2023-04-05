@@ -20,7 +20,7 @@ internal data class EarnedRewardsSummary(
     val earnedRewardBreakdown: List<EarnedRewardRuleDetail>? = null,
 ) {
     companion object {
-        fun generateDefaultsForMerchant(
+        fun generateLocally(
             merchant: Merchant,
             price: Int,
             userRewardAmount: Int,

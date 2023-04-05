@@ -19,8 +19,8 @@ internal interface TransactionsSvcClient {
         isNewCatchUser: Boolean,
         items: List<Item>?,
         userCohorts: List<String>?,
-        excludeCartBasedRules: Boolean,
-        includeEarnedRewardBreakdown: Boolean,
+        excludeCartBasedRules: Boolean = false,
+        includeEarnedRewardBreakdown: Boolean = true,
     ): NetworkResponse<EarnedRewardsSummary>
 
     suspend fun fetchRewardCampaign(

@@ -1,5 +1,6 @@
 package com.getcatch.android.test.helpers
 
+import com.getcatch.android.models.EarnedRewardsSummary
 import com.getcatch.android.models.Item
 import com.getcatch.android.models.Merchant
 import com.getcatch.android.models.PublicUserData
@@ -13,7 +14,7 @@ internal object FakeDataProvider {
         id = "fake-merchant-id",
         name = "Fake Merchant",
         url = "https://getcatch.com",
-        defaultEarnedRewardsRate = 0.1,
+        defaultEarnedRewardsRate = 0.11,
         enableConfigurableRewards = true,
         rewardsLifetimeInDays = 180,
         cardBackgroundImageUrl = fakeMerchantCardBackgroundImageUrl,
@@ -46,4 +47,77 @@ internal object FakeDataProvider {
         category = listOf(),
         imageUrl = ""
     )
+
+    object User {
+        val NoCredits = PublicUserData(
+            userFirstName = "First",
+            rewardAmount = 0,
+            firstPurchaseBonusEligibility = false
+        )
+
+        val Returning = PublicUserData(
+            userFirstName = "First",
+            rewardAmount = 1500,
+            firstPurchaseBonusEligibility = false
+        )
+
+        val New = PublicUserData(
+            userFirstName = "First",
+            rewardAmount = 0,
+            firstPurchaseBonusEligibility = true
+        )
+
+        fun newWithCredits(amount: Int = 500) = PublicUserData(
+            userFirstName = "First",
+            rewardAmount = amount,
+            firstPurchaseBonusEligibility = true
+        )
+
+    }
+
+    object EarnedRewards {
+        fun default(
+            price: Int,
+            rewardRate: Double = merchant.defaultEarnedRewardsRate
+        ) = EarnedRewardsSummary(
+            signUpBonusAmount = 0,
+            signUpDiscountAmount = 0,
+            percentageRewardRate = rewardRate,
+            earnedRewardsTotal = (price * rewardRate).toInt(),
+            earnedRewardBreakdown = emptyList()
+        )
+
+        fun newUser(
+            price: Int,
+            rewardRate: Double = merchant.defaultEarnedRewardsRate,
+            signUpBonus: Int = 1000
+        ) = EarnedRewardsSummary(
+            signUpBonusAmount = signUpBonus,
+            signUpDiscountAmount = 0,
+            percentageRewardRate = rewardRate,
+            earnedRewardsTotal = (price * rewardRate).toInt() + signUpBonus,
+            earnedRewardBreakdown = emptyList()
+        )
+
+        fun signUpDiscount(
+            price: Int,
+            rewardRate: Double = merchant.defaultEarnedRewardsRate,
+            signUpDiscount: Int = 1000
+        ) = EarnedRewardsSummary(
+            signUpBonusAmount = 0,
+            signUpDiscountAmount = signUpDiscount,
+            percentageRewardRate = rewardRate,
+            earnedRewardsTotal = (price * rewardRate).toInt(),
+            earnedRewardBreakdown = emptyList()
+        )
+
+        fun noRewards(rewardRate: Double = merchant.defaultEarnedRewardsRate) =
+            EarnedRewardsSummary(
+                signUpBonusAmount = 0,
+                signUpDiscountAmount = 0,
+                percentageRewardRate = rewardRate,
+                earnedRewardsTotal = 0,
+                earnedRewardBreakdown = emptyList()
+            )
+    }
 }
