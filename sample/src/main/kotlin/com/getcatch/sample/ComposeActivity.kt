@@ -16,15 +16,15 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
-import com.getcatch.android.composables.Callout
-import com.getcatch.android.composables.CampaignLink
-import com.getcatch.android.composables.CatchLogo
-import com.getcatch.android.composables.CatchLogoSize
-import com.getcatch.android.composables.ExpressCheckoutCallout
-import com.getcatch.android.composables.PaymentMethod
-import com.getcatch.android.composables.PurchaseConfirmation
 import com.getcatch.android.ui.BorderStyle
 import com.getcatch.android.ui.CalloutBorderStyle
+import com.getcatch.android.ui.composables.Callout
+import com.getcatch.android.ui.composables.CampaignLink
+import com.getcatch.android.ui.composables.CatchLogo
+import com.getcatch.android.ui.composables.CatchLogoSize
+import com.getcatch.android.ui.composables.ExpressCheckoutCallout
+import com.getcatch.android.ui.composables.PaymentMethod
+import com.getcatch.android.ui.composables.PurchaseConfirmation
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint

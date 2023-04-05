@@ -8,14 +8,14 @@
         android:layout_gravity="center"
         android:gravity="center">
 
-        <com.getcatch.android.views.CalloutView
+        <com.getcatch.android.ui.views.CalloutView
             android:id="@+id/test_callout_view"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:padding="16dp"
             />
 
-        <com.getcatch.android.views.CalloutView
+        <com.getcatch.android.ui.views.CalloutView
             android:id="@+id/test_or_prefix_callout_view"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

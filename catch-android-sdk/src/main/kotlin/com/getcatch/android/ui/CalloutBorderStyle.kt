@@ -4,7 +4,7 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.unit.dp
-import com.getcatch.android.styling.values.ColorValue
+import com.getcatch.android.ui.styles.values.ColorValue
 
 // Remember that any changes made to this sealed class need to be updated in `CalloutView.kt` and
 // `res/values/attrs.xml`
