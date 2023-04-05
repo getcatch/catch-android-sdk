@@ -11,6 +11,7 @@ import androidx.compose.runtime.staticCompositionLocalOf
 import androidx.compose.ui.text.font.FontFamily
 import com.getcatch.android.Catch
 import com.getcatch.android.theming.color.CatchComposeColors
+import com.getcatch.android.ui.typography.CatchFonts
 
 internal val LocalThemeVariant =
     staticCompositionLocalOf<ThemeVariant> { error("No theme variant provided") }
@@ -36,7 +37,7 @@ internal object CatchTheme {
 @Composable
 internal fun CatchTheme(
     variantOption: ThemeVariantOption = DynamicThemeVariant.Standard,
-    defaultFontFamily: FontFamily = CatchTypography.circularFontFamily,
+    defaultFontFamily: FontFamily = CatchFonts.circularFontFamily,
     content: @Composable () -> Unit
 ) {
     val variant: ThemeVariant = when (variantOption) {

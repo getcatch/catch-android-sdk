@@ -1,4 +1,4 @@
-package com.getcatch.android.theming
+package com.getcatch.android.ui.typography
 
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight

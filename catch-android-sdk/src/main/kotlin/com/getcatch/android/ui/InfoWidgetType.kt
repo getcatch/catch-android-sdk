@@ -1,7 +1,7 @@
 package com.getcatch.android.ui
 
 import androidx.compose.ui.text.TextStyle
-import com.getcatch.android.theming.CatchTextStyles
+import com.getcatch.android.ui.typography.CatchTextStyles
 
 @Suppress("MagicNumber")
 internal sealed interface InfoWidgetType {

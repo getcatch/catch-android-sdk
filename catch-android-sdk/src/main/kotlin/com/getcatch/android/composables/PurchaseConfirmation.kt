@@ -23,10 +23,10 @@ import androidx.compose.ui.unit.dp
 import com.getcatch.android.R
 import com.getcatch.android.composables.elements.LinkButton
 import com.getcatch.android.repository.MerchantRepository
-import com.getcatch.android.theming.CatchTextStyles
 import com.getcatch.android.theming.CatchTheme
 import com.getcatch.android.theming.LocalThemeVariant
 import com.getcatch.android.ui.BorderStyle
+import com.getcatch.android.ui.typography.CatchTextStyles
 import com.getcatch.android.utils.centsToDollarsString
 import org.koin.compose.koinInject
 

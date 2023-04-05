@@ -1,4 +1,4 @@
-package com.getcatch.android.theming
+package com.getcatch.android.ui.typography
 
 import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.font.FontFamily
@@ -6,7 +6,7 @@ import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.font.FontWeight
 import com.getcatch.android.R
 
-internal object CatchTypography {
+internal object CatchFonts {
     val circularFontFamily: FontFamily = FontFamily(
         Font(
             resId = R.font.circular_thin,

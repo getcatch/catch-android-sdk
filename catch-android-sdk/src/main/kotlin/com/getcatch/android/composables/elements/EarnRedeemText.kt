@@ -13,9 +13,9 @@ import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.unit.dp
-import com.getcatch.android.theming.CatchTextStyles
 import com.getcatch.android.theming.CatchTheme
 import com.getcatch.android.theming.LocalColors
+import com.getcatch.android.ui.typography.CatchTextStyles
 import com.getcatch.android.utils.centsToDollarsString
 import com.getcatch.android.utils.toPercentString
 import kotlin.math.min
