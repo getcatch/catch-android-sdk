@@ -88,9 +88,10 @@ private fun CalloutInternal(
         val variant = CatchTheme.variant
         val styles by remember(variant, styleOverrides) {
             mutableStateOf(
-                StyleResolver.calloutStyles(
-                    variant,
-                    styleOverrides
+                StyleResolver.infoWidgetStyles(
+                    theme = variant,
+                    instanceOverrides = styleOverrides,
+                    infoWidgetType = InfoWidgetType.Callout
                 )
             )
         }

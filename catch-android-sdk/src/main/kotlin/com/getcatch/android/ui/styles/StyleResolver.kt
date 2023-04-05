@@ -1,20 +1,21 @@
 package com.getcatch.android.ui.styles
 
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.unit.sp
 import com.getcatch.android.Catch
+import com.getcatch.android.ui.InfoWidgetType
 import com.getcatch.android.ui.theming.ThemeVariant
 
 internal object StyleResolver {
 
-    fun calloutStyles(
+    fun infoWidgetStyles(
         theme: ThemeVariant,
         instanceOverrides: InfoWidgetStyle?,
+        infoWidgetType: InfoWidgetType,
     ): InfoWidgetStyle.Resolved {
         val defaults = InfoWidgetStyle.Resolved(
             widgetTextStyle = WidgetTextStyle.Resolved(
-                fontSize = 14.sp,
-                lineHeight = 20.sp,
+                fontSize = infoWidgetType.defaultTextStyle.fontSize,
+                lineHeight = infoWidgetType.defaultTextStyle.lineHeight,
                 fontColor = theme.composeColors.foreground,
                 fontWeight = FontWeight.W400,
             ),
@@ -29,7 +30,12 @@ internal object StyleResolver {
                 widgetTextStyle = globalConfig?.widgetTextStyle,
                 benefitTextStyle = globalConfig?.benefitTextStyle,
             )
-            return@let basicOverrides.withOverrides(globalConfig?.calloutStyle)
+            val widgetOverrides = when(infoWidgetType) {
+                InfoWidgetType.Callout -> globalConfig?.calloutStyle
+                is InfoWidgetType.PaymentMethod -> globalConfig?.paymentMethodStyle
+                InfoWidgetType.ExpressCheckoutCallout -> globalConfig?.expressCheckoutCalloutStyle
+            }
+            return@let basicOverrides.withOverrides(widgetOverrides)
         }
         return defaults
             .withOverrides(globalOverrides)
