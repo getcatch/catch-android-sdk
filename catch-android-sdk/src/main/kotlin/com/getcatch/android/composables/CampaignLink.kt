@@ -23,10 +23,10 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.getcatch.android.R
 import com.getcatch.android.composables.elements.LinkButton
 import com.getcatch.android.repository.MerchantRepository
-import com.getcatch.android.theming.BorderStyle
+import com.getcatch.android.theming.CatchTextStyles
 import com.getcatch.android.theming.CatchTheme
-import com.getcatch.android.theming.CatchTypography
 import com.getcatch.android.theming.LocalThemeVariant
+import com.getcatch.android.ui.BorderStyle
 import com.getcatch.android.utils.centsToDollarsString
 import org.koin.compose.koinInject
 
@@ -85,12 +85,12 @@ internal fun CampaignLinkInternal(
                         append(stringResource(id = R.string.to_spend_at_next_time, it.name))
                     }
                 },
-                style = CatchTypography.CatchTextStyles.bodyRegular
+                style = CatchTextStyles.bodyRegular
             )
             MerchantRewardCard(rewardsAmount = rewardsAmount)
             Text(
                 text = stringResource(id = R.string.claim_now_and_start_earning),
-                style = CatchTypography.CatchTextStyles.bodySmall
+                style = CatchTextStyles.bodySmall
             )
             LinkButton(
                 label = stringResource(

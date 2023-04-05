@@ -18,9 +18,9 @@ import androidx.compose.ui.unit.dp
 import com.getcatch.android.R
 import com.getcatch.android.composables.elements.EarnRedeemText
 import com.getcatch.android.composables.elements.InfoIcon
-import com.getcatch.android.theming.BorderStyle
 import com.getcatch.android.theming.CatchTheme
 import com.getcatch.android.theming.LocalThemeVariant
+import com.getcatch.android.ui.BorderStyle
 
 @Composable
 public fun PaymentMethod(borderStyle: BorderStyle? = null) {

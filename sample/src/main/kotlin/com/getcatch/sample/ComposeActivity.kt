@@ -23,8 +23,8 @@ import com.getcatch.android.composables.CatchLogoSize
 import com.getcatch.android.composables.ExpressCheckoutCallout
 import com.getcatch.android.composables.PaymentMethod
 import com.getcatch.android.composables.PurchaseConfirmation
-import com.getcatch.android.theming.BorderStyle
-import com.getcatch.android.theming.CalloutBorderStyle
+import com.getcatch.android.ui.BorderStyle
+import com.getcatch.android.ui.CalloutBorderStyle
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint

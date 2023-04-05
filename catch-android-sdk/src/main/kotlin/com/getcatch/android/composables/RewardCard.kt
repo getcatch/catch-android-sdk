@@ -22,8 +22,8 @@ import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
 import coil.request.ImageRequest
 import com.getcatch.android.R
+import com.getcatch.android.theming.CatchTextStyles
 import com.getcatch.android.theming.CatchTheme
-import com.getcatch.android.theming.CatchTypography
 import com.getcatch.android.theming.color.CatchColors
 import com.getcatch.android.utils.centsToDollarsString
 
@@ -73,12 +73,12 @@ internal fun RewardCard(
             Spacer(modifier = Modifier.weight(1f))
             Text(
                 text = rewardsAmount.centsToDollarsString(),
-                style = CatchTypography.CatchTextStyles.h2,
+                style = CatchTextStyles.h2,
                 color = textColor,
             )
             Text(
                 text = "Exp. 00/00/00",
-                style = CatchTypography.CatchTextStyles.bodySmall,
+                style = CatchTextStyles.bodySmall,
                 color = textColor,
             )
         }

@@ -29,9 +29,10 @@ import com.getcatch.android.composables.elements.InlineLogo
 import com.getcatch.android.models.Item
 import com.getcatch.android.styling.InfoWidgetStyle
 import com.getcatch.android.styling.StyleResolver
-import com.getcatch.android.theming.CalloutBorderStyle
 import com.getcatch.android.theming.CatchTheme
 import com.getcatch.android.theming.ThemeVariantOption
+import com.getcatch.android.ui.CalloutBorderStyle
+import com.getcatch.android.ui.InfoWidgetType
 import com.getcatch.android.viewmodels.EarnRedeemViewModel
 import org.koin.androidx.compose.koinViewModel
 
@@ -85,7 +86,7 @@ private fun CalloutInternal(
 
     CatchTheme(theme) {
         val variant = CatchTheme.variant
-        val styles by remember {
+        val styles by remember(variant, styleOverrides) {
             mutableStateOf(
                 StyleResolver.calloutStyles(
                     variant,
@@ -120,7 +121,10 @@ private fun CalloutInternal(
                 ),
             )
             Spacer(modifier = Modifier.width(2.dp))
-            InlineLogo(fontSize = styles.widgetTextStyle.fontSize)
+            InlineLogo(
+                fontSize = styles.widgetTextStyle.fontSize,
+                widgetType = InfoWidgetType.Callout,
+            )
             Spacer(modifier = Modifier.width(2.dp))
             InfoIcon(styles.composeTextStyle)
         }

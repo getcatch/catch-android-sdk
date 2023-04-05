@@ -27,10 +27,10 @@ import androidx.compose.ui.unit.dp
 import com.getcatch.android.R
 import com.getcatch.android.composables.elements.EarnRedeemText
 import com.getcatch.android.composables.elements.InfoIcon
-import com.getcatch.android.theming.CalloutBorderStyle
+import com.getcatch.android.theming.CatchTextStyles
 import com.getcatch.android.theming.CatchTheme
-import com.getcatch.android.theming.CatchTypography
 import com.getcatch.android.theming.LocalThemeVariant
+import com.getcatch.android.ui.CalloutBorderStyle
 
 @Composable
 public fun ExpressCheckoutCallout(borderStyle: CalloutBorderStyle? = null) {
@@ -68,7 +68,7 @@ private fun ExpressCheckoutCalloutContent(showDash: Boolean) {
     Row(verticalAlignment = Alignment.CenterVertically, modifier = Modifier.height(intrinsicSize = IntrinsicSize.Min)) {
         EarnRedeemText(
             suffix = stringResource(R.string.with),
-            textStyle = CatchTypography.CatchTextStyles.bodyRegular
+            textStyle = CatchTextStyles.bodyRegular
         )
         Spacer(modifier = Modifier.width(2.dp))
         Image(
@@ -93,7 +93,7 @@ private fun ExpressCheckoutCalloutContent(showDash: Boolean) {
                     append(stringResource(id = R.string.payment_step))
                 }
             },
-            style = CatchTypography.CatchTextStyles.bodyRegular
+            style = CatchTextStyles.bodyRegular
         )
         Spacer(modifier = Modifier.width(2.dp))
         InfoIcon()
