@@ -23,7 +23,7 @@ import com.getcatch.android.theming.CatchTheme
 import com.getcatch.android.theming.LocalThemeVariant
 
 @Composable
-public fun Payment(borderStyle: BorderStyle? = null) {
+public fun PaymentMethod(borderStyle: BorderStyle? = null) {
     CatchTheme {
         var rowModifier = Modifier
             .height(intrinsicSize = IntrinsicSize.Min)
