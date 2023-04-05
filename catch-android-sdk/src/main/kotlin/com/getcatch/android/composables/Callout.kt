@@ -45,15 +45,11 @@ public fun Callout(
     theme: ThemeVariantOption? = null,
     styleOverrides: InfoWidgetStyle? = null,
 ) {
-    val viewModelKey by remember {
-        mutableStateOf(
-            EarnRedeemViewModel.generateKey(
-                price = price,
-                items = items,
-                userCohorts = userCohorts,
-            )
-        )
-    }
+    val viewModelKey = EarnRedeemViewModel.generateKey(
+        price = price,
+        items = items,
+        userCohorts = userCohorts,
+    )
     CalloutInternal(
         price = price,
         items = items,
@@ -78,7 +74,7 @@ private fun CalloutInternal(
     styleOverrides: InfoWidgetStyle? = null,
     viewModel: EarnRedeemViewModel,
 ) {
-    LaunchedEffect(price) {
+    LaunchedEffect(price, items, userCohorts) {
         viewModel.init(
             price = price,
             items = items,
@@ -105,10 +101,9 @@ private fun CalloutInternal(
                 is CalloutBorderStyle.Custom -> borderStyle.color
                 else -> CatchTheme.colors.border
             }
-            rowModifier =
-                rowModifier
-                    .border(1.dp, borderColor, borderStyle.shape)
-                    .padding(horizontal = 8.dp, vertical = 4.dp)
+            rowModifier = rowModifier
+                .border(1.dp, borderColor, borderStyle.shape)
+                .padding(horizontal = 8.dp, vertical = 4.dp)
         }
 
         FlowRow(
