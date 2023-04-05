@@ -26,6 +26,8 @@ import com.getcatch.android.ui.BorderStyle
 import com.getcatch.android.ui.InfoWidgetType
 import com.getcatch.android.ui.PaymentMethodVariant
 import com.getcatch.android.ui.composables.elements.BenefitText
+import com.getcatch.android.ui.composables.elements.EarnRedeemContent
+import com.getcatch.android.ui.composables.elements.FillerText
 import com.getcatch.android.ui.composables.elements.InfoIcon
 import com.getcatch.android.ui.composables.elements.InlineLogo
 import com.getcatch.android.ui.styles.InfoWidgetStyle
@@ -33,6 +35,7 @@ import com.getcatch.android.ui.styles.StyleResolver
 import com.getcatch.android.ui.theming.CatchTheme
 import com.getcatch.android.ui.theming.ThemeVariantOption
 import com.getcatch.android.utils.Constants
+import com.getcatch.android.viewmodels.EarnRedeemUiState
 import com.getcatch.android.viewmodels.EarnRedeemViewModel
 import org.koin.androidx.compose.koinViewModel
 
@@ -82,9 +85,7 @@ internal fun PaymentMethodInternal(
 ) {
     LaunchedEffect(price, items, userCohorts, disabled) {
         viewModel.update(
-            price = if (disabled) 0 else price,
-            items = items,
-            userCohorts = userCohorts
+            price = if (disabled) 0 else price, items = items, userCohorts = userCohorts
         )
     }
     val uiState by viewModel.uiState.collectAsStateWithLifecycle()
@@ -104,13 +105,11 @@ internal fun PaymentMethodInternal(
         var rowModifier = Modifier
             .wrapContentWidth()
             .animateContentSize()
-
         if (borderStyle != null) {
             val borderColor = when (borderStyle) {
                 is BorderStyle.Custom -> borderStyle.color
                 else -> CatchTheme.colors.border
             }
-
             rowModifier = rowModifier
                 .border(1.dp, borderColor, borderStyle.shape)
                 .padding(horizontal = 8.dp, vertical = 4.dp)
@@ -131,18 +130,27 @@ internal fun PaymentMethodInternal(
                 )
                 Spacer(modifier = Modifier.width(8.dp))
             }
-
-            FlowRow(verticalAlignment = Alignment.CenterVertically) {
-                val prefix =
-                    if (variant is PaymentMethodVariant.LogoCompact) null
-                    else stringResource(R.string.pay_by_bank)
-                BenefitText(
-                    uiState = uiState,
-                    styles = styles,
-                    prefix = prefix,
-                    modifier = disabledModifier,
-                )
-
+            EarnRedeemContent(uiState, styles) { reward ->
+                FlowRow(verticalAlignment = Alignment.CenterVertically) {
+                    if (variant !is PaymentMethodVariant.LogoCompact) {
+                        FillerText(
+                            text = stringResource(R.string.pay_by_bank),
+                            styles = styles,
+                            modifier = disabledModifier
+                        )
+                    }
+                    Row(verticalAlignment = Alignment.CenterVertically) {
+                        BenefitText(
+                            reward = reward,
+                            styles = styles,
+                            modifier = disabledModifier,
+                        )
+                        Spacer(modifier = Modifier.width(2.dp))
+                        InfoIcon(styles.composeTextStyle)
+                    }
+                }
+            }
+            if (uiState is EarnRedeemUiState.Loading) {
                 Spacer(modifier = Modifier.width(2.dp))
                 InfoIcon(styles.composeTextStyle)
             }
