@@ -25,7 +25,6 @@ import com.getcatch.android.composables.Payment
 import com.getcatch.android.composables.PurchaseConfirmation
 import com.getcatch.android.theming.BorderStyle
 import com.getcatch.android.theming.CalloutBorderStyle
-import com.getcatch.android.theming.ThemeVariant
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -50,7 +49,8 @@ class ComposeActivity : ComponentActivity() {
                     alignment = Alignment.CenterVertically
                 )
             ) {
-                Callout(theme=ThemeVariant.LightMono)
+                Callout()
+                Callout(price = 5000)
                 Payment()
                 ExpressCheckoutCallout(borderStyle = CalloutBorderStyle.SlightRound)
                 PurchaseConfirmation(rewardsAmount = 1000, borderStyle = BorderStyle.SlightRound)
