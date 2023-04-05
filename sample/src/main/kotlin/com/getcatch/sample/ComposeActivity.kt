@@ -21,7 +21,7 @@ import com.getcatch.android.composables.CampaignLink
 import com.getcatch.android.composables.CatchLogo
 import com.getcatch.android.composables.CatchLogoSize
 import com.getcatch.android.composables.ExpressCheckoutCallout
-import com.getcatch.android.composables.Payment
+import com.getcatch.android.composables.PaymentMethod
 import com.getcatch.android.composables.PurchaseConfirmation
 import com.getcatch.android.theming.BorderStyle
 import com.getcatch.android.theming.CalloutBorderStyle
@@ -51,7 +51,7 @@ class ComposeActivity : ComponentActivity() {
             ) {
                 Callout()
                 Callout(price = 5000)
-                Payment()
+                PaymentMethod()
                 ExpressCheckoutCallout(borderStyle = CalloutBorderStyle.SlightRound)
                 PurchaseConfirmation(rewardsAmount = 1000, borderStyle = BorderStyle.SlightRound)
                 CampaignLink(rewardsAmount = 1500, borderStyle = BorderStyle.Square)
