@@ -2,7 +2,7 @@ package com.getcatch.android.web
 
 import android.util.Log
 import android.webkit.JavascriptInterface
-import com.getcatch.android.activities.WebViewActivity
+import com.getcatch.android.ui.activities.WebViewActivity
 import kotlinx.serialization.SerializationException
 
 internal abstract class CatchWebViewInterface(protected val activity: WebViewActivity) {

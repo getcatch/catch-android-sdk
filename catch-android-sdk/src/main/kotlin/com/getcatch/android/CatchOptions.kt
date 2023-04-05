@@ -3,8 +3,8 @@ package com.getcatch.android
 import androidx.compose.ui.text.font.FontFamily
 import com.getcatch.android.network.Environment
 import com.getcatch.android.styling.CatchStyleConfig
-import com.getcatch.android.theming.ThemeVariant
-import com.getcatch.android.theming.ThemeVariantOption
+import com.getcatch.android.ui.theming.ThemeVariant
+import com.getcatch.android.ui.theming.ThemeVariantOption
 
 /**
  * An object which specifies optional configuration settings to

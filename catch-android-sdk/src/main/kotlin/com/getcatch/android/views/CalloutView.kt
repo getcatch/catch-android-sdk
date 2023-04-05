@@ -11,8 +11,8 @@ import com.getcatch.android.R
 import com.getcatch.android.composables.Callout
 import com.getcatch.android.models.Item
 import com.getcatch.android.styling.InfoWidgetStyle
-import com.getcatch.android.theming.ThemeVariant
 import com.getcatch.android.ui.CalloutBorderStyle
+import com.getcatch.android.ui.theming.ThemeVariant
 import com.getcatch.android.utils.getCalloutBorderStyle
 import com.getcatch.android.utils.getHasOrPrefix
 import com.getcatch.android.utils.getThemeVariant
