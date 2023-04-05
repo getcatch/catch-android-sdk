@@ -21,7 +21,10 @@
             android:layout_height="wrap_content"
             android:padding="16dp"
             app:hasOrPrefix="true"
-            app:borderStyle="pill"/>
+            app:calloutBorderStyle="custom"
+            app:customBorderColor="@color/accent_turquoise"
+            app:customBorderRadius="1"
+            app:themeVariant="light_mono"/>
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/toggle_theme_btn"

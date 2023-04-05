@@ -3,47 +3,52 @@ package com.getcatch.android.views
 import android.content.Context
 import android.util.AttributeSet
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.platform.AbstractComposeView
 import com.getcatch.android.R
 import com.getcatch.android.composables.Callout
+import com.getcatch.android.models.Item
+import com.getcatch.android.styling.InfoWidgetStyle
 import com.getcatch.android.theming.CalloutBorderStyle
+import com.getcatch.android.theming.ThemeVariant
+import com.getcatch.android.utils.getCalloutBorderStyle
+import com.getcatch.android.utils.getHasOrPrefix
+import com.getcatch.android.utils.getThemeVariant
 
 public class CalloutView @JvmOverloads constructor(
     context: Context,
     attrs: AttributeSet? = null,
     defStyleAttr: Int = 0
 ) : AbstractComposeView(context, attrs, defStyleAttr) {
+    private val _price = mutableStateOf<Int?>(null)
+    public var price: Int? by _price
 
-    // Public getter/setter for our title that delegates to the State value.
-    public var redeemableRewards: Int?
-        get() = redeemableRewardsCents.value
-        set(value) {
-            redeemableRewardsCents.value = value
-        }
+    private val _hasOrPrefix = mutableStateOf(false)
+    public var hasOrPrefix: Boolean by _hasOrPrefix
 
-    private val redeemableRewardsCents = mutableStateOf<Int?>(null)
-    private val hasOrPrefix: Boolean
-    private val borderStyle: CalloutBorderStyle?
+    private val _borderStyle = mutableStateOf<CalloutBorderStyle?>(null)
+    public var borderStyle: CalloutBorderStyle? by _borderStyle
+
+    private val _themeVariant = mutableStateOf<ThemeVariant?>(null)
+    public var themeVariant: ThemeVariant? by _themeVariant
+
+    private val _items = mutableStateOf<List<Item>?>(null)
+    public var items: List<Item>? by _items
+
+    private val _userCohorts = mutableStateOf<List<String>?>(null)
+    public var userCohorts: List<String>? by _userCohorts
+
+    private val _styleOverrides = mutableStateOf<InfoWidgetStyle?>(null)
+    public var styleOverrides: InfoWidgetStyle? by _styleOverrides
 
     init {
         context.theme.obtainStyledAttributes(attrs, R.styleable.CalloutView, 0, 0).apply {
             try {
-                hasOrPrefix = getBoolean(R.styleable.CalloutView_hasOrPrefix, false)
-                borderStyle = if (hasValue(R.styleable.CalloutView_borderStyle)) {
-                    // The mapping of these values is delicate as it is simply specified in
-                    // `res/values/attrs.xml`. Ideally, some sort of codegen would link the attrs
-                    // int to the actual sealed class, but that is probably more work than it is
-                    // worth for a value that is unlikely to change.
-                    when (getInt(R.styleable.CalloutView_borderStyle, -1)) {
-                        0 -> CalloutBorderStyle.Square
-                        1 -> CalloutBorderStyle.SlightRound
-                        2 -> CalloutBorderStyle.Pill
-                        else -> null
-                    }
-                } else {
-                    null
-                }
+                _hasOrPrefix.value = getHasOrPrefix()
+                _borderStyle.value = getCalloutBorderStyle()
+                _themeVariant.value = getThemeVariant(R.styleable.CalloutView_themeVariant)
             } finally {
                 recycle()
             }
@@ -53,8 +58,13 @@ public class CalloutView @JvmOverloads constructor(
     @Composable
     override fun Content() {
         Callout(
-            hasOrPrefix = hasOrPrefix,
-            borderStyle = borderStyle
+            price = _price.value ?: 0,
+            hasOrPrefix = _hasOrPrefix.value,
+            borderStyle = _borderStyle.value,
+            theme = _themeVariant.value,
+            items = _items.value,
+            userCohorts = _userCohorts.value,
+            styleOverrides = _styleOverrides.value,
         )
     }
 }
