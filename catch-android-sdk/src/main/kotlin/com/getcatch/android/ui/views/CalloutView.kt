@@ -8,10 +8,10 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.platform.AbstractComposeView
 import com.getcatch.android.R
-import com.getcatch.android.composables.Callout
 import com.getcatch.android.models.Item
-import com.getcatch.android.styling.InfoWidgetStyle
 import com.getcatch.android.ui.CalloutBorderStyle
+import com.getcatch.android.ui.composables.Callout
+import com.getcatch.android.ui.styles.InfoWidgetStyle
 import com.getcatch.android.ui.theming.ThemeVariant
 import com.getcatch.android.utils.getCalloutBorderStyle
 import com.getcatch.android.utils.getHasOrPrefix

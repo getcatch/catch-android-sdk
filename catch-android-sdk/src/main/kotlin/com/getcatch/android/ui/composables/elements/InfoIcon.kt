@@ -14,7 +14,7 @@ import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.getcatch.android.R
-import com.getcatch.android.activities.tofu.TOFUActivity
+import com.getcatch.android.ui.activities.tofu.TOFUActivity
 import com.getcatch.android.ui.theming.CatchTheme
 import com.getcatch.android.ui.typography.CatchTextStyles
 

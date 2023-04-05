@@ -1,8 +1,8 @@
 package com.getcatch.android.ui.styles
 
-import com.getcatch.android.styling.values.ColorValue
-import com.getcatch.android.styling.values.FontWeight
-import com.getcatch.android.styling.values.TextTransform
+import com.getcatch.android.ui.styles.values.ColorValue
+import com.getcatch.android.ui.styles.values.FontWeight
+import com.getcatch.android.ui.styles.values.TextTransform
 
 public data class ActionButtonStyle(
     val fontSize: Float? = null,

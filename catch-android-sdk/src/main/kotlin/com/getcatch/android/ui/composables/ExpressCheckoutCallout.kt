@@ -25,9 +25,9 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.unit.dp
 import com.getcatch.android.R
-import com.getcatch.android.composables.elements.EarnRedeemText
-import com.getcatch.android.composables.elements.InfoIcon
 import com.getcatch.android.ui.CalloutBorderStyle
+import com.getcatch.android.ui.composables.elements.EarnRedeemText
+import com.getcatch.android.ui.composables.elements.InfoIcon
 import com.getcatch.android.ui.theming.CatchTheme
 import com.getcatch.android.ui.theming.LocalThemeVariant
 import com.getcatch.android.ui.typography.CatchTextStyles

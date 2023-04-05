@@ -21,9 +21,9 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.unit.dp
 import com.getcatch.android.R
-import com.getcatch.android.composables.elements.LinkButton
 import com.getcatch.android.repository.MerchantRepository
 import com.getcatch.android.ui.BorderStyle
+import com.getcatch.android.ui.composables.elements.LinkButton
 import com.getcatch.android.ui.theming.CatchTheme
 import com.getcatch.android.ui.theming.LocalThemeVariant
 import com.getcatch.android.ui.typography.CatchTextStyles

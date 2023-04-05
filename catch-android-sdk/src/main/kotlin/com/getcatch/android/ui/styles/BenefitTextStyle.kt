@@ -1,8 +1,8 @@
 package com.getcatch.android.ui.styles
 
 import androidx.compose.ui.graphics.Color
-import com.getcatch.android.styling.values.ColorValue
-import com.getcatch.android.styling.values.FontWeight
+import com.getcatch.android.ui.styles.values.ColorValue
+import com.getcatch.android.ui.styles.values.FontWeight
 import androidx.compose.ui.text.font.FontWeight as ComposeFontWeight
 
 public data class BenefitTextStyle(

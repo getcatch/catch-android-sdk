@@ -3,9 +3,9 @@ package com.getcatch.android.ui.styles
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.sp
-import com.getcatch.android.styling.values.ColorValue
-import com.getcatch.android.styling.values.FontWeight
-import com.getcatch.android.styling.values.TextTransform
+import com.getcatch.android.ui.styles.values.ColorValue
+import com.getcatch.android.ui.styles.values.FontWeight
+import com.getcatch.android.ui.styles.values.TextTransform
 import androidx.compose.ui.text.font.FontWeight as ComposeFontWeight
 
 public data class WidgetTextStyle(

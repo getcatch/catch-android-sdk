@@ -2,7 +2,7 @@ package com.getcatch.android
 
 import androidx.compose.ui.text.font.FontFamily
 import com.getcatch.android.network.Environment
-import com.getcatch.android.styling.CatchStyleConfig
+import com.getcatch.android.ui.styles.CatchStyleConfig
 import com.getcatch.android.ui.theming.ThemeVariant
 import com.getcatch.android.ui.theming.ThemeVariantOption
 

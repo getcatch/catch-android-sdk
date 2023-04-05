@@ -12,7 +12,7 @@ import com.getcatch.android.network.Environment
 import com.getcatch.android.network.NetworkResponse
 import com.getcatch.android.repository.MerchantRepository
 import com.getcatch.android.repository.UserRepository
-import com.getcatch.android.styling.CatchStyleConfig
+import com.getcatch.android.ui.styles.CatchStyleConfig
 import com.getcatch.android.ui.theming.DynamicThemeVariant
 import com.getcatch.android.ui.theming.ThemeVariantOption
 import com.getcatch.android.ui.typography.CatchFonts

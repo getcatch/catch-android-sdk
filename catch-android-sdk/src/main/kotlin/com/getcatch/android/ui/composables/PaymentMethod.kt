@@ -16,9 +16,9 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import com.getcatch.android.R
-import com.getcatch.android.composables.elements.EarnRedeemText
-import com.getcatch.android.composables.elements.InfoIcon
 import com.getcatch.android.ui.BorderStyle
+import com.getcatch.android.ui.composables.elements.EarnRedeemText
+import com.getcatch.android.ui.composables.elements.InfoIcon
 import com.getcatch.android.ui.theming.CatchTheme
 import com.getcatch.android.ui.theming.LocalThemeVariant
 
