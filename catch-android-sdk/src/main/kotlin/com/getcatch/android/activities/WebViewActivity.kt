@@ -6,10 +6,10 @@ import android.webkit.WebView
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.getcatch.android.BuildConfig
 import com.getcatch.android.web.CatchSDKWebClient
 import com.getcatch.android.web.CatchWebViewInterface
@@ -30,7 +30,7 @@ internal abstract class WebViewActivity : ComponentActivity(), KoinComponent {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
-            val urlState by urlFlow.collectAsState()
+            val urlState by urlFlow.collectAsStateWithLifecycle()
             urlState?.let { url ->
                 val webViewState = rememberWebViewState(url)
                 val webViewClient = remember { CatchSDKWebClient(this) }

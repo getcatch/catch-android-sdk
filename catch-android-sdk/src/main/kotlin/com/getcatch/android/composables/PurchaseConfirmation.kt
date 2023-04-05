@@ -28,11 +28,22 @@ import com.getcatch.android.theming.CatchTheme
 import com.getcatch.android.theming.CatchTypography
 import com.getcatch.android.theming.LocalThemeVariant
 import com.getcatch.android.utils.centsToDollarsString
-import org.koin.androidx.compose.get
+import org.koin.compose.koinInject
 
 @Composable
 public fun PurchaseConfirmation(rewardsAmount: Int, borderStyle: BorderStyle? = null) {
-    val merchantRepo = get<MerchantRepository>()
+    PurchaseConfirmationInternal(
+        rewardsAmount = rewardsAmount,
+        borderStyle = borderStyle
+    )
+}
+
+@Composable
+internal fun PurchaseConfirmationInternal(
+    rewardsAmount: Int,
+    borderStyle: BorderStyle? = null,
+    merchantRepo: MerchantRepository = koinInject()
+) {
     val merchant by merchantRepo.activeMerchant.collectAsState()
     CatchTheme {
         var containerModifier = Modifier
