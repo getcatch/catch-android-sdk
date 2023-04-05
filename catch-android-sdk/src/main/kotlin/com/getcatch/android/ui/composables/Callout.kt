@@ -76,7 +76,7 @@ private fun CalloutInternal(
     viewModel: EarnRedeemViewModel,
 ) {
     LaunchedEffect(price, items, userCohorts) {
-        viewModel.init(
+        viewModel.update(
             price = price,
             items = items,
             userCohorts = userCohorts

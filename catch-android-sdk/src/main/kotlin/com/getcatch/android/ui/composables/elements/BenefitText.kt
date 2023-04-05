@@ -13,6 +13,7 @@ import com.getcatch.android.viewmodels.EarnRedeemUiState
 
 @Composable
 internal fun BenefitText(
+    modifier: Modifier = Modifier,
     uiState: EarnRedeemUiState,
     styles: InfoWidgetStyle.Resolved,
     capitalize: Boolean = true,
@@ -39,7 +40,8 @@ internal fun BenefitText(
                 text = styles.applyTextTransform(message),
                 color = color,
                 style = styles.benefitComposeTextStyle,
-                textDecoration = TextDecoration.Underline
+                textDecoration = TextDecoration.Underline,
+                modifier = modifier,
             )
             suffixComposable?.invoke()
         }
@@ -48,6 +50,7 @@ internal fun BenefitText(
 
 @Composable
 internal fun BenefitText(
+    modifier: Modifier = Modifier,
     uiState: EarnRedeemUiState,
     styles: InfoWidgetStyle.Resolved,
     capitalize: Boolean = true,
@@ -62,6 +65,7 @@ internal fun BenefitText(
             Text(
                 text = styles.applyTextTransform(it),
                 style = styles.composeTextStyle,
+                modifier = modifier
             )
             Spacer(modifier = Modifier.width(3.dp))
         }
@@ -72,7 +76,9 @@ internal fun BenefitText(
             Text(
                 text = styles.applyTextTransform(it),
                 style = styles.composeTextStyle,
+                modifier = modifier,
             )
         }
     },
+    modifier = modifier,
 )

@@ -22,16 +22,23 @@ internal class EarnRedeemViewModel(
     private var items: List<Item>? = null
     private var userCohorts: List<String>? = null
 
-    fun init(price: Int, items: List<Item>?, userCohorts: List<String>?) {
-        this.price = price
-        this.items = items
-        this.userCohorts = userCohorts
-
+    init {
         viewModelScope.launch {
             userRepo.activeUser.collect { user ->
                 if (user != null) {
                     calculateReward(user)
                 }
+            }
+        }
+    }
+
+    fun update(price: Int, items: List<Item>?, userCohorts: List<String>?) {
+        this.price = price
+        this.items = items
+        this.userCohorts = userCohorts
+        userRepo.activeUser.value?.let { user ->
+            viewModelScope.launch {
+                calculateReward(user)
             }
         }
     }
@@ -56,7 +63,8 @@ internal class EarnRedeemViewModel(
          * for the view model. This function takes in the parameters used to init
          * the view model and creates a string key out of them.
          */
-        fun generateKey(price: Int, items: List<Item>?, userCohorts: List<String>?) =
-            "$price:${items?.hashCode()}:${userCohorts?.joinToString(",")}"
+        fun generateKey(price: Int, items: List<Item>?, userCohorts: List<String>?, disabled: Boolean = false) =
+            if (disabled) "disabled"
+            else "$price:${items?.hashCode()}:${userCohorts?.joinToString(",")}"
     }
 }
