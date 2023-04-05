@@ -93,7 +93,7 @@ dependencies {
     // Koin main features for Android
     implementation "io.insert-koin:koin-android:3.2.2"
     // Jetpack Compose
-    implementation "io.insert-koin:koin-androidx-compose:3.2.1"
+    implementation "io.insert-koin:koin-androidx-compose:3.2.2"
     
     // COMPOSE DEPENDENCIES
     // Integration with activities
