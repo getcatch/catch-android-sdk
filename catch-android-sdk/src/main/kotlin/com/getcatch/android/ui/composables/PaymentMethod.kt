@@ -1,12 +1,10 @@
 package com.getcatch.android.ui.composables
 
 import androidx.compose.animation.animateContentSize
-import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.ExperimentalLayoutApi
 import androidx.compose.foundation.layout.FlowRow
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.layout.wrapContentWidth
 import androidx.compose.runtime.Composable
@@ -22,7 +20,6 @@ import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.getcatch.android.R
 import com.getcatch.android.models.Item
-import com.getcatch.android.ui.BorderStyle
 import com.getcatch.android.ui.InfoWidgetType
 import com.getcatch.android.ui.PaymentMethodVariant
 import com.getcatch.android.ui.composables.elements.BenefitText
@@ -46,7 +43,6 @@ public fun PaymentMethod(
     userCohorts: List<String>? = null,
     disabled: Boolean = false,
     variant: PaymentMethodVariant = PaymentMethodVariant.Standard,
-    borderStyle: BorderStyle? = null,
     theme: ThemeVariantOption? = null,
     styleOverrides: InfoWidgetStyle? = null,
 ) {
@@ -63,7 +59,6 @@ public fun PaymentMethod(
         userCohorts = userCohorts,
         disabled = disabled,
         variant = variant,
-        borderStyle = borderStyle,
         theme = theme,
         styleOverrides = styleOverrides,
         viewModel = koinViewModel(key = viewModelKey),
@@ -78,7 +73,6 @@ internal fun PaymentMethodInternal(
     userCohorts: List<String>? = null,
     disabled: Boolean = false,
     variant: PaymentMethodVariant = PaymentMethodVariant.Standard,
-    borderStyle: BorderStyle? = null,
     theme: ThemeVariantOption? = null,
     styleOverrides: InfoWidgetStyle? = null,
     viewModel: EarnRedeemViewModel,
@@ -102,21 +96,10 @@ internal fun PaymentMethodInternal(
             )
         }
 
-        var rowModifier = Modifier
-            .wrapContentWidth()
-            .animateContentSize()
-        if (borderStyle != null) {
-            val borderColor = when (borderStyle) {
-                is BorderStyle.Custom -> borderStyle.color
-                else -> CatchTheme.colors.border
-            }
-            rowModifier = rowModifier
-                .border(1.dp, borderColor, borderStyle.shape)
-                .padding(horizontal = 8.dp, vertical = 4.dp)
-        }
-
         Row(
-            modifier = rowModifier,
+            modifier = Modifier
+                .wrapContentWidth()
+                .animateContentSize(),
             verticalAlignment = Alignment.CenterVertically,
         ) {
             val disabledModifier =
@@ -138,6 +121,7 @@ internal fun PaymentMethodInternal(
                             styles = styles,
                             modifier = disabledModifier
                         )
+                        Spacer(modifier = Modifier.width(3.dp))
                     }
                     Row(verticalAlignment = Alignment.CenterVertically) {
                         BenefitText(
