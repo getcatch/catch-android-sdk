@@ -18,12 +18,15 @@ internal fun BenefitText(
     val color =
         if (reward.redeemable) styles.benefitTextStyle.redeemFontColor
         else styles.benefitTextStyle.earnFontColor
+    val textDecoration =
+        if (reward is CalculatedReward.PercentRate) null
+        else TextDecoration.Underline
 
     Text(
         text = styles.applyTextTransform(message),
         color = color,
         style = styles.benefitComposeTextStyle,
-        textDecoration = TextDecoration.Underline,
+        textDecoration = textDecoration,
         modifier = modifier,
     )
 }
