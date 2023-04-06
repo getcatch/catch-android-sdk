@@ -9,14 +9,14 @@
         android:gravity="center">
 
         <com.getcatch.android.ui.views.CalloutView
-            android:id="@+id/test_callout_view"
+            android:id="@+id/basic_callout"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:padding="16dp"
             />
 
         <com.getcatch.android.ui.views.CalloutView
-            android:id="@+id/test_or_prefix_callout_view"
+            android:id="@+id/custom_callout"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:padding="16dp"
@@ -25,6 +25,22 @@
             app:customBorderColor="@color/accent_turquoise"
             app:customBorderRadius="1"
             app:themeVariant="light_mono"/>
+
+        <com.getcatch.android.ui.views.PaymentMethodView
+            android:id="@+id/basic_payment_method"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="16dp"
+            />
+
+        <com.getcatch.android.ui.views.PaymentMethodView
+            android:id="@+id/custom_payment_method"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="16dp"
+            app:paymentMethodVariant="logo_compact"
+            app:themeVariant="light_mono"
+            />
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/toggle_theme_btn"

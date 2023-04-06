@@ -1,22 +1,40 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <attr name="calloutBorderStyle" format="enum">
-        <enum name="square" value="0" />
-        <enum name="slight_round" value="1" />
-        <enum name="pill" value="2" />
-        <enum name="custom" value="3" />
-    </attr>
+    <!--  Attribute value definitions  -->
     <attr name="themeVariant" format="enum">
         <enum name="light" value="0" />
         <enum name="light_mono" value="1" />
         <enum name="dark" value="2" />
         <enum name="dark_mono" value="3" />
     </attr>
+    <attr name="calloutBorderStyle" format="enum">
+        <enum name="square" value="0" />
+        <enum name="slight_round" value="1" />
+        <enum name="pill" value="2" />
+        <enum name="custom" value="3" />
+    </attr>
+    <attr name="borderStyle" format="enum">
+        <enum name="square" value="0" />
+        <enum name="slight_round" value="1" />
+        <enum name="custom" value="2" />
+    </attr>
+    <attr name="customBorderRadius" format="integer" />
+    <attr name="customBorderColor" format="color" />
+
+    <!--  View attributes  -->
     <declare-styleable name="CalloutView">
         <attr name="calloutBorderStyle" />
         <attr name="hasOrPrefix" format="boolean" />
-        <attr name="customBorderRadius" format="integer" />
-        <attr name="customBorderColor" format="color" />
+        <attr name="customBorderRadius" />
+        <attr name="customBorderColor" />
         <attr name="themeVariant" />
+    </declare-styleable>
+    <declare-styleable name="PaymentMethodView">
+        <attr name="themeVariant" />
+        <attr name="paymentMethodVariant" format="enum">
+            <enum name="standard" value="0" />
+            <enum name="compact" value="1" />
+            <enum name="logo_compact" value="2" />
+        </attr>
     </declare-styleable>
 </resources>

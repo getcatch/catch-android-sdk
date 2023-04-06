@@ -4,7 +4,9 @@ import android.content.res.TypedArray
 import android.util.Log
 import androidx.annotation.StyleableRes
 import com.getcatch.android.R
+import com.getcatch.android.ui.BorderStyle
 import com.getcatch.android.ui.CalloutBorderStyle
+import com.getcatch.android.ui.PaymentMethodVariant
 import com.getcatch.android.ui.styles.values.ColorValue
 import com.getcatch.android.ui.theming.ThemeVariant
 
@@ -17,11 +19,23 @@ internal object CalloutBorderStyleAttrEnum {
     const val CUSTOM = 3
 }
 
+internal object BorderStyleAttrEnum {
+    const val SQUARE = 0
+    const val SLIGHT_ROUND = 1
+    const val CUSTOM = 2
+}
+
 internal object ThemeVariantAttrEnum {
     const val LIGHT = 0
     const val LIGHT_MONO = 1
     const val DARK = 2
     const val DARK_MONO = 3
+}
+
+internal object PaymentMethodVariantAttrEnum {
+    const val STANDARD = 0
+    const val COMPACT = 1
+    const val LOGO_COMPACT = 2
 }
 
 internal fun TypedArray.getCalloutBorderStyle(): CalloutBorderStyle? =
@@ -48,6 +62,35 @@ internal fun TypedArray.getCalloutBorderStyle(): CalloutBorderStyle? =
         else -> null
     }
 
+
+internal fun TypedArray.getBorderStyle(
+    widgetName: String,
+    @StyleableRes borderStyleResId: Int,
+    @StyleableRes customBorderColorResId: Int,
+    @StyleableRes customBorderRadiusResId: Int,
+): BorderStyle? =
+    when (getInt(borderStyleResId, -1)) {
+        BorderStyleAttrEnum.SQUARE -> BorderStyle.Square
+        BorderStyleAttrEnum.SLIGHT_ROUND -> BorderStyle.SlightRound
+        BorderStyleAttrEnum.CUSTOM -> {
+            val radius = getInt(customBorderRadiusResId, -1)
+            val color = getColor(customBorderColorResId, -1)
+            if (radius != -1 && color != -1) {
+                BorderStyle.Custom(
+                    radius = radius.toFloat(),
+                    color = ColorValue(color),
+                )
+            } else {
+                Log.w(
+                    widgetName,
+                    "Border style set to custom, but radius or color not specified."
+                )
+                null
+            }
+        }
+        else -> null
+    }
+
 internal fun TypedArray.getThemeVariant(@StyleableRes styleableResId: Int): ThemeVariant? =
     when (getInt(styleableResId, -1)) {
         ThemeVariantAttrEnum.LIGHT -> ThemeVariant.Light
@@ -57,4 +100,10 @@ internal fun TypedArray.getThemeVariant(@StyleableRes styleableResId: Int): Them
         else -> null
     }
 
-
+internal fun TypedArray.getPaymentMethodVariant(): PaymentMethodVariant? =
+    when (getInt(R.styleable.PaymentMethodView_paymentMethodVariant, -1)) {
+        PaymentMethodVariantAttrEnum.STANDARD -> PaymentMethodVariant.Standard
+        PaymentMethodVariantAttrEnum.COMPACT -> PaymentMethodVariant.Compact
+        PaymentMethodVariantAttrEnum.LOGO_COMPACT -> PaymentMethodVariant.LogoCompact
+        else -> null
+    }

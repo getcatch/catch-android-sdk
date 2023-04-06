@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.databinding.DataBindingUtil
 import com.getcatch.android.ui.views.CalloutView
+import com.getcatch.android.ui.views.PaymentMethodView
 import com.getcatch.sample.databinding.ActivityViewBasedBinding
 import com.google.android.material.button.MaterialButton
 import dagger.hilt.android.AndroidEntryPoint
@@ -15,8 +16,10 @@ import kotlin.random.Random
 class ViewBasedActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityViewBasedBinding
-    private lateinit var calloutView: CalloutView
-    private lateinit var orPrefixCalloutView: CalloutView
+    private lateinit var basicCallout: CalloutView
+    private lateinit var customCallout: CalloutView
+    private lateinit var basicPaymentMethod: PaymentMethodView
+    private lateinit var customPaymentMethod: PaymentMethodView
     private lateinit var goToComposeActivityBtn: MaterialButton
     private lateinit var toggleThemeBtn: MaterialButton
 
@@ -32,22 +35,24 @@ class ViewBasedActivity : AppCompatActivity() {
         goToComposeActivityBtn.setOnClickListener {
             goToComposeActivity()
         }
-        calloutView = binding.testCalloutView
-        calloutView.setOnClickListener {
-            if (calloutView.price == null) {
-                calloutView.price = Random.nextInt(from = 0, until = 10000)
+        basicCallout = binding.basicCallout
+        basicCallout.setOnClickListener {
+            if (basicCallout.price == null) {
+                basicCallout.price = Random.nextInt(from = 0, until = 10000)
             } else {
-                calloutView.price = null
+                basicCallout.price = null
             }
         }
-        orPrefixCalloutView = binding.testOrPrefixCalloutView
-        orPrefixCalloutView.setOnClickListener  {
-            if (orPrefixCalloutView.price == null) {
-                orPrefixCalloutView.price = Random.nextInt(from = 0, until = 10000)
+        customCallout = binding.customCallout
+        customCallout.setOnClickListener  {
+            if (customCallout.price == null) {
+                customCallout.price = Random.nextInt(from = 0, until = 10000)
             } else {
-                orPrefixCalloutView.price = null
+                customCallout.price = null
             }
         }
+        basicPaymentMethod = binding.basicPaymentMethod
+        customPaymentMethod = binding.customPaymentMethod
         toggleThemeBtn = binding.toggleThemeBtn
         toggleThemeBtn.setOnClickListener {
             val newMode = when (AppCompatDelegate.getDefaultNightMode()) {
