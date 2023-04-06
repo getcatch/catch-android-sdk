@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.databinding.DataBindingUtil
 import com.getcatch.android.ui.views.CalloutView
+import com.getcatch.android.ui.views.ExpressCheckoutCalloutView
 import com.getcatch.android.ui.views.PaymentMethodView
 import com.getcatch.sample.databinding.ActivityViewBasedBinding
 import com.google.android.material.button.MaterialButton
@@ -20,6 +21,8 @@ class ViewBasedActivity : AppCompatActivity() {
     private lateinit var customCallout: CalloutView
     private lateinit var basicPaymentMethod: PaymentMethodView
     private lateinit var customPaymentMethod: PaymentMethodView
+    private lateinit var basicExpressCheckoutCallout: ExpressCheckoutCalloutView
+    private lateinit var customExpressCheckoutCallout: ExpressCheckoutCalloutView
     private lateinit var goToComposeActivityBtn: MaterialButton
     private lateinit var toggleThemeBtn: MaterialButton
 
@@ -53,6 +56,8 @@ class ViewBasedActivity : AppCompatActivity() {
         }
         basicPaymentMethod = binding.basicPaymentMethod
         customPaymentMethod = binding.customPaymentMethod
+        basicExpressCheckoutCallout = binding.basicExpressCheckoutCallout
+        customExpressCheckoutCallout = binding.customExpressCheckoutCallout
         toggleThemeBtn = binding.toggleThemeBtn
         toggleThemeBtn.setOnClickListener {
             val newMode = when (AppCompatDelegate.getDefaultNightMode()) {

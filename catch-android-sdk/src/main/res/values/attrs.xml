@@ -37,4 +37,10 @@
             <enum name="logo_compact" value="2" />
         </attr>
     </declare-styleable>
+    <declare-styleable name="ExpressCheckoutCalloutView">
+        <attr name="themeVariant" />
+        <attr name="borderStyle" />
+        <attr name="customBorderRadius" />
+        <attr name="customBorderColor" />
+    </declare-styleable>
 </resources>
