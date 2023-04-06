@@ -4,7 +4,7 @@
     <string name="benefit_redeem_message">redeem %1$s</string>
     <string name="benefit_saved_message">save %1$s</string>
     <string name="or_prefix">or</string>
-    <string name="em_dash_prefix">– </string>
+    <string name="em_dash_prefix">–\ </string>
     <string name="by_paying_with">by paying with</string>
     <string name="with">with</string>
     <string name="info_character">ⓘ</string>
