@@ -38,14 +38,15 @@ internal fun RewardCard(
     val cardShape = RoundedCornerShape(14.88.dp)
     Box(
         modifier = Modifier
-            .background(color = cardBgColor, shape = cardShape)
             .shadow(
                 elevation = 2.dp,
                 shape = cardShape,
                 ambientColor = Color(CatchColors.GREY_7)
             )
+            .background(color = cardBgColor, shape = cardShape)
             .width(224.dp)
             .height(138.44.dp)
+
     ) {
         if (cardBgImageUrl != null) {
             AsyncImage(

@@ -1,19 +1,22 @@
 package com.getcatch.android.ui.composables
 
+import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.padding
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
+import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.lifecycle.compose.collectAsStateWithLifecycle
-import com.getcatch.android.repository.MerchantRepository
+import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.dp
+import com.getcatch.android.models.Merchant
+import com.getcatch.android.utils.PreviewData
 import com.getcatch.android.utils.fromHexString
-import org.koin.compose.koinInject
 
 @Composable
 internal fun MerchantRewardCard(
     rewardsAmount: Int,
-    merchantRepo: MerchantRepository = koinInject()
+    merchant: Merchant?
 ) {
-    val merchant by merchantRepo.activeMerchant.collectAsStateWithLifecycle()
     merchant?.let {
         RewardCard(
             rewardsAmount = rewardsAmount,
@@ -22,5 +25,17 @@ internal fun MerchantRewardCard(
             textColor = Color.fromHexString(it.cardFontColor, Color.White),
             cardBgImageUrl = it.cardBackgroundImageUrl,
         )
+    }
+}
+
+@Preview
+@Composable
+internal fun PreviewMerchantRewardCard() {
+    Box(
+        modifier = Modifier
+            .background(Color.White)
+            .padding(8.dp)
+    ) {
+        MerchantRewardCard(rewardsAmount = 1000, merchant = PreviewData.merchant)
     }
 }
