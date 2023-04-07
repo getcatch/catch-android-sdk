@@ -1,13 +1,13 @@
 package com.getcatch.android.web
 
 import android.content.Context
-import android.content.Intent
 import android.net.Uri
 import android.util.Log
 import android.webkit.WebResourceRequest
 import android.webkit.WebView
 import com.getcatch.android.utils.CatchUrls
 import com.getcatch.android.utils.baseUrl
+import com.getcatch.android.utils.launchUrlIntent
 import com.google.accompanist.web.AccompanistWebViewClient
 
 @Suppress("MaxLineLength")
@@ -32,8 +32,7 @@ internal class CatchSDKWebClient(private val context: Context) : AccompanistWebV
         return if (url in CatchUrls.internalWebViewBaseUrls) {
             false
         } else {
-            val intent = Intent(Intent.ACTION_VIEW, Uri.parse(url))
-            context.startActivity(intent)
+            launchUrlIntent(context, url)
             true
         }
     }
