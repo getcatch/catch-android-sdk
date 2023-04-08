@@ -60,6 +60,20 @@
                 app:customBorderRadius="8"
                 app:themeVariant="light_mono" />
 
+            <com.getcatch.android.ui.views.PurchaseConfirmationView
+                android:id="@+id/basic_purchase_confirmation"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="16dp" />
+
+            <com.getcatch.android.ui.views.PurchaseConfirmationView
+                android:id="@+id/custom_purchase_confirmation"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="16dp"
+                app:borderStyle="none"
+                app:themeVariant="light_mono"/>
+
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/toggle_theme_btn"
                 android:layout_width="wrap_content"
