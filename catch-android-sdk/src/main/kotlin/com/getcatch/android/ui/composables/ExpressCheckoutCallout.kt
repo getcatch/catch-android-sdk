@@ -29,6 +29,7 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.getcatch.android.R
 import com.getcatch.android.models.Item
 import com.getcatch.android.ui.BorderStyle
+import com.getcatch.android.ui.HasBorderShape
 import com.getcatch.android.ui.InfoWidgetType
 import com.getcatch.android.ui.composables.elements.BenefitText
 import com.getcatch.android.ui.composables.elements.EarnRedeemContent
@@ -49,7 +50,7 @@ public fun ExpressCheckoutCallout(
     price: Int = 0,
     items: List<Item>? = null,
     userCohorts: List<String>? = null,
-    borderStyle: BorderStyle? = null,
+    borderStyle: BorderStyle = BorderStyle.None,
     theme: ThemeVariantOption? = null,
     styleOverrides: InfoWidgetStyle? = null,
 ) {
@@ -75,7 +76,7 @@ internal fun ExpressCheckoutCalloutInternal(
     price: Int = 0,
     items: List<Item>? = null,
     userCohorts: List<String>? = null,
-    borderStyle: BorderStyle? = null,
+    borderStyle: BorderStyle = BorderStyle.None,
     theme: ThemeVariantOption? = null,
     styleOverrides: InfoWidgetStyle? = null,
     viewModel: EarnRedeemViewModel,
@@ -98,7 +99,7 @@ internal fun ExpressCheckoutCalloutInternal(
             )
         }
         var containerModifier = Modifier.animateContentSize()
-        if (borderStyle != null) {
+        if (borderStyle is HasBorderShape) {
             val borderColor = when (borderStyle) {
                 is BorderStyle.Custom -> borderStyle.color
                 else -> CatchTheme.colors.border

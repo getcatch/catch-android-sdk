@@ -17,12 +17,14 @@ internal object CalloutBorderStyleAttrEnum {
     const val SLIGHT_ROUND = 1
     const val PILL = 2
     const val CUSTOM = 3
+    const val NONE = 4
 }
 
 internal object BorderStyleAttrEnum {
     const val SQUARE = 0
     const val SLIGHT_ROUND = 1
     const val CUSTOM = 2
+    const val NONE = 3
 }
 
 internal object ThemeVariantAttrEnum {
@@ -59,6 +61,7 @@ internal fun TypedArray.getCalloutBorderStyle(): CalloutBorderStyle? =
                 null
             }
         }
+        CalloutBorderStyleAttrEnum.NONE -> CalloutBorderStyle.None
         else -> null
     }
 
@@ -88,6 +91,7 @@ internal fun TypedArray.getBorderStyle(
                 null
             }
         }
+        BorderStyleAttrEnum.NONE -> BorderStyle.None
         else -> null
     }
 

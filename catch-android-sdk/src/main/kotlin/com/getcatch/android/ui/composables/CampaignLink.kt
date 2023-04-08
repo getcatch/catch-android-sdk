@@ -29,6 +29,7 @@ import com.getcatch.android.models.Merchant
 import com.getcatch.android.repository.MerchantRepository
 import com.getcatch.android.ui.ActionWidgetType
 import com.getcatch.android.ui.BorderStyle
+import com.getcatch.android.ui.HasBorderShape
 import com.getcatch.android.ui.composables.elements.LinkButton
 import com.getcatch.android.ui.styles.ActionWidgetStyle
 import com.getcatch.android.ui.styles.StyleResolver
@@ -42,7 +43,7 @@ import org.koin.compose.koinInject
 @Composable
 public fun CampaignLink(
     rewardsAmount: Int,
-    borderStyle: BorderStyle? = null,
+    borderStyle: BorderStyle = BorderStyle.SlightRound,
     theme: ThemeVariantOption? = null,
     styleOverrides: ActionWidgetStyle? = null,
 ) {
@@ -60,7 +61,7 @@ public fun CampaignLink(
 @Composable
 internal fun CampaignLinkInternal(
     rewardsAmount: Int,
-    borderStyle: BorderStyle? = null,
+    borderStyle: BorderStyle = BorderStyle.SlightRound,
     theme: ThemeVariantOption? = null,
     styleOverrides: ActionWidgetStyle? = null,
     merchant: Merchant?,
@@ -81,14 +82,19 @@ internal fun CampaignLinkInternal(
             .fillMaxWidth()
             .animateContentSize()
 
-        if (borderStyle != null) {
+        containerModifier = if (borderStyle is HasBorderShape) {
             val borderColor =
                 if (borderStyle is BorderStyle.Custom) borderStyle.color
                 else CatchTheme.colors.border
 
-            containerModifier = containerModifier
+            containerModifier
                 .border(1.dp, borderColor, borderStyle.shape)
                 .padding(16.dp)
+        } else {
+            // If we don't have a border, we need at least this small
+            // amount of padding so the link button's shadow does
+            // not get cut off
+            containerModifier.padding(4.dp)
         }
         BoxWithConstraints(modifier = containerModifier) {
             val fullWidthButton = maxWidth < 479.dp
@@ -140,7 +146,7 @@ internal fun CampaignLinkInternal(
     }
 }
 
-internal fun claimNowTextStyle(baseTextStyle: TextStyle): TextStyle  {
+internal fun claimNowTextStyle(baseTextStyle: TextStyle): TextStyle {
     val fontSize = baseTextStyle.fontSize * Constants.CLAIM_NOW_FONT_SIZE_RATIO
     val lineHeight = fontSize * Constants.CLAIM_NOW_FONT_SIZE_TO_LINE_HEIGHT_RATIO
     return baseTextStyle.copy(

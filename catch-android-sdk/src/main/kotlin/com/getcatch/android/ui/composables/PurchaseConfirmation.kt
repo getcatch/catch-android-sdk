@@ -29,6 +29,7 @@ import com.getcatch.android.models.Merchant
 import com.getcatch.android.repository.MerchantRepository
 import com.getcatch.android.ui.ActionWidgetType
 import com.getcatch.android.ui.BorderStyle
+import com.getcatch.android.ui.HasBorderShape
 import com.getcatch.android.ui.composables.elements.DonationMessage
 import com.getcatch.android.ui.composables.elements.LinkButton
 import com.getcatch.android.ui.styles.ActionWidgetStyle
@@ -44,7 +45,7 @@ import org.koin.compose.koinInject
 public fun PurchaseConfirmation(
     earned: Int,
     donation: Int? = null,
-    borderStyle: BorderStyle? = null,
+    borderStyle: BorderStyle = BorderStyle.SlightRound,
     theme: ThemeVariantOption? = null,
     styleOverrides: ActionWidgetStyle? = null,
 ) {
@@ -64,7 +65,7 @@ public fun PurchaseConfirmation(
 internal fun PurchaseConfirmationInternal(
     earned: Int,
     donation: Int,
-    borderStyle: BorderStyle? = BorderStyle.SlightRound,
+    borderStyle: BorderStyle = BorderStyle.SlightRound,
     theme: ThemeVariantOption? = null,
     styleOverrides: ActionWidgetStyle? = null,
     merchant: Merchant?,
@@ -84,17 +85,21 @@ internal fun PurchaseConfirmationInternal(
             .wrapContentHeight()
             .fillMaxWidth()
             .animateContentSize()
-        if (borderStyle != null) {
+        containerModifier = if (borderStyle is HasBorderShape) {
             val borderColor =
                 if (borderStyle is BorderStyle.Custom) borderStyle.color
                 else CatchTheme.colors.border
 
-            containerModifier = containerModifier
+            containerModifier
                 .border(1.dp, borderColor, borderStyle.shape)
                 .padding(16.dp)
         } else {
-            containerModifier = containerModifier.padding(4.dp)
+            // If we don't have a border, we need at least this small
+            // amount of padding so the link button's shadow does
+            // not get cut off
+            containerModifier.padding(4.dp)
         }
+
         BoxWithConstraints(modifier = containerModifier) {
             val fullWidthButton = maxWidth < 479.dp
             Column {

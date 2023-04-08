@@ -29,8 +29,8 @@ public class CalloutView @JvmOverloads constructor(
     private val _hasOrPrefix = mutableStateOf(false)
     public var hasOrPrefix: Boolean by _hasOrPrefix
 
-    private val _borderStyle = mutableStateOf<CalloutBorderStyle?>(null)
-    public var borderStyle: CalloutBorderStyle? by _borderStyle
+    private val _borderStyle = mutableStateOf<CalloutBorderStyle>(CalloutBorderStyle.None)
+    public var borderStyle: CalloutBorderStyle by _borderStyle
 
     private val _themeVariant = mutableStateOf<ThemeVariant?>(null)
     public var themeVariant: ThemeVariant? by _themeVariant
@@ -48,7 +48,7 @@ public class CalloutView @JvmOverloads constructor(
         context.theme.obtainStyledAttributes(attrs, R.styleable.CalloutView, 0, 0).apply {
             try {
                 _hasOrPrefix.value = getHasOrPrefix()
-                _borderStyle.value = getCalloutBorderStyle()
+                getCalloutBorderStyle()?.let { _borderStyle.value = it }
                 _themeVariant.value = getThemeVariant(R.styleable.CalloutView_themeVariant)
             } finally {
                 recycle()

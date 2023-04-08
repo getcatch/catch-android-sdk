@@ -25,6 +25,7 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.getcatch.android.R
 import com.getcatch.android.models.Item
 import com.getcatch.android.ui.CalloutBorderStyle
+import com.getcatch.android.ui.HasBorderShape
 import com.getcatch.android.ui.InfoWidgetType
 import com.getcatch.android.ui.composables.elements.BenefitText
 import com.getcatch.android.ui.composables.elements.EarnRedeemContent
@@ -45,7 +46,7 @@ public fun Callout(
     items: List<Item>? = null,
     userCohorts: List<String>? = null,
     hasOrPrefix: Boolean = false,
-    borderStyle: CalloutBorderStyle? = null,
+    borderStyle: CalloutBorderStyle = CalloutBorderStyle.None,
     theme: ThemeVariantOption? = null,
     styleOverrides: InfoWidgetStyle? = null,
 ) {
@@ -74,7 +75,7 @@ private fun CalloutInternal(
     items: List<Item>? = null,
     userCohorts: List<String>? = null,
     hasOrPrefix: Boolean = false,
-    borderStyle: CalloutBorderStyle? = CalloutBorderStyle.SlightRound,
+    borderStyle: CalloutBorderStyle = CalloutBorderStyle.None,
     theme: ThemeVariantOption? = null,
     styleOverrides: InfoWidgetStyle? = null,
     viewModel: EarnRedeemViewModel,
@@ -100,7 +101,7 @@ private fun CalloutInternal(
 
         var rowModifier = Modifier.animateContentSize()
 
-        if (borderStyle != null) {
+        if (borderStyle is HasBorderShape) {
             val borderColor = when (borderStyle) {
                 is CalloutBorderStyle.Custom -> borderStyle.color
                 else -> CatchTheme.colors.border
