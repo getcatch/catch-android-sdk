@@ -1,6 +1,11 @@
 package com.getcatch.android.models
 
 import com.getcatch.android.utils.CatchUrls
+import com.getcatch.android.utils.toDate
+import kotlinx.datetime.Clock
+import kotlinx.datetime.DateTimeUnit
+import kotlinx.datetime.LocalDate
+import kotlinx.datetime.plus
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
@@ -53,9 +58,10 @@ internal data class Merchant(
     val theme: MerchantThemeConfig?,
 ) {
     /** Generates url for merchant logo image asset */
-    val cardLogoImageUrl: String
-        get() = CatchUrls.assetUrl(id, MerchantAssetType.CARD_LOGO)
+    val cardLogoImageUrl: String = CatchUrls.assetUrl(id, MerchantAssetType.CARD_LOGO)
 
-    val hasTheme: Boolean
-        get() = theme != null
+    val hasTheme: Boolean = theme != null
+
+    val expirationDate: LocalDate
+        get() = Clock.System.now().toDate().plus(rewardsLifetimeInDays, DateTimeUnit.DAY)
 }
