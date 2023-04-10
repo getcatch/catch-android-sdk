@@ -1,6 +1,5 @@
 package com.getcatch.android.network.clients
 
-import com.getcatch.android.models.PublicKey
 import com.getcatch.android.network.Environment
 import com.getcatch.android.network.NetworkResponse
 import com.getcatch.android.network.clients.transactions.TransactionsSvcClientImpl
@@ -27,7 +26,6 @@ public class TestTransactionsSvcClientImpl {
 
     private val testDeviceId = "TEST_DEVICE_ID"
     private val testMerchantId = "TEST_MERCHANT_ID"
-    private val testPublicKey = PublicKey("test_public_key")
 
     @Before
     public fun setup() {
@@ -194,20 +192,17 @@ public class TestTransactionsSvcClientImpl {
 
         mockClient.addResponse(
             method = HttpMethod.Get,
-            url = "${transactionsSvcClient.baseUrl}/api/transactions-svc" +
-                    "/merchants/${testPublicKey.value}/reward_campaigns/$testCampaignName/public",
+            url = "${transactionsSvcClient.baseUrl}/reward_campaigns/$testCampaignName/public",
             responseBody = responseJson,
         )
 
         runBlocking {
             val response = transactionsSvcClient.fetchRewardCampaign(
-                publicKey = testPublicKey,
                 campaignName = testCampaignName,
             )
             when (response) {
                 is NetworkResponse.Success -> {
                     assertThat(response.body.rewardCampaignId).isEqualTo("rc-dMetos")
-                    assertThat(response.body.rewardsExpiration).isEqualTo("2023-06-26T12:00:00+00:00")
                     assertThat(response.body.totalAmount).isEqualTo(1000)
                 }
                 is NetworkResponse.Failure -> fail(

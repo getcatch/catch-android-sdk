@@ -2,7 +2,6 @@ package com.getcatch.android.network.clients.transactions
 
 import com.getcatch.android.models.EarnedRewardsSummary
 import com.getcatch.android.models.Item
-import com.getcatch.android.models.PublicKey
 import com.getcatch.android.models.PublicUserData
 import com.getcatch.android.models.RewardCampaign
 import com.getcatch.android.network.NetworkResponse
@@ -23,8 +22,5 @@ internal interface TransactionsSvcClient {
         includeEarnedRewardBreakdown: Boolean = true,
     ): NetworkResponse<EarnedRewardsSummary>
 
-    suspend fun fetchRewardCampaign(
-        publicKey: PublicKey,
-        campaignName: String,
-    ): NetworkResponse<RewardCampaign>
+    suspend fun fetchRewardCampaign(campaignName: String): NetworkResponse<RewardCampaign>
 }
