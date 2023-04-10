@@ -26,10 +26,14 @@ import com.getcatch.android.ui.theming.CatchTheme
 import com.getcatch.android.ui.theming.color.CatchColors
 import com.getcatch.android.ui.typography.CatchTextStyles
 import com.getcatch.android.utils.centsToDollarsString
+import com.getcatch.android.utils.format
+import kotlinx.datetime.LocalDate
+import kotlinx.datetime.toLocalDate
 
 @Composable
 internal fun RewardCard(
     rewardsAmount: Int,
+    expirationDate: LocalDate,
     logoUrl: String,
     cardBgColor: Color,
     textColor: Color,
@@ -78,7 +82,7 @@ internal fun RewardCard(
                 color = textColor,
             )
             Text(
-                text = "Exp. 00/00/00",
+                text = "Exp. ${expirationDate.format("MM/dd/yy")}",
                 style = CatchTextStyles.bodySmall,
                 color = textColor,
             )
@@ -96,6 +100,7 @@ internal fun PreviewRewardCard() {
     CatchTheme {
         RewardCard(
             rewardsAmount = 1000,
+            expirationDate = "2023-04-21".toLocalDate(),
             logoUrl = logoUrl,
             cardBgColor = cardBgColor,
             textColor = textColor

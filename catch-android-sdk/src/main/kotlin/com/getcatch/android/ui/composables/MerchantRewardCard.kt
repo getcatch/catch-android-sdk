@@ -21,6 +21,7 @@ internal fun MerchantRewardCard(
         RewardCard(
             rewardsAmount = rewardsAmount,
             logoUrl = it.cardLogoImageUrl,
+            expirationDate = it.expirationDate,
             cardBgColor = Color.fromHexString(it.cardBackgroundColor, Color.Black),
             textColor = Color.fromHexString(it.cardFontColor, Color.White),
             cardBgImageUrl = it.cardBackgroundImageUrl,
