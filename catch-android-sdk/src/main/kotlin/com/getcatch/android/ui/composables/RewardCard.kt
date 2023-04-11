@@ -50,7 +50,6 @@ internal fun RewardCard(
             .background(color = cardBgColor, shape = cardShape)
             .width(224.dp)
             .height(138.44.dp)
-
     ) {
         if (cardBgImageUrl != null) {
             AsyncImage(
@@ -93,15 +92,21 @@ internal fun RewardCard(
 internal fun PreviewRewardCard() {
     val logoUrl =
         "https://cdn.shopify.com/s/files/1/0508/1084/7381/files/Store_Logo_Dark_180x.png?v=1614703801"
-    val cardBgColor = Color.White
-    val textColor = Color.Black
+    val cardBgColor = Color.Black
+    val textColor = Color.White
     CatchTheme {
-        RewardCard(
-            rewardsAmount = 1000,
-            expirationDate = "2023-04-21".toLocalDate(),
-            logoUrl = logoUrl,
-            cardBgColor = cardBgColor,
-            textColor = textColor
-        )
+        Box(
+            modifier = Modifier
+                .background(Color.White)
+                .padding(8.dp)
+        ) {
+            RewardCard(
+                rewardsAmount = 1000,
+                expirationDate = "2023-04-21".toLocalDate(),
+                logoUrl = logoUrl,
+                cardBgColor = cardBgColor,
+                textColor = textColor
+            )
+        }
     }
 }
