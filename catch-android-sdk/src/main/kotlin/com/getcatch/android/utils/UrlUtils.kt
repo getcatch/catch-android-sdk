@@ -1,5 +1,7 @@
 package com.getcatch.android.utils
 
+import android.content.Context
+import android.content.Intent
 import android.net.Uri
 import io.ktor.http.URLBuilder
 
@@ -29,3 +31,9 @@ internal val Uri.baseUrl: String
 
 internal fun URLBuilder.parameter(key: String, value: Any?): Unit =
     value?.let { parameters.append(key, it.toString()) } ?: Unit
+
+
+internal fun launchUrlIntent(context: Context, url: String) {
+    val intent = Intent(Intent.ACTION_VIEW, Uri.parse(url))
+    context.startActivity(intent)
+}

@@ -17,6 +17,9 @@
     <string name="view_your_credit">View your credit</string>
     <string name="claim_store_credit">Claim %1$s store credit</string>
     <string name="claim_now_and_start_earning">Claim now and start earning 10% on every order.</string>
+    <string name="donation_message_header">You\'ve donated %1$s</string>
+    <string name="matched_your_contribution">%1$s has matched your contribution to\ </string>
+    <string name="thanks_for_pitching_in">Thanks for pitching in.</string>
 
     <!--  Content descriptions  -->
     <string name="content_description_catch_logo">The Catch logo</string>
