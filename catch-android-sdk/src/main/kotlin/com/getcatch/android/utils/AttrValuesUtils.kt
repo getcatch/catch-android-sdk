@@ -111,3 +111,7 @@ internal fun TypedArray.getPaymentMethodVariant(): PaymentMethodVariant? =
         PaymentMethodVariantAttrEnum.LOGO_COMPACT -> PaymentMethodVariant.LogoCompact
         else -> null
     }
+
+
+internal fun TypedArray.getCampaignName(): String? =
+    getString(R.styleable.CampaignLinkView_campaignName)
