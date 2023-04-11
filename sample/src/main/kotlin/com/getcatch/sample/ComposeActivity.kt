@@ -56,7 +56,7 @@ class ComposeActivity : ComponentActivity() {
                     donation = 50,
                     borderStyle = BorderStyle.SlightRound
                 )
-                CampaignLink(rewardsAmount = 1500, borderStyle = BorderStyle.Square)
+                CampaignLink(campaignName = "aBaVga")
                 CatchLogo()
                 CatchLogo(size = CatchLogoSize.MEDIUM)
                 CatchLogo(size = CatchLogoSize.FILL)

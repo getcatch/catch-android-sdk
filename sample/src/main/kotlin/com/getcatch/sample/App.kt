@@ -14,7 +14,7 @@ class App : Application() {
             publicKey = "TEST_MERCHANT_PUBLIC_KEY",
             context = this,
             options = CatchOptions(
-                environment = Environment.PRODUCTION,
+                environment = Environment.SANDBOX,
             )
         )
     }
