@@ -54,6 +54,7 @@ public fun Callout(
         items = items,
         userCohorts = userCohorts,
     )
+
     CalloutInternal(
         price = price,
         items = items,
@@ -106,7 +107,7 @@ private fun CalloutInternal(
             }
             rowModifier = rowModifier
                 .border(1.dp, borderColor, borderStyle.shape)
-                .padding(horizontal = 8.dp, vertical = 4.dp)
+                .padding(start = 8.dp, top = 4.dp, bottom = 4.dp, end = 4.dp)
         }
 
         FlowRow(
