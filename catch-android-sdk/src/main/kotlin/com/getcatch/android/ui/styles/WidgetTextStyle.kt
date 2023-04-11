@@ -44,8 +44,8 @@ public data class WidgetTextStyle(
                 fontColor = overrides.fontColor?.value ?: fontColor,
                 fontWeight = overrides.fontWeight?.toComposeFontWeight() ?: fontWeight,
                 lineHeight = overrides.lineHeight?.sp ?: lineHeight,
-                letterSpacing = overrides.letterSpacing?.sp,
-                textTransform = overrides.textTransform,
+                letterSpacing = overrides.letterSpacing?.sp ?: letterSpacing,
+                textTransform = overrides.textTransform ?: textTransform,
             )
         }
     }

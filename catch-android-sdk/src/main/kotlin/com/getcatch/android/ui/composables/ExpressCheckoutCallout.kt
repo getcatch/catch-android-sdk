@@ -1,101 +1,178 @@
 package com.getcatch.android.ui.composables
 
 import androidx.compose.animation.animateContentSize
-import androidx.compose.foundation.Image
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.BoxWithConstraints
-import androidx.compose.foundation.layout.BoxWithConstraintsScope
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.IntrinsicSize
+import androidx.compose.foundation.layout.ExperimentalLayoutApi
+import androidx.compose.foundation.layout.FlowRow
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.SpanStyle
 import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.getcatch.android.R
-import com.getcatch.android.ui.CalloutBorderStyle
-import com.getcatch.android.ui.composables.elements.EarnRedeemText
+import com.getcatch.android.models.Item
+import com.getcatch.android.ui.BorderStyle
+import com.getcatch.android.ui.InfoWidgetType
+import com.getcatch.android.ui.composables.elements.BenefitText
+import com.getcatch.android.ui.composables.elements.EarnRedeemContent
+import com.getcatch.android.ui.composables.elements.FillerText
 import com.getcatch.android.ui.composables.elements.InfoIcon
+import com.getcatch.android.ui.composables.elements.InlineLogo
+import com.getcatch.android.ui.styles.InfoWidgetStyle
+import com.getcatch.android.ui.styles.StyleResolver
 import com.getcatch.android.ui.theming.CatchTheme
-import com.getcatch.android.ui.theming.LocalThemeVariant
-import com.getcatch.android.ui.typography.CatchTextStyles
+import com.getcatch.android.ui.theming.ThemeVariantOption
+import com.getcatch.android.utils.transformAndAppend
+import com.getcatch.android.viewmodels.EarnRedeemUiState
+import com.getcatch.android.viewmodels.EarnRedeemViewModel
+import org.koin.androidx.compose.koinViewModel
 
 @Composable
-public fun ExpressCheckoutCallout(borderStyle: CalloutBorderStyle? = null) {
-    CatchTheme {
-        var containerModifier = Modifier
-            .height(intrinsicSize = IntrinsicSize.Min)
-            .animateContentSize()
+public fun ExpressCheckoutCallout(
+    price: Int = 0,
+    items: List<Item>? = null,
+    userCohorts: List<String>? = null,
+    borderStyle: BorderStyle? = null,
+    theme: ThemeVariantOption? = null,
+    styleOverrides: InfoWidgetStyle? = null,
+) {
+    val viewModelKey = EarnRedeemViewModel.generateKey(
+        price = price,
+        items = items,
+        userCohorts = userCohorts,
+    )
+
+    ExpressCheckoutCalloutInternal(
+        price = price,
+        items = items,
+        userCohorts = userCohorts,
+        borderStyle = borderStyle,
+        theme = theme,
+        styleOverrides = styleOverrides,
+        viewModel = koinViewModel(key = viewModelKey),
+    )
+}
+
+@Composable
+internal fun ExpressCheckoutCalloutInternal(
+    price: Int = 0,
+    items: List<Item>? = null,
+    userCohorts: List<String>? = null,
+    borderStyle: BorderStyle? = null,
+    theme: ThemeVariantOption? = null,
+    styleOverrides: InfoWidgetStyle? = null,
+    viewModel: EarnRedeemViewModel,
+) {
+    LaunchedEffect(price, items, userCohorts) {
+        viewModel.update(
+            price = price, items = items, userCohorts = userCohorts
+        )
+    }
+    val uiState by viewModel.uiState.collectAsStateWithLifecycle()
+    CatchTheme(theme) {
+        val variant = CatchTheme.variant
+        val styles by remember(variant, styleOverrides) {
+            mutableStateOf(
+                StyleResolver.infoWidgetStyles(
+                    theme = variant,
+                    instanceOverrides = styleOverrides,
+                    infoWidgetType = InfoWidgetType.ExpressCheckoutCallout,
+                )
+            )
+        }
+        var containerModifier = Modifier.animateContentSize()
         if (borderStyle != null) {
-            containerModifier =
-                containerModifier
-                    .border(1.dp, CatchTheme.colors.border, borderStyle.shape)
-                    .padding(horizontal = 8.dp, vertical = 4.dp)
+            val borderColor = when (borderStyle) {
+                is BorderStyle.Custom -> borderStyle.color
+                else -> CatchTheme.colors.border
+            }
+
+            containerModifier = containerModifier
+                .border(1.dp, borderColor, borderStyle.shape)
+                .padding(horizontal = 16.dp, vertical = 12.dp)
         }
         BoxWithConstraints(modifier = Modifier.fillMaxWidth()) {
-            ExpressCheckoutCalloutContainer(modifier = containerModifier)
+            val condense = maxWidth < 560.dp
+            ExpressCheckoutCalloutContent(
+                modifier = containerModifier,
+                uiState = uiState,
+                styles = styles,
+                condense = condense,
+            )
         }
     }
 }
 
+@OptIn(ExperimentalLayoutApi::class)
 @Composable
-private fun BoxWithConstraintsScope.ExpressCheckoutCalloutContainer(modifier: Modifier) {
-    if (maxWidth < 560.dp) {
-        Column(modifier = modifier.align(Alignment.Center)) {
-            ExpressCheckoutCalloutContent(showDash = false)
+private fun ExpressCheckoutCalloutContent(
+    modifier: Modifier = Modifier,
+    uiState: EarnRedeemUiState,
+    styles: InfoWidgetStyle.Resolved,
+    condense: Boolean
+) {
+    FlowRow(
+        verticalAlignment = Alignment.CenterVertically,
+        modifier = modifier.fillMaxWidth(),
+        maxItemsInEachRow = if (condense) 1 else Int.MAX_VALUE
+    ) {
+        Row(verticalAlignment = Alignment.CenterVertically) {
+            EarnRedeemContent(uiState, styles) { reward ->
+                BenefitText(reward = reward, styles = styles)
+                Spacer(modifier = Modifier.width(3.dp))
+                FillerText(text = stringResource(R.string.with), styles = styles)
+            }
+            Spacer(modifier = Modifier.width(2.dp))
+            InlineLogo(
+                fontSize = styles.widgetTextStyle.fontSize,
+                widgetType = InfoWidgetType.ExpressCheckoutCallout
+            )
         }
-    } else {
-        Row(modifier = modifier.align(Alignment.Center)) {
-            ExpressCheckoutCalloutContent(showDash = true)
+        if (!condense) {
+            Spacer(modifier = Modifier.width(3.dp))
         }
-    }
-}
-
-@Composable
-private fun ExpressCheckoutCalloutContent(showDash: Boolean) {
-    Row(verticalAlignment = Alignment.CenterVertically, modifier = Modifier.height(intrinsicSize = IntrinsicSize.Min)) {
-        EarnRedeemText(
-            suffix = stringResource(R.string.with),
-            textStyle = CatchTextStyles.bodyRegular
-        )
-        Spacer(modifier = Modifier.width(2.dp))
-        Image(
-            painter = painterResource(id = LocalThemeVariant.current.logoResId),
-            contentDescription = stringResource(
-                id = R.string.content_description_catch_logo
-            ),
-            modifier = Modifier.height(21.dp),
-        )
-    }
-    if (showDash) {
-        Spacer(modifier = Modifier.width(3.dp))
-    }
-    Row(verticalAlignment = Alignment.CenterVertically) {
-        Text(
-            text = buildAnnotatedString {
-                if (showDash) {
-                    append(stringResource(id = R.string.em_dash_prefix))
-                }
-                append(stringResource(id = R.string.find_us_at_the))
-                withStyle(style = SpanStyle(fontWeight = FontWeight.W700)) {
-                    append(stringResource(id = R.string.payment_step))
-                }
-            },
-            style = CatchTextStyles.bodyRegular
-        )
-        Spacer(modifier = Modifier.width(2.dp))
-        InfoIcon()
+        Row(verticalAlignment = Alignment.CenterVertically) {
+            val textTransform = styles.widgetTextStyle.textTransform
+            Text(
+                text = buildAnnotatedString {
+                    if (!condense) {
+                        transformAndAppend(
+                            textTransform,
+                            stringResource(id = R.string.em_dash_prefix)
+                        )
+                    }
+                    transformAndAppend(textTransform, stringResource(id = R.string.find_us_at_the))
+                    withStyle(style = SpanStyle(fontWeight = FontWeight.W700)) {
+                        transformAndAppend(
+                            textTransform,
+                            stringResource(id = R.string.payment_step)
+                        )
+                    }
+                },
+                style = styles.composeTextStyle,
+                overflow = TextOverflow.Visible,
+                maxLines = 1,
+                softWrap = false,
+            )
+            Spacer(modifier = Modifier.width(2.dp))
+            InfoIcon(styles.composeTextStyle)
+        }
     }
 }
