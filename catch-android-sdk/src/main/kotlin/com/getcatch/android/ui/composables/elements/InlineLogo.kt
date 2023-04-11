@@ -16,7 +16,7 @@ import com.getcatch.android.ui.theming.CatchTheme
 import com.getcatch.android.utils.Constants
 
 @Composable
-internal fun InlineLogo(fontSize: TextUnit, widgetType: InfoWidgetType) {
+internal fun InlineLogo(fontSize: TextUnit, widgetType: InfoWidgetType, modifier: Modifier = Modifier) {
     val logoHeight = fontSize.value * widgetType.logoToFontSizeRatio
     Image(
         painter = painterResource(id = CatchTheme.variant.logoResId),
@@ -24,7 +24,7 @@ internal fun InlineLogo(fontSize: TextUnit, widgetType: InfoWidgetType) {
             id = R.string.content_description_catch_logo
         ),
         contentScale = ContentScale.Fit,
-        modifier = Modifier
+        modifier = modifier
             .height(height = logoHeight.dp)
             .aspectRatio(
                 Constants.LOGO_ASPECT_RATIO,

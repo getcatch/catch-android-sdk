@@ -27,12 +27,15 @@ import com.getcatch.android.models.Item
 import com.getcatch.android.ui.CalloutBorderStyle
 import com.getcatch.android.ui.InfoWidgetType
 import com.getcatch.android.ui.composables.elements.BenefitText
+import com.getcatch.android.ui.composables.elements.EarnRedeemContent
+import com.getcatch.android.ui.composables.elements.FillerText
 import com.getcatch.android.ui.composables.elements.InfoIcon
 import com.getcatch.android.ui.composables.elements.InlineLogo
 import com.getcatch.android.ui.styles.InfoWidgetStyle
 import com.getcatch.android.ui.styles.StyleResolver
 import com.getcatch.android.ui.theming.CatchTheme
 import com.getcatch.android.ui.theming.ThemeVariantOption
+import com.getcatch.android.viewmodels.EarnRedeemUiState
 import com.getcatch.android.viewmodels.EarnRedeemViewModel
 import org.koin.androidx.compose.koinViewModel
 
@@ -76,10 +79,8 @@ private fun CalloutInternal(
     viewModel: EarnRedeemViewModel,
 ) {
     LaunchedEffect(price, items, userCohorts) {
-        viewModel.init(
-            price = price,
-            items = items,
-            userCohorts = userCohorts
+        viewModel.update(
+            price = price, items = items, userCohorts = userCohorts
         )
     }
     val uiState by viewModel.uiState.collectAsStateWithLifecycle()
@@ -112,22 +113,28 @@ private fun CalloutInternal(
             modifier = rowModifier,
             verticalAlignment = Alignment.CenterVertically,
         ) {
-            BenefitText(
-                uiState = uiState,
-                styles = styles,
-                capitalize = !hasOrPrefix,
-                prefix = if (hasOrPrefix) stringResource(R.string.or_prefix) else null,
-                suffix = stringResource(
-                    R.string.by_paying_with
-                ),
-            )
+            EarnRedeemContent(uiState, styles) { reward ->
+                if (hasOrPrefix) {
+                    FillerText(text = stringResource(R.string.or_prefix), styles = styles)
+                    Spacer(modifier = Modifier.width(3.dp))
+                }
+                BenefitText(
+                    reward = reward, styles = styles, capitalize = !hasOrPrefix
+                )
+                Spacer(modifier = Modifier.width(3.dp))
+                FillerText(text = stringResource(R.string.by_paying_with), styles = styles)
+            }
+
             Spacer(modifier = Modifier.width(2.dp))
             InlineLogo(
                 fontSize = styles.widgetTextStyle.fontSize,
                 widgetType = InfoWidgetType.Callout,
             )
-            Spacer(modifier = Modifier.width(2.dp))
-            InfoIcon(styles.composeTextStyle)
+
+            if (uiState !is EarnRedeemUiState.Loading) {
+                Spacer(modifier = Modifier.width(2.dp))
+                InfoIcon(styles.composeTextStyle)
+            }
         }
     }
 }

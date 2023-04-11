@@ -18,6 +18,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import com.getcatch.android.ui.BorderStyle
 import com.getcatch.android.ui.CalloutBorderStyle
+import com.getcatch.android.ui.PaymentMethodVariant
 import com.getcatch.android.ui.composables.Callout
 import com.getcatch.android.ui.composables.CampaignLink
 import com.getcatch.android.ui.composables.CatchLogo
@@ -52,6 +53,9 @@ class ComposeActivity : ComponentActivity() {
                 Callout()
                 Callout(price = 5000)
                 PaymentMethod()
+                PaymentMethod(price = 5000)
+                PaymentMethod(variant= PaymentMethodVariant.Compact)
+                PaymentMethod(variant= PaymentMethodVariant.LogoCompact)
                 ExpressCheckoutCallout(borderStyle = CalloutBorderStyle.SlightRound)
                 PurchaseConfirmation(rewardsAmount = 1000, borderStyle = BorderStyle.SlightRound)
                 CampaignLink(rewardsAmount = 1500, borderStyle = BorderStyle.Square)
