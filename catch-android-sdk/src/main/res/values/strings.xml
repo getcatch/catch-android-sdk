@@ -18,8 +18,7 @@
     <string name="claim_store_credit">Claim %1$s store credit</string>
     <string name="claim_now_and_start_earning">Claim now and start earning 10% on every order.</string>
     <string name="donation_message_header">You\'ve donated %1$s</string>
-    <string name="donation_message_body">%1$s has matched your contribution to %2$s. Thanks for pitching in.</string>
-    <string name="has_matched_your_contribution_to">\ has matched your contribution to\ </string>
+    <string name="matched_your_contribution">%1$s has matched your contribution to\ </string>
     <string name="thanks_for_pitching_in">Thanks for pitching in.</string>
 
     <!--  Content descriptions  -->

@@ -46,10 +46,8 @@ internal fun DonationMessage(donation: Int, merchantName: String, recipient: Don
         textDecoration = CatchTextStyles.linkSmall.textDecoration,
     )
     val annotatedBody = buildAnnotatedString {
-        append(merchantName)
-        append(stringResource(id = R.string.has_matched_your_contribution_to))
+        append(stringResource(id = R.string.matched_your_contribution, merchantName))
         withAnnotation(UrlAnnotation(recipient.url)) {
-
             withStyle(linkSpanStyle) {
                 append(recipient.name)
             }
