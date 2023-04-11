@@ -70,9 +70,7 @@ internal fun RewardCard(
         ) {
             AsyncImage(
                 model = logoUrl,
-                contentDescription = stringResource(
-                    id = R.string.content_description_merchant_logo,
-                ),
+                contentDescription = stringResource(id = R.string.content_description_merchant_logo),
                 modifier = Modifier.height(28.dp),
             )
             Spacer(modifier = Modifier.weight(1f))
@@ -82,7 +80,7 @@ internal fun RewardCard(
                 color = textColor,
             )
             Text(
-                text = "Exp. ${expirationDate.format("MM/dd/yy")}",
+                text = stringResource(R.string.card_expiration, expirationDate.format("MM/dd/yy")),
                 style = CatchTextStyles.bodySmall,
                 color = textColor,
             )
