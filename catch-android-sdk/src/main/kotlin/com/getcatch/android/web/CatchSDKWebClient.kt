@@ -1,17 +1,18 @@
 package com.getcatch.android.web
 
-import android.content.Context
 import android.net.Uri
 import android.util.Log
+import android.webkit.WebResourceError
 import android.webkit.WebResourceRequest
 import android.webkit.WebView
+import com.getcatch.android.ui.activities.WebViewActivity
 import com.getcatch.android.utils.CatchUrls
 import com.getcatch.android.utils.baseUrl
 import com.getcatch.android.utils.launchUrlIntent
 import com.google.accompanist.web.AccompanistWebViewClient
 
 @Suppress("MaxLineLength")
-internal class CatchSDKWebClient(private val context: Context) : AccompanistWebViewClient() {
+internal class CatchSDKWebClient(private val webViewActivity: WebViewActivity) : AccompanistWebViewClient() {
 
     private fun registerPostMessageListener(view: WebView?) {
         val createPostMessageHandlerFunctionScript =
@@ -32,7 +33,7 @@ internal class CatchSDKWebClient(private val context: Context) : AccompanistWebV
         return if (url in CatchUrls.internalWebViewBaseUrls) {
             false
         } else {
-            launchUrlIntent(context, url)
+            launchUrlIntent(webViewActivity, url)
             true
         }
     }
@@ -61,6 +62,15 @@ internal class CatchSDKWebClient(private val context: Context) : AccompanistWebV
     override fun onPageFinished(view: WebView?, url: String?) {
         super.onPageFinished(view, url)
         registerPostMessageListener(view)
+    }
+
+    override fun onReceivedError(
+        view: WebView?,
+        request: WebResourceRequest?,
+        error: WebResourceError?
+    ) {
+        super.onReceivedError(view, request, error)
+        webViewActivity.finish()
     }
 
     companion object {
