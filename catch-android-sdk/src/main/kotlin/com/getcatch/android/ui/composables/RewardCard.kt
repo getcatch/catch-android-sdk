@@ -92,8 +92,8 @@ internal fun RewardCard(
 internal fun PreviewRewardCard() {
     val logoUrl =
         "https://cdn.shopify.com/s/files/1/0508/1084/7381/files/Store_Logo_Dark_180x.png?v=1614703801"
-    val cardBgColor = Color.Black
-    val textColor = Color.White
+    val cardBgColor = Color.White
+    val textColor = Color.Black
     CatchTheme {
         Box(
             modifier = Modifier
