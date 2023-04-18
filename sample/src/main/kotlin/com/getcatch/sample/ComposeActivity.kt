@@ -17,8 +17,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import com.getcatch.android.ui.BorderStyle
-import com.getcatch.android.ui.CalloutBorderStyle
-import com.getcatch.android.ui.PaymentMethodVariant
 import com.getcatch.android.ui.composables.Callout
 import com.getcatch.android.ui.composables.CampaignLink
 import com.getcatch.android.ui.composables.CatchLogo
@@ -26,9 +24,6 @@ import com.getcatch.android.ui.composables.CatchLogoSize
 import com.getcatch.android.ui.composables.ExpressCheckoutCallout
 import com.getcatch.android.ui.composables.PaymentMethod
 import com.getcatch.android.ui.composables.PurchaseConfirmation
-import com.getcatch.android.ui.styles.InfoWidgetStyle
-import com.getcatch.android.ui.styles.WidgetTextStyle
-import com.getcatch.android.ui.styles.values.TextTransform
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -54,21 +49,13 @@ class ComposeActivity : ComponentActivity() {
                 )
             ) {
                 Callout()
-                Callout(price = 5000, borderStyle = CalloutBorderStyle.SlightRound)
-                PaymentMethod(price = 5000, disabled = true)
-                PaymentMethod(variant = PaymentMethodVariant.Compact)
-                PaymentMethod(variant = PaymentMethodVariant.LogoCompact)
-                ExpressCheckoutCallout(price = 6000, borderStyle = BorderStyle.SlightRound)
-                ExpressCheckoutCallout(
-                    styleOverrides = InfoWidgetStyle(
-                        widgetTextStyle = WidgetTextStyle(
-                            fontSize = 20f,
-                            letterSpacing = 1.2f,
-                            textTransform = TextTransform.UPPERCASE
-                        )
-                    )
+                PaymentMethod()
+                ExpressCheckoutCallout()
+                PurchaseConfirmation(
+                    earned = 1000,
+                    donation = 50,
+                    borderStyle = BorderStyle.SlightRound
                 )
-                PurchaseConfirmation(rewardsAmount = 1000, borderStyle = BorderStyle.SlightRound)
                 CampaignLink(rewardsAmount = 1500, borderStyle = BorderStyle.Square)
                 CatchLogo()
                 CatchLogo(size = CatchLogoSize.MEDIUM)
