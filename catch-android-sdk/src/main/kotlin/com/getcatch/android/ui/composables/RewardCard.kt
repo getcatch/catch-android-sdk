@@ -26,10 +26,14 @@ import com.getcatch.android.ui.theming.CatchTheme
 import com.getcatch.android.ui.theming.color.CatchColors
 import com.getcatch.android.ui.typography.CatchTextStyles
 import com.getcatch.android.utils.centsToDollarsString
+import com.getcatch.android.utils.format
+import kotlinx.datetime.LocalDate
+import kotlinx.datetime.toLocalDate
 
 @Composable
 internal fun RewardCard(
     rewardsAmount: Int,
+    expirationDate: LocalDate,
     logoUrl: String,
     cardBgColor: Color,
     textColor: Color,
@@ -46,7 +50,6 @@ internal fun RewardCard(
             .background(color = cardBgColor, shape = cardShape)
             .width(224.dp)
             .height(138.44.dp)
-
     ) {
         if (cardBgImageUrl != null) {
             AsyncImage(
@@ -66,9 +69,7 @@ internal fun RewardCard(
         ) {
             AsyncImage(
                 model = logoUrl,
-                contentDescription = stringResource(
-                    id = R.string.content_description_merchant_logo,
-                ),
+                contentDescription = stringResource(id = R.string.content_description_merchant_logo),
                 modifier = Modifier.height(28.dp),
             )
             Spacer(modifier = Modifier.weight(1f))
@@ -78,7 +79,7 @@ internal fun RewardCard(
                 color = textColor,
             )
             Text(
-                text = "Exp. 00/00/00",
+                text = stringResource(R.string.card_expiration, expirationDate.format("MM/dd/yy")),
                 style = CatchTextStyles.bodySmall,
                 color = textColor,
             )
@@ -91,14 +92,21 @@ internal fun RewardCard(
 internal fun PreviewRewardCard() {
     val logoUrl =
         "https://cdn.shopify.com/s/files/1/0508/1084/7381/files/Store_Logo_Dark_180x.png?v=1614703801"
-    val cardBgColor = Color.White
-    val textColor = Color.Black
+    val cardBgColor = Color.Black
+    val textColor = Color.White
     CatchTheme {
-        RewardCard(
-            rewardsAmount = 1000,
-            logoUrl = logoUrl,
-            cardBgColor = cardBgColor,
-            textColor = textColor
-        )
+        Box(
+            modifier = Modifier
+                .background(Color.White)
+                .padding(8.dp)
+        ) {
+            RewardCard(
+                rewardsAmount = 1000,
+                expirationDate = "2023-04-21".toLocalDate(),
+                logoUrl = logoUrl,
+                cardBgColor = cardBgColor,
+                textColor = textColor
+            )
+        }
     }
 }
