@@ -1,4 +1,4 @@
-package com.getcatch.android.styling.values
+package com.getcatch.android.ui.styles.values
 
 import com.google.common.truth.Truth.assertThat
 import org.junit.Test
