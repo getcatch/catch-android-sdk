@@ -13,7 +13,7 @@ import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.foundation.layout.wrapContentWidth
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -24,9 +24,9 @@ import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.getcatch.android.R
-import com.getcatch.android.models.Merchant
-import com.getcatch.android.repository.MerchantRepository
+import com.getcatch.android.models.RewardCampaign
 import com.getcatch.android.ui.ActionWidgetType
 import com.getcatch.android.ui.BorderStyle
 import com.getcatch.android.ui.HasBorderShape
@@ -36,35 +36,39 @@ import com.getcatch.android.ui.styles.StyleResolver
 import com.getcatch.android.ui.theming.CatchTheme
 import com.getcatch.android.ui.theming.ThemeVariantOption
 import com.getcatch.android.utils.Constants
-import com.getcatch.android.utils.centsToDollarsString
 import com.getcatch.android.utils.transformAndAppend
-import org.koin.compose.koinInject
+import com.getcatch.android.viewmodels.CampaignLinkUiState
+import com.getcatch.android.viewmodels.CampaignLinkViewModel
+import org.koin.androidx.compose.koinViewModel
 
 @Composable
 public fun CampaignLink(
-    rewardsAmount: Int,
+    campaignName: String,
     borderStyle: BorderStyle = BorderStyle.SlightRound,
     theme: ThemeVariantOption? = null,
     styleOverrides: ActionWidgetStyle? = null,
 ) {
-    val merchantRepo: MerchantRepository = koinInject()
-    val merchant by merchantRepo.activeMerchant.collectAsState()
-    CampaignLinkInternal(
-        rewardsAmount = rewardsAmount,
-        borderStyle = borderStyle,
-        theme = theme,
-        styleOverrides = styleOverrides,
-        merchant = merchant,
-    )
+    val viewModel: CampaignLinkViewModel = koinViewModel(key = campaignName)
+    LaunchedEffect(campaignName) {
+        viewModel.loadCampaign(campaignName)
+    }
+    val uiState by viewModel.uiState.collectAsStateWithLifecycle()
+    if (uiState is CampaignLinkUiState.Success) {
+        CampaignLinkInternal(
+            rewardCampaign = (uiState as CampaignLinkUiState.Success).rewardCampaign,
+            borderStyle = borderStyle,
+            theme = theme,
+            styleOverrides = styleOverrides,
+        )
+    }
 }
 
 @Composable
 internal fun CampaignLinkInternal(
-    rewardsAmount: Int,
+    rewardCampaign: RewardCampaign,
     borderStyle: BorderStyle = BorderStyle.SlightRound,
     theme: ThemeVariantOption? = null,
     styleOverrides: ActionWidgetStyle? = null,
-    merchant: Merchant?,
 ) {
     CatchTheme(theme) {
         val themeVariant = CatchTheme.variant
@@ -111,20 +115,21 @@ internal fun CampaignLinkInternal(
                                 styles.widgetTextStyle.textTransform,
                                 stringResource(
                                     id = R.string.you_earned,
-                                    rewardsAmount.centsToDollarsString()
+                                    rewardCampaign.amountInDollars
                                 )
                             )
                         }
-                        merchant?.let {
-                            transformAndAppend(
-                                styles.widgetTextStyle.textTransform,
-                                stringResource(id = R.string.to_spend_at_next_time, it.name)
+                        transformAndAppend(
+                            styles.widgetTextStyle.textTransform,
+                            stringResource(
+                                id = R.string.to_spend_at_next_time,
+                                rewardCampaign.merchantName
                             )
-                        }
+                        )
                     },
                     style = styles.composeTextStyle
                 )
-                MerchantRewardCard(rewardsAmount = rewardsAmount, merchant = merchant)
+                RewardCampaignCard(rewardCampaign = rewardCampaign)
                 Text(
                     text = stringResource(id = R.string.claim_now_and_start_earning),
                     style = claimNowTextStyle(styles.composeTextStyle)
@@ -135,7 +140,7 @@ internal fun CampaignLinkInternal(
                 LinkButton(
                     label = stringResource(
                         id = R.string.claim_store_credit,
-                        rewardsAmount.centsToDollarsString()
+                        rewardCampaign.amountInDollars
                     ),
                     link = "https://getcatch.com",
                     modifier = buttonModifier,
