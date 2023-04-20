@@ -24,8 +24,8 @@ public class ExpressCheckoutCalloutView @JvmOverloads constructor(
     private val _price = mutableStateOf<Int?>(null)
     public var price: Int? by _price
 
-    private val _borderStyle = mutableStateOf<BorderStyle?>(null)
-    public var borderStyle: BorderStyle? by _borderStyle
+    private val _borderStyle = mutableStateOf<BorderStyle>(BorderStyle.None)
+    public var borderStyle: BorderStyle by _borderStyle
 
     private val _themeVariant = mutableStateOf<ThemeVariant?>(null)
     public var themeVariant: ThemeVariant? by _themeVariant
@@ -40,19 +40,23 @@ public class ExpressCheckoutCalloutView @JvmOverloads constructor(
     public var styleOverrides: InfoWidgetStyle? by _styleOverrides
 
     init {
-        context.theme.obtainStyledAttributes(attrs, R.styleable.ExpressCheckoutCalloutView, 0, 0).apply {
-            try {
-                _borderStyle.value = getBorderStyle(
-                    widgetName = WIDGET_NAME,
-                    borderStyleResId = R.styleable.ExpressCheckoutCalloutView_borderStyle,
-                    customBorderColorResId = R.styleable.ExpressCheckoutCalloutView_customBorderColor,
-                    customBorderRadiusResId = R.styleable.ExpressCheckoutCalloutView_customBorderRadius,
-                )
-                _themeVariant.value = getThemeVariant(R.styleable.ExpressCheckoutCalloutView_themeVariant)
-            } finally {
-                recycle()
+        context.theme.obtainStyledAttributes(attrs, R.styleable.ExpressCheckoutCalloutView, 0, 0)
+            .apply {
+                try {
+                    getBorderStyle(
+                        widgetName = WIDGET_NAME,
+                        borderStyleResId = R.styleable.ExpressCheckoutCalloutView_borderStyle,
+                        customBorderColorResId = R.styleable.ExpressCheckoutCalloutView_customBorderColor,
+                        customBorderRadiusResId = R.styleable.ExpressCheckoutCalloutView_customBorderRadius,
+                    )?.let {
+                        _borderStyle.value = it
+                    }
+                    _themeVariant.value =
+                        getThemeVariant(R.styleable.ExpressCheckoutCalloutView_themeVariant)
+                } finally {
+                    recycle()
+                }
             }
-        }
     }
 
     @Composable
