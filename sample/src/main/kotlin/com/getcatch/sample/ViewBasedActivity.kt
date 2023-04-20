@@ -6,8 +6,10 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.databinding.DataBindingUtil
 import com.getcatch.android.ui.views.CalloutView
+import com.getcatch.android.ui.views.CampaignLinkView
 import com.getcatch.android.ui.views.ExpressCheckoutCalloutView
 import com.getcatch.android.ui.views.PaymentMethodView
+import com.getcatch.android.ui.views.PurchaseConfirmationView
 import com.getcatch.sample.databinding.ActivityViewBasedBinding
 import com.google.android.material.button.MaterialButton
 import dagger.hilt.android.AndroidEntryPoint
@@ -23,6 +25,10 @@ class ViewBasedActivity : AppCompatActivity() {
     private lateinit var customPaymentMethod: PaymentMethodView
     private lateinit var basicExpressCheckoutCallout: ExpressCheckoutCalloutView
     private lateinit var customExpressCheckoutCallout: ExpressCheckoutCalloutView
+    private lateinit var basicPurchaseConfirmation: PurchaseConfirmationView
+    private lateinit var customPurchaseConfirmation: PurchaseConfirmationView
+    private lateinit var basicCampaignLink: CampaignLinkView
+    private lateinit var customCampaignLink: CampaignLinkView
     private lateinit var goToComposeActivityBtn: MaterialButton
     private lateinit var toggleThemeBtn: MaterialButton
 
@@ -58,6 +64,11 @@ class ViewBasedActivity : AppCompatActivity() {
         customPaymentMethod = binding.customPaymentMethod
         basicExpressCheckoutCallout = binding.basicExpressCheckoutCallout
         customExpressCheckoutCallout = binding.customExpressCheckoutCallout
+        basicPurchaseConfirmation = binding.basicPurchaseConfirmation
+        customPurchaseConfirmation = binding.customPurchaseConfirmation
+        basicCampaignLink = binding.basicCampaignLink
+        customCampaignLink = binding.customCampaignLink
+        customCampaignLink.campaignName = "aBaVga"
         toggleThemeBtn = binding.toggleThemeBtn
         toggleThemeBtn.setOnClickListener {
             val newMode = when (AppCompatDelegate.getDefaultNightMode()) {
