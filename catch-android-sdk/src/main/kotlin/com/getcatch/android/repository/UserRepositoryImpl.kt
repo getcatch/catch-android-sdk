@@ -18,12 +18,11 @@ internal class UserRepositoryImpl(
     private val _didFetchUserData = MutableStateFlow(false)
     override val didFetchUserData: StateFlow<Boolean> = _didFetchUserData.asStateFlow()
 
-    override var deviceToken: String?
-        get() = cache.deviceToken
-        set(value) { cache.deviceToken = value }
+    private val _deviceToken = MutableStateFlow(cache.deviceToken)
+    override val deviceToken: StateFlow<String?> = _deviceToken
 
     override suspend fun loadUserData(merchantId: String) {
-        val token = deviceToken
+        val token = deviceToken.value
         if (token != null) {
             val response =
                 transactionsSvcClient.fetchUserData(deviceToken = token, merchantId = merchantId)
@@ -39,7 +38,16 @@ internal class UserRepositoryImpl(
     }
 
     override fun fallbackToNewUser() {
-        _activeUser.value = PublicUserData.noData
+        if (_activeUser.value == null) {
+            _activeUser.value = PublicUserData.noData
+        }
         _didFetchUserData.value = true
+    }
+
+    override fun updateDeviceToken(token: String) {
+        if (token.isNotBlank()) {
+            cache.deviceToken = token
+            _deviceToken.value = token
+        }
     }
 }
