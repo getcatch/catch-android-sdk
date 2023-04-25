@@ -1,7 +1,9 @@
 package com.getcatch.android.models
 
 import com.getcatch.android.models.checkout.Price
+import kotlinx.serialization.Serializable
 
+@Serializable
 public data class Item(
     val name: String,
     val sku: String,
