@@ -5,12 +5,17 @@ import android.util.Log
 import android.webkit.WebView
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.material.CircularProgressIndicator
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.getcatch.android.BuildConfig
+import com.getcatch.android.ui.theming.color.CatchColors
 import com.getcatch.android.web.CatchSDKWebClient
 import com.getcatch.android.web.CatchWebViewInterface
 import com.getcatch.android.web.PostMessageBody
@@ -31,36 +36,45 @@ internal abstract class WebViewActivity : ComponentActivity(), KoinComponent {
         super.onCreate(savedInstanceState)
         setContent {
             val urlState by urlFlow.collectAsStateWithLifecycle()
-            urlState?.let { url ->
-                val webViewState = rememberWebViewState(url)
-                val webViewClient = remember { CatchSDKWebClient(this) }
-                WebView(
-                    modifier = Modifier.fillMaxSize(),
-                    state = webViewState,
-                    client = webViewClient,
-                    onCreated = { view ->
-                        // Set transparent background
-                        view.setBackgroundColor(0)
-                        // Enable core browser functionality
-                        view.settings.javaScriptEnabled = true
-                        view.settings.domStorageEnabled = true
-                        view.settings.databaseEnabled = true
-                        // Inject javascript interface
-                        view.addJavascriptInterface(
-                            javascriptInterface,
-                            com.getcatch.android.ui.activities.WebViewActivity.Companion.JAVASCRIPT_INTERFACE_NAME
-                        )
-                        if (BuildConfig.DEBUG) {
-                            WebView.setWebContentsDebuggingEnabled(true)
-                        }
-                        webView = view
-                    },
-                    onDispose = { view ->
-                        removeListener(view)
-                        webView = null
-                    },
-                    captureBackPresses = false,
-                )
+            Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
+                if (urlState == null) {
+                    CircularProgressIndicator(color = Color(CatchColors.PINK_2))
+                }
+                urlState?.let { url ->
+                    val webViewState = rememberWebViewState(url)
+                    val webViewClient = remember { CatchSDKWebClient(this@WebViewActivity) }
+                    if (webViewState.isLoading) {
+                        CircularProgressIndicator(color = Color(CatchColors.PINK_2))
+                    }
+
+                    WebView(
+                        modifier = Modifier.fillMaxSize(),
+                        state = webViewState,
+                        client = webViewClient,
+                        onCreated = { view ->
+                            // Set transparent background
+                            view.setBackgroundColor(0)
+                            // Enable core browser functionality
+                            view.settings.javaScriptEnabled = true
+                            view.settings.domStorageEnabled = true
+                            view.settings.databaseEnabled = true
+                            // Inject javascript interface
+                            view.addJavascriptInterface(
+                                javascriptInterface,
+                                JAVASCRIPT_INTERFACE_NAME
+                            )
+                            if (BuildConfig.DEBUG) {
+                                WebView.setWebContentsDebuggingEnabled(true)
+                            }
+                            webView = view
+                        },
+                        onDispose = { view ->
+                            removeListener(view)
+                            webView = null
+                        },
+                        captureBackPresses = false,
+                    )
+                }
             }
         }
     }
