@@ -26,15 +26,16 @@ public class TestRewardsRepositoryImpl {
         val earnedRewards = FakeDataProvider.EarnedRewards.default(0)
         val rewardsRepo = createRewardsRepo(earnedRewards)
         runBlocking {
-            val reward = rewardsRepo.fetchCalculatedEarnedReward(
+            val result = rewardsRepo.fetchCalculatedEarnedReward(
                 user = FakeDataProvider.User.Returning,
                 price = 0,
                 items = null,
                 userCohorts = null,
             )
-            when (reward) {
+            when (result.reward) {
                 is CalculatedReward.PercentRate -> {
-                    assertThat(reward.percent).isEqualTo(FakeDataProvider.merchant.defaultEarnedRewardsRate)
+                    assertThat(result.reward.percent).isEqualTo(FakeDataProvider.merchant.defaultEarnedRewardsRate)
+                    assertThat(result.rewardsSummary).isNotNull()
                 }
                 else -> fail(
                     "Calculate earned rewards should fall back to merchant's default rate due to invalid price"
@@ -50,15 +51,16 @@ public class TestRewardsRepositoryImpl {
         val rewardsRepo = createRewardsRepo(earnedRewards)
         val totalEarnedRewards = earnedRewards.earnedRewardsTotal ?: 0
         runBlocking {
-            val reward = rewardsRepo.fetchCalculatedEarnedReward(
+            val result = rewardsRepo.fetchCalculatedEarnedReward(
                 user = user,
                 price = tenDollars,
                 items = null,
                 userCohorts = null
             )
-            when (reward) {
+            when (result.reward) {
                 is CalculatedReward.EarnedCredits -> {
-                    assertThat(reward.amount).isEqualTo(totalEarnedRewards)
+                    assertThat(result.reward.amount).isEqualTo(totalEarnedRewards)
+                    assertThat(result.rewardsSummary).isNotNull()
                 }
                 else -> fail("Calculate earned rewards should have returned earned credits equal")
             }
@@ -75,16 +77,17 @@ public class TestRewardsRepositoryImpl {
         val rewardsRepo = createRewardsRepo(earnedRewards)
         val totalAvailableRewards = earnedRewards.signUpDiscountAmount + (user.rewardAmount ?: 0)
         runBlocking {
-            val reward = rewardsRepo.fetchCalculatedEarnedReward(
+            val result = rewardsRepo.fetchCalculatedEarnedReward(
                 user = user,
                 price = tenDollars,
                 items = null,
                 userCohorts = null
             )
-            when (reward) {
+            when (result.reward) {
                 is CalculatedReward.Saved -> {
                     // Since the price is less than the rewards available, we should see the
-                    assertThat(reward.amount).isEqualTo(totalAvailableRewards)
+                    assertThat(result.reward.amount).isEqualTo(totalAvailableRewards)
+                    assertThat(result.rewardsSummary).isNotNull()
                 }
                 else -> fail("Calculate earned rewards should have returned earned credits equal to price")
             }
@@ -100,16 +103,17 @@ public class TestRewardsRepositoryImpl {
         val user = FakeDataProvider.User.New
         val rewardsRepo = createRewardsRepo(earnedRewards)
         runBlocking {
-            val reward = rewardsRepo.fetchCalculatedEarnedReward(
+            val result = rewardsRepo.fetchCalculatedEarnedReward(
                 user = user,
                 price = tenDollars,
                 items = null,
                 userCohorts = null
             )
-            when (reward) {
+            when (result.reward) {
                 is CalculatedReward.Saved -> {
                     // Since the price is less than the rewards available, we should see the price as the savings
-                    assertThat(reward.amount).isEqualTo(tenDollars)
+                    assertThat(result.reward.amount).isEqualTo(tenDollars)
+                    assertThat(result.rewardsSummary).isNotNull()
                 }
                 else -> fail("Calculate earned rewards should have returned earned credits equal to price")
             }
@@ -125,16 +129,17 @@ public class TestRewardsRepositoryImpl {
         val user = FakeDataProvider.User.NoCredits
         val rewardsRepo = createRewardsRepo(earnedRewards)
         runBlocking {
-            val reward = rewardsRepo.fetchCalculatedEarnedReward(
+            val result = rewardsRepo.fetchCalculatedEarnedReward(
                 user = user,
                 price = tenDollars,
                 items = null,
                 userCohorts = null
             )
-            when (reward) {
+            when (result.reward) {
                 is CalculatedReward.PercentRate -> {
                     // Since the price is less than the rewards available, we should see the price as the savings
-                    assertThat(reward.percent).isEqualTo(earnedRewards.percentageRewardRate)
+                    assertThat(result.reward.percent).isEqualTo(earnedRewards.percentageRewardRate)
+                    assertThat(result.rewardsSummary).isNotNull()
                 }
                 else -> fail("Calculate earned rewards should have returned the max percentage rate")
             }
