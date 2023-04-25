@@ -9,6 +9,10 @@
             android:name="com.getcatch.android.ui.activities.checkout.direct.DirectCheckoutActivity"
             android:configChanges="orientation|screenSize|screenLayout|keyboardHidden"
             android:theme="@style/Theme.Transparent" />
+        <activity
+            android:name="com.getcatch.android.ui.activities.checkout.virtualcard.VirtualCardCheckoutActivity"
+            android:configChanges="orientation|screenSize|screenLayout|keyboardHidden"
+            android:theme="@style/Theme.Transparent" />
     </application>
 
 </manifest>
