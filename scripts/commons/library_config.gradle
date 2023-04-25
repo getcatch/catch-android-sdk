@@ -3,4 +3,5 @@
  * */
 apply plugin: "com.android.library"
 apply plugin: 'kotlinx-serialization'
+apply plugin: "org.jetbrains.kotlin.plugin.parcelize"
 apply from: rootProject.file("scripts/commons/common_config.gradle")

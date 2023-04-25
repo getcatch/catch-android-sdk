@@ -1,7 +1,3 @@
-/**
- * Module identifier, used across the project to reference this module.
- * This should match the directory name this file is in.
- * */
 plugins {
     id "kotlin-android"
     id "kotlin-kapt"
@@ -9,6 +5,10 @@ plugins {
     id 'org.jetbrains.kotlin.android'
 }
 
+/**
+ * Module identifier, used across the project to reference this module.
+ * This should match the directory name this file is in.
+ * */
 // Module
 ext.module_name = "sample"
 
