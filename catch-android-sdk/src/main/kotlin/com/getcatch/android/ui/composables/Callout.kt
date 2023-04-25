@@ -115,13 +115,15 @@ private fun CalloutInternal(
             modifier = rowModifier,
             verticalAlignment = Alignment.CenterVertically,
         ) {
-            EarnRedeemContent(uiState, styles) { reward ->
+            EarnRedeemContent(uiState, styles) { reward, summary ->
                 if (hasOrPrefix) {
                     FillerText(text = stringResource(R.string.or_prefix), styles = styles)
                     Spacer(modifier = Modifier.width(3.dp))
                 }
                 BenefitText(
-                    reward = reward, styles = styles, capitalize = !hasOrPrefix
+                    reward = reward, styles = styles, capitalize = !hasOrPrefix,
+                    price = price,
+                    summary = summary
                 )
                 Spacer(modifier = Modifier.width(3.dp))
                 FillerText(text = stringResource(R.string.by_paying_with), styles = styles)
@@ -132,11 +134,13 @@ private fun CalloutInternal(
                 fontSize = styles.widgetTextStyle.fontSize,
                 widgetType = InfoWidgetType.Callout,
             )
+            Spacer(modifier = Modifier.width(2.dp))
+            InfoIcon(
+                styles.composeTextStyle,
+                price = price,
+                rewardsSummary = (uiState as? EarnRedeemUiState.Success)?.summary
+            )
 
-            if (uiState !is EarnRedeemUiState.Loading) {
-                Spacer(modifier = Modifier.width(2.dp))
-                InfoIcon(styles.composeTextStyle)
-            }
         }
     }
 }

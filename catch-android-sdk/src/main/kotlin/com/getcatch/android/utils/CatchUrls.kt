@@ -4,6 +4,7 @@ import com.getcatch.android.models.Merchant
 import com.getcatch.android.models.MerchantAssetType
 import com.getcatch.android.models.PublicKey
 import com.getcatch.android.models.checkout.CheckoutPrefill
+import com.getcatch.android.models.tofu.TofuPath
 import com.getcatch.android.network.Environment
 
 /**
@@ -26,18 +27,8 @@ internal object CatchUrls {
             "${Environment.PRODUCTION.baseUrl}/t/",
         )
 
-    fun eduModal(environment: Environment, publicKey: PublicKey, merchant: Merchant) =
-        buildUrl("${environment.baseUrl}/t/") {
-            parameter("publicKey", publicKey.value)
-            parameter("merchantId", merchant.id)
-            parameter("merchantName", merchant.name)
-            parameter("credit", merchant.defaultEarnedRewardsRate.toPercentString())
-            parameter("referer", environment.baseUrl)
-            parameter("loadTheme", merchant.hasTheme.toString())
-        }
-
-    fun rewardsBreakdownModal(environment: Environment, publicKey: PublicKey, merchant: Merchant) =
-        buildUrl("${environment.baseUrl}/t/breakdown/") {
+    fun tofu(environment: Environment, publicKey: PublicKey, merchant: Merchant, path: TofuPath) =
+        buildUrl("${environment.baseUrl}/t/${path.path}") {
             parameter("publicKey", publicKey.value)
             parameter("merchantId", merchant.id)
             parameter("merchantName", merchant.name)

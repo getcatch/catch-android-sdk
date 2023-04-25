@@ -113,7 +113,7 @@ internal fun PaymentMethodInternal(
                 )
                 Spacer(modifier = Modifier.width(8.dp))
             }
-            EarnRedeemContent(uiState, styles) { reward ->
+            EarnRedeemContent(uiState, styles) { reward, summary ->
                 FlowRow(verticalAlignment = Alignment.CenterVertically) {
                     if (variant !is PaymentMethodVariant.LogoCompact) {
                         FillerText(
@@ -128,15 +128,17 @@ internal fun PaymentMethodInternal(
                             reward = reward,
                             styles = styles,
                             modifier = disabledModifier,
+                            price = price,
+                            summary = summary,
                         )
                         Spacer(modifier = Modifier.width(2.dp))
-                        InfoIcon(styles.composeTextStyle)
+                        InfoIcon(styles.composeTextStyle, price = price, rewardsSummary = summary)
                     }
                 }
             }
             if (uiState is EarnRedeemUiState.Loading) {
                 Spacer(modifier = Modifier.width(2.dp))
-                InfoIcon(styles.composeTextStyle)
+                InfoIcon(styles.composeTextStyle, price = price)
             }
         }
     }

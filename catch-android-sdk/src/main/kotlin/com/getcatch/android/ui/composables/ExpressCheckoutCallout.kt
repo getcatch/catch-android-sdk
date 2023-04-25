@@ -116,6 +116,7 @@ internal fun ExpressCheckoutCalloutInternal(
                 uiState = uiState,
                 styles = styles,
                 condense = condense,
+                price = price,
             )
         }
     }
@@ -124,6 +125,7 @@ internal fun ExpressCheckoutCalloutInternal(
 @OptIn(ExperimentalLayoutApi::class)
 @Composable
 private fun ExpressCheckoutCalloutContent(
+    price: Int,
     modifier: Modifier = Modifier,
     uiState: EarnRedeemUiState,
     styles: InfoWidgetStyle.Resolved,
@@ -135,8 +137,8 @@ private fun ExpressCheckoutCalloutContent(
         maxItemsInEachRow = if (condense) 1 else Int.MAX_VALUE
     ) {
         Row(verticalAlignment = Alignment.CenterVertically) {
-            EarnRedeemContent(uiState, styles) { reward ->
-                BenefitText(reward = reward, styles = styles)
+            EarnRedeemContent(uiState, styles) { reward, summary ->
+                BenefitText(reward = reward, styles = styles, price = price, summary = summary)
                 Spacer(modifier = Modifier.width(3.dp))
                 FillerText(text = stringResource(R.string.with), styles = styles)
             }
@@ -173,7 +175,11 @@ private fun ExpressCheckoutCalloutContent(
                 softWrap = false,
             )
             Spacer(modifier = Modifier.width(2.dp))
-            InfoIcon(styles.composeTextStyle)
+            InfoIcon(
+                styles.composeTextStyle,
+                price = price,
+                rewardsSummary = (uiState as? EarnRedeemUiState.Success)?.summary
+            )
         }
     }
 }

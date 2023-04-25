@@ -6,6 +6,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.getcatch.android.models.CalculatedReward
+import com.getcatch.android.models.EarnedRewardsSummary
 import com.getcatch.android.ui.styles.InfoWidgetStyle
 import com.getcatch.android.utils.Constants
 import com.getcatch.android.viewmodels.EarnRedeemUiState
@@ -14,7 +15,7 @@ import com.getcatch.android.viewmodels.EarnRedeemUiState
 internal fun EarnRedeemContent(
     uiState: EarnRedeemUiState,
     styles: InfoWidgetStyle.Resolved,
-    content: @Composable (reward: CalculatedReward) -> Unit
+    content: @Composable (reward: CalculatedReward, summary: EarnedRewardsSummary?) -> Unit
 ) {
     when (uiState) {
         EarnRedeemUiState.Loading -> {
@@ -25,7 +26,7 @@ internal fun EarnRedeemContent(
             )
         }
         is EarnRedeemUiState.Success -> {
-            content(uiState.reward)
+            content(uiState.reward, uiState.summary)
         }
     }
 }
