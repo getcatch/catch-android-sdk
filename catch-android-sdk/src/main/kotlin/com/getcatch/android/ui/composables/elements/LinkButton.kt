@@ -32,6 +32,12 @@ internal fun LinkButton(
             backgroundColor = styles.backgroundColor,
             contentColor = styles.fontColor
         ),
+        elevation = ButtonDefaults.elevation(
+            defaultElevation = styles.elevation,
+            pressedElevation = styles.elevation,
+            hoveredElevation = styles.elevation,
+            focusedElevation = styles.elevation,
+        ),
         onClick = { launchUrlIntent(context, link) },
         modifier = modifier.height(styles.height),
         contentPadding = PaddingValues(horizontal = 16.dp, vertical = 12.dp),

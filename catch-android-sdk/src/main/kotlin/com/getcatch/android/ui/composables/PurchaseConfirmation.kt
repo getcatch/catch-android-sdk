@@ -94,10 +94,9 @@ internal fun PurchaseConfirmationInternal(
                 .border(1.dp, borderColor, borderStyle.shape)
                 .padding(16.dp)
         } else {
-            // If we don't have a border, we need at least this small
-            // amount of padding so the link button's shadow does
-            // not get cut off
-            containerModifier.padding(4.dp)
+            // If we don't have a border, we need at least a small amount of
+            // padding so the action button's shadow does not get cut off
+            containerModifier.padding(styles.actionButtonStyle.elevation * 2)
         }
 
         BoxWithConstraints(modifier = containerModifier) {
