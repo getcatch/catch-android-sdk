@@ -6,8 +6,9 @@ import kotlinx.coroutines.flow.StateFlow
 internal interface UserRepository {
     val activeUser: StateFlow<PublicUserData?>
     val didFetchUserData: StateFlow<Boolean>
-    var deviceToken: String?
+    val deviceToken: StateFlow<String?>
 
     suspend fun loadUserData(merchantId: String)
     fun fallbackToNewUser()
+    fun updateDeviceToken(token: String)
 }

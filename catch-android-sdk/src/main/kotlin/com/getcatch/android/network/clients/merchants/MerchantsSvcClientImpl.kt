@@ -12,7 +12,7 @@ internal class MerchantsSvcClientImpl(
     private val httpClient: HttpClient,
     environment: Environment
 ) : MerchantsSvcClient {
-    internal val baseUrl = "https://${environment.host}/api/merchants-svc"
+    internal val baseUrl = "${environment.baseUrl}/api/merchants-svc"
     override suspend fun loadPublicMerchantData(
         publicKey: PublicKey
     ): NetworkResponse<Merchant> = handleNetworkResponse {
