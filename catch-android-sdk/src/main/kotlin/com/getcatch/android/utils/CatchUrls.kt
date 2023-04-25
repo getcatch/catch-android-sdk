@@ -3,51 +3,14 @@ package com.getcatch.android.utils
 import com.getcatch.android.models.Merchant
 import com.getcatch.android.models.MerchantAssetType
 import com.getcatch.android.models.PublicKey
+import com.getcatch.android.models.checkout.CheckoutPrefill
+import com.getcatch.android.network.Environment
 
 /**
- * Helper functions for generating the different URLs needed throughout the SDK
+ * Helper functions for generating the URLs for web views and assets
  */
 internal object CatchUrls {
-    const val CATCH_BASE_URL = "https://dev.app-sandbox.getcatch.com"
     private const val ASSETS_BASE_URL = "https://dev.assets.getcatch.com"
-
-    fun eduModal(publicKey: PublicKey, merchant: Merchant) = buildUrl("$CATCH_BASE_URL/t/") {
-        parameter("publicKey", publicKey.value)
-        parameter("merchantId", merchant.id)
-        parameter("merchantName", merchant.name)
-        parameter("credit", merchant.defaultEarnedRewardsRate.toPercentString())
-        parameter("referer", CATCH_BASE_URL)
-        parameter("loadTheme", merchant.hasTheme.toString())
-    }
-
-    fun rewardsBreakdownModal(publicKey: PublicKey, merchant: Merchant) =
-        buildUrl("$CATCH_BASE_URL/t/breakdown/") {
-            parameter("publicKey", publicKey.value)
-            parameter("merchantId", merchant.id)
-            parameter("merchantName", merchant.name)
-            parameter("credit", merchant.defaultEarnedRewardsRate.toPercentString())
-            parameter("referer", CATCH_BASE_URL)
-            parameter("loadTheme", merchant.hasTheme.toString())
-        }
-
-    fun checkout(
-        publicKey: PublicKey,
-        merchant: Merchant,
-        checkoutId: String,
-        prefillUserPhone: String = "",
-        prefillUserName: String = "",
-        prefillUserEmail: String = "",
-        hideHeader: Boolean = false,
-    ) = buildUrl("$CATCH_BASE_URL/c/") {
-        parameter("publicKey", publicKey.value)
-        parameter("checkoutId", checkoutId)
-        parameter("referer", CATCH_BASE_URL)
-        parameter("loadTheme", merchant.hasTheme.toString())
-        parameter("hideHeader", hideHeader.toString())
-        parameter("prefillUserPhone", prefillUserPhone)
-        parameter("prefillUserName", prefillUserName)
-        parameter("prefillUserEmail", prefillUserEmail)
-    }
 
     fun assetUrl(merchantId: String, assetType: MerchantAssetType) =
         "$ASSETS_BASE_URL/merchant-assets/$merchantId/${assetType.fileName}"
@@ -55,8 +18,69 @@ internal object CatchUrls {
     /**
      * A set of all of the urls we want to always be opened in an internal webview.
      */
-    val internalWebViewBaseUrls = setOf(
-        "$CATCH_BASE_URL/c/",
-        "$CATCH_BASE_URL/t/",
-    )
+    val internalWebViewBaseUrls
+        get() = setOf(
+            "${Environment.SANDBOX.baseUrl}/c/",
+            "${Environment.SANDBOX.baseUrl}/t/",
+            "${Environment.PRODUCTION.baseUrl}/c/",
+            "${Environment.PRODUCTION.baseUrl}/t/",
+        )
+
+    fun eduModal(environment: Environment, publicKey: PublicKey, merchant: Merchant) =
+        buildUrl("${environment.baseUrl}/t/") {
+            parameter("publicKey", publicKey.value)
+            parameter("merchantId", merchant.id)
+            parameter("merchantName", merchant.name)
+            parameter("credit", merchant.defaultEarnedRewardsRate.toPercentString())
+            parameter("referer", environment.baseUrl)
+            parameter("loadTheme", merchant.hasTheme.toString())
+        }
+
+    fun rewardsBreakdownModal(environment: Environment, publicKey: PublicKey, merchant: Merchant) =
+        buildUrl("${environment.baseUrl}/t/breakdown/") {
+            parameter("publicKey", publicKey.value)
+            parameter("merchantId", merchant.id)
+            parameter("merchantName", merchant.name)
+            parameter("credit", merchant.defaultEarnedRewardsRate.toPercentString())
+            parameter("referer", environment.baseUrl)
+            parameter("loadTheme", merchant.hasTheme.toString())
+        }
+
+    fun directCheckout(
+        environment: Environment,
+        publicKey: PublicKey,
+        merchant: Merchant,
+        checkoutId: String,
+        prefill: CheckoutPrefill,
+        hideHeader: Boolean = false,
+    ) = buildUrl("${environment.baseUrl}/c/") {
+        parameter("publicKey", publicKey.value)
+        parameter("checkoutId", checkoutId)
+        parameter("referer", environment.baseUrl)
+        parameter("loadTheme", merchant.hasTheme.toString())
+        parameter("hideHeader", hideHeader.toString())
+        parameter("prefillUserPhone", prefill.userPhone)
+        parameter("prefillUserName", prefill.userName)
+        parameter("prefillUserEmail", prefill.userEmail)
+        parameter("flow", "iframe")
+    }
+
+    fun virtualCardCheckout(
+        environment: Environment,
+        publicKey: PublicKey,
+        merchant: Merchant,
+        orderId: String,
+        prefill: CheckoutPrefill,
+        hideHeader: Boolean = false,
+    ) = buildUrl("${environment.baseUrl}/c/") {
+        parameter("publicKey", publicKey.value)
+        parameter("orderId", orderId)
+        parameter("referer", environment.baseUrl)
+        parameter("loadTheme", merchant.hasTheme.toString())
+        parameter("hideHeader", hideHeader.toString())
+        parameter("prefillUserPhone", prefill.userPhone)
+        parameter("prefillUserName", prefill.userName)
+        parameter("prefillUserEmail", prefill.userEmail)
+        parameter("flow", "iframe")
+    }
 }

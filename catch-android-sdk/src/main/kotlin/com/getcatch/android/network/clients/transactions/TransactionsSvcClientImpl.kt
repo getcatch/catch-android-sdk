@@ -15,7 +15,7 @@ internal class TransactionsSvcClientImpl(
     private val httpClient: HttpClient,
     environment: Environment
 ) : TransactionsSvcClient {
-    val baseUrl = "https://${environment.host}/api/transactions-svc"
+    val baseUrl = "${environment.baseUrl}/api/transactions-svc"
     override suspend fun fetchUserData(
         deviceToken: String,
         merchantId: String

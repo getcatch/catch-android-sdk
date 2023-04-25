@@ -1,31 +1,105 @@
 package com.getcatch.android.web
 
 import android.net.Uri
+import android.os.Build
 import android.util.Log
 import android.webkit.WebResourceError
 import android.webkit.WebResourceRequest
 import android.webkit.WebView
+import com.getcatch.android.exceptions.WebViewError
+import com.getcatch.android.network.Environment
+import com.getcatch.android.repository.UserRepository
 import com.getcatch.android.ui.activities.WebViewActivity
 import com.getcatch.android.utils.CatchUrls
 import com.getcatch.android.utils.baseUrl
 import com.getcatch.android.utils.launchUrlIntent
 import com.google.accompanist.web.AccompanistWebViewClient
+import kotlinx.serialization.json.Json
+import kotlinx.serialization.json.contentOrNull
+import kotlinx.serialization.json.jsonPrimitive
+import org.koin.core.component.KoinComponent
+import org.koin.core.component.inject
 
 @Suppress("MaxLineLength")
-internal class CatchSDKWebClient(private val webViewActivity: WebViewActivity) : AccompanistWebViewClient() {
+internal class CatchSDKWebClient(private val webViewActivity: WebViewActivity) :
+    AccompanistWebViewClient(), KoinComponent {
+    private val environment: Environment by inject()
+    private val userRepo: UserRepository by inject()
 
-    private fun registerPostMessageListener(view: WebView?) {
-        val createPostMessageHandlerFunctionScript =
-            "function $POST_MESSAGE_HANDLER_FUNCTION_NAME(event) { CatchAndroid.handlePostMessage(JSON.stringify(event.data))}"
-
-        view?.evaluateJavascript(createPostMessageHandlerFunctionScript) {
-            Log.d(this::class.simpleName, "Creating post message handler function")
+    override fun onPageFinished(view: WebView?, url: String?) {
+        super.onPageFinished(view, url)
+        Log.d("PAGE_FINISHED_URL", url ?: "No url?")
+        if (view != null) {
+            registerPostMessageListener(view)
+            injectDeviceTokenToLocalStorage(view)
         }
+    }
+
+    fun onWebViewDisposed(view: WebView) {
+        removePostMessageListener(view)
+    }
+
+    override fun onReceivedError(
+        view: WebView?,
+        request: WebResourceRequest?,
+        error: WebResourceError?
+    ) {
+        super.onReceivedError(view, request, error)
+        if (Build.VERSION.SDK_INT > Build.VERSION_CODES.M) {
+            error?.description?.toString()?.let {
+                webViewActivity.handleError(WebViewError(it))
+            }
+            return
+        }
+        webViewActivity.handleError(null)
+    }
+
+    private fun registerPostMessageListener(view: WebView) {
+        val createPostMessageHandlerFunctionScript = """
+            function $POST_MESSAGE_HANDLER_FUNCTION_NAME(event) {
+                if (event.origin != "${environment.baseUrl}") return;
+                CatchAndroid.handlePostMessage(JSON.stringify(event.data));
+            }
+        """.trimIndent()
+
+        view.evaluateJavascript(createPostMessageHandlerFunctionScript) {}
 
         val registerEventHandlerScript =
             "window.addEventListener('message', $POST_MESSAGE_HANDLER_FUNCTION_NAME)"
-        view?.evaluateJavascript(registerEventHandlerScript) {
-            Log.d(this::class.simpleName, "Registering listener post message handler")
+        view.evaluateJavascript(registerEventHandlerScript) {}
+    }
+
+    @Suppress("MaxLineLength")
+    private fun removePostMessageListener(webView: WebView) {
+        val script =
+            "window.removeEventListener('message', $POST_MESSAGE_HANDLER_FUNCTION_NAME)"
+        webView.evaluateJavascript(script) {}
+    }
+
+
+    private fun injectDeviceTokenToLocalStorage(webView: WebView) {
+        val localStorageKeyPrefix = if (environment == Environment.SANDBOX) "sandbox_" else ""
+        var localStorageKey = "${localStorageKeyPrefix}${LocalStorageKeys.DEVICE_TOKEN}"
+        // This is temporary for while we are testing in dev
+        localStorageKey = "dev_$localStorageKey"
+        val tokenStr = userRepo.deviceToken.value?.let { "'$it'" } ?: "null"
+        val script = """
+                function handleToken(tokenFromAndroid) {
+                    const localToken = localStorage.getItem('$localStorageKey');
+                    if (localToken != null) {
+                      return localToken;
+                    } else if (tokenFromAndroid != null) {
+                       localStorage.setItem('$localStorageKey', tokenFromAndroid);
+                    }
+                    return null
+                }
+                handleToken($tokenStr);
+            """.trimIndent()
+
+        webView.evaluateJavascript(script) { jsResult ->
+            Json.parseToJsonElement(jsResult).jsonPrimitive.contentOrNull?.let { token ->
+                userRepo.updateDeviceToken(token)
+            }
         }
     }
 
@@ -57,20 +131,6 @@ internal class CatchSDKWebClient(private val webViewActivity: WebViewActivity) :
         } else {
             true
         }
-    }
-
-    override fun onPageFinished(view: WebView?, url: String?) {
-        super.onPageFinished(view, url)
-        registerPostMessageListener(view)
-    }
-
-    override fun onReceivedError(
-        view: WebView?,
-        request: WebResourceRequest?,
-        error: WebResourceError?
-    ) {
-        super.onReceivedError(view, request, error)
-        webViewActivity.finish()
     }
 
     companion object {

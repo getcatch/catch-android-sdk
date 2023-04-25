@@ -5,7 +5,7 @@ import android.webkit.JavascriptInterface
 import com.getcatch.android.ui.activities.WebViewActivity
 import kotlinx.serialization.SerializationException
 
-internal abstract class CatchWebViewInterface(protected val activity: WebViewActivity) {
+internal class CatchWebViewInterface(val webViewActivity: WebViewActivity) {
 
     @JavascriptInterface
     fun handlePostMessage(message: String) {
@@ -14,7 +14,7 @@ internal abstract class CatchWebViewInterface(protected val activity: WebViewAct
         }
         try {
             val deserializedMessage = PostMessageBody.fromJsonString(message)
-            handlePostMessage(deserializedMessage)
+            webViewActivity.handlePostMessage(deserializedMessage)
         } catch (ex: SerializationException) {
             Log.w(
                 this::class.simpleName,
@@ -24,9 +24,8 @@ internal abstract class CatchWebViewInterface(protected val activity: WebViewAct
         }
     }
 
-    protected abstract fun handlePostMessage(message: PostMessageBody)
-
     companion object {
         private const val EMPTY_JSON_STRING = "\"\""
+        const val NAME = "CatchAndroid"
     }
 }

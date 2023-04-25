@@ -44,13 +44,6 @@ internal class CacheManagerImpl(val context: Context) : CacheManager {
     override var deviceToken: String?
         get() = sharedPrefs.getString(PREFS_KEY_DEVICE_TOKEN, null)
         set(value) {
-            /*
-            Once a device token has already been generated and saved don't overwrite it
-            since it acts as the unique identifier used to access the user's public data.
-             */
-            if (deviceToken != null) {
-                return
-            }
             sharedPrefs.edit().putString(PREFS_KEY_DEVICE_TOKEN, value).apply()
         }
 
