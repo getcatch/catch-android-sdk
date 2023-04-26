@@ -68,19 +68,18 @@ public object Catch {
         )
     }
 
-    private suspend fun refreshMerchant(merchantRepo: MerchantRepository, userRepo: UserRepository) {
-        when (val response = merchantRepo.loadMerchant()) {
-            is NetworkResponse.Success -> {
-                val merchant = response.body
-                userRepo.loadUserData(merchant.id)
-            }
+    private suspend fun refreshMerchant(
+        merchantRepo: MerchantRepository,
+        userRepo: UserRepository
+    ) {
+        val response = merchantRepo.loadMerchant()
 
-            is NetworkResponse.Failure -> {
-                Log.e("CatchSDK", "Failed to fetch merchant.")
-                // Assume a new user so rewards can be calculated
-                userRepo.fallbackToNewUser()
-            }
+        if (response is NetworkResponse.Failure) {
+            Log.e("CatchSDK", "Failed to fetch merchant.")
+            // Assume a new user so rewards can be calculated
+            userRepo.fallbackToNewUser()
         }
+
     }
 
     private suspend fun refreshUser(merchantRepo: MerchantRepository, userRepo: UserRepository) {
@@ -106,12 +105,13 @@ public object Catch {
                         refreshUser(merchantRepo, userRepo)
                     }
                 }
+
                 Lifecycle.Event.ON_STOP -> {
                     refreshMerchantJob?.cancel()
                     refreshUserJob?.cancel()
                 }
-                else -> { /* No-op */
-                }
+
+                else -> { /* No-op */ }
             }
         }
         )
