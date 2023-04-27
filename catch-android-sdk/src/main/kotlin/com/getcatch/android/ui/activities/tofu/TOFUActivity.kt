@@ -20,7 +20,7 @@ import com.getcatch.android.web.PostMessageActions
 import com.getcatch.android.web.PostMessageBody
 import com.getcatch.android.web.PostMessageBodyKeys
 import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.combineTransform
+import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.launch
 import kotlinx.serialization.json.contentOrNull
 import kotlinx.serialization.json.jsonPrimitive
@@ -59,15 +59,17 @@ internal class TOFUActivity : WebViewActivity(), KoinComponent {
             }
         }
         lifecycleScope.launch {
-            tofuReady.combineTransform(tofuOpenData) { ready, data ->
-                if (ready && data != null) {
-                    emit(data)
+            combine(tofuReady, tofuOpenData) { ready, data -> Pair(ready, data) }
+                .collect { (ready, data) ->
+                    if (ready && data != null) {
+                        val messageBody =
+                            PostMessageBody(
+                                PostMessageActions.TOFU_OPEN,
+                                data = data.toJsonObject()
+                            )
+                        postMessage(messageBody)
+                    }
                 }
-            }.collect { data ->
-                val messageBody =
-                    PostMessageBody(PostMessageActions.TOFU_OPEN, data = data.toJsonObject())
-                postMessage(messageBody)
-            }
         }
     }
 

@@ -1,8 +1,11 @@
 package com.getcatch.android.models.checkout
 
+import android.os.Parcelable
+import kotlinx.parcelize.Parcelize
 import kotlinx.serialization.Serializable
 
 /** Breakdown of the order total */
+@Parcelize
 @Serializable
 public data class Amounts(
     /** The total amount (in cents) to charge the consumer after all promotions, discounts and fees are applied. */
@@ -22,4 +25,4 @@ public data class Amounts(
 
     /** The currency in which the amounts are represented. */
     val currency: String,
-)
+) : Parcelable
