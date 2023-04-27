@@ -21,6 +21,8 @@
     <string name="matched_your_contribution">%1$s has matched your contribution to\ </string>
     <string name="thanks_for_pitching_in">Thanks for pitching in.</string>
     <string name="card_expiration">Exp. %1$s</string>
+    <string name="disabled_tooltip_body">Sorry, Catch can\'t be used to pay for one or more item (like a gift card or subscription) currently in your cart.</string>
+    <string name="disabled_tooltip_cta">Learn more about Catch</string>
 
     <!--  Content descriptions  -->
     <string name="content_description_catch_logo">The Catch logo</string>

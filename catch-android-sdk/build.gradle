@@ -50,8 +50,8 @@ apply plugin: "org.jetbrains.dokka"
 android {
     namespace = "com.getcatch.android"
     defaultConfig {
-        versionName "1.0.0-library-module"
-        versionCode 3
+        versionName "0.0.0"
+        versionCode 1
     }
     buildFeatures {
         viewBinding true

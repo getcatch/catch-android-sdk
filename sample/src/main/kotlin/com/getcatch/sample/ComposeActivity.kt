@@ -79,13 +79,14 @@ class ComposeActivity : ComponentActivity() {
             ) {
                 Spacer(Modifier.height(16.dp))
                 Callout(price = 10000)
-                PaymentMethod()
+                PaymentMethod(disabled = true)
                 ExpressCheckoutCallout()
                 PurchaseConfirmation(
                     earned = 1000,
                     donation = 50,
                     borderStyle = BorderStyle.SlightRound
                 )
+                PaymentMethod(disabled = true)
                 PurchaseConfirmation(
                     earned = 1000,
                     donation = 50,

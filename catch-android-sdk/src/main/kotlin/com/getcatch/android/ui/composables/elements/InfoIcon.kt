@@ -24,6 +24,7 @@ internal fun InfoIcon(
     textStyle: TextStyle,
     price: Int? = null,
     rewardsSummary: EarnedRewardsSummary? = null,
+    onClickOverride: (() -> Unit)? = null,
 ) {
     val context = LocalContext.current
     Text(
@@ -33,7 +34,16 @@ internal fun InfoIcon(
             .padding(2.dp)
             .clickable(
                 onClick = {
-                    TOFUActivity.open(context, price, rewardsSummary, path = TofuPath.HOW_IT_WORKS)
+                    if (onClickOverride != null) {
+                        onClickOverride()
+                    } else {
+                        TOFUActivity.open(
+                            context,
+                            price,
+                            rewardsSummary,
+                            path = TofuPath.HOW_IT_WORKS
+                        )
+                    }
                 },
                 indication = null,
                 interactionSource = remember {
@@ -41,6 +51,7 @@ internal fun InfoIcon(
                 }
             )
     )
+
 }
 
 @Preview
