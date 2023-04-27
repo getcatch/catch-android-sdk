@@ -22,7 +22,6 @@ import androidx.compose.ui.unit.dp
 import com.getcatch.android.models.checkout.CheckoutPrefill
 import com.getcatch.android.ui.BorderStyle
 import com.getcatch.android.ui.activities.checkout.direct.DirectCheckoutController
-import com.getcatch.android.ui.activities.checkout.direct.DirectCheckoutResult
 import com.getcatch.android.ui.composables.Callout
 import com.getcatch.android.ui.composables.CampaignLink
 import com.getcatch.android.ui.composables.CatchLogo
@@ -51,21 +50,21 @@ class ComposeActivity : ComponentActivity() {
         )
     }
 
-    private fun onDirectCheckoutResult(directCheckoutResult: DirectCheckoutResult) {
-        when (directCheckoutResult) {
-            DirectCheckoutResult.Canceled -> Log.d("TestDirectCheckout", "Cancel")
-            DirectCheckoutResult.Confirmed -> Log.d("TestDirectCheckout", "Confirm")
-            is DirectCheckoutResult.Failed -> Log.e(
-                "TestDirectCheckout",
-                "Failure",
-                directCheckoutResult.error
-            )
-        }
+    private fun onCheckoutCanceled() {
+        Log.d("TestDirectCheckout", "Cancel")
+    }
+
+    private fun onDirectCheckoutConfirmed() {
+        Log.d("TestDirectCheckout", "Confirm")
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        directCheckoutController = DirectCheckoutController(this, this::onDirectCheckoutResult)
+        directCheckoutController = DirectCheckoutController(
+            this,
+            this::onDirectCheckoutConfirmed,
+            this::onCheckoutCanceled
+        )
         setContent {
             Column(
                 modifier = Modifier

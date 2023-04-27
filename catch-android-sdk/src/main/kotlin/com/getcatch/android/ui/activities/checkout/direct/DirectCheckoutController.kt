@@ -1,24 +1,40 @@
 package com.getcatch.android.ui.activities.checkout.direct
 
+import android.util.Log
 import androidx.activity.ComponentActivity
 import androidx.activity.result.ActivityResultLauncher
 import androidx.fragment.app.Fragment
 import com.getcatch.android.models.checkout.CheckoutPrefill
+import com.getcatch.android.ui.activities.checkout.CheckoutCanceledCallback
 
 public class DirectCheckoutController(
-    activity: ComponentActivity, callback: DirectCheckoutResultCallback
+    activity: ComponentActivity,
+    onConfirm: DirectCheckoutConfirmedCallback? = null,
+    onCancel: CheckoutCanceledCallback? = null
 ) {
 
     private val activityResultLauncher: ActivityResultLauncher<DirectCheckoutContract.Args>
 
     init {
         activityResultLauncher = activity.registerForActivityResult(DirectCheckoutContract()) {
-            callback.onDirectCheckoutResult(it)
+            when (it) {
+                DirectCheckoutResult.Canceled -> onCancel?.onCancel()
+                DirectCheckoutResult.Confirmed -> onConfirm?.onDirectCheckoutConfirmed()
+                is DirectCheckoutResult.Failed -> Log.e(
+                    this::class.simpleName,
+                    "Direct checkout failed.",
+                    it.error
+                )
+            }
         }
     }
 
-    public constructor(fragment: Fragment, callback: DirectCheckoutResultCallback) : this(
-        fragment.requireActivity(), callback
+    public constructor(
+        fragment: Fragment,
+        onConfirm: DirectCheckoutConfirmedCallback? = null,
+        onCancel: CheckoutCanceledCallback? = null
+    ) : this(
+        fragment.requireActivity(), onConfirm, onCancel
     )
 
     /**
