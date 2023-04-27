@@ -83,8 +83,8 @@ public object Catch {
     }
 
     private suspend fun refreshUser(merchantRepo: MerchantRepository, userRepo: UserRepository) {
-        merchantRepo.activeMerchant.combineTransform(userRepo.deviceToken) { merchant, token ->
-            if (merchant != null && token !== null) {
+        merchantRepo.activeMerchant.combineTransform(userRepo.deviceToken) { merchant, _ ->
+            if (merchant != null) {
                 emit(merchant.id)
             }
         }.collectLatest { merchantId -> userRepo.loadUserData(merchantId = merchantId) }
