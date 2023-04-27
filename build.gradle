@@ -36,7 +36,7 @@ buildscript {
 
 plugins {
     id "io.gitlab.arturbosch.detekt" version "1.21.0"
-//    id 'io.codearte.nexus-staging' version "0.30.0"
+    id 'io.codearte.nexus-staging' version "0.30.0"
     id 'org.jetbrains.kotlin.android' version '1.8.10' apply false
     id "org.jetbrains.dokka" version "1.8.10"
     id "org.jetbrains.kotlin.plugin.parcelize" version "1.8.10" apply false
