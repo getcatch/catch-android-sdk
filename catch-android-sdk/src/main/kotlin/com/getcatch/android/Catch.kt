@@ -6,6 +6,9 @@ import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.State
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.ui.text.font.FontFamily
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.LifecycleEventObserver
+import androidx.lifecycle.ProcessLifecycleOwner
 import com.getcatch.android.di.sdkModule
 import com.getcatch.android.models.PublicKey
 import com.getcatch.android.network.Environment
@@ -16,7 +19,11 @@ import com.getcatch.android.ui.styles.CatchStyleConfig
 import com.getcatch.android.ui.theming.DynamicThemeVariant
 import com.getcatch.android.ui.theming.ThemeVariantOption
 import com.getcatch.android.ui.typography.CatchFonts
-import kotlinx.coroutines.MainScope
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.SupervisorJob
+import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.launch
 import org.koin.android.ext.koin.androidContext
 import org.koin.core.KoinApplication
@@ -60,21 +67,60 @@ public object Catch {
         )
     }
 
+    private suspend fun refreshMerchant(
+        merchantRepo: MerchantRepository,
+        userRepo: UserRepository
+    ) {
+        val response = merchantRepo.loadMerchant()
+
+        if (response is NetworkResponse.Failure) {
+            Log.e("CatchSDK", "Failed to fetch merchant.")
+            // Assume a new user so rewards can be calculated
+            userRepo.fallbackToNewUser()
+        }
+
+    }
+
+    private suspend fun refreshUser(merchantRepo: MerchantRepository, userRepo: UserRepository) {
+        combine(merchantRepo.activeMerchant, userRepo.deviceToken) { merchant, token ->
+            Pair(
+                merchant,
+                token
+            )
+        }.collect { (merchant, _) ->
+            if (merchant != null) {
+                Log.d("CatchSDK", "Load that user!")
+                userRepo.loadUserData(merchantId = merchant.id)
+            }
+        }
+    }
+
     private fun loadData(merchantRepo: MerchantRepository, userRepo: UserRepository) {
-        // Load merchant on app start
-        MainScope().launch {
-            when (val response = merchantRepo.loadMerchant()) {
-                is NetworkResponse.Success -> {
-                    val merchant = response.body
-                    userRepo.loadUserData(merchant.id)
+        val applicationJob = SupervisorJob()
+        val backgroundScope = CoroutineScope(Dispatchers.IO + applicationJob)
+        var refreshMerchantJob: Job? = null
+        var refreshUserJob: Job? = null
+        ProcessLifecycleOwner.get().lifecycle.addObserver(LifecycleEventObserver { _, event ->
+            when (event) {
+                Lifecycle.Event.ON_START -> {
+                    refreshMerchantJob = backgroundScope.launch {
+                        refreshMerchant(merchantRepo, userRepo)
+                    }
+                    refreshUserJob = backgroundScope.launch {
+                        refreshUser(merchantRepo, userRepo)
+                    }
                 }
-                is NetworkResponse.Failure -> {
-                    Log.e("Catch", "Failed to fetch merchant.")
-                    // Assume a new user so rewards can be calculated
-                    userRepo.fallbackToNewUser()
+
+                Lifecycle.Event.ON_STOP -> {
+                    refreshMerchantJob?.cancel()
+                    refreshUserJob?.cancel()
+                }
+
+                else -> { /* No-op */
                 }
             }
         }
+        )
     }
 
     private fun applyOptions(options: CatchOptions) {
