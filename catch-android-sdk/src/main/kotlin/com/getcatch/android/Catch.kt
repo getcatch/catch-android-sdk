@@ -23,8 +23,7 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.SupervisorJob
-import kotlinx.coroutines.flow.collectLatest
-import kotlinx.coroutines.flow.combineTransform
+import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.launch
 import org.koin.android.ext.koin.androidContext
 import org.koin.core.KoinApplication
@@ -83,11 +82,17 @@ public object Catch {
     }
 
     private suspend fun refreshUser(merchantRepo: MerchantRepository, userRepo: UserRepository) {
-        merchantRepo.activeMerchant.combineTransform(userRepo.deviceToken) { merchant, _ ->
+        combine(merchantRepo.activeMerchant, userRepo.deviceToken) { merchant, token ->
+            Pair(
+                merchant,
+                token
+            )
+        }.collect { (merchant, _) ->
             if (merchant != null) {
-                emit(merchant.id)
+                Log.d("CatchSDK", "Load that user!")
+                userRepo.loadUserData(merchantId = merchant.id)
             }
-        }.collectLatest { merchantId -> userRepo.loadUserData(merchantId = merchantId) }
+        }
     }
 
     private fun loadData(merchantRepo: MerchantRepository, userRepo: UserRepository) {
@@ -111,7 +116,8 @@ public object Catch {
                     refreshUserJob?.cancel()
                 }
 
-                else -> { /* No-op */ }
+                else -> { /* No-op */
+                }
             }
         }
         )
