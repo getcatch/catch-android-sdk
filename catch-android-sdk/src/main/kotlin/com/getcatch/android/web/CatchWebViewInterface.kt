@@ -18,7 +18,7 @@ internal class CatchWebViewInterface(val webViewActivity: WebViewActivity) {
         } catch (ex: SerializationException) {
             Log.w(
                 this::class.simpleName,
-                "Error deserializing the following into a PostMessageBody: $message",
+                "Error deserializing a post message body",
                 ex
             )
         }
