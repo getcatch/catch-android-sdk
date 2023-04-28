@@ -50,15 +50,13 @@ public class TestCacheManagerImpl {
     }
 
     @Test
-    public fun `deviceToken, do not overwrite`() {
+    public fun `deviceToken, get and set`() {
         val cacheManager = CacheManagerImpl(sharedPrefsMockBuilder.createContext())
         val testDeviceToken = "TEST_DEVICE_TOKEN"
         assertThat(cacheManager.deviceToken).isNull()
         cacheManager.deviceToken = testDeviceToken
         assertThat(cacheManager.deviceToken).isEqualTo(testDeviceToken)
         cacheManager.deviceToken = null
-        assertThat(cacheManager.deviceToken).isEqualTo(testDeviceToken)
-        cacheManager.deviceToken = "SOMETHING NEW"
-        assertThat(cacheManager.deviceToken).isEqualTo(testDeviceToken)
+        assertThat(cacheManager.deviceToken).isNull()
     }
 }

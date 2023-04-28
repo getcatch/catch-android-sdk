@@ -18,21 +18,23 @@ public class TestUserRepositoryImpl {
     private val testMerchantId = "TEST_MERCHANT_ID"
 
     @Test
-    public fun `deviceToken, reflects merchant cache`() {
+    public fun `deviceToken, doesn't update to blank strings`() {
         val mockCacheManager = MockCacheManager()
         val mockedTxnClient = mock(TransactionsSvcClient::class.java)
         val userRepo = UserRepositoryImpl(mockedTxnClient, mockCacheManager)
 
         assertThat(mockCacheManager.deviceToken).isNull()
-        assertThat(userRepo.deviceToken).isNull()
+        assertThat(userRepo.deviceToken.value).isNull()
 
-        mockCacheManager.deviceToken = testDeviceToken
+
+        userRepo.updateDeviceToken(testDeviceToken)
+        assertThat(userRepo.deviceToken.value).isEqualTo(testDeviceToken)
         assertThat(mockCacheManager.deviceToken).isEqualTo(testDeviceToken)
-        assertThat(userRepo.deviceToken).isEqualTo(testDeviceToken)
 
-        val newTestDeviceToken = "NEW_TEST_DEVICE_TOKEN"
-        userRepo.deviceToken = newTestDeviceToken
-        assertThat(mockCacheManager.deviceToken).isEqualTo(newTestDeviceToken)
+        val blankString = " "
+        userRepo.updateDeviceToken(blankString)
+        assertThat(userRepo.deviceToken.value).isEqualTo(testDeviceToken)
+        assertThat(mockCacheManager.deviceToken).isEqualTo(testDeviceToken)
     }
 
     @Test
