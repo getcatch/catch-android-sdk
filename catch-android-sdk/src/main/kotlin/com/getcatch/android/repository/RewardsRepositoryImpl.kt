@@ -1,6 +1,7 @@
 package com.getcatch.android.repository
 
 import android.util.Log
+import com.getcatch.android.models.CalculateRewardsResult
 import com.getcatch.android.models.CalculatedReward
 import com.getcatch.android.models.EarnedRewardsSummary
 import com.getcatch.android.models.Item
@@ -20,8 +21,8 @@ internal class RewardsRepositoryImpl(
         price: Int,
         items: List<Item>?,
         userCohorts: List<String>?
-    ): CalculatedReward {
-        val merchant = merchantRepo.activeMerchant.value ?: return CalculatedReward.Default
+    ): CalculateRewardsResult {
+        val merchant = merchantRepo.activeMerchant.value ?: return CalculateRewardsResult.NoRewardsSummary
 
         val earnedRewardsSummary = fetchEarnedRewardSummary(
             price = price,
@@ -29,13 +30,17 @@ internal class RewardsRepositoryImpl(
             userCohorts = userCohorts,
             merchant = merchant,
             user = user,
-        ) ?: return CalculatedReward.Default
+        ) ?: return CalculateRewardsResult.NoRewardsSummary
 
-        return getPrioritizedReward(
+        val calculatedReward = getPrioritizedReward(
             earnedRewardsSummary = earnedRewardsSummary,
             price = price,
             existingUserRewardAmount = user.rewardAmount ?: 0,
             defaultMerchantRewardRate = merchant.defaultEarnedRewardsRate,
+        )
+        return CalculateRewardsResult(
+            reward = calculatedReward,
+            rewardsSummary = earnedRewardsSummary,
         )
     }
 

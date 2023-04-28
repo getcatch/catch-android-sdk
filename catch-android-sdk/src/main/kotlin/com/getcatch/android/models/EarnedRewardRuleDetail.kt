@@ -1,8 +1,11 @@
 package com.getcatch.android.models
 
+import android.os.Parcelable
+import kotlinx.parcelize.Parcelize
 import kotlinx.serialization.Serializable
 import kotlin.math.ceil
 
+@Parcelize
 @Serializable
 internal data class EarnedRewardRuleDetail(
     val rewardRuleId: String,
@@ -14,7 +17,7 @@ internal data class EarnedRewardRuleDetail(
     val ruleEngineType: String?,
     val flatRewardAmount: Int?,
     val percentageRewardRate: Double?,
-) {
+) : Parcelable {
     companion object {
         fun unrestrictedEarned(
             merchant: Merchant,

@@ -46,13 +46,13 @@ internal class EarnRedeemViewModel(
     private suspend fun calculateReward(user: PublicUserData) {
         price?.let {
             _uiState.value = EarnRedeemUiState.Loading
-            val calculatedReward = rewardsRepo.fetchCalculatedEarnedReward(
+            val calculateRewardsResult = rewardsRepo.fetchCalculatedEarnedReward(
                 user = user,
                 price = it,
                 items = items,
                 userCohorts = userCohorts,
             )
-            _uiState.value = EarnRedeemUiState.Success(calculatedReward)
+            _uiState.value = EarnRedeemUiState.Success(calculateRewardsResult)
         }
     }
 

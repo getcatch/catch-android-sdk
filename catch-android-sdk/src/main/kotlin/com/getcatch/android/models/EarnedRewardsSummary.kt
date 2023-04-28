@@ -1,7 +1,10 @@
 package com.getcatch.android.models
 
+import android.os.Parcelable
+import kotlinx.parcelize.Parcelize
 import kotlinx.serialization.Serializable
 
+@Parcelize
 @Serializable
 internal data class EarnedRewardsSummary(
     /** Amount of rewards (in US cents) that the user can earn as a sign up bonus. */
@@ -18,7 +21,7 @@ internal data class EarnedRewardsSummary(
 
     /** Rewards rules used for the earnings breakdown modal */
     val earnedRewardBreakdown: List<EarnedRewardRuleDetail>? = null,
-) {
+) : Parcelable {
     companion object {
         fun generateLocally(
             merchant: Merchant,
