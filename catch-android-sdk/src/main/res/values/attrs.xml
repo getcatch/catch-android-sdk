@@ -51,6 +51,12 @@
         <attr name="customBorderRadius" />
         <attr name="customBorderColor" />
     </declare-styleable>
+    <declare-styleable name="PurchaseConfirmationByOrderIdView">
+        <attr name="themeVariant" />
+        <attr name="borderStyle" />
+        <attr name="customBorderRadius" />
+        <attr name="customBorderColor" />
+    </declare-styleable>
     <declare-styleable name="CampaignLinkView">
         <attr name="campaignName" format="string" />
         <attr name="themeVariant" />
