@@ -2,8 +2,10 @@ package com.getcatch.android.network.clients.transactions
 
 import com.getcatch.android.models.EarnedRewardsSummary
 import com.getcatch.android.models.Item
+import com.getcatch.android.models.PublicKey
 import com.getcatch.android.models.PublicUserData
 import com.getcatch.android.models.RewardCampaign
+import com.getcatch.android.models.RewardsForConfirmedCheckout
 import com.getcatch.android.network.Environment
 import com.getcatch.android.network.NetworkResponse
 import com.getcatch.android.utils.handleNetworkResponse
@@ -53,5 +55,12 @@ internal class TransactionsSvcClientImpl(
         httpClient.get(
             "$baseUrl/reward_campaigns/$campaignName/public"
         )
+    }
+
+    override suspend fun fetchRewardsForConfirmedCheckout(
+        orderId: String,
+        publicKey: PublicKey
+    ): NetworkResponse<RewardsForConfirmedCheckout> = handleNetworkResponse {
+        httpClient.get("$baseUrl/merchants/${publicKey.value}/rewards_for_confirmed_checkout/$orderId")
     }
 }

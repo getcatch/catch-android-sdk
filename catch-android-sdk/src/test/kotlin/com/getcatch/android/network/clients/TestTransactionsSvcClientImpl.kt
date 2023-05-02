@@ -1,5 +1,6 @@
 package com.getcatch.android.network.clients
 
+import com.getcatch.android.models.PublicKey
 import com.getcatch.android.network.Environment
 import com.getcatch.android.network.NetworkResponse
 import com.getcatch.android.network.clients.transactions.TransactionsSvcClientImpl
@@ -47,6 +48,7 @@ public class TestTransactionsSvcClientImpl {
             when (response) {
                 is NetworkResponse.Success -> assertThat(response.body.userFirstName)
                     .isEqualTo("Luigi")
+
                 is NetworkResponse.Failure -> fail(
                     "Request with valid device and merchant id should succeed and return user data"
                 )
@@ -135,6 +137,7 @@ public class TestTransactionsSvcClientImpl {
                     assertThat(response.body.signUpBonusAmount).isEqualTo(1000)
                     assertThat(response.body.earnedRewardsTotal).isEqualTo(1150)
                 }
+
                 is NetworkResponse.Failure -> fail(
                     "Valid request should succeed and return calculated earned rewards"
                 )
@@ -177,6 +180,7 @@ public class TestTransactionsSvcClientImpl {
                     assertThat(response.body.signUpBonusAmount).isEqualTo(0)
                     assertThat(response.body.earnedRewardsTotal).isEqualTo(150)
                 }
+
                 is NetworkResponse.Failure -> fail(
                     "Valid request should succeed and return calculated earned rewards"
                 )
@@ -205,8 +209,40 @@ public class TestTransactionsSvcClientImpl {
                     assertThat(response.body.rewardCampaignId).isEqualTo("rc-dMetos")
                     assertThat(response.body.totalAmount).isEqualTo(1000)
                 }
+
                 is NetworkResponse.Failure -> fail(
                     "Valid request should succeed and return reward campaign"
+                )
+            }
+        }
+    }
+
+    @Test
+    public fun `fetchRewardsForConfirmedCheckout, success`() {
+        val responseJson =
+            ResourceHelpers.loadResource("rewards-for-confirmed-checkout-response.json")
+        val testMerchantOrderId = "TEST_MERCHANT_ORDER_ID"
+        val testPublicKey = PublicKey("TEST_PUBLIC_KEY")
+
+        mockClient.addResponse(
+            method = HttpMethod.Get,
+            url = transactionsSvcClient.baseUrl +
+                "/merchants/${testPublicKey.value}/rewards_for_confirmed_checkout/$testMerchantOrderId",
+            responseBody = responseJson,
+        )
+
+        runBlocking {
+            val response = transactionsSvcClient.fetchRewardsForConfirmedCheckout(
+                orderId = testMerchantOrderId, publicKey = testPublicKey
+            )
+            when (response) {
+                is NetworkResponse.Success -> {
+                    assertThat(response.body.earnedRewards).isEqualTo(2424)
+                    assertThat(response.body.userDonationAmountFromReward).isEqualTo(24)
+                }
+
+                is NetworkResponse.Failure -> fail(
+                    "Valid request should succeed and return rewards data"
                 )
             }
         }
