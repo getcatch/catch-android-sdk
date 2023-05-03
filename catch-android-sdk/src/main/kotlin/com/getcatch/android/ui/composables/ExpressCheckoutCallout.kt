@@ -10,7 +10,6 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
-import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
@@ -32,6 +31,7 @@ import com.getcatch.android.ui.BorderStyle
 import com.getcatch.android.ui.HasBorderShape
 import com.getcatch.android.ui.InfoWidgetType
 import com.getcatch.android.ui.composables.elements.BenefitText
+import com.getcatch.android.ui.composables.elements.CatchText
 import com.getcatch.android.ui.composables.elements.EarnRedeemContent
 import com.getcatch.android.ui.composables.elements.FillerText
 import com.getcatch.android.ui.composables.elements.InfoIcon
@@ -153,7 +153,7 @@ private fun ExpressCheckoutCalloutContent(
         }
         Row(verticalAlignment = Alignment.CenterVertically) {
             val textTransform = styles.widgetTextStyle.textTransform
-            Text(
+            CatchText(
                 text = buildAnnotatedString {
                     if (!condense) {
                         transformAndAppend(

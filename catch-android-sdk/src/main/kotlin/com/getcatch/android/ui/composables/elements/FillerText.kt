@@ -1,6 +1,5 @@
 package com.getcatch.android.ui.composables.elements
 
-import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import com.getcatch.android.ui.styles.InfoWidgetStyle
@@ -11,7 +10,7 @@ internal fun FillerText(
     text: String,
     styles: InfoWidgetStyle.Resolved,
 ) {
-    Text(
+    CatchText(
         text = styles.applyTextTransform(text),
         style = styles.composeTextStyle,
         modifier = modifier,

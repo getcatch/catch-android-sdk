@@ -3,7 +3,6 @@ package com.getcatch.android.ui.composables.elements
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.width
-import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -39,7 +38,7 @@ internal fun EarnRedeemText(
         )
     } else {
         prefixComposable?.invoke()
-        Text(
+        CatchText(
             text = earnRedeemMessage.message,
             color = earnRedeemMessage.color,
             style = textStyle,
@@ -62,7 +61,7 @@ internal fun EarnRedeemText(
     capitalize = capitalize,
     prefixComposable = prefix?.let {
         @Composable {
-            Text(
+            CatchText(
                 text = it,
                 style = textStyle,
                 color = CatchTheme.colors.foreground,
@@ -73,7 +72,7 @@ internal fun EarnRedeemText(
     suffixComposable = suffix?.let {
         @Composable {
             Spacer(modifier = Modifier.width(3.dp))
-            Text(
+            CatchText(
                 text = it,
                 style = textStyle,
                 color = CatchTheme.colors.foreground,

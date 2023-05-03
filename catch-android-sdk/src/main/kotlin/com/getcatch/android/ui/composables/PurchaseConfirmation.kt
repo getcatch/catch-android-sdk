@@ -11,7 +11,6 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.foundation.layout.wrapContentWidth
-import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
@@ -30,6 +29,7 @@ import com.getcatch.android.repository.MerchantRepository
 import com.getcatch.android.ui.ActionWidgetType
 import com.getcatch.android.ui.BorderStyle
 import com.getcatch.android.ui.HasBorderShape
+import com.getcatch.android.ui.composables.elements.CatchText
 import com.getcatch.android.ui.composables.elements.DonationMessage
 import com.getcatch.android.ui.composables.elements.LinkButton
 import com.getcatch.android.ui.styles.ActionWidgetStyle
@@ -108,7 +108,7 @@ internal fun PurchaseConfirmationInternal(
                     modifier = Modifier.height(28.dp),
                 )
                 Spacer(modifier = Modifier.height(16.dp))
-                Text(
+                CatchText(
                     text = buildAnnotatedString {
                         withStyle(styles.earnedComposeSpanStyle) {
                             transformAndAppend(

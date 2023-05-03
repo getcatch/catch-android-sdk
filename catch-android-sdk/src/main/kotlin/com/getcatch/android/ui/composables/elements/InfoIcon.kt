@@ -3,7 +3,6 @@ package com.getcatch.android.ui.composables.elements
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.padding
-import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
@@ -27,7 +26,7 @@ internal fun InfoIcon(
     onClickOverride: (() -> Unit)? = null,
 ) {
     val context = LocalContext.current
-    Text(
+    CatchText(
         text = stringResource(R.string.info_character),
         style = textStyle,
         modifier = Modifier
