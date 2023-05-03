@@ -2,8 +2,10 @@ package com.getcatch.android.network.clients.transactions
 
 import com.getcatch.android.models.EarnedRewardsSummary
 import com.getcatch.android.models.Item
+import com.getcatch.android.models.PublicKey
 import com.getcatch.android.models.PublicUserData
 import com.getcatch.android.models.RewardCampaign
+import com.getcatch.android.models.RewardsForConfirmedCheckout
 import com.getcatch.android.network.NetworkResponse
 
 internal interface TransactionsSvcClient {
@@ -23,4 +25,9 @@ internal interface TransactionsSvcClient {
     ): NetworkResponse<EarnedRewardsSummary>
 
     suspend fun fetchRewardCampaign(campaignName: String): NetworkResponse<RewardCampaign>
+
+    suspend fun fetchRewardsForConfirmedCheckout(
+        orderId: String,
+        publicKey: PublicKey
+    ): NetworkResponse<RewardsForConfirmedCheckout>
 }
