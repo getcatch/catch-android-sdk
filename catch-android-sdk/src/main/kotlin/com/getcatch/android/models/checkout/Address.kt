@@ -1,9 +1,12 @@
 package com.getcatch.android.models.checkout
 
+import android.os.Parcelable
+import kotlinx.parcelize.Parcelize
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 /** Contains address details. */
+@Parcelize
 @Serializable
 public data class Address(
     /** The name of the contact. */
@@ -34,4 +37,4 @@ public data class Address(
 
     /** The phone number associated with the order's contact. Format: "+12223334444" */
     val phoneNumber: String?,
-)
+) : Parcelable

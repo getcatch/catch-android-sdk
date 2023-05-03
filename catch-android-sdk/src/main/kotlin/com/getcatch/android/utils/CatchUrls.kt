@@ -56,22 +56,38 @@ internal object CatchUrls {
         parameter("flow", "iframe")
     }
 
-    fun virtualCardCheckout(
+    fun openVirtualCardCheckout(
         environment: Environment,
         publicKey: PublicKey,
         merchant: Merchant,
-        orderId: String,
+        checkoutId: String,
         prefill: CheckoutPrefill,
         hideHeader: Boolean = false,
     ) = buildUrl("${environment.baseUrl}/c/") {
         parameter("publicKey", publicKey.value)
-        parameter("orderId", orderId)
+        parameter("checkoutId", checkoutId)
         parameter("referer", environment.baseUrl)
         parameter("loadTheme", merchant.hasTheme.toString())
         parameter("hideHeader", hideHeader.toString())
         parameter("prefillUserPhone", prefill.userPhone)
         parameter("prefillUserName", prefill.userName)
         parameter("prefillUserEmail", prefill.userEmail)
-        parameter("flow", "iframe")
+        parameter("integration", "vcn")
+    }
+     fun createAndOpenVirtualCardCheckout(
+        environment: Environment,
+        publicKey: PublicKey,
+        merchant: Merchant,
+        prefill: CheckoutPrefill,
+        hideHeader: Boolean = false,
+    ) = buildUrl("${environment.baseUrl}/c/") {
+        parameter("publicKey", publicKey.value)
+        parameter("referer", environment.baseUrl)
+        parameter("loadTheme", merchant.hasTheme.toString())
+        parameter("hideHeader", hideHeader.toString())
+        parameter("prefillUserPhone", prefill.userPhone)
+        parameter("prefillUserName", prefill.userName)
+        parameter("prefillUserEmail", prefill.userEmail)
+        parameter("integration", "vcn")
     }
 }
