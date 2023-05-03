@@ -12,10 +12,14 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
+import androidx.compose.ui.layout.onGloballyPositioned
+import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.getcatch.android.R
@@ -23,10 +27,12 @@ import com.getcatch.android.models.Item
 import com.getcatch.android.ui.InfoWidgetType
 import com.getcatch.android.ui.PaymentMethodVariant
 import com.getcatch.android.ui.composables.elements.BenefitText
+import com.getcatch.android.ui.composables.elements.DisabledTooltipContent
 import com.getcatch.android.ui.composables.elements.EarnRedeemContent
 import com.getcatch.android.ui.composables.elements.FillerText
 import com.getcatch.android.ui.composables.elements.InfoIcon
 import com.getcatch.android.ui.composables.elements.InlineLogo
+import com.getcatch.android.ui.composables.elements.WidgetTooltip
 import com.getcatch.android.ui.styles.InfoWidgetStyle
 import com.getcatch.android.ui.styles.StyleResolver
 import com.getcatch.android.ui.theming.CatchTheme
@@ -96,10 +102,18 @@ internal fun PaymentMethodInternal(
             )
         }
 
+        var showTooltip by remember { mutableStateOf(false) }
+        var widgetWidth by remember { mutableStateOf(Dp.Unspecified) }
+        val infoIconOnClickOverride = if (disabled) ({ showTooltip = true }) else null
+        val pixelDensity = LocalDensity.current
+
         Row(
             modifier = Modifier
                 .wrapContentWidth()
-                .animateContentSize(),
+                .animateContentSize()
+                .onGloballyPositioned { coordinates ->
+                    widgetWidth = with(pixelDensity) { coordinates.size.width.toDp() }
+                },
             verticalAlignment = Alignment.CenterVertically,
         ) {
             val disabledModifier =
@@ -114,7 +128,10 @@ internal fun PaymentMethodInternal(
                 Spacer(modifier = Modifier.width(8.dp))
             }
             EarnRedeemContent(uiState, styles) { reward, summary ->
-                FlowRow(verticalAlignment = Alignment.CenterVertically) {
+                FlowRow(
+                    modifier = Modifier.wrapContentWidth(),
+                    verticalAlignment = Alignment.CenterVertically
+                ) {
                     if (variant !is PaymentMethodVariant.LogoCompact) {
                         FillerText(
                             text = stringResource(R.string.pay_by_bank),
@@ -132,13 +149,34 @@ internal fun PaymentMethodInternal(
                             summary = summary,
                         )
                         Spacer(modifier = Modifier.width(2.dp))
-                        InfoIcon(styles.composeTextStyle, price = price, rewardsSummary = summary)
+                        InfoIcon(
+                            styles.composeTextStyle,
+                            price = price,
+                            rewardsSummary = summary,
+                            onClickOverride = infoIconOnClickOverride
+                        )
                     }
                 }
             }
             if (uiState is EarnRedeemUiState.Loading) {
                 Spacer(modifier = Modifier.width(2.dp))
-                InfoIcon(styles.composeTextStyle, price = price)
+                InfoIcon(
+                    styles.composeTextStyle,
+                    price = price,
+                    onClickOverride = infoIconOnClickOverride
+                )
+            }
+            if (showTooltip && widgetWidth != Dp.Unspecified) {
+                WidgetTooltip(
+                    widgetWidth = widgetWidth,
+                    onDismissRequested = { showTooltip = false }) {
+                    DisabledTooltipContent(
+                        textStyle = styles.composeTextStyle,
+                        onDismissRequested = { showTooltip = false },
+                        price = price,
+                        rewardsSummary = (uiState as? EarnRedeemUiState.Success)?.summary
+                    )
+                }
             }
         }
     }
