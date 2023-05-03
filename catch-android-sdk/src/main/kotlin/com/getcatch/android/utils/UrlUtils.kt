@@ -1,8 +1,10 @@
 package com.getcatch.android.utils
 
+import android.content.ActivityNotFoundException
 import android.content.Context
 import android.content.Intent
 import android.net.Uri
+import android.util.Log
 import io.ktor.http.URLBuilder
 
 /**
@@ -34,6 +36,13 @@ internal fun URLBuilder.parameter(key: String, value: Any?): Unit =
 
 
 internal fun launchUrlIntent(context: Context, url: String) {
-    val intent = Intent(Intent.ACTION_VIEW, Uri.parse(url))
-    context.startActivity(intent)
+    try {
+        val intent = Intent(Intent.ACTION_VIEW, Uri.parse(ensureUrlPrefix(url)))
+        context.startActivity(intent)
+    } catch (ex: ActivityNotFoundException) {
+        Log.e("CatchSDK", "Invalid url: $url", ex)
+    }
 }
+
+internal fun ensureUrlPrefix(url: String): String =
+    if (url.startsWith("https://") || url.startsWith("http://")) url else "https://$url"
