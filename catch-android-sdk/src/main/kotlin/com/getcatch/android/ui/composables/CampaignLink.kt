@@ -34,7 +34,7 @@ import com.getcatch.android.ui.composables.elements.LinkButton
 import com.getcatch.android.ui.styles.ActionWidgetStyle
 import com.getcatch.android.ui.styles.StyleResolver
 import com.getcatch.android.ui.theming.CatchTheme
-import com.getcatch.android.ui.theming.ThemeVariantOption
+import com.getcatch.android.ui.theming.ThemeVariant
 import com.getcatch.android.utils.Constants
 import com.getcatch.android.utils.transformAndAppend
 import com.getcatch.android.viewmodels.CampaignLinkUiState
@@ -45,7 +45,7 @@ import org.koin.androidx.compose.koinViewModel
 public fun CampaignLink(
     campaignName: String,
     borderStyle: BorderStyle = BorderStyle.SlightRound,
-    theme: ThemeVariantOption? = null,
+    theme: ThemeVariant? = null,
     styleOverrides: ActionWidgetStyle? = null,
 ) {
     val viewModel: CampaignLinkViewModel = koinViewModel(key = campaignName)
@@ -67,7 +67,7 @@ public fun CampaignLink(
 internal fun CampaignLinkInternal(
     rewardCampaign: RewardCampaign,
     borderStyle: BorderStyle = BorderStyle.SlightRound,
-    theme: ThemeVariantOption? = null,
+    theme: ThemeVariant? = null,
     styleOverrides: ActionWidgetStyle? = null,
 ) {
     CatchTheme(theme) {

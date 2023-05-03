@@ -6,7 +6,7 @@ import androidx.compose.runtime.getValue
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.getcatch.android.ui.BorderStyle
 import com.getcatch.android.ui.styles.ActionWidgetStyle
-import com.getcatch.android.ui.theming.ThemeVariantOption
+import com.getcatch.android.ui.theming.ThemeVariant
 import com.getcatch.android.viewmodels.RewardsByOrderIdUiState
 import com.getcatch.android.viewmodels.RewardsByOrderIdViewModel
 import org.koin.androidx.compose.koinViewModel
@@ -15,7 +15,7 @@ import org.koin.androidx.compose.koinViewModel
 public fun PurchaseConfirmationByOrderId(
     orderId: String,
     borderStyle: BorderStyle = BorderStyle.SlightRound,
-    theme: ThemeVariantOption? = null,
+    theme: ThemeVariant? = null,
     styleOverrides: ActionWidgetStyle? = null,
 ) {
     val viewModel: RewardsByOrderIdViewModel = koinViewModel(key = orderId)

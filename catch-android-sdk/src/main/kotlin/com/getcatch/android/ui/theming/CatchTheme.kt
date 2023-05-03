@@ -1,6 +1,5 @@
 package com.getcatch.android.ui.theming
 
-import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Typography
 import androidx.compose.runtime.Composable
@@ -23,11 +22,6 @@ internal object CatchTheme {
         @ReadOnlyComposable
         get() = LocalColors.current
 
-//    val typography: CatchTypography
-//        @Composable
-//        @ReadOnlyComposable
-//        get() = LocalTypography.current
-
     val variant: ThemeVariant
         @Composable
         @ReadOnlyComposable
@@ -36,19 +30,10 @@ internal object CatchTheme {
 
 @Composable
 internal fun CatchTheme(
-    variantOption: ThemeVariantOption = DynamicThemeVariant.Standard,
+    variant: ThemeVariant = ThemeVariant.Light,
     defaultFontFamily: FontFamily = CatchFonts.circularFontFamily,
     content: @Composable () -> Unit
 ) {
-    val variant: ThemeVariant = when (variantOption) {
-        is ThemeVariant -> variantOption
-        is DynamicThemeVariant -> if (isSystemInDarkTheme()) {
-            variantOption.darkVariant
-        } else {
-            variantOption.lightVariant
-        }
-    }
-
     val rememberedColors = remember {
         variant.composeColors.copy()
     }.apply {
@@ -68,11 +53,11 @@ internal fun CatchTheme(
 
 @Composable
 internal fun CatchTheme(
-    themeOverride: ThemeVariantOption? = null,
+    themeOverride: ThemeVariant? = null,
     content: @Composable () -> Unit
 ) {
     CatchTheme(
-        variantOption = themeOverride ?: Catch.colorTheme.value,
+        variant = themeOverride ?: Catch.colorTheme.value,
         defaultFontFamily = Catch.customFontFamily.value,
         content = content
     )

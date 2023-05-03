@@ -39,7 +39,7 @@ import com.getcatch.android.ui.composables.elements.InlineLogo
 import com.getcatch.android.ui.styles.InfoWidgetStyle
 import com.getcatch.android.ui.styles.StyleResolver
 import com.getcatch.android.ui.theming.CatchTheme
-import com.getcatch.android.ui.theming.ThemeVariantOption
+import com.getcatch.android.ui.theming.ThemeVariant
 import com.getcatch.android.utils.transformAndAppend
 import com.getcatch.android.viewmodels.EarnRedeemUiState
 import com.getcatch.android.viewmodels.EarnRedeemViewModel
@@ -51,7 +51,7 @@ public fun ExpressCheckoutCallout(
     items: List<Item>? = null,
     userCohorts: List<String>? = null,
     borderStyle: BorderStyle = BorderStyle.None,
-    theme: ThemeVariantOption? = null,
+    theme: ThemeVariant? = null,
     styleOverrides: InfoWidgetStyle? = null,
 ) {
     val viewModelKey = EarnRedeemViewModel.generateKey(
@@ -77,7 +77,7 @@ internal fun ExpressCheckoutCalloutInternal(
     items: List<Item>? = null,
     userCohorts: List<String>? = null,
     borderStyle: BorderStyle = BorderStyle.None,
-    theme: ThemeVariantOption? = null,
+    theme: ThemeVariant? = null,
     styleOverrides: InfoWidgetStyle? = null,
     viewModel: EarnRedeemViewModel,
 ) {
