@@ -89,7 +89,6 @@ public object Catch {
             )
         }.collect { (merchant, _) ->
             if (merchant != null) {
-                Log.d("CatchSDK", "Load that user!")
                 userRepo.loadUserData(merchantId = merchant.id)
             }
         }

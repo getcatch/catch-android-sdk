@@ -2,7 +2,6 @@ package com.getcatch.android.ui.composables.elements
 
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.interaction.MutableInteractionSource
-import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
@@ -32,7 +31,7 @@ internal fun BenefitText(
         if (reward is CalculatedReward.PercentRate) null
         else TextDecoration.Underline
 
-    Text(
+    CatchText(
         text = styles.applyTextTransform(message),
         color = color,
         style = styles.benefitComposeTextStyle,

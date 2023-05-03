@@ -11,8 +11,6 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.layout.widthIn
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.foundation.text.ClickableText
-import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -71,14 +69,14 @@ internal fun DonationMessage(donation: Int, merchantName: String, recipient: Don
                 modifier = Modifier.size(20.dp)
             )
             Spacer(modifier = Modifier.width(4.dp))
-            Text(
+            CatchText(
                 stringResource(R.string.donation_message_header, donation.centsToDollarsString()),
                 style = CatchTextStyles.h3,
                 color = Color(CatchColors.GREY_7)
             )
         }
         Spacer(modifier = Modifier.width(4.dp))
-        ClickableText(
+        CatchClickableText(
             text = annotatedBody,
             style = CatchTextStyles.bodySmall.copy(color = bodyColor),
             onClick = { offset ->

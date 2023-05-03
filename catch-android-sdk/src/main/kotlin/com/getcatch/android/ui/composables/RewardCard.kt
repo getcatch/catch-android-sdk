@@ -9,7 +9,6 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.shadow
@@ -22,6 +21,7 @@ import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
 import coil.request.ImageRequest
 import com.getcatch.android.R
+import com.getcatch.android.ui.composables.elements.CatchText
 import com.getcatch.android.ui.theming.CatchTheme
 import com.getcatch.android.ui.theming.color.CatchColors
 import com.getcatch.android.ui.typography.CatchTextStyles
@@ -73,12 +73,12 @@ internal fun RewardCard(
                 modifier = Modifier.height(28.dp),
             )
             Spacer(modifier = Modifier.weight(1f))
-            Text(
+            CatchText(
                 text = rewardsAmount.centsToDollarsString(),
                 style = CatchTextStyles.h2,
                 color = textColor,
             )
-            Text(
+            CatchText(
                 text = stringResource(R.string.card_expiration, expirationDate.format("MM/dd/yy")),
                 style = CatchTextStyles.bodySmall,
                 color = textColor,

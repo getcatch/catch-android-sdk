@@ -11,7 +11,6 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.foundation.layout.wrapContentWidth
-import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
@@ -30,6 +29,7 @@ import com.getcatch.android.models.RewardCampaign
 import com.getcatch.android.ui.ActionWidgetType
 import com.getcatch.android.ui.BorderStyle
 import com.getcatch.android.ui.HasBorderShape
+import com.getcatch.android.ui.composables.elements.CatchText
 import com.getcatch.android.ui.composables.elements.LinkButton
 import com.getcatch.android.ui.styles.ActionWidgetStyle
 import com.getcatch.android.ui.styles.StyleResolver
@@ -108,7 +108,7 @@ internal fun CampaignLinkInternal(
                     contentDescription = stringResource(id = R.string.content_description_catch_logo),
                     modifier = Modifier.height(28.dp),
                 )
-                Text(
+                CatchText(
                     text = buildAnnotatedString {
                         withStyle(styles.earnedComposeSpanStyle) {
                             transformAndAppend(
@@ -130,7 +130,7 @@ internal fun CampaignLinkInternal(
                     style = styles.composeTextStyle
                 )
                 RewardCampaignCard(rewardCampaign = rewardCampaign)
-                Text(
+                CatchText(
                     text = stringResource(id = R.string.claim_now_and_start_earning),
                     style = claimNowTextStyle(styles.composeTextStyle)
                 )
