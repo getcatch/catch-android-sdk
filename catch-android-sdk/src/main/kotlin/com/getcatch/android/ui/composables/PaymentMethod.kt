@@ -92,7 +92,7 @@ internal fun PaymentMethodInternal(
 
     CatchTheme(theme) {
         val themeVariant = CatchTheme.variant
-        val styles by remember(variant, styleOverrides) {
+        val styles by remember(variant, themeVariant, styleOverrides) {
             mutableStateOf(
                 StyleResolver.infoWidgetStyles(
                     theme = themeVariant,
