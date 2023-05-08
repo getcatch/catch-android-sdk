@@ -121,7 +121,9 @@ private fun CalloutInternal(
                     Spacer(modifier = Modifier.width(3.dp))
                 }
                 BenefitText(
-                    reward = reward, styles = styles, capitalize = !hasOrPrefix,
+                    reward = reward,
+                    styles = styles,
+                    capitalize = !hasOrPrefix,
                     price = price,
                     summary = summary
                 )
