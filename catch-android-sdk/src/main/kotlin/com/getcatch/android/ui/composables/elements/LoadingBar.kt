@@ -55,7 +55,7 @@ private fun PreviewLoadingBar() {
             }
         }
 
-        CatchTheme(variantOption = ThemeVariant.Dark) {
+        CatchTheme(variant = ThemeVariant.Dark) {
             Box(
                 modifier = Modifier
                     .width(115.dp)

@@ -4,7 +4,6 @@ import androidx.compose.ui.text.font.FontFamily
 import com.getcatch.android.network.Environment
 import com.getcatch.android.ui.styles.CatchStyleConfig
 import com.getcatch.android.ui.theming.ThemeVariant
-import com.getcatch.android.ui.theming.ThemeVariantOption
 
 /**
  * An object which specifies optional configuration settings to
@@ -24,7 +23,7 @@ import com.getcatch.android.ui.theming.ThemeVariantOption
  * applied to all text in widgets if set. Defaults to null.
  */
 public data class CatchOptions(
-    val colorTheme: ThemeVariantOption = ThemeVariant.Light,
+    val colorTheme: ThemeVariant = ThemeVariant.Light,
     val environment: Environment = Environment.SANDBOX,
     val customFontFamily: FontFamily? = null,
     val styleConfig: CatchStyleConfig? = null,

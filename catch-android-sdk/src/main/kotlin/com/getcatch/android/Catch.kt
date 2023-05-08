@@ -16,8 +16,7 @@ import com.getcatch.android.network.NetworkResponse
 import com.getcatch.android.repository.MerchantRepository
 import com.getcatch.android.repository.UserRepository
 import com.getcatch.android.ui.styles.CatchStyleConfig
-import com.getcatch.android.ui.theming.DynamicThemeVariant
-import com.getcatch.android.ui.theming.ThemeVariantOption
+import com.getcatch.android.ui.theming.ThemeVariant
 import com.getcatch.android.ui.typography.CatchFonts
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -139,10 +138,10 @@ public object Catch {
         _customFontFamily.value = fontFamily
     }
 
-    private val _colorTheme: MutableState<ThemeVariantOption> =
-        mutableStateOf(DynamicThemeVariant.Standard)
-    internal val colorTheme: State<ThemeVariantOption> = _colorTheme
-    public fun setColorTheme(themeVariantOption: ThemeVariantOption): Unit = synchronized(this) {
-        _colorTheme.value = themeVariantOption
+    private val _colorTheme: MutableState<ThemeVariant> =
+        mutableStateOf(ThemeVariant.Light)
+    internal val colorTheme: State<ThemeVariant> = _colorTheme
+    public fun setColorTheme(themeVariant: ThemeVariant): Unit = synchronized(this) {
+        _colorTheme.value = themeVariant
     }
 }

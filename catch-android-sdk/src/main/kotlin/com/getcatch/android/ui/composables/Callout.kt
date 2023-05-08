@@ -35,7 +35,7 @@ import com.getcatch.android.ui.composables.elements.InlineLogo
 import com.getcatch.android.ui.styles.InfoWidgetStyle
 import com.getcatch.android.ui.styles.StyleResolver
 import com.getcatch.android.ui.theming.CatchTheme
-import com.getcatch.android.ui.theming.ThemeVariantOption
+import com.getcatch.android.ui.theming.ThemeVariant
 import com.getcatch.android.viewmodels.EarnRedeemUiState
 import com.getcatch.android.viewmodels.EarnRedeemViewModel
 import org.koin.androidx.compose.koinViewModel
@@ -47,7 +47,7 @@ public fun Callout(
     userCohorts: List<String>? = null,
     hasOrPrefix: Boolean = false,
     borderStyle: CalloutBorderStyle = CalloutBorderStyle.None,
-    theme: ThemeVariantOption? = null,
+    theme: ThemeVariant? = null,
     styleOverrides: InfoWidgetStyle? = null,
 ) {
     val viewModelKey = EarnRedeemViewModel.generateKey(
@@ -76,7 +76,7 @@ private fun CalloutInternal(
     userCohorts: List<String>? = null,
     hasOrPrefix: Boolean = false,
     borderStyle: CalloutBorderStyle = CalloutBorderStyle.None,
-    theme: ThemeVariantOption? = null,
+    theme: ThemeVariant? = null,
     styleOverrides: InfoWidgetStyle? = null,
     viewModel: EarnRedeemViewModel,
 ) {

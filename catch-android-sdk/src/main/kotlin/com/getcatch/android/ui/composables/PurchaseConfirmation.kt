@@ -35,7 +35,7 @@ import com.getcatch.android.ui.composables.elements.LinkButton
 import com.getcatch.android.ui.styles.ActionWidgetStyle
 import com.getcatch.android.ui.styles.StyleResolver
 import com.getcatch.android.ui.theming.CatchTheme
-import com.getcatch.android.ui.theming.ThemeVariantOption
+import com.getcatch.android.ui.theming.ThemeVariant
 import com.getcatch.android.utils.PreviewData
 import com.getcatch.android.utils.centsToDollarsString
 import com.getcatch.android.utils.transformAndAppend
@@ -46,7 +46,7 @@ public fun PurchaseConfirmation(
     earned: Int,
     donation: Int? = null,
     borderStyle: BorderStyle = BorderStyle.SlightRound,
-    theme: ThemeVariantOption? = null,
+    theme: ThemeVariant? = null,
     styleOverrides: ActionWidgetStyle? = null,
 ) {
     val merchantRepo: MerchantRepository = koinInject()
@@ -66,7 +66,7 @@ internal fun PurchaseConfirmationInternal(
     earned: Int,
     donation: Int,
     borderStyle: BorderStyle = BorderStyle.SlightRound,
-    theme: ThemeVariantOption? = null,
+    theme: ThemeVariant? = null,
     styleOverrides: ActionWidgetStyle? = null,
     merchant: Merchant?,
 ) {

@@ -36,7 +36,7 @@ import com.getcatch.android.ui.composables.elements.WidgetTooltip
 import com.getcatch.android.ui.styles.InfoWidgetStyle
 import com.getcatch.android.ui.styles.StyleResolver
 import com.getcatch.android.ui.theming.CatchTheme
-import com.getcatch.android.ui.theming.ThemeVariantOption
+import com.getcatch.android.ui.theming.ThemeVariant
 import com.getcatch.android.utils.Constants
 import com.getcatch.android.viewmodels.EarnRedeemUiState
 import com.getcatch.android.viewmodels.EarnRedeemViewModel
@@ -49,7 +49,7 @@ public fun PaymentMethod(
     userCohorts: List<String>? = null,
     disabled: Boolean = false,
     variant: PaymentMethodVariant = PaymentMethodVariant.Standard,
-    theme: ThemeVariantOption? = null,
+    theme: ThemeVariant? = null,
     styleOverrides: InfoWidgetStyle? = null,
 ) {
     val viewModelKey = EarnRedeemViewModel.generateKey(
@@ -79,7 +79,7 @@ internal fun PaymentMethodInternal(
     userCohorts: List<String>? = null,
     disabled: Boolean = false,
     variant: PaymentMethodVariant = PaymentMethodVariant.Standard,
-    theme: ThemeVariantOption? = null,
+    theme: ThemeVariant? = null,
     styleOverrides: InfoWidgetStyle? = null,
     viewModel: EarnRedeemViewModel,
 ) {
