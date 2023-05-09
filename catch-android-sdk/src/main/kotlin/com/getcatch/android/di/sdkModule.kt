@@ -34,7 +34,7 @@ internal val sdkModule = module {
         MerchantRepositoryImpl(merchantsSvcClient = get(), cache = get(), publicKey = get())
     }
     single<TransactionsSvcClient> {
-        TransactionsSvcClientImpl(httpClient = get(), environment = get())
+        TransactionsSvcClientImpl(httpClient = get(), publicKey = get(), environment = get())
     }
     single<UserRepository> {
         UserRepositoryImpl(transactionsSvcClient = get(), cache = get())

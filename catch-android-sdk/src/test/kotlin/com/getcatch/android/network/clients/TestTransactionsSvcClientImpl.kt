@@ -20,8 +20,10 @@ import kotlin.test.fail
 
 public class TestTransactionsSvcClientImpl {
     private val mockClient = MockHttpClient()
+    private val testPublicKey = PublicKey("TEST_PUBLIC_KEY")
     private val transactionsSvcClient = TransactionsSvcClientImpl(
         mockClient.client,
+        testPublicKey,
         Environment.PRODUCTION,
     )
 
@@ -196,7 +198,8 @@ public class TestTransactionsSvcClientImpl {
 
         mockClient.addResponse(
             method = HttpMethod.Get,
-            url = "${transactionsSvcClient.baseUrl}/reward_campaigns/$testCampaignName/public",
+            url = transactionsSvcClient.baseUrl +
+                "/merchants/${testPublicKey.value}/reward_campaigns/$testCampaignName/public",
             responseBody = responseJson,
         )
 
@@ -222,7 +225,6 @@ public class TestTransactionsSvcClientImpl {
         val responseJson =
             ResourceHelpers.loadResource("rewards-for-confirmed-checkout-response.json")
         val testMerchantOrderId = "TEST_MERCHANT_ORDER_ID"
-        val testPublicKey = PublicKey("TEST_PUBLIC_KEY")
 
         mockClient.addResponse(
             method = HttpMethod.Get,

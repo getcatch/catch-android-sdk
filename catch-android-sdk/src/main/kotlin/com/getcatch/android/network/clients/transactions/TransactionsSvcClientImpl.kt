@@ -15,6 +15,7 @@ import io.ktor.client.request.parameter
 
 internal class TransactionsSvcClientImpl(
     private val httpClient: HttpClient,
+    private val publicKey: PublicKey,
     environment: Environment
 ) : TransactionsSvcClient {
     val baseUrl = "${environment.baseUrl}/api/transactions-svc"
@@ -53,7 +54,7 @@ internal class TransactionsSvcClientImpl(
         campaignName: String
     ): NetworkResponse<RewardCampaign> = handleNetworkResponse {
         httpClient.get(
-            "$baseUrl/reward_campaigns/$campaignName/public"
+            "$baseUrl/merchants/${publicKey.value}/reward_campaigns/$campaignName/public"
         )
     }
 
