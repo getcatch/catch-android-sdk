@@ -20,7 +20,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.getcatch.android.ui.theming.CatchTheme
-import com.getcatch.android.ui.theming.LocalColors
 import com.getcatch.android.ui.theming.ThemeVariant
 
 @Composable
@@ -34,7 +33,7 @@ internal fun LoadingBar(modifier: Modifier = Modifier) {
     Box(modifier = modifier.fillMaxSize()) {
         Box(
             modifier = Modifier
-                .background(LocalColors.current.border, shape = RoundedCornerShape(2.dp))
+                .background(CatchTheme.colors.border, shape = RoundedCornerShape(2.dp))
                 .fillMaxHeight()
                 .fillMaxWidth(percentage)
         )
