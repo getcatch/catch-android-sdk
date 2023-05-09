@@ -1,52 +1,33 @@
 package com.getcatch.sample
 
-import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.rememberScrollState
-import androidx.compose.foundation.verticalScroll
-import androidx.compose.material.Button
-import androidx.compose.material.Text
-import androidx.compose.ui.Alignment
-import androidx.compose.ui.Modifier
-import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.unit.dp
+import androidx.compose.material.MaterialTheme
+import androidx.lifecycle.viewmodel.compose.viewModel
 import com.getcatch.android.models.checkout.CheckoutPrefill
-import com.getcatch.android.ui.BorderStyle
 import com.getcatch.android.ui.activities.checkout.direct.DirectCheckoutController
-import com.getcatch.android.ui.composables.Callout
-import com.getcatch.android.ui.composables.CampaignLink
-import com.getcatch.android.ui.composables.CatchLogo
-import com.getcatch.android.ui.composables.CatchLogoSize
-import com.getcatch.android.ui.composables.ExpressCheckoutCallout
-import com.getcatch.android.ui.composables.PaymentMethod
-import com.getcatch.android.ui.composables.PurchaseConfirmation
-import com.getcatch.android.ui.styles.ActionButtonStyle
-import com.getcatch.android.ui.styles.ActionWidgetStyle
-import com.getcatch.android.ui.theming.ThemeVariant
+import com.getcatch.sample.ui.composables.DemoScaffold
+import com.getcatch.sample.ui.composables.demos.CalloutDemo
+import com.getcatch.sample.ui.composables.demos.CampaignLinkDemo
+import com.getcatch.sample.ui.composables.demos.CatchLogoDemo
+import com.getcatch.sample.ui.composables.demos.ExpressCheckoutCalloutDemo
+import com.getcatch.sample.ui.composables.demos.OpenCheckoutDemo
+import com.getcatch.sample.ui.composables.demos.PaymentMethodDemo
+import com.getcatch.sample.ui.composables.demos.PurchaseConfirmationDemo
+import com.getcatch.sample.ui.theming.DarkDemoColors
+import com.getcatch.sample.ui.theming.LightDemoColors
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class ComposeActivity : ComponentActivity() {
     lateinit var directCheckoutController: DirectCheckoutController
-    private fun goToViewBasedActivity() {
-        val intent = Intent(this, ViewBasedActivity::class.java)
-        startActivity(intent)
-    }
 
-    private fun openTestCheckout() {
-        val testCheckoutId = ""
+    private fun openDirectCheckout(checkoutId: String, checkoutPrefill: CheckoutPrefill) {
         directCheckoutController.openCheckout(
-            testCheckoutId,
-            CheckoutPrefill(userName = "Tester")
+            checkoutId,
+            checkoutPrefill,
         )
     }
 
@@ -61,56 +42,19 @@ class ComposeActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         directCheckoutController = DirectCheckoutController(
-            this,
-            this::onDirectCheckoutConfirmed,
-            this::onCheckoutCanceled
+            this, this::onDirectCheckoutConfirmed, this::onCheckoutCanceled
         )
         setContent {
-            Column(
-                modifier = Modifier
-                    .fillMaxSize()
-                    .padding(horizontal = 16.dp)
-                    .verticalScroll(rememberScrollState()),
-                horizontalAlignment = Alignment.CenterHorizontally,
-                verticalArrangement = Arrangement.spacedBy(
-                    16.dp,
-                    alignment = Alignment.CenterVertically
-                )
-            ) {
-                Spacer(Modifier.height(16.dp))
-                Callout(price = 10000)
-                PaymentMethod(disabled = true)
-                ExpressCheckoutCallout()
-                PurchaseConfirmation(
-                    earned = 1000,
-                    donation = 50,
-                    borderStyle = BorderStyle.SlightRound
-                )
-                PaymentMethod(disabled = true)
-                PurchaseConfirmation(
-                    earned = 1000,
-                    donation = 50,
-                    styleOverrides = ActionWidgetStyle(
-                        actionButtonStyle = ActionButtonStyle(
-                            elevation = 4f
-                        )
-                    ),
-                    borderStyle = BorderStyle.None,
-                )
-                CampaignLink(campaignName = "aBaVga")
-                CampaignLink(
-                    campaignName = "aBaVga",
-                    borderStyle = BorderStyle.None,
-                    theme = ThemeVariant.LightMono
-                )
-                CatchLogo()
-                CatchLogo(size = CatchLogoSize.MEDIUM)
-                CatchLogo(size = CatchLogoSize.FILL)
-                Button(onClick = { openTestCheckout() }) {
-                    Text(text = "Open checkout")
-                }
-                Button(onClick = { goToViewBasedActivity() }) {
-                    Text(text = stringResource(id = R.string.go_to_view_based_activity_btn_label))
+            val viewModel: DemoSettingsViewModel = viewModel()
+            MaterialTheme(colors = if (viewModel.themeVariant.isDarkTheme) DarkDemoColors else LightDemoColors) {
+                DemoScaffold(viewModel) {
+                    CalloutDemo(price = viewModel.price)
+                    ExpressCheckoutCalloutDemo(price = viewModel.price)
+                    PaymentMethodDemo(price = viewModel.price)
+                    PurchaseConfirmationDemo(price = viewModel.price)
+                    CampaignLinkDemo()
+                    CatchLogoDemo()
+                    OpenCheckoutDemo(openDirectCheckout = this@ComposeActivity::openDirectCheckout)
                 }
             }
         }
