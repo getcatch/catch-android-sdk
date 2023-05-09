@@ -6,5 +6,5 @@ import com.getcatch.android.models.checkout.CardDetails
  * Callback that is invoked when a virtual card checkout is successfully confirmed.
  */
 public fun interface VirtualCardCheckoutConfirmedCallback {
-    public fun onVirtualCardCheckoutResult(cardDetails: CardDetails)
+    public fun onVirtualCardCheckoutConfirmed(cardDetails: CardDetails)
 }

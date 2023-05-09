@@ -19,7 +19,7 @@ public class VirtualCardCheckoutController(
         activityResultLauncher = activity.registerForActivityResult(VirtualCardCheckoutContract()) {
             when (it) {
                 VirtualCardCheckoutResult.Canceled -> onCancel?.onCancel()
-                is VirtualCardCheckoutResult.Confirmed -> onConfirm?.onVirtualCardCheckoutResult(it.cardDetails)
+                is VirtualCardCheckoutResult.Confirmed -> onConfirm?.onVirtualCardCheckoutConfirmed(it.cardDetails)
                 is VirtualCardCheckoutResult.Failed -> Log.e(
                     this::class.simpleName,
                     "Virtual card checkout failed.",
