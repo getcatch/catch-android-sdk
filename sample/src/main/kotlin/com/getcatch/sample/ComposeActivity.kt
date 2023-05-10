@@ -1,7 +1,7 @@
 package com.getcatch.sample
 
 import android.os.Bundle
-import android.util.Log
+import android.widget.Toast
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.material.MaterialTheme
@@ -32,11 +32,15 @@ class ComposeActivity : ComponentActivity() {
     }
 
     private fun onCheckoutCanceled() {
-        Log.d("TestDirectCheckout", "Cancel")
+        Toast
+            .makeText(this, "Checkout canceled.", Toast.LENGTH_SHORT)
+            .show()
     }
 
     private fun onDirectCheckoutConfirmed() {
-        Log.d("TestDirectCheckout", "Confirm")
+        Toast
+            .makeText(this, "Checkout confirmed.", Toast.LENGTH_SHORT)
+            .show()
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
