@@ -79,7 +79,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:padding="16dp"
-                app:campaignName="aBaVga"/>
+                app:campaignName="RAWYP"/>
 
             <com.getcatch.android.ui.views.CampaignLinkView
                 android:id="@+id/custom_campaign_link"
@@ -88,18 +88,6 @@
                 android:padding="16dp"
                 app:borderStyle="none"
                 app:themeVariant="light_mono"/>
-
-            <com.google.android.material.button.MaterialButton
-                android:id="@+id/toggle_theme_btn"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/toggle_theme" />
-
-            <com.google.android.material.button.MaterialButton
-                android:id="@+id/go_to_compose_activity_btn"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/go_to_compose_activity_btn_label" />
 
         </LinearLayout>
     </ScrollView>
