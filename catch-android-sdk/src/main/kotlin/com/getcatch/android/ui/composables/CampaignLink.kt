@@ -36,6 +36,7 @@ import com.getcatch.android.ui.styles.StyleResolver
 import com.getcatch.android.ui.theming.CatchTheme
 import com.getcatch.android.ui.theming.ThemeVariant
 import com.getcatch.android.utils.Constants
+import com.getcatch.android.utils.logoResId
 import com.getcatch.android.utils.transformAndAppend
 import com.getcatch.android.viewmodels.CampaignLinkUiState
 import com.getcatch.android.viewmodels.CampaignLinkViewModel

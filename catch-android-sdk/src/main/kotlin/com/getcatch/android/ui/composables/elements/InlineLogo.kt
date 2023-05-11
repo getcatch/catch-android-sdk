@@ -14,6 +14,7 @@ import com.getcatch.android.R
 import com.getcatch.android.ui.InfoWidgetType
 import com.getcatch.android.ui.theming.CatchTheme
 import com.getcatch.android.utils.Constants
+import com.getcatch.android.utils.logoResId
 
 @Composable
 internal fun InlineLogo(fontSize: TextUnit, widgetType: InfoWidgetType, modifier: Modifier = Modifier) {

@@ -11,6 +11,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import com.getcatch.android.R
 import com.getcatch.android.ui.theming.CatchTheme
+import com.getcatch.android.utils.logoResId
 
 @Composable
 public fun CatchLogo(size: CatchLogoSize = CatchLogoSize.SMALL) {
