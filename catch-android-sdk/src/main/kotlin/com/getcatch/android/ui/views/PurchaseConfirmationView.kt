@@ -16,24 +16,49 @@ import com.getcatch.android.ui.theming.ThemeVariant
 import com.getcatch.android.utils.getBorderStyle
 import com.getcatch.android.utils.getThemeVariant
 
+/**
+ * The PurchaseConfirmation widget is designed to be used on the merchant's order
+ * confirmation page if Catch was used as a payment method.
+ *
+ * The widget includes information about how much credit the consumer just earned
+ * through their purchase and contains a link which directs the consumer to their account
+ * page on Catch's website.
+ *
+ * For virtual card integrations, use [PurchaseConfirmationByOrderIdView].
+ */
 public class PurchaseConfirmationView @JvmOverloads constructor(
     context: Context,
     attrs: AttributeSet? = null,
     defStyleAttr: Int = 0
 ) : AbstractComposeView(context, attrs, defStyleAttr) {
     private val _earned: MutableState<Int> = mutableStateOf(0)
+    private val _donation: MutableState<Int> = mutableStateOf(0)
+    private val _borderStyle: MutableState<BorderStyle> = mutableStateOf(BorderStyle.SlightRound)
+    private val _themeVariant: MutableState<ThemeVariant?> = mutableStateOf(null)
+    private val _styleOverrides: MutableState<ActionWidgetStyle?> = mutableStateOf(null)
+
+    /** The amount in cents that that the consumer earned in credit based on their purchase.*/
     public var earned: Int by _earned
 
-    private val _donation: MutableState<Int> = mutableStateOf(0)
+    /**
+     * The amount of cents that the consumer is donating. Not used if the merchant
+     * doesn't have donations enabled.
+     */
     public var donation: Int by _donation
 
-    private val _borderStyle: MutableState<BorderStyle> = mutableStateOf(BorderStyle.SlightRound)
+    /** The [BorderStyle] that the widget renders. Defaults to the [BorderStyle.SlightRound] style. */
     public var borderStyle: BorderStyle by _borderStyle
 
-    private val _themeVariant: MutableState<ThemeVariant?> = mutableStateOf(null)
+    /**
+     * The Catch color [ThemeVariant]. If no theme is set, the theme set globally on the
+     * [Catch] object will be used, which defaults to [ThemeVariant.Light].
+     */
     public var themeVariant: ThemeVariant? by _themeVariant
 
-    private val _styleOverrides: MutableState<ActionWidgetStyle?> = mutableStateOf(null)
+    /**
+     * Style overrides which can be used to override the widget's default
+     * appearance (ex. font size, color, weight, etc.).
+     */
     public var styleOverrides: ActionWidgetStyle? by _styleOverrides
 
     init {
