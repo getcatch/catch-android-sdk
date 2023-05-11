@@ -44,6 +44,36 @@ import com.getcatch.android.viewmodels.EarnRedeemUiState
 import com.getcatch.android.viewmodels.EarnRedeemViewModel
 import org.koin.androidx.compose.koinViewModel
 
+/**
+ * The ExpressCheckoutCallout widget displays similar informational content as the Callout with
+ * additional messaging on where to find Catch in the checkout flow.
+ *
+ * It is intended to be displayed in merchant checkout flows in which an express checkout option is
+ * present. Since Catch can only be selected on the final step of checkout, this messaging is meant
+ * to reduce confusion if the consumer intends to pay with Catch but does not see it displayed as an
+ * express checkout option. The widget also includes a button to open an informational modal with
+ * more details about paying with Catch and with links to visit Catch's marketing website.
+ *
+ * The ExpressCheckoutCallout widget also makes use of its price, items, and userCohorts
+ * attributes to calculate rewards the user will earn on the current purchase.
+ *
+ * @param price The cost in cents that a consumer would pay for the item(s) without redeeming Catch
+ * credit.
+ *
+ * @param items A list of all items included in the order. Used to calculate item-based rewards.
+ *
+ * @param userCohorts A list of user cohorts that the signed in user qualifies for. Used to
+ * calculate user cohort based rewards.
+ *
+ * @param borderStyle The [BorderStyle] that the widget renders. Defaults to the
+ * [BorderStyle.None] style.
+ *
+ * @param theme The Catch color [ThemeVariant]. If no theme is set, the theme set globally on the
+ * [Catch] object will be used, which defaults to [ThemeVariant.Light].
+ *
+ * @param styleOverrides Style overrides which can be used to override the widget's default
+ * appearance (ex. font size, color, weight, etc.).
+ */
 @Composable
 public fun ExpressCheckoutCallout(
     price: Int = 0,
