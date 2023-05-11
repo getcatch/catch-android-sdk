@@ -1,7 +1,6 @@
 package com.getcatch.android.ui.composables
 
 import androidx.compose.animation.animateContentSize
-import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.BoxWithConstraints
 import androidx.compose.foundation.layout.ExperimentalLayoutApi
 import androidx.compose.foundation.layout.FlowRow
@@ -28,7 +27,6 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.getcatch.android.R
 import com.getcatch.android.models.Item
 import com.getcatch.android.ui.BorderStyle
-import com.getcatch.android.ui.HasBorderShape
 import com.getcatch.android.ui.InfoWidgetType
 import com.getcatch.android.ui.composables.elements.BenefitText
 import com.getcatch.android.ui.composables.elements.CatchText
@@ -40,6 +38,7 @@ import com.getcatch.android.ui.styles.InfoWidgetStyle
 import com.getcatch.android.ui.styles.StyleResolver
 import com.getcatch.android.ui.theming.CatchTheme
 import com.getcatch.android.ui.theming.ThemeVariant
+import com.getcatch.android.utils.border
 import com.getcatch.android.utils.transformAndAppend
 import com.getcatch.android.viewmodels.EarnRedeemUiState
 import com.getcatch.android.viewmodels.EarnRedeemViewModel
@@ -99,14 +98,9 @@ internal fun ExpressCheckoutCalloutInternal(
             )
         }
         var containerModifier = Modifier.animateContentSize()
-        if (borderStyle is HasBorderShape) {
-            val borderColor = when (borderStyle) {
-                is BorderStyle.Custom -> borderStyle.color
-                else -> CatchTheme.colors.border
-            }
-
+        if (borderStyle !is BorderStyle.None) {
             containerModifier = containerModifier
-                .border(1.dp, borderColor, borderStyle.shape)
+                .border(borderStyle)
                 .padding(horizontal = 16.dp, vertical = 12.dp)
         }
         BoxWithConstraints(modifier = Modifier.fillMaxWidth()) {

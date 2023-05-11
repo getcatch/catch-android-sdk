@@ -2,7 +2,6 @@ package com.getcatch.android.ui.composables
 
 import androidx.compose.animation.animateContentSize
 import androidx.compose.foundation.Image
-import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.BoxWithConstraints
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
@@ -28,7 +27,6 @@ import com.getcatch.android.models.Merchant
 import com.getcatch.android.repository.MerchantRepository
 import com.getcatch.android.ui.ActionWidgetType
 import com.getcatch.android.ui.BorderStyle
-import com.getcatch.android.ui.HasBorderShape
 import com.getcatch.android.ui.composables.elements.CatchText
 import com.getcatch.android.ui.composables.elements.DonationMessage
 import com.getcatch.android.ui.composables.elements.LinkButton
@@ -37,6 +35,7 @@ import com.getcatch.android.ui.styles.StyleResolver
 import com.getcatch.android.ui.theming.CatchTheme
 import com.getcatch.android.ui.theming.ThemeVariant
 import com.getcatch.android.utils.PreviewData
+import com.getcatch.android.utils.border
 import com.getcatch.android.utils.centsToDollarsString
 import com.getcatch.android.utils.logoResId
 import com.getcatch.android.utils.transformAndAppend
@@ -86,13 +85,10 @@ internal fun PurchaseConfirmationInternal(
             .wrapContentHeight()
             .fillMaxWidth()
             .animateContentSize()
-        containerModifier = if (borderStyle is HasBorderShape) {
-            val borderColor =
-                if (borderStyle is BorderStyle.Custom) borderStyle.color
-                else CatchTheme.colors.border
 
+        containerModifier = if (borderStyle !is BorderStyle.None) {
             containerModifier
-                .border(1.dp, borderColor, borderStyle.shape)
+                .border(borderStyle)
                 .padding(16.dp)
         } else {
             // If we don't have a border, we need at least a small amount of

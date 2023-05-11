@@ -1,14 +1,9 @@
 package com.getcatch.android.ui.composables
 
 import androidx.compose.animation.animateContentSize
-import androidx.compose.foundation.border
-import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.ExperimentalLayoutApi
 import androidx.compose.foundation.layout.FlowRow
 import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.fillMaxHeight
-import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.runtime.Composable
@@ -19,13 +14,11 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.getcatch.android.R
 import com.getcatch.android.models.Item
 import com.getcatch.android.ui.CalloutBorderStyle
-import com.getcatch.android.ui.HasBorderShape
 import com.getcatch.android.ui.InfoWidgetType
 import com.getcatch.android.ui.composables.elements.BenefitText
 import com.getcatch.android.ui.composables.elements.EarnRedeemContent
@@ -36,6 +29,7 @@ import com.getcatch.android.ui.styles.InfoWidgetStyle
 import com.getcatch.android.ui.styles.StyleResolver
 import com.getcatch.android.ui.theming.CatchTheme
 import com.getcatch.android.ui.theming.ThemeVariant
+import com.getcatch.android.utils.border
 import com.getcatch.android.viewmodels.EarnRedeemUiState
 import com.getcatch.android.viewmodels.EarnRedeemViewModel
 import org.koin.androidx.compose.koinViewModel
@@ -101,13 +95,9 @@ private fun CalloutInternal(
 
         var rowModifier = Modifier.animateContentSize()
 
-        if (borderStyle is HasBorderShape) {
-            val borderColor = when (borderStyle) {
-                is CalloutBorderStyle.Custom -> borderStyle.color
-                else -> CatchTheme.colors.border
-            }
+        if (borderStyle !is CalloutBorderStyle.None) {
             rowModifier = rowModifier
-                .border(1.dp, borderColor, borderStyle.shape)
+                .border(borderStyle)
                 .padding(start = 8.dp, top = 4.dp, bottom = 4.dp, end = 4.dp)
         }
 
@@ -142,22 +132,6 @@ private fun CalloutInternal(
                 price = price,
                 rewardsSummary = (uiState as? EarnRedeemUiState.Success)?.summary
             )
-
         }
-    }
-}
-
-@Preview(name = "CalloutWidget")
-@Composable
-public fun PreviewCalloutWidget() {
-    Column(
-        modifier = Modifier
-            .fillMaxHeight()
-            .fillMaxWidth()
-            .padding(16.dp),
-        verticalArrangement = Arrangement.Center,
-        horizontalAlignment = Alignment.CenterHorizontally
-    ) {
-        Callout()
     }
 }
