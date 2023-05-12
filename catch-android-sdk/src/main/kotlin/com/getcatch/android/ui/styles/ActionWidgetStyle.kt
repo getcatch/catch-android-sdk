@@ -4,9 +4,21 @@ import androidx.compose.ui.text.SpanStyle
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.unit.TextUnit
 
+/**
+ * Styling for Catch widgets which contain an action button.
+ *
+ * This includes the following widgets:
+ *  - [PurchaseConfirmation]
+ *  - [CampaignLink]
+ */
 public data class ActionWidgetStyle(
+    /** Configures styling for all text components in an action widget. */
     val widgetTextStyle: WidgetTextStyle? = null,
+
+    /** Configures color and font weight of all benefit text within an action widget. */
     val benefitTextStyle: BenefitTextStyle? = null,
+
+    /** Configures styling of the button within an action widget. */
     val actionButtonStyle: ActionButtonStyle? = null,
 ) {
     internal fun withOverrides(overrides: ActionWidgetStyle?): ActionWidgetStyle {

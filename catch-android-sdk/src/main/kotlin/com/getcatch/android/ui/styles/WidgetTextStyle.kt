@@ -8,12 +8,26 @@ import com.getcatch.android.ui.styles.values.FontWeight
 import com.getcatch.android.ui.styles.values.TextTransform
 import androidx.compose.ui.text.font.FontWeight as ComposeFontWeight
 
+/**
+ * Styling for the text components within the Catch widgets.
+ */
 public data class WidgetTextStyle(
+    /** Configures the font size for text components. */
     val fontSize: Float? = null,
+
+    /** Configures the font color for text components. */
     val fontColor: ColorValue? = null,
+
+    /** Configures the font weight for text components. */
     val fontWeight: FontWeight? = null,
+
+    /** Configures the line height for text components. */
     val lineHeight: Float? = null,
+
+    /** Configures the letter spacing for text components. */
     val letterSpacing: Float? = null,
+
+    /** Transforms casing of text in text components. */
     val textTransform: TextTransform? = null,
 ) {
 
