@@ -8,7 +8,7 @@ import androidx.activity.result.contract.ActivityResultContract
 import androidx.annotation.VisibleForTesting
 import androidx.core.os.bundleOf
 import com.getcatch.android.models.checkout.CheckoutPrefill
-import com.getcatch.android.models.checkout.CreateVirtualCardCheckoutBody
+import com.getcatch.android.models.checkout.CreateVirtualCardCheckoutData
 import com.getcatch.android.utils.parcelableExtra
 import kotlinx.parcelize.Parcelize
 
@@ -29,7 +29,7 @@ internal class VirtualCardCheckoutContract :
 
     @Parcelize
     data class Args(
-        val checkoutData: CreateVirtualCardCheckoutBody?,
+        val checkoutData: CreateVirtualCardCheckoutData?,
         val checkoutId: String?,
         val prefill: CheckoutPrefill,
     ) : Parcelable {

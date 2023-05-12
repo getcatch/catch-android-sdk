@@ -4,7 +4,7 @@ package com.getcatch.android.ui.activities.checkout.virtualcard
 import androidx.lifecycle.lifecycleScope
 import com.getcatch.android.models.PublicKey
 import com.getcatch.android.models.checkout.CardDetails
-import com.getcatch.android.models.checkout.CreateVirtualCardCheckoutBody
+import com.getcatch.android.models.checkout.CreateVirtualCardCheckoutData
 import com.getcatch.android.network.Environment
 import com.getcatch.android.repository.MerchantRepository
 import com.getcatch.android.serialization.SnakeCaseSerializer
@@ -27,7 +27,7 @@ internal class VirtualCardCheckoutActivity
     private val publicKey: PublicKey by inject()
     private val merchantRepo: MerchantRepository by inject()
     private val checkoutReady = MutableStateFlow(false)
-    private val checkoutData = MutableStateFlow<CreateVirtualCardCheckoutBody?>(null)
+    private val checkoutData = MutableStateFlow<CreateVirtualCardCheckoutData?>(null)
 
     override fun generateUrl() {
         val args = VirtualCardCheckoutContract.Args.fromIntent(intent)
