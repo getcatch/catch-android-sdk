@@ -31,11 +31,34 @@ import org.koin.core.context.startKoin
 import org.koin.dsl.module
 import java.util.concurrent.atomic.AtomicBoolean
 
+/** The Catch SDK global interface. */
 public object Catch {
-    internal val initialized = AtomicBoolean(false)
+    private val initialized = AtomicBoolean(false)
+    internal var styleConfig: CatchStyleConfig? = null
+
+    private val _customFontFamily: MutableState<FontFamily> =
+        mutableStateOf(CatchFonts.circularFontFamily)
+    internal val customFontFamily: State<FontFamily> = _customFontFamily
+
+    private val _colorTheme: MutableState<ThemeVariant> =
+        mutableStateOf(ThemeVariant.Light)
+    internal val colorTheme: State<ThemeVariant> = _colorTheme
+
+    /**
+     * Initializes the Catch SDK. Must be called from the `onStart` method of your
+     * [Application](https://developer.android.com/reference/android/app/Application) class.
+     *
+     * @param context The Android Context of the application.
+     *
+     * @param publicKey A string representing the merchant's public API key.
+     *
+     * @param options An object which specifies optional configuration settings to control the
+     * global behavior of the Catch SDK. If the options object is omitted, the Catch SDK will
+     * fallback to default values.
+     */
     public fun initialize(
-        publicKey: String,
         context: Context,
+        publicKey: String,
         options: CatchOptions = CatchOptions(),
     ): Unit = synchronized(this) {
         // Setup dependency injection
@@ -53,6 +76,26 @@ public object Catch {
         // Apply custom options
         applyOptions(options)
         initialized.set(true)
+    }
+
+    /**
+     * Changes the current value of the global font family. The font family can also be specified
+     * when initializing the SDK.
+     *
+     * @param fontFamily An object containing all the necessary font information.
+     */
+    public fun setCustomFontFamily(fontFamily: FontFamily): Unit = synchronized(this) {
+        _customFontFamily.value = fontFamily
+    }
+
+    /**
+     * Changes the current value of the global theme variant. The themeVariant parameter accepts the
+     * same enumeration of values that can be used for the theme option when initializing the SDK.
+     *
+     * @param themeVariant The Catch preset color theme.
+     */
+    public fun setColorTheme(themeVariant: ThemeVariant): Unit = synchronized(this) {
+        _colorTheme.value = themeVariant
     }
 
     private fun initKoin(
@@ -137,21 +180,5 @@ public object Catch {
         if (!initialized.get()) {
             throw CatchNotInitializedException()
         }
-    }
-
-    internal var styleConfig: CatchStyleConfig? = null
-
-    private val _customFontFamily: MutableState<FontFamily> =
-        mutableStateOf(CatchFonts.circularFontFamily)
-    internal val customFontFamily: State<FontFamily> = _customFontFamily
-    public fun setCustomFontFamily(fontFamily: FontFamily): Unit = synchronized(this) {
-        _customFontFamily.value = fontFamily
-    }
-
-    private val _colorTheme: MutableState<ThemeVariant> =
-        mutableStateOf(ThemeVariant.Light)
-    internal val colorTheme: State<ThemeVariant> = _colorTheme
-    public fun setColorTheme(themeVariant: ThemeVariant): Unit = synchronized(this) {
-        _colorTheme.value = themeVariant
     }
 }
