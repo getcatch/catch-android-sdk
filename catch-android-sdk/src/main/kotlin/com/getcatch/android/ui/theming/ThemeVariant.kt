@@ -11,11 +11,13 @@ import com.getcatch.android.ui.theming.color.CatchComposeColors
  *   - Dark
  *   - DarkMono
  *
- * For further color customization, see `StyleOverrides`.
+ * For further color customization, see [CatchStyleConfig].
  */
 public sealed class ThemeVariant {
     internal abstract val colors: CatchColorTheme
     internal val composeColors: CatchComposeColors by lazy { this.colors.toComposeColors() }
+
+    /** Utility flag to distinguish light themes from dark themes. */
     public abstract val isDarkTheme: Boolean
 
     /**
