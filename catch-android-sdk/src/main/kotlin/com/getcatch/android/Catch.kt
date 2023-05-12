@@ -10,6 +10,7 @@ import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.LifecycleEventObserver
 import androidx.lifecycle.ProcessLifecycleOwner
 import com.getcatch.android.di.sdkModule
+import com.getcatch.android.exceptions.CatchNotInitializedException
 import com.getcatch.android.models.PublicKey
 import com.getcatch.android.network.Environment
 import com.getcatch.android.network.NetworkResponse
@@ -28,8 +29,10 @@ import org.koin.android.ext.koin.androidContext
 import org.koin.core.KoinApplication
 import org.koin.core.context.startKoin
 import org.koin.dsl.module
+import java.util.concurrent.atomic.AtomicBoolean
 
 public object Catch {
+    internal val initialized = AtomicBoolean(false)
     public fun initialize(
         publicKey: String,
         context: Context,
@@ -49,6 +52,7 @@ public object Catch {
 
         // Apply custom options
         applyOptions(options)
+        initialized.set(true)
     }
 
     private fun initKoin(
@@ -127,6 +131,12 @@ public object Catch {
         }
         _colorTheme.value = options.colorTheme
         styleConfig = options.styleConfig
+    }
+
+    internal fun assertInitialized() {
+        if (!initialized.get()) {
+            throw CatchNotInitializedException()
+        }
     }
 
     internal var styleConfig: CatchStyleConfig? = null

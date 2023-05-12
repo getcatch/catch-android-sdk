@@ -23,6 +23,7 @@ import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import com.getcatch.android.Catch
 import com.getcatch.android.R
 import com.getcatch.android.models.RewardCampaign
 import com.getcatch.android.ui.ActionWidgetType
@@ -68,6 +69,7 @@ public fun CampaignLink(
     theme: ThemeVariant? = null,
     styleOverrides: ActionWidgetStyle? = null,
 ) {
+    Catch.assertInitialized()
     val viewModel: CampaignLinkViewModel = koinViewModel(key = campaignName)
     LaunchedEffect(campaignName) {
         viewModel.loadCampaign(campaignName)

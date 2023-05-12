@@ -22,6 +22,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import com.getcatch.android.Catch
 import com.getcatch.android.R
 import com.getcatch.android.models.Item
 import com.getcatch.android.ui.InfoWidgetType
@@ -86,6 +87,7 @@ public fun PaymentMethod(
     theme: ThemeVariant? = null,
     styleOverrides: InfoWidgetStyle? = null,
 ) {
+    Catch.assertInitialized()
     val viewModelKey = EarnRedeemViewModel.generateKey(
         price = price,
         items = items,

@@ -22,6 +22,7 @@ import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.getcatch.android.Catch
 import com.getcatch.android.R
 import com.getcatch.android.models.Merchant
 import com.getcatch.android.repository.MerchantRepository
@@ -73,6 +74,7 @@ public fun PurchaseConfirmation(
     theme: ThemeVariant? = null,
     styleOverrides: ActionWidgetStyle? = null,
 ) {
+    Catch.assertInitialized()
     val merchantRepo: MerchantRepository = koinInject()
     val merchant by merchantRepo.activeMerchant.collectAsState()
     PurchaseConfirmationInternal(

@@ -6,6 +6,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
+import com.getcatch.android.Catch
 import com.getcatch.android.R
 import com.getcatch.android.ui.CatchLogoSize
 import com.getcatch.android.ui.theming.CatchTheme
@@ -25,6 +26,7 @@ import com.getcatch.android.utils.size
  */
 @Composable
 public fun CatchLogo(size: CatchLogoSize = CatchLogoSize.SMALL, theme: ThemeVariant? = null) {
+    Catch.assertInitialized()
     CatchTheme(theme) {
         Image(
             painterResource(id = CatchTheme.variant.logoResId),
