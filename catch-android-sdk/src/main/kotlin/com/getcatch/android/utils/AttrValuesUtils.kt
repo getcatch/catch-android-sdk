@@ -6,6 +6,7 @@ import androidx.annotation.StyleableRes
 import com.getcatch.android.R
 import com.getcatch.android.ui.BorderStyle
 import com.getcatch.android.ui.CalloutBorderStyle
+import com.getcatch.android.ui.CatchLogoSize
 import com.getcatch.android.ui.PaymentMethodVariant
 import com.getcatch.android.ui.styles.values.ColorValue
 import com.getcatch.android.ui.theming.ThemeVariant
@@ -38,6 +39,12 @@ internal object PaymentMethodVariantAttrEnum {
     const val STANDARD = 0
     const val COMPACT = 1
     const val LOGO_COMPACT = 2
+}
+
+internal object CatchLogoSizeAttrEnum {
+    const val SMALL = 0
+    const val MEDIUM = 1
+    const val FILL = 2
 }
 
 internal fun TypedArray.getCalloutBorderStyle(): CalloutBorderStyle? =
@@ -115,3 +122,11 @@ internal fun TypedArray.getPaymentMethodVariant(): PaymentMethodVariant? =
 
 internal fun TypedArray.getCampaignName(): String? =
     getString(R.styleable.CampaignLinkView_campaignName)
+
+internal fun TypedArray.getCatchLogoSize(): CatchLogoSize? =
+    when (getInt(R.styleable.CatchLogoView_catchLogoSize, -1)) {
+        CatchLogoSizeAttrEnum.SMALL -> CatchLogoSize.SMALL
+        CatchLogoSizeAttrEnum.MEDIUM -> CatchLogoSize.MEDIUM
+        CatchLogoSizeAttrEnum.FILL -> CatchLogoSize.FILL
+        else -> null
+    }
