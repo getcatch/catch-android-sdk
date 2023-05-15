@@ -7,6 +7,9 @@ import androidx.fragment.app.Fragment
 import com.getcatch.android.models.checkout.CheckoutPrefill
 import com.getcatch.android.ui.activities.checkout.CheckoutCanceledCallback
 
+/**
+ * The DirectCheckoutController manages launching and handling a direct checkout activity.
+ */
 public class DirectCheckoutController(
     activity: ComponentActivity,
     onConfirm: DirectCheckoutConfirmedCallback? = null,
@@ -21,9 +24,7 @@ public class DirectCheckoutController(
                 DirectCheckoutResult.Canceled -> onCancel?.onCancel()
                 DirectCheckoutResult.Confirmed -> onConfirm?.onDirectCheckoutConfirmed()
                 is DirectCheckoutResult.Failed -> Log.e(
-                    this::class.simpleName,
-                    "Direct checkout failed.",
-                    it.error
+                    this::class.simpleName, "Direct checkout failed.", it.error
                 )
             }
         }

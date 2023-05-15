@@ -5,9 +5,14 @@ import com.getcatch.android.models.Item
 import kotlinx.parcelize.Parcelize
 import kotlinx.serialization.Serializable
 
+/**
+ * The data needed to create a virtual card checkout. This data is passed into the
+ * [VirtualCardCheckoutController.createAndOpenCheckout] method to have the Catch SDK create
+ * a virtual card checkout for the cart contents being purchased.
+ */
 @Parcelize
 @Serializable
-public data class CreateVirtualCardCheckoutBody(
+public data class CreateVirtualCardCheckoutData(
     /**
      * The ID of this order in the merchant's system which Catch will store
      * for shared identification purposes. This ID should be unique per order.

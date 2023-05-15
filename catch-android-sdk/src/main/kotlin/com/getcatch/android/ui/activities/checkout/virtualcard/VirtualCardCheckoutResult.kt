@@ -4,19 +4,15 @@ import android.os.Parcelable
 import com.getcatch.android.models.checkout.CardDetails
 import kotlinx.parcelize.Parcelize
 
-public sealed class VirtualCardCheckoutResult : Parcelable {
+internal sealed class VirtualCardCheckoutResult : Parcelable {
     @Parcelize
-    public object Canceled : VirtualCardCheckoutResult()
+    object Canceled : VirtualCardCheckoutResult()
 
     @Parcelize
-    public class Confirmed(public val cardDetails: CardDetails) : VirtualCardCheckoutResult()
+    class Confirmed(val cardDetails: CardDetails) : VirtualCardCheckoutResult()
 
-    /**
-     * The checkout attempt failed.
-     * @param error The error encountered by the customer.
-     */
     @Parcelize
-    public data class Failed(
+    data class Failed(
         val error: Throwable
     ) : VirtualCardCheckoutResult()
 }

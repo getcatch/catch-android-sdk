@@ -5,9 +5,12 @@ import androidx.activity.ComponentActivity
 import androidx.activity.result.ActivityResultLauncher
 import androidx.fragment.app.Fragment
 import com.getcatch.android.models.checkout.CheckoutPrefill
-import com.getcatch.android.models.checkout.CreateVirtualCardCheckoutBody
+import com.getcatch.android.models.checkout.CreateVirtualCardCheckoutData
 import com.getcatch.android.ui.activities.checkout.CheckoutCanceledCallback
 
+/**
+ * The VirtualCardCheckoutController manages launching and handling a virtual card checkout activity.
+ */
 public class VirtualCardCheckoutController(
     activity: ComponentActivity,
     onConfirm: VirtualCardCheckoutConfirmedCallback? = null,
@@ -19,7 +22,10 @@ public class VirtualCardCheckoutController(
         activityResultLauncher = activity.registerForActivityResult(VirtualCardCheckoutContract()) {
             when (it) {
                 VirtualCardCheckoutResult.Canceled -> onCancel?.onCancel()
-                is VirtualCardCheckoutResult.Confirmed -> onConfirm?.onVirtualCardCheckoutConfirmed(it.cardDetails)
+                is VirtualCardCheckoutResult.Confirmed -> onConfirm?.onVirtualCardCheckoutConfirmed(
+                    it.cardDetails
+                )
+
                 is VirtualCardCheckoutResult.Failed -> Log.e(
                     this::class.simpleName,
                     "Virtual card checkout failed.",
@@ -55,7 +61,10 @@ public class VirtualCardCheckoutController(
      * @param checkoutData The unique identifier for the order that will be used to create a checkout.
      * @param prefill Prefill values for the user.
      */
-    public fun createAndOpenCheckout(checkoutData: CreateVirtualCardCheckoutBody, prefill: CheckoutPrefill) {
+    public fun createAndOpenCheckout(
+        checkoutData: CreateVirtualCardCheckoutData,
+        prefill: CheckoutPrefill
+    ) {
         val args = VirtualCardCheckoutContract.Args(
             checkoutData = checkoutData,
             checkoutId = null,
