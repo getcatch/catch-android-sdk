@@ -2,6 +2,12 @@ package com.getcatch.android.ui.styles.values
 
 import androidx.compose.ui.text.font.FontWeight as ComposeFontWeight
 
+/**
+ * An enum of the font weights that can be used in custom styling.
+ *
+ * If you load a custom font via [Catch.setCustomFontFamily] then make sure you provide
+ * a font resource for each font weight you intend to use.
+ */
 public enum class FontWeight {
     W100,
     W200,

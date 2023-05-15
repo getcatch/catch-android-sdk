@@ -11,16 +11,47 @@ import com.getcatch.android.ui.styles.values.FontWeight
 import com.getcatch.android.ui.styles.values.TextTransform
 import androidx.compose.ui.text.font.FontWeight as ComposeFontWeight
 
+/**
+ * The styling for action buttons found in Catch widgets.
+ *
+ * The following widgets contain action buttons:
+ * - [PurchaseConfirmation]
+ * - [CampaignLink]
+ */
 public data class ActionButtonStyle(
+    /** Configures the font size for the button's label. */
     val fontSize: Float? = null,
+
+    /** Configures the font color for the button's label. */
     val fontColor: ColorValue? = null,
+
+    /** Configures the button's height. */
     val height: Float? = null,
+
+    /** Configures the line height for the button's label. */
     val lineHeight: Float? = null,
+
+    /** Configures the font weight for the button's label. */
     val fontWeight: FontWeight? = null,
+
+    /** Configures the letter spacing for the button's label. */
     val letterSpacing: Float? = null,
+
+    /**
+     * Configures the elevation of the button which controls the shadow.
+     *
+     * For details on elevation and shadows in Android, please refer to
+     * the [official Android docs](https://developer.android.com/develop/ui/views/theming/shadows-clipping).
+     */
     val elevation: Float? = null,
+
+    /** Configures the border radius of the button. */
     val borderRadius: Float? = null,
+
+    /** Configures the background color of the button. */
     val backgroundColor: ColorValue? = null,
+
+    /** Transforms casing of text for the button's label. */
     val textTransform: TextTransform? = null,
 ) {
     internal fun withOverrides(overrides: ActionButtonStyle?): ActionButtonStyle {

@@ -3,7 +3,10 @@ package com.getcatch.android.ui.styles.values
 import androidx.compose.ui.graphics.Color
 import com.getcatch.android.utils.fromHexString
 
-
+/**
+ * A utility class used in custom styling to allow for colors to be
+ * provided in a variety of formats.
+ */
 public class ColorValue {
     internal val value: Color
 
