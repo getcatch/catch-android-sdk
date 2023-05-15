@@ -4,7 +4,7 @@ package com.getcatch.android.ui.styles
  * The global styles that can be used to customize Catch widgets.
  *
  * Any styling defined at the widget-level (ex. calloutStyle) will override styling defined globally
- * (ex. widgetTextStyle).Additionally, any themes or overrides set on an individual widget will
+ * (ex. widgetTextStyle). Additionally, any themes or overrides set on an individual widget will
  * override the global configurations set here. All styling parameters are optional and only
  * non-null values will override those at a higher level.
  */
