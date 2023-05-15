@@ -22,6 +22,11 @@
     </attr>
     <attr name="customBorderRadius" format="integer" />
     <attr name="customBorderColor" format="color" />
+    <attr name="catchLogoSize" format="enum">
+        <enum name="small" value="0" />
+        <enum name="medium" value="1" />
+        <enum name="fill" value="2" />
+    </attr>
 
     <!--  View attributes  -->
     <declare-styleable name="CalloutView">
@@ -63,5 +68,9 @@
         <attr name="borderStyle" />
         <attr name="customBorderRadius" />
         <attr name="customBorderColor" />
+    </declare-styleable>
+    <declare-styleable name="CatchLogoView">
+        <attr name="catchLogoSize" />
+        <attr name="themeVariant" />
     </declare-styleable>
 </resources>
