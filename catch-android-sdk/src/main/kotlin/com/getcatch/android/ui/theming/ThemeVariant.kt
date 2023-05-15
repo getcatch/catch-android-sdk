@@ -1,6 +1,5 @@
 package com.getcatch.android.ui.theming
 
-import com.getcatch.android.R
 import com.getcatch.android.ui.theming.color.CatchColorTheme
 import com.getcatch.android.ui.theming.color.CatchComposeColors
 
@@ -16,7 +15,6 @@ import com.getcatch.android.ui.theming.color.CatchComposeColors
  */
 public sealed class ThemeVariant {
     internal abstract val colors: CatchColorTheme
-    internal abstract val logoResId: Int
     internal val composeColors: CatchComposeColors by lazy { this.colors.toComposeColors() }
     public abstract val isDarkTheme: Boolean
 
@@ -26,7 +24,6 @@ public sealed class ThemeVariant {
      */
     public object Light : ThemeVariant() {
         override val colors: CatchColorTheme = CatchColorTheme.Light
-        override val logoResId: Int = R.drawable.ic_catch_logo_dark
         override val isDarkTheme: Boolean = false
     }
 
@@ -36,7 +33,6 @@ public sealed class ThemeVariant {
      */
     public object LightMono : ThemeVariant() {
         override val colors: CatchColorTheme = CatchColorTheme.LightMono
-        override val logoResId: Int = R.drawable.ic_catch_logo_mono_dark
         override val isDarkTheme: Boolean = false
     }
 
@@ -46,7 +42,6 @@ public sealed class ThemeVariant {
      */
     public object Dark : ThemeVariant() {
         override val colors: CatchColorTheme = CatchColorTheme.Dark
-        override val logoResId: Int = R.drawable.ic_catch_logo_white
         override val isDarkTheme: Boolean = true
     }
 
@@ -56,7 +51,6 @@ public sealed class ThemeVariant {
      */
     public object DarkMono : ThemeVariant() {
         override val colors: CatchColorTheme = CatchColorTheme.DarkMono
-        override val logoResId: Int = R.drawable.ic_catch_logo_mono_white
         override val isDarkTheme: Boolean = true
     }
 }

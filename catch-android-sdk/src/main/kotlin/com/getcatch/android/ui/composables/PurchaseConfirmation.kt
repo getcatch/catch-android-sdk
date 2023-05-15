@@ -38,6 +38,7 @@ import com.getcatch.android.ui.theming.CatchTheme
 import com.getcatch.android.ui.theming.ThemeVariant
 import com.getcatch.android.utils.PreviewData
 import com.getcatch.android.utils.centsToDollarsString
+import com.getcatch.android.utils.logoResId
 import com.getcatch.android.utils.transformAndAppend
 import org.koin.compose.koinInject
 
