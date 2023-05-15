@@ -16,27 +16,59 @@ import com.getcatch.android.ui.theming.ThemeVariant
 import com.getcatch.android.utils.getBorderStyle
 import com.getcatch.android.utils.getThemeVariant
 
+/**
+ * The ExpressCheckoutCallout widget displays similar informational content as the Callout with
+ * additional messaging on where to find Catch in the checkout flow.
+ *
+ * It is intended to be displayed in merchant checkout flows in which an express checkout option is
+ * present. Since Catch can only be selected on the final step of checkout, this messaging is meant
+ * to reduce confusion if the consumer intends to pay with Catch but does not see it displayed as an
+ * express checkout option. The widget also includes a button to open an informational modal with
+ * more details about paying with Catch and with links to visit Catch's marketing website.
+ *
+ * The ExpressCheckoutCallout widget also makes use of its price, items, and userCohorts
+ * attributes to calculate rewards the user will earn on the current purchase.
+ */
 public class ExpressCheckoutCalloutView @JvmOverloads constructor(
     context: Context,
     attrs: AttributeSet? = null,
     defStyleAttr: Int = 0
 ) : AbstractComposeView(context, attrs, defStyleAttr) {
     private val _price = mutableStateOf<Int?>(null)
+    private val _items = mutableStateOf<List<Item>?>(null)
+    private val _userCohorts = mutableStateOf<List<String>?>(null)
+    private val _borderStyle = mutableStateOf<BorderStyle>(BorderStyle.None)
+    private val _theme = mutableStateOf<ThemeVariant?>(null)
+    private val _styleOverrides = mutableStateOf<InfoWidgetStyle?>(null)
+
+    /**
+     * The cost in cents that a consumer would pay for the item(s) without redeeming Catch credit.
+     */
     public var price: Int? by _price
 
-    private val _borderStyle = mutableStateOf<BorderStyle>(BorderStyle.None)
-    public var borderStyle: BorderStyle by _borderStyle
-
-    private val _themeVariant = mutableStateOf<ThemeVariant?>(null)
-    public var themeVariant: ThemeVariant? by _themeVariant
-
-    private val _items = mutableStateOf<List<Item>?>(null)
-    public var items: List<Item>? by _items
-
-    private val _userCohorts = mutableStateOf<List<String>?>(null)
+    /**
+     * A list of user cohorts that the signed in user qualifies for. Used to calculate user cohort
+     * based rewards.
+     */
     public var userCohorts: List<String>? by _userCohorts
 
-    private val _styleOverrides = mutableStateOf<InfoWidgetStyle?>(null)
+    /** The [BorderStyle] that the widget renders. Defaults to the [BorderStyle.None] style. */
+    public var borderStyle: BorderStyle by _borderStyle
+
+    /**
+     * The Catch color [ThemeVariant]. If no theme is set, the theme set globally on the
+     * [Catch] object will be used, which defaults to [ThemeVariant.Light].
+     */
+    public var theme: ThemeVariant? by _theme
+
+    /** A list of all items included in the order. Used to calculate item-based rewards. */
+    public var items: List<Item>? by _items
+
+
+    /**
+     * Style overrides which can be used to override the widget's default
+     * appearance (ex. font size, color, weight, etc.).
+     */
     public var styleOverrides: InfoWidgetStyle? by _styleOverrides
 
     init {
@@ -51,7 +83,7 @@ public class ExpressCheckoutCalloutView @JvmOverloads constructor(
                     )?.let {
                         _borderStyle.value = it
                     }
-                    _themeVariant.value =
+                    _theme.value =
                         getThemeVariant(R.styleable.ExpressCheckoutCalloutView_themeVariant)
                 } finally {
                     recycle()
@@ -66,7 +98,7 @@ public class ExpressCheckoutCalloutView @JvmOverloads constructor(
             items = _items.value,
             userCohorts = _userCohorts.value,
             borderStyle = _borderStyle.value,
-            theme = _themeVariant.value,
+            theme = _theme.value,
             styleOverrides = _styleOverrides.value,
         )
     }
