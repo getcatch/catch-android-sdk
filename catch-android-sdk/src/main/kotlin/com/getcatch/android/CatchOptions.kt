@@ -20,7 +20,7 @@ import com.getcatch.android.ui.theming.ThemeVariant
  * applied to all text in widgets if set. Defaults to null.
  *
  * @property styleConfig An optional style config that will be
- * applied to all text in widgets if set. Defaults to null.
+ * applied to the elements of all widgets if set. Defaults to null.
  */
 public data class CatchOptions(
     val colorTheme: ThemeVariant = ThemeVariant.Light,
