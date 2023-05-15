@@ -24,6 +24,7 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import com.getcatch.android.Catch
 import com.getcatch.android.R
 import com.getcatch.android.models.Item
 import com.getcatch.android.ui.BorderStyle
@@ -83,6 +84,7 @@ public fun ExpressCheckoutCallout(
     theme: ThemeVariant? = null,
     styleOverrides: InfoWidgetStyle? = null,
 ) {
+    Catch.assertInitialized()
     val viewModelKey = EarnRedeemViewModel.generateKey(
         price = price,
         items = items,
