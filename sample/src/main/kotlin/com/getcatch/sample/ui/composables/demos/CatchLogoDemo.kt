@@ -9,8 +9,8 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.unit.dp
+import com.getcatch.android.ui.CatchLogoSize
 import com.getcatch.android.ui.composables.CatchLogo
-import com.getcatch.android.ui.composables.CatchLogoSize
 import com.getcatch.sample.ui.composables.DemoSection
 import com.getcatch.sample.ui.composables.SegmentedControl
 import com.getcatch.sample.utils.capitalize
@@ -22,7 +22,7 @@ fun CatchLogoDemo() {
         CatchLogo(size = logoSize)
     }, settingsContent = {
         Column(verticalArrangement = Arrangement.spacedBy(6.dp)) {
-            Text("Border Style")
+            Text("Size")
             SegmentedControl(
                 options = CatchLogoSize.values().toList().map { it.name.lowercase().capitalize() },
                 onOptionSelected = { logoSize = CatchLogoSize.values()[it] }

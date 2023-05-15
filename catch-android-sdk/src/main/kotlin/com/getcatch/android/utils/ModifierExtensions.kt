@@ -1,6 +1,8 @@
 package com.getcatch.android.utils
 
 import androidx.compose.foundation.border
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.composed
 import androidx.compose.ui.unit.dp
@@ -26,4 +28,10 @@ internal fun Modifier.border(borderStyle: BorderStyle): Modifier = composed {
     } else {
         this
     }
+}
+
+internal fun Modifier.size(catchLogoSize: CatchLogoSize): Modifier = when (catchLogoSize) {
+    CatchLogoSize.SMALL -> this.height(18.dp)
+    CatchLogoSize.MEDIUM -> this.height(40.dp)
+    CatchLogoSize.FILL -> this.fillMaxWidth()
 }
