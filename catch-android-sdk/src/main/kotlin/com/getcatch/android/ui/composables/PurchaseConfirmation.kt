@@ -41,6 +41,30 @@ import com.getcatch.android.utils.logoResId
 import com.getcatch.android.utils.transformAndAppend
 import org.koin.compose.koinInject
 
+/**
+ * The PurchaseConfirmation widget is designed to be used on the merchant's order
+ * confirmation page if Catch was used as a payment method.
+ *
+ * The widget includes information about how much credit the consumer just earned
+ * through their purchase and contains a link which directs the consumer to their account
+ * page on Catch's website.
+ *
+ * For virtual card integrations, use [PurchaseConfirmationByOrderId].
+ *
+ * @param earned The amount in cents that that the consumer earned in credit based on their purchase.
+ *
+ * @param donation The amount of cents that the consumer is donating. Not used if the merchant
+ * doesn't have donations enabled.
+ *
+ * @param borderStyle The [BorderStyle] that the widget renders.
+ * Defaults to the [BorderStyle.SlightRound] style.
+ *
+ * @param theme The Catch color [ThemeVariant]. If no theme is set, the theme set globally on the
+ * [Catch] object will be used, which defaults to [ThemeVariant.Light].
+ *
+ * @param styleOverrides Style overrides which can be used to override the widget's default
+ * appearance (ex. font size, color, weight, etc.).
+ */
 @Composable
 public fun PurchaseConfirmation(
     earned: Int,

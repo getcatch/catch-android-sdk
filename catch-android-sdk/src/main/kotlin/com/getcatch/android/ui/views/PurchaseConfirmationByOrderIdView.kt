@@ -16,21 +16,42 @@ import com.getcatch.android.ui.theming.ThemeVariant
 import com.getcatch.android.utils.getBorderStyle
 import com.getcatch.android.utils.getThemeVariant
 
+/**
+ * The PurchaseConfirmationByOrderId widget serves the same purpose as the [PurchaseConfirmationView]
+ * widget but is to be used for purchases made with Catch's virtual card integration.
+ */
 public class PurchaseConfirmationByOrderIdView @JvmOverloads constructor(
     context: Context,
     attrs: AttributeSet? = null,
     defStyleAttr: Int = 0
 ) : AbstractComposeView(context, attrs, defStyleAttr) {
     private val _orderId: MutableState<String?> = mutableStateOf(null)
+    private val _borderStyle: MutableState<BorderStyle> = mutableStateOf(BorderStyle.SlightRound)
+    private val _themeVariant: MutableState<ThemeVariant?> = mutableStateOf(null)
+    private val _styleOverrides: MutableState<ActionWidgetStyle?> = mutableStateOf(null)
+
+    /**
+     * The order ID used to create the virtual card checkout for which the
+     * purchase confirmation will be displayed.
+     */
     public var orderId: String? by _orderId
 
-    private val _borderStyle: MutableState<BorderStyle> = mutableStateOf(BorderStyle.SlightRound)
+    /**
+     * The [BorderStyle] that the widget renders.
+     * Defaults to the [BorderStyle.SlightRound] style.
+     */
     public var borderStyle: BorderStyle by _borderStyle
 
-    private val _themeVariant: MutableState<ThemeVariant?> = mutableStateOf(null)
+    /**
+     * The Catch color [ThemeVariant]. If no theme is set, the theme set globally on the
+     * [Catch] object will be used, which defaults to [ThemeVariant.Light].
+     */
     public var themeVariant: ThemeVariant? by _themeVariant
 
-    private val _styleOverrides: MutableState<ActionWidgetStyle?> = mutableStateOf(null)
+    /**
+     * Style overrides which can be used to override the widget's default
+     * appearance (ex. font size, color, weight, etc.).
+     */
     public var styleOverrides: ActionWidgetStyle? by _styleOverrides
 
     init {
