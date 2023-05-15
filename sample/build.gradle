@@ -14,6 +14,7 @@ ext.module_name = "sample"
 
 // Android app script
 apply from: rootProject.file("scripts/commons/app_config.gradle")
+apply plugin: "io.gitlab.arturbosch.detekt"
 
 /**
  * App versioning
@@ -78,6 +79,10 @@ android {
     }
 }
 
+detekt {
+    config = files("../config/detekt/sample-app-detekt.yml")
+}
+
 /**
  * App dependencies
  * */
@@ -137,4 +142,7 @@ dependencies {
     testImplementation 'androidx.test.ext:truth:1.5.0'
     testImplementation "org.mockito:mockito-core:4.4.0"
     testImplementation "org.jetbrains.kotlinx:kotlinx-coroutines-test:1.6.4"
+
+    // Static analysis
+    detektPlugins "io.gitlab.arturbosch.detekt:detekt-formatting:1.21.0"
 }

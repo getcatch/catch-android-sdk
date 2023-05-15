@@ -72,7 +72,4 @@ subprojects {
         sourceCompatibility = JavaVersion.VERSION_1_8
         targetCompatibility = JavaVersion.VERSION_1_8
     }
-    detekt {
-        // TODO: Decide on any additional config
-    }
 }
