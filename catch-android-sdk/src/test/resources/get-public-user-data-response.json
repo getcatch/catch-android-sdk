@@ -1,7 +1,27 @@
 {
+  "available_reward_breakdown": [
+    {
+      "amount": 5128,
+      "expirations": [
+        "2023-10-26T12:00:00+00:00",
+        "2023-06-01T12:00:00+00:00"
+      ],
+      "redeemable_flat_order_total_min": null,
+      "redeemable_percentage_order_total_max": null,
+      "reward_amounts": [
+        128,
+        5000
+      ],
+      "reward_ids": [
+        "rwd-723344ec-cdf2-4b28-aef9-3d409bc3e929",
+        "rwd-f1543e45-e7af-49fc-8ba3-5c37ca3a4863"
+      ]
+    }
+  ],
+  "claimed_second_chance_bonus_at_merchant": false,
   "first_purchase_bonus_eligibility": false,
   "is_catch_employee": true,
-  "reward_amount": 5271,
+  "reward_amount": 5128,
   "user_first_name": "Luigi",
   "was_referred": false
 }

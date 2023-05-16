@@ -24,6 +24,9 @@ internal data class PublicUserData(
 
     /** Whether or not the current user was referred to the merchant by Catch */
     val wasReferred: Boolean = false,
+
+    /** A list of rewards available for a user to redeem. */
+    val availableRewardBreakdown: List<AvailableRewardDetail>
 ) {
     companion object {
         val noData = PublicUserData(
@@ -32,6 +35,7 @@ internal data class PublicUserData(
             firstPurchaseBonusEligibility = true,
             isCatchEmployee = false,
             wasReferred = false,
+            availableRewardBreakdown = emptyList(),
         )
     }
 }
