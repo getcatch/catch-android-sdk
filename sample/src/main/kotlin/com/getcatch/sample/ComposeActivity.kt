@@ -44,16 +44,25 @@ class ComposeActivity : ComponentActivity() {
             .show()
     }
 
+    @Suppress("MagicNumber")
     private fun onVirtualCardCheckoutConfirmed(cardDetails: CardDetails) {
+        val lastFour = cardDetails.cardNumber.let { it.substring(it.length - 4) }
         Toast
-            .makeText(this, "Virtual card checkout confirmed.", Toast.LENGTH_SHORT)
+            .makeText(
+                this,
+                "Virtual card checkout confirmed. Card ending in: $lastFour",
+                Toast.LENGTH_SHORT
+            )
             .show()
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         catchCheckoutController = CatchCheckoutController(
-            this, this::onCheckoutConfirmed, this::onVirtualCardCheckoutConfirmed, this::onCheckoutCanceled
+            this,
+            this::onCheckoutConfirmed,
+            this::onVirtualCardCheckoutConfirmed,
+            this::onCheckoutCanceled
         )
         setContent {
             val viewModel: DemoSettingsViewModel = viewModel()
@@ -70,5 +79,4 @@ class ComposeActivity : ComponentActivity() {
             }
         }
     }
-
 }
