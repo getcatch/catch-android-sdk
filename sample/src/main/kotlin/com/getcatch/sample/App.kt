@@ -11,10 +11,10 @@ class App : Application() {
     override fun onCreate() {
         super.onCreate()
         Catch.initialize(
-            publicKey = "TEST_MERCHANT_PUBLIC_KEY",
+            publicKey = Constants.CATCH_PUBLIC_KEY,
             context = this,
             options = CatchOptions(
-                environment = Environment.SANDBOX,
+                environment = Environment.PRODUCTION,
             )
         )
     }
