@@ -48,7 +48,5 @@ public data class CreateVirtualCardCheckoutData(
     val userCohorts: List<String>,
 ) : Parcelable {
     /** Contains the name and version of the platform in use. */
-    internal val platform = Platform
+    internal val platform = Platform()
 }
-
-

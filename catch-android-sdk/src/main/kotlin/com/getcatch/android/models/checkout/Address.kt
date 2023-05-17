@@ -18,13 +18,13 @@ public data class Address(
 
     /** The optional apartment, suite, unit, etc. */
     @SerialName("address_2")
-    val address2: String?,
+    val address2: String? = null,
 
     /** The city. */
     val city: String,
 
     /** For international addresses where needed, such as name of the suburb for NZ or village for UK. */
-    val area: String?,
+    val area: String? = null,
 
     /** The state or province abbreviation, such as 'NY' or 'CA'. */
     val zoneCode: String,
@@ -36,5 +36,5 @@ public data class Address(
     val postalCode: String,
 
     /** The phone number associated with the order's contact. Format: "+12223334444" */
-    val phoneNumber: String?,
+    val phoneNumber: String? = null,
 ) : Parcelable

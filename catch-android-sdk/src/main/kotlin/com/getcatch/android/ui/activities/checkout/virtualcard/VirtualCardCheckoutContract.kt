@@ -26,7 +26,6 @@ internal class VirtualCardCheckoutContract :
             )
     }
 
-
     @Parcelize
     data class Args(
         val checkoutData: CreateVirtualCardCheckoutData?,

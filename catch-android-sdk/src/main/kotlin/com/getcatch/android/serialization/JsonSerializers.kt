@@ -10,4 +10,5 @@ internal val SnakeCaseSerializer = Json {
     isLenient = true
     ignoreUnknownKeys = true
     namingStrategy = JsonNamingStrategy.SnakeCase
+    encodeDefaults = true
 }

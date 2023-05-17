@@ -6,7 +6,6 @@ import io.ktor.client.call.NoTransformationFoundException
 import io.ktor.client.call.body
 import io.ktor.client.plugins.HttpRequestTimeoutException
 import io.ktor.client.statement.HttpResponse
-import io.ktor.client.statement.request
 import io.ktor.http.isSuccess
 import io.ktor.serialization.JsonConvertException
 import java.net.UnknownHostException
@@ -17,7 +16,6 @@ internal suspend inline fun <reified T> handleNetworkResponse(
     var response: HttpResponse? = null
     try {
         response = requestBlock()
-        Log.d("CatchSDK", "${response?.request?.url?.toString()}")
     } catch (ex: UnknownHostException) {
         Log.w(
             "handleNetworkResponse",

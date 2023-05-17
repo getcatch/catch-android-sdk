@@ -44,8 +44,7 @@ internal abstract class CheckoutActivity<T> : WebViewActivity() {
         }
     }
 
-    protected open fun handleCheckoutReady() { /* Default no-op */
-    }
+    protected open fun handleCheckoutReady() { /* Default no-op */ }
 
     override fun handleError(
         error: WebViewError?
