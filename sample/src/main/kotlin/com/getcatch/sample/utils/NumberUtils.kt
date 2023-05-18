@@ -2,6 +2,7 @@ package com.getcatch.sample.utils
 
 import java.text.NumberFormat
 import java.util.*
+import kotlin.math.roundToInt
 
 private val dollarsFormatter = NumberFormat.getCurrencyInstance().apply {
     maximumFractionDigits = 0
@@ -9,6 +10,10 @@ private val dollarsFormatter = NumberFormat.getCurrencyInstance().apply {
 }
 
 const val CENTS_PER_DOLLAR = 100f
+
+fun roundCentsToDollar(cents: Float): Int {
+    return (cents / CENTS_PER_DOLLAR).roundToInt() * CENTS_PER_DOLLAR.toInt()
+}
 
 fun centsToDollarsString(cents: Int): String {
     return dollarsFormatter.format(cents / CENTS_PER_DOLLAR)

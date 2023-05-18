@@ -13,64 +13,87 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Button
 import androidx.compose.material.MaterialTheme
+import androidx.compose.material.Slider
+import androidx.compose.material.SliderDefaults
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.getcatch.sample.DemoSettingsViewModel
+import com.getcatch.sample.ui.theming.DarkDemoColors
+import com.getcatch.sample.ui.theming.LightDemoColors
 import com.getcatch.sample.utils.allThemeVariants
 import com.getcatch.sample.utils.centsToDollarsString
 import com.getcatch.sample.utils.name
+import com.getcatch.sample.utils.roundCentsToDollar
+import kotlin.math.roundToInt
+
+const val FIVE_HUNDRED_DOLLARS_CENTS = 50000f
 
 @Composable
 fun DemoSettingsSheet(viewModel: DemoSettingsViewModel) {
-    Column(
-        Modifier
-            .fillMaxWidth()
-            .padding(top = 8.dp, start = 16.dp, end = 16.dp, bottom = 32.dp)
-    ) {
-
-        Box(
+    MaterialTheme(colors = if (viewModel.themeVariant.isDarkTheme) DarkDemoColors else LightDemoColors) {
+        var sliderPosition by remember { mutableStateOf(0f) }
+        Column(
             Modifier
-                .width(80.dp)
-                .height(6.dp)
-                .align(Alignment.CenterHorizontally)
-                .background(
-                    color = MaterialTheme.colors.onBackground.copy(alpha = 0.5f),
-                    shape = RoundedCornerShape(percent = 50)
-                )
-        )
+                .fillMaxWidth()
+                .padding(top = 8.dp, start = 16.dp, end = 16.dp, bottom = 32.dp)
+        ) {
+            Box(
+                Modifier
+                    .width(80.dp)
+                    .height(6.dp)
+                    .align(Alignment.CenterHorizontally)
+                    .background(
+                        color = MaterialTheme.colors.onBackground.copy(alpha = 0.5f),
+                        shape = RoundedCornerShape(percent = 50)
+                    )
+            )
 
-        DemoSettingSheetSection(headerText = "Price: ${centsToDollarsString(viewModel.price)}") {
-            Row(
-                Modifier.fillMaxWidth(),
-                verticalAlignment = Alignment.CenterVertically,
-                horizontalArrangement = Arrangement.Center
-            ) {
-                Button(onClick = { viewModel.subtractTenDollars() }, enabled = viewModel.price != 0) {
-                    Text(text = "-$10")
-                }
-                Spacer(Modifier.width(8.dp))
-                Button(onClick = { viewModel.subtractOneDollar() }, enabled = viewModel.price != 0) {
-                    Text(text = "-$1")
-                }
-                Spacer(Modifier.width(8.dp))
-                Button(onClick = { viewModel.addOneDollar() }) {
-                    Text(text = "+$1")
-                }
-                Spacer(Modifier.width(8.dp))
-                Button(onClick = { viewModel.addTenDollars() }) {
-                    Text(text = "+$10")
+            DemoSettingSheetSection(headerText = "Price: ${centsToDollarsString(sliderPosition.roundToInt())}") {
+                Row(
+                    Modifier.fillMaxWidth(),
+                    verticalAlignment = Alignment.CenterVertically,
+                    horizontalArrangement = Arrangement.Center
+                ) {
+                    Button(onClick = {
+                        sliderPosition = 0f
+                        viewModel.clearPrice()
+                    }, enabled = viewModel.price != 0) {
+                        Text(text = "Clear")
+                    }
+                    Spacer(Modifier.width(8.dp))
+                    Slider(
+                        modifier = Modifier.weight(1f),
+                        value = sliderPosition,
+                        onValueChange = {
+                            sliderPosition = it
+                        },
+                        onValueChangeFinished = {
+                            viewModel.updatePrice(roundCentsToDollar(sliderPosition))
+                        },
+                        valueRange = 0f..FIVE_HUNDRED_DOLLARS_CENTS,
+                        steps = 500,
+                        colors = SliderDefaults.colors(
+                            inactiveTrackColor = MaterialTheme.colors.primary,
+                            activeTrackColor = MaterialTheme.colors.background,
+                            thumbColor = MaterialTheme.colors.primary,
+                        )
+                    )
                 }
             }
-        }
 
-        DemoSettingSheetSection("Theme Variant") {
-            SegmentedControl(
-                options = allThemeVariants.map { it.name },
-                onOptionSelected = { viewModel.updateThemeVariant(allThemeVariants[it]) }
-            )
+            DemoSettingSheetSection("Theme Variant") {
+                SegmentedControl(
+                    options = allThemeVariants.map { it.name },
+                    onOptionSelected = { viewModel.updateThemeVariant(allThemeVariants[it]) }
+                )
+            }
         }
     }
 }
