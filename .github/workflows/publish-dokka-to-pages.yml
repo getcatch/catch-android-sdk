@@ -42,6 +42,7 @@ jobs:
         with:
           # Upload only docs directory
           path: 'catch-android-sdk/build/dokka/html'
+
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v2
