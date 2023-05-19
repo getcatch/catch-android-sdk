@@ -39,24 +39,32 @@ internal class TOFUActivity : WebViewActivity(), KoinComponent {
     override fun generateUrl() {
         val args: TofuArgs? = intent.parcelableExtra(EXTRA_ARGS)
         lifecycleScope.launch {
-            merchantRepo.activeMerchant.collect { merchant ->
-                if (merchant != null) {
-                    url.value = CatchUrls.tofu(
-                        environment = environment,
-                        publicKey = publicKey,
-                        merchant = merchant,
-                        path = args?.path ?: TofuPath.HOW_IT_WORKS
-                    )
-                    if (args != null) {
-                        tofuOpenData.value = TofuOpenData(
-                            earnedRewardsBreakdown = args.rewardsSummary,
-                            price = args.price,
-                            merchantDefaults = MerchantDefaults.fromMerchant(merchant),
-                            path = args.path
+            combine(merchantRepo.activeMerchant, userRepo.activeUser) { merchant, user ->
+                Pair(
+                    merchant,
+                    user
+                )
+            }
+                .collect { (merchant, user) ->
+                    if (merchant != null) {
+                        url.value = CatchUrls.tofu(
+                            environment = environment,
+                            publicKey = publicKey,
+                            merchant = merchant,
+                            path = args?.path ?: TofuPath.HOW_IT_WORKS
                         )
+                        if (args != null && user != null) {
+                            tofuOpenData.value = TofuOpenData(
+                                earnedRewardsBreakdown = args.rewardsSummary,
+                                price = args.price,
+                                merchantDefaults = MerchantDefaults.fromMerchant(merchant),
+                                donationRecipient = merchant.donationRecipient,
+                                publicUserData = user,
+                                path = args.path,
+                            )
+                        }
                     }
                 }
-            }
         }
         lifecycleScope.launch {
             combine(tofuReady, tofuOpenData) { ready, data -> Pair(ready, data) }

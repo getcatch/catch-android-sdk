@@ -34,6 +34,7 @@ internal object FakeDataProvider {
         firstPurchaseBonusEligibility = false,
         isCatchEmployee = false,
         wasReferred = false,
+        availableRewardBreakdown = emptyList(),
     )
 
     fun randomItem() = Item(
@@ -52,27 +53,30 @@ internal object FakeDataProvider {
         val NoCredits = PublicUserData(
             userFirstName = "First",
             rewardAmount = 0,
-            firstPurchaseBonusEligibility = false
+            firstPurchaseBonusEligibility = false,
+            availableRewardBreakdown = emptyList(),
         )
 
         val Returning = PublicUserData(
             userFirstName = "First",
             rewardAmount = 1500,
-            firstPurchaseBonusEligibility = false
+            firstPurchaseBonusEligibility = false,
+                availableRewardBreakdown = emptyList(),
         )
 
         val New = PublicUserData(
             userFirstName = "First",
             rewardAmount = 0,
-            firstPurchaseBonusEligibility = true
+            firstPurchaseBonusEligibility = true,
+            availableRewardBreakdown = emptyList(),
         )
 
         fun newWithCredits(amount: Int = 500) = PublicUserData(
             userFirstName = "First",
             rewardAmount = amount,
-            firstPurchaseBonusEligibility = true
+            firstPurchaseBonusEligibility = true,
+            availableRewardBreakdown = emptyList(),
         )
-
     }
 
     object EarnedRewards {
