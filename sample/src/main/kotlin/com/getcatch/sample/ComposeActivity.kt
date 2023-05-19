@@ -19,17 +19,36 @@ import com.getcatch.sample.ui.composables.demos.PaymentMethodDemo
 import com.getcatch.sample.ui.composables.demos.PurchaseConfirmationDemo
 import com.getcatch.sample.ui.theming.DarkDemoColors
 import com.getcatch.sample.ui.theming.LightDemoColors
+import com.getcatch.sample.utils.CheckoutDemoOption
+import com.getcatch.sample.utils.createRandomCheckoutData
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class ComposeActivity : ComponentActivity() {
     lateinit var catchCheckoutController: CatchCheckoutController
 
-    private fun openDirectCheckout(checkoutId: String, checkoutPrefill: CheckoutPrefill) {
-        catchCheckoutController.openCheckout(
-            checkoutId,
-            checkoutPrefill,
-        )
+    private fun handleOpenCheckout(
+        checkoutOption: CheckoutDemoOption,
+        id: String,
+        checkoutPrefill: CheckoutPrefill
+    ) {
+        when (checkoutOption) {
+            CheckoutDemoOption.DIRECT_OPEN -> {
+                catchCheckoutController.openCheckout(id, prefill = checkoutPrefill)
+            }
+
+            CheckoutDemoOption.VIRTUAL_CARD_CREATE -> {
+                catchCheckoutController.createAndOpenVirtualCardCheckout(
+                    createRandomCheckoutData(id),
+                    prefill = checkoutPrefill
+                )
+            }
+
+            CheckoutDemoOption.VIRTUAL_CARD_OPEN -> {
+                catchCheckoutController.openVirtualCardCheckout(id, prefill = checkoutPrefill)
+            }
+        }
+
     }
 
     private fun onCheckoutCanceled() {
@@ -74,7 +93,7 @@ class ComposeActivity : ComponentActivity() {
                     PurchaseConfirmationDemo(price = viewModel.price)
                     CampaignLinkDemo()
                     CatchLogoDemo()
-                    OpenCheckoutDemo(openDirectCheckout = this@ComposeActivity::openDirectCheckout)
+                    OpenCheckoutDemo(handleOpenCheckout = this@ComposeActivity::handleOpenCheckout)
                 }
             }
         }

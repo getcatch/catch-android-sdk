@@ -50,7 +50,7 @@ fun DemoScaffold(viewModel: DemoSettingsViewModel, content: @Composable ColumnSc
                     Modifier
                         .height(48.dp)
                         .fillMaxWidth()
-                        .background(MaterialTheme.colors.surface)
+                        .background(MaterialTheme.colors.secondary)
                 )
             }
             Box(

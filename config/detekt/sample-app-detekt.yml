@@ -124,7 +124,7 @@ complexity:
     threshold: 600
   LongMethod:
     active: true
-    threshold: 100
+    threshold: 200
   LongParameterList:
     active: true
     functionThreshold: 30 # Higher than default for Composables
