@@ -6,8 +6,9 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.material.MaterialTheme
 import androidx.lifecycle.viewmodel.compose.viewModel
+import com.getcatch.android.models.checkout.CardDetails
 import com.getcatch.android.models.checkout.CheckoutPrefill
-import com.getcatch.android.ui.activities.checkout.direct.DirectCheckoutController
+import com.getcatch.android.ui.activities.checkout.CatchCheckoutController
 import com.getcatch.sample.ui.composables.DemoScaffold
 import com.getcatch.sample.ui.composables.demos.CalloutDemo
 import com.getcatch.sample.ui.composables.demos.CampaignLinkDemo
@@ -22,10 +23,10 @@ import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class ComposeActivity : ComponentActivity() {
-    lateinit var directCheckoutController: DirectCheckoutController
+    lateinit var catchCheckoutController: CatchCheckoutController
 
     private fun openDirectCheckout(checkoutId: String, checkoutPrefill: CheckoutPrefill) {
-        directCheckoutController.openCheckout(
+        catchCheckoutController.openCheckout(
             checkoutId,
             checkoutPrefill,
         )
@@ -37,16 +38,31 @@ class ComposeActivity : ComponentActivity() {
             .show()
     }
 
-    private fun onDirectCheckoutConfirmed() {
+    private fun onCheckoutConfirmed() {
         Toast
             .makeText(this, "Checkout confirmed.", Toast.LENGTH_SHORT)
             .show()
     }
 
+    @Suppress("MagicNumber")
+    private fun onVirtualCardCheckoutConfirmed(cardDetails: CardDetails) {
+        val lastFour = cardDetails.cardNumber.let { it.substring(it.length - 4) }
+        Toast
+            .makeText(
+                this,
+                "Virtual card checkout confirmed. Card ending in: $lastFour",
+                Toast.LENGTH_SHORT
+            )
+            .show()
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        directCheckoutController = DirectCheckoutController(
-            this, this::onDirectCheckoutConfirmed, this::onCheckoutCanceled
+        catchCheckoutController = CatchCheckoutController(
+            this,
+            this::onCheckoutConfirmed,
+            this::onVirtualCardCheckoutConfirmed,
+            this::onCheckoutCanceled
         )
         setContent {
             val viewModel: DemoSettingsViewModel = viewModel()
@@ -63,5 +79,4 @@ class ComposeActivity : ComponentActivity() {
             }
         }
     }
-
 }

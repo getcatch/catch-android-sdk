@@ -1,4 +1,4 @@
-package com.getcatch.android.ui.activities.checkout.virtualcard
+package com.getcatch.android.ui.activities.checkout
 
 import com.getcatch.android.models.checkout.CardDetails
 
