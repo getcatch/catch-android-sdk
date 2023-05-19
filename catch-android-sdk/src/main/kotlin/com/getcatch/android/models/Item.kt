@@ -24,7 +24,7 @@ public data class Item(
     val quantity: Int,
 
     /** An optional list of categories the item belongs to. */
-    val category: List<String>?,
+    val category: List<String>? = null,
 
     /** The image of the item. */
     val imageUrl: String,

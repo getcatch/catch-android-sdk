@@ -1,10 +1,9 @@
 package com.getcatch.android.ui.activities.checkout.virtualcard
 
-
 import androidx.lifecycle.lifecycleScope
 import com.getcatch.android.models.PublicKey
-import com.getcatch.android.models.checkout.CardDetails
 import com.getcatch.android.models.checkout.CreateVirtualCardCheckoutData
+import com.getcatch.android.models.checkout.VirtualCardCheckoutSuccessData
 import com.getcatch.android.network.Environment
 import com.getcatch.android.repository.MerchantRepository
 import com.getcatch.android.serialization.SnakeCaseSerializer
@@ -53,6 +52,7 @@ internal class VirtualCardCheckoutActivity
                             merchant = merchant,
                             prefill = args.prefill,
                         )
+                        checkoutData.value = args.checkoutData
                     } else {
                         finishWithError(defaultInitializationError)
                     }
@@ -64,9 +64,10 @@ internal class VirtualCardCheckoutActivity
             combine(checkoutReady, checkoutData) { ready, data -> Pair(ready, data) }
                 .collect { (ready, data) ->
                     if (ready && data != null) {
+                        val checkoutDataJson = SnakeCaseSerializer.encodeToJsonElement(data) as JsonObject
                         val messageBody = PostMessageBody(
                             PostMessageActions.VIRTUAL_CARD_CHECKOUT_DATA,
-                            data = SnakeCaseSerializer.encodeToJsonElement(data) as JsonObject
+                            data = checkoutDataJson
                         )
                         postMessage(messageBody)
                     }
@@ -77,13 +78,17 @@ internal class VirtualCardCheckoutActivity
     override val canceledResult: VirtualCardCheckoutResult = VirtualCardCheckoutResult.Canceled
 
     override fun generateSuccessResult(successMessage: PostMessageBody): VirtualCardCheckoutResult {
-        val cardDetails: CardDetails =
+        val successData: VirtualCardCheckoutSuccessData =
             SnakeCaseSerializer.decodeFromJsonElement(successMessage.data!!)
-        return VirtualCardCheckoutResult.Confirmed(cardDetails)
+        return VirtualCardCheckoutResult.Confirmed(successData.cardDetails)
     }
 
     override fun generateFailureResult(error: Throwable) = VirtualCardCheckoutResult.Failed(error)
 
     override fun generateBundleForResult(result: VirtualCardCheckoutResult) =
         VirtualCardCheckoutContract.Result(result).toBundle()
+
+    override fun handleCheckoutReady() {
+        checkoutReady.value = true
+    }
 }

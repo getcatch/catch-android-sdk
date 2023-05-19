@@ -124,7 +124,6 @@ public object Catch {
             // Assume a new user so rewards can be calculated
             userRepo.fallbackToNewUser()
         }
-
     }
 
     private suspend fun refreshUser(merchantRepo: MerchantRepository, userRepo: UserRepository) {
@@ -161,8 +160,7 @@ public object Catch {
                     refreshUserJob?.cancel()
                 }
 
-                else -> { /* No-op */
-                }
+                else -> { /* No-op */ }
             }
         }
         )
