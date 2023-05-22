@@ -1,9 +1,9 @@
 package com.getcatch.android
 
-import androidx.compose.ui.text.font.FontFamily
 import com.getcatch.android.network.Environment
 import com.getcatch.android.ui.styles.CatchStyleConfig
 import com.getcatch.android.ui.theming.ThemeVariant
+import com.getcatch.android.ui.typography.CustomFontFamily
 
 /**
  * An object which specifies optional configuration settings to
@@ -25,6 +25,6 @@ import com.getcatch.android.ui.theming.ThemeVariant
 public data class CatchOptions(
     val colorTheme: ThemeVariant = ThemeVariant.Light,
     val environment: Environment = Environment.SANDBOX,
-    val customFontFamily: FontFamily? = null,
+    val customFontFamily: CustomFontFamily? = null,
     val styleConfig: CatchStyleConfig? = null,
 )

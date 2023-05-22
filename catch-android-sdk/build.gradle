@@ -110,17 +110,17 @@ dependencies {
     
     // COMPOSE DEPENDENCIES
     // Integration with activities
-    api 'androidx.activity:activity-compose:1.7.0'
+    implementation 'androidx.activity:activity-compose:1.7.0'
     // Compose Material Design
-    api 'androidx.compose.material:material:1.4.0'
+    implementation 'androidx.compose.material:material:1.4.0'
     // Animations
-    api 'androidx.compose.animation:animation:1.4.0'
+    implementation 'androidx.compose.animation:animation:1.4.0'
     // Tooling support (Previews, etc.)
-    api 'androidx.compose.ui:ui-tooling:1.4.0'
+    implementation 'androidx.compose.ui:ui-tooling:1.4.0'
     // Integration with ViewModels
-    api 'androidx.lifecycle:lifecycle-viewmodel-compose:2.6.1'
+    implementation 'androidx.lifecycle:lifecycle-viewmodel-compose:2.6.1'
     // Lifecycle runtime
-    api 'androidx.lifecycle:lifecycle-runtime-compose:2.6.1'
+    implementation 'androidx.lifecycle:lifecycle-runtime-compose:2.6.1'
     // Accompanist WebView
     implementation "com.google.accompanist:accompanist-webview:0.30.1"
     // Accompanist Flow Layouts
