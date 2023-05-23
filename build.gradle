@@ -1,3 +1,4 @@
+import org.jetbrains.dokka.gradle.DokkaTask
 
 buildscript {
     // Project-wide variables
@@ -13,8 +14,6 @@ buildscript {
         google()
         mavenCentral()
         gradlePluginPortal()
-        // maven { url "https://jitpack.io"  }
-        // jcenter()
     }
     
     /**
@@ -55,8 +54,6 @@ allprojects {
         google()
         mavenCentral()
         gradlePluginPortal()
-        // maven { url "https://jitpack.io"  }
-        // jcenter()
     }
 }
 
@@ -71,5 +68,18 @@ subprojects {
         // Kotlin compiler JVM-target version (as int)
         sourceCompatibility = JavaVersion.VERSION_1_8
         targetCompatibility = JavaVersion.VERSION_1_8
+    }
+
+    tasks.withType(DokkaTask.class) {
+        suppressInheritedMembers.set(true)
+        String dokkaBaseConfiguration = """
+        {
+          "footerMessage": "(c) 2023 Catch"
+        }
+        """
+        pluginsMapConfiguration.set(
+                // fully qualified plugin name to json configuration
+                ["org.jetbrains.dokka.base.DokkaBase": dokkaBaseConfiguration]
+        )
     }
 }

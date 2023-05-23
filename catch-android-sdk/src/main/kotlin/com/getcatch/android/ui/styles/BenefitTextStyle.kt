@@ -9,10 +9,16 @@ import androidx.compose.ui.text.font.FontWeight as ComposeFontWeight
  * Styling for the benefit text within Catch widgets.
  * The benefit text displays the earned or redeemable credits to the user.
  *
- * Examples: "You earned $x", "Redeem $x" or "Earn x% credit".
+ * Examples:
+ *  - "You earned $x"
+ *  - "Redeem $x"
+ *  - "Earn x% credit".
  *
  * This portion of the text can be highlighted with a different text color and/or font weight.
- * All other text attributes will be inherited from the general [WidgetTextStyle].
+ * All other text attributes will be inherited from the [`WidgetTextStyle`](WidgetTextStyle).
+ *
+ * See [`BenefitTextStyle.create`](BenefitTextStyle.create) for apps that do not have Compose
+ * dependencies used in the primary constructor.
  */
 public data class BenefitTextStyle(
     /** Configures the font weight of the benefit text. */
@@ -57,9 +63,10 @@ public data class BenefitTextStyle(
 
     public companion object {
         /**
-         * Utility function to replace primary constructor for view based apps that use [ColorValue]
-         * and [FontWeight] instead of the Compose [androidx.compose.ui.graphics.Color] and
-         * [androidx.compose.ui.text.font.FontWeight].
+         * Utility function to replace primary constructor for view based apps that use the SDK
+         * provided [`ColorValue`](ColorValue) and [`FontWeight`](FontWeight) instead of the Compose
+         * [`Color`](androidx.compose.ui.graphics.Color) and
+         * [`FontWeight`](androidx.compose.ui.text.font.FontWeight).
          */
         public fun create(
             fontWeight: FontWeight? = null,

@@ -27,15 +27,16 @@ public class CatchLogoView @JvmOverloads constructor(
     private val _themeVariant = mutableStateOf<ThemeVariant?>(null)
 
     /**
-     * The [CatchLogoSize] options are meant to provide some recommended defaults while
-     * allowing for customization by using the [CatchLogoSize.FILL] within a container of the size of
-     * your choosing.
+     * The [`CatchLogoSize`](CatchLogoSize) options are meant to provide some recommended defaults
+     * while allowing for customization by using the [`CatchLogoSize.FILL`](CatchLogoSize.FILL)
+     * within a container of the size of your choosing.
      */
     public var size: CatchLogoSize by _size
 
     /**
-     * The Catch color [ThemeVariant]. If no theme is set, the theme set globally on the
-     * [Catch] object will be used, which defaults to [ThemeVariant.Light].
+     * The Catch color [`ThemeVariant`](ThemeVariant). If no theme is set, the theme set globally on
+     * the [`Catch`](com.getcatch.android.Catch) object will be used, which defaults to
+     * [`ThemeVariant.Light`](ThemeVariant.Light).
      */
     public var themeVariant: ThemeVariant? by _themeVariant
 

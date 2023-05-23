@@ -17,8 +17,9 @@ import com.getcatch.android.utils.getBorderStyle
 import com.getcatch.android.utils.getThemeVariant
 
 /**
- * The ExpressCheckoutCallout widget displays similar informational content as the Callout with
- * additional messaging on where to find Catch in the checkout flow.
+ * The `ExpressCheckoutCallout` widget displays similar informational content as the
+ * [`Callout`](CalloutView) widget with additional messaging on where to find Catch
+ * in the checkout flow.
  *
  * It is intended to be displayed in merchant checkout flows in which an express checkout option is
  * present. Since Catch can only be selected on the final step of checkout, this messaging is meant
@@ -26,8 +27,8 @@ import com.getcatch.android.utils.getThemeVariant
  * express checkout option. The widget also includes a button to open an informational modal with
  * more details about paying with Catch and with links to visit Catch's marketing website.
  *
- * The ExpressCheckoutCallout widget also makes use of its price, items, and userCohorts
- * attributes to calculate rewards the user will earn on the current purchase.
+ * The `ExpressCheckoutCallout` widget makes use of its `price`, `items`, and `userCohorts`
+ * properties to calculate rewards the user will earn on the current purchase.
  */
 public class ExpressCheckoutCalloutView @JvmOverloads constructor(
     context: Context,
@@ -56,14 +57,14 @@ public class ExpressCheckoutCalloutView @JvmOverloads constructor(
     public var borderStyle: BorderStyle by _borderStyle
 
     /**
-     * The Catch color [ThemeVariant]. If no theme is set, the theme set globally on the
-     * [Catch] object will be used, which defaults to [ThemeVariant.Light].
+     * The Catch color [`ThemeVariant`](ThemeVariant). If no theme is set, the theme set globally on
+     * the [`Catch`](com.android.getcatch.Catch) object will be used, which defaults to
+     * [`ThemeVariant.Light`](ThemeVariant.Light).
      */
     public var theme: ThemeVariant? by _theme
 
     /** A list of all items included in the order. Used to calculate item-based rewards. */
     public var items: List<Item>? by _items
-
 
     /**
      * Style overrides which can be used to override the widget's default

@@ -15,8 +15,11 @@ import androidx.compose.ui.text.font.FontWeight as ComposeFontWeight
  * The styling for action buttons found in Catch widgets.
  *
  * The following widgets contain action buttons:
- * - [com.getcatch.android.ui.composables.PurchaseConfirmation]
- * - [com.getcatch.android.ui.composables.CampaignLink]
+ * - [`PurchaseConfirmation`](com.getcatch.android.ui.composables.PurchaseConfirmation)
+ * - [`CampaignLink`](com.getcatch.android.ui.composables.CampaignLink)
+ *
+ * See [`ActionButtonStyle.create`](ActionButtonStyle.create) for apps that do not have Compose
+ * dependencies used in the primary constructor.
  */
 public data class ActionButtonStyle(
     /** Configures the font size for the button's label. */
@@ -113,9 +116,10 @@ public data class ActionButtonStyle(
 
     public companion object {
         /**
-         * Utility function to replace primary constructor for view based apps that use [ColorValue]
-         * and [FontWeight] instead of the Compose [androidx.compose.ui.graphics.Color] and
-         * [androidx.compose.ui.text.font.FontWeight].
+         * Utility function to replace primary constructor for view based apps that use the SDK
+         * provided [`ColorValue`](ColorValue) and [`FontWeight`](FontWeight) instead of the Compose
+         * [`Color`](androidx.compose.ui.graphics.Color) and
+         * [`FontWeight`](androidx.compose.ui.text.font.FontWeight).
          */
         public fun create(
             fontSize: Float? = null,

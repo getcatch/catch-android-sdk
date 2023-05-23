@@ -17,12 +17,13 @@ import com.getcatch.android.utils.size
 /**
  * A view which displays Catch's logo.
  *
- * @param size The [CatchLogoSize] options are meant to provide some recommended defaults while
- * allowing for customization by using the [CatchLogoSize.FILL] within a container of the size of
- * your choosing.
+ * @param size The [`CatchLogoSize`](CatchLogoSize) options are meant to provide some recommended
+ * defaults while allowing for customization by using the [`CatchLogoSize.FILL`](CatchLogoSize.FILL)
+ * within a container of the size of your choosing.
  *
- * @param theme The Catch color [ThemeVariant]. If no theme is set, the theme set globally on the
- * [Catch] object will be used, which defaults to [ThemeVariant.Light].
+ * @param theme The Catch color [`ThemeVariant`](ThemeVariant). If no theme is set, the theme set
+ * globally on the [`Catch`](Catch) object will be used, which defaults to
+ * [`ThemeVariant.Light`](ThemeVariant.Light).
  */
 @Composable
 public fun CatchLogo(size: CatchLogoSize = CatchLogoSize.SMALL, theme: ThemeVariant? = null) {

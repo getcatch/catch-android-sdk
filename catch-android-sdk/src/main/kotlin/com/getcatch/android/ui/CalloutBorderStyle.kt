@@ -3,9 +3,11 @@ package com.getcatch.android.ui
 import com.getcatch.android.ui.styles.values.ColorValue
 
 /**
- * The options for the style of border the [Callout] widget renders.
+ * The options for the style of border the [`Callout`](com.getcatch.android.ui.composables.Callout)
+ * widget renders.
  *
- * The only difference between this and the [BorderStyle] is that the [Callout] widget
+ * The only difference between this and the [`BorderStyle`](BorderStyle) is that the
+ * [`Callout`](com.getcatch.android.ui.composables.Callout) widget
  * also supports a pill shaped border.
  */
 public sealed interface CalloutBorderStyle {

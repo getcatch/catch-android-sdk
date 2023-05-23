@@ -12,17 +12,19 @@ import com.getcatch.android.viewmodels.RewardsByOrderIdViewModel
 import org.koin.androidx.compose.koinViewModel
 
 /**
- * The PurchaseConfirmationByOrderId widget serves the same purpose as the [PurchaseConfirmation]
- * widget but is to be used for purchases made with Catch's virtual card integration.
+ * The `PurchaseConfirmationByOrderId` widget serves the same purpose as the
+ * [`PurchaseConfirmation`](PurchaseConfirmation) widget but is to be used
+ * for purchases made with Catch's virtual card integration.
  *
  * @param orderId The order ID used to create the virtual card checkout for which the
  * purchase confirmation will be displayed.
  *
- * @param borderStyle The [BorderStyle] that the widget renders.
- * Defaults to the [BorderStyle.SlightRound] style.
+ * @param borderStyle The [`BorderStyle`](BorderStyle) that the widget renders.
+ * Defaults to the [`BorderStyle.SlightRound`](BorderStyle.SlightRound) style.
  *
- * @param theme The Catch color [ThemeVariant]. If no theme is set, the theme set globally on the
- * [Catch] object will be used, which defaults to [ThemeVariant.Light].
+ * @param theme The Catch color [`ThemeVariant`](ThemeVariant). If no theme is set, the theme set
+ * globally on the [`Catch`](Catch) object will be used, which defaults to
+ * [`ThemeVariant.Light`](ThemeVariant.Light).
  *
  * @param styleOverrides Style overrides which can be used to override the widget's default
  * appearance (ex. font size, color, weight, etc.).

@@ -9,7 +9,7 @@ public enum class TextTransform {
     /** Capitalizes each word in the string (ex. "Test String"). */
     CAPITALIZE,
 
-    /** Converts each character in the string to uppercase (ex. "test string"). */
+    /** Converts each character in the string to uppercase (ex. "TEST STRING"). */
     UPPERCASE,
 
     /** Converts each character in the string to lowercase (ex. "test string"). */

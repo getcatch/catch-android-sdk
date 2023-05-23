@@ -36,7 +36,7 @@ import com.getcatch.android.viewmodels.EarnRedeemViewModel
 import org.koin.androidx.compose.koinViewModel
 
 /**
- * The Callout widget shows consumers how much Catch credit they could earn or redeem
+ * The `Callout` widget shows consumers how much Catch credit they could earn or redeem
  * based on the price of the item(s) they're considering (e.g. when viewing a product detail
  * page or their cart).
  *
@@ -46,7 +46,7 @@ import org.koin.androidx.compose.koinViewModel
  * currently signed in to Catch, and tailors the messaging to them if they have rewards that
  * are available to redeem with the merchant.
  *
- * The Callout widget also makes use of its price, items, and userCohorts attributes to calculate
+ * The `Callout` widget makes use of its `price`, `items`, and `userCohorts` params to calculate
  * rewards the user will earn on the current item (if implemented on product detail page) or
  * on the current order (if implemented in the cart or during the checkout flow).
  *
@@ -66,11 +66,12 @@ import org.koin.androidx.compose.koinViewModel
  * (e.g. "or earn $23.00 credit" instead of "Earn $23.00 credit"). Intended to be used when the
  * callout is found below other payment method callout widgets.
  *
- * @param borderStyle The [CalloutBorderStyle] that the widget renders.
- * Defaults to the [CalloutBorderStyle.None] style.
+ * @param borderStyle The [`CalloutBorderStyle`](CalloutBorderStyle) that the widget renders.
+ * Defaults to the [`CalloutBorderStyle.None`](CalloutBorderStyle.None) style.
  *
- * @param theme The Catch color [ThemeVariant]. If no theme is set, the theme set globally on the
- * [Catch] object will be used, which defaults to [ThemeVariant.Light].
+ * @param theme The Catch color [`ThemeVariant`](ThemeVariant). If no theme is set, the theme set
+ * globally on the [`Catch`](Catch) object will be used, which defaults to
+ * [`ThemeVariant.Light`](ThemeVariant.Light).
  *
  * @param styleOverrides Style overrides which can be used to override the widget's default
  * appearance (ex. font size, color, weight, etc.).
