@@ -10,6 +10,9 @@ import androidx.compose.ui.text.font.FontWeight as ComposeFontWeight
 
 /**
  * Styling for the text components within the Catch widgets.
+ *
+ * See [`WidgetTextStyle.create`](WidgetTextStyle.create) for apps that do not have Compose
+ * dependencies used in the primary constructor.
  */
 public data class WidgetTextStyle(
     /** Configures the font size for text components. */
@@ -66,9 +69,10 @@ public data class WidgetTextStyle(
 
     public companion object {
         /**
-         * Utility function to replace primary constructor for view based apps that use [ColorValue]
-         * and [FontWeight] instead of the Compose [androidx.compose.ui.graphics.Color] and
-         * [androidx.compose.ui.text.font.FontWeight].
+         * Utility function to replace primary constructor for view based apps that use the SDK
+         * provided [`ColorValue`](ColorValue) and [`FontWeight`](FontWeight) instead of the Compose
+         * [`Color`](androidx.compose.ui.graphics.Color) and
+         * [`FontWeight`](androidx.compose.ui.text.font.FontWeight).
          */
         public fun create(
             fontSize: Float? = null,

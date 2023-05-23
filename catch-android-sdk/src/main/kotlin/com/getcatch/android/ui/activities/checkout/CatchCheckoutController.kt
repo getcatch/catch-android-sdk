@@ -60,7 +60,10 @@ public class CatchCheckoutController(
         onVirtualCardCheckoutConfirmed: VirtualCardCheckoutConfirmedCallback? = null,
         onCancel: CheckoutCanceledCallback? = null
     ) : this(
-        fragment.requireActivity(), onCheckoutConfirmed, onVirtualCardCheckoutConfirmed, onCancel
+        fragment.requireActivity(),
+        onCheckoutConfirmed,
+        onVirtualCardCheckoutConfirmed,
+        onCancel
     )
 
     /**
@@ -87,7 +90,7 @@ public class CatchCheckoutController(
     }
 
     /**
-     * @param checkoutData The unique identifier for the order that will be used to create a checkout.
+     * @param checkoutData The order data for the checkout.
      * @param prefill Prefill values for the user.
      */
     public fun createAndOpenVirtualCardCheckout(

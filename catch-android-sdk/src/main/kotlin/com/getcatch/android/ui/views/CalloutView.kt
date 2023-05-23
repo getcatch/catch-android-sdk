@@ -17,9 +17,8 @@ import com.getcatch.android.utils.getCalloutBorderStyle
 import com.getcatch.android.utils.getHasOrPrefix
 import com.getcatch.android.utils.getThemeVariant
 
-
 /**
- * The Callout widget shows consumers how much Catch credit they could earn or redeem
+ * The `Callout` widget shows consumers how much Catch credit they could earn or redeem
  * based on the price of the item(s) they're considering (e.g. when viewing a product detail
  * page or their cart).
  *
@@ -29,7 +28,7 @@ import com.getcatch.android.utils.getThemeVariant
  * currently signed in to Catch, and tailors the messaging to them if they have rewards that
  * are available to redeem with the merchant.
  *
- * The Callout widget also makes use of its price, items, and userCohorts attributes to calculate
+ * The `Callout` widget makes use of its `price`, `items`, and `userCohorts` properties to calculate
  * rewards the user will earn on the current item (if implemented on product detail page) or
  * on the current order (if implemented in the cart or during the checkout flow).
  */
@@ -75,14 +74,15 @@ public class CalloutView @JvmOverloads constructor(
     public var hasOrPrefix: Boolean by _hasOrPrefix
 
     /**
-     * The [CalloutBorderStyle] that the widget renders.
-     * Defaults to the [CalloutBorderStyle.None] style.
+     * The [`CalloutBorderStyle`](CalloutBorderStyle) that the widget renders.
+     * Defaults to the [`CalloutBorderStyle.None`](CalloutBorderStyle.None) style.
      */
     public var borderStyle: CalloutBorderStyle by _borderStyle
 
     /**
-     * The Catch color [ThemeVariant]. If no theme is set, the theme set globally on the
-     * [Catch] object will be used, which defaults to [ThemeVariant.Light].
+     * The Catch color [`ThemeVariant`](ThemeVariant). If no theme is set, the theme set globally on
+     * the [`Catch`](com.getcatch.android.Catch) object will be used, which defaults to
+     * [`ThemeVariant.Light`](ThemeVariant.Light).
      */
     public var themeVariant: ThemeVariant? by _themeVariant
 

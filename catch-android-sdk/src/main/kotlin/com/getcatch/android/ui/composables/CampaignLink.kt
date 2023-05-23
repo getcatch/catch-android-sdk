@@ -43,8 +43,8 @@ import com.getcatch.android.viewmodels.CampaignLinkViewModel
 import org.koin.androidx.compose.koinViewModel
 
 /**
- * The CampaignLink widget is designed to be displayed on your order confirmation page if Catch was
- * **not** used as a payment method to offer credits to the consumer if they pay with Catch for
+ * The `CampaignLink` widget is designed to be displayed on your order confirmation page if Catch was
+ * ***not*** used as a payment method to offer credits to the consumer if they pay with Catch for
  * their next purchase.
  *
  * The widget displays information about the amount of credits the consumer can claim based on the
@@ -53,11 +53,12 @@ import org.koin.androidx.compose.koinViewModel
  *
  * @param campaignName The name of a valid and active Catch campaign.
  *
- * @param borderStyle The [BorderStyle] that the widget renders.
- * Defaults to the [BorderStyle.SlightRound] style.
+ * @param borderStyle The [`BorderStyle`](BorderStyle) that the widget renders.
+ * Defaults to the [`BorderStyle.SlightRound`](BorderStyle.SlightRound) style.
  *
- * @param theme The Catch color [ThemeVariant]. If no theme is set, the theme set globally on the
- * [Catch] object will be used, which defaults to [ThemeVariant.Light].
+ * @param theme The Catch color [`ThemeVariant`](ThemeVariant). If no theme is set, the theme set
+ * globally on the [`Catch`](Catch) object will be used, which defaults to
+ * [`ThemeVariant.Light`](ThemeVariant.Light).
  *
  * @param styleOverrides Style overrides which can be used to override the widget's default
  * appearance (ex. font size, color, weight, etc.).
@@ -177,5 +178,3 @@ internal fun claimNowTextStyle(baseTextStyle: TextStyle): TextStyle {
         lineHeight = lineHeight,
     )
 }
-
-

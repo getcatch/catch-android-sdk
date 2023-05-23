@@ -7,9 +7,10 @@ import kotlinx.serialization.Serializable
 
 /**
  * The data needed to create a virtual card checkout. This data is passed into the
- * [VirtualCardCheckoutController.createAndOpenCheckout] method to have the Catch SDK create
- * a virtual card checkout for the cart contents being purchased.
+ * [`CatchCheckoutController.createAndOpenVirtualCardCheckout`](com.getcatch.android.ui.activities.checkout.CatchCheckoutController.createAndOpenVirtualCardCheckout)
+ * method to have the Catch SDK create a virtual card checkout for the cart contents being purchased.
  */
+@Suppress("MaxLineLength")
 @Parcelize
 @Serializable
 public data class CreateVirtualCardCheckoutData(

@@ -7,9 +7,9 @@ import androidx.compose.ui.text.TextStyle as ComposeTextStyle
  * Styling for Catch widgets which contain benefit text, filler text, and an info button.
  *
  * This includes the following widgets:
- *  - [Callout]
- *  - [ExpressCheckoutCallout]
- *  - [PaymentMethod]
+ *  - [`Callout`](com.getcatch.android.ui.composables.Callout)
+ *  - [`ExpressCheckoutCallout`](com.getcatch.android.ui.composables.ExpressCheckoutCallout)
+ *  - [`PaymentMethod`](com.getcatch.android.ui.composables.PaymentMethod)
  */
 public data class InfoWidgetStyle(
     /** Configures styling for all text components in an info widget. */

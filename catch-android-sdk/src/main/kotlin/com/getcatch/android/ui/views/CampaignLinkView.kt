@@ -18,15 +18,15 @@ import com.getcatch.android.utils.getCampaignName
 import com.getcatch.android.utils.getThemeVariant
 
 /**
- * The CampaignLink widget is designed to be displayed on your order confirmation page if Catch was
- * **not** used as a payment method to offer credits to the consumer if they pay with Catch for
+ * The `CampaignLink` widget is designed to be displayed on your order confirmation page if Catch was
+ * ***not*** used as a payment method to offer credits to the consumer if they pay with Catch for
  * their next purchase.
  *
  * The widget displays information about the amount of credits the consumer can claim based on the
  * reward campaign’s name. The widget also acts as a hyperlink, directing consumers to a page where
  * they can claim the credits.
  */
-public class CampaignLinkView  @JvmOverloads constructor(
+public class CampaignLinkView @JvmOverloads constructor(
     context: Context,
     attrs: AttributeSet? = null,
     defStyleAttr: Int = 0
@@ -40,13 +40,15 @@ public class CampaignLinkView  @JvmOverloads constructor(
     public var campaignName: String? by _campaignName
 
     /**
-     * The [BorderStyle] that the widget renders. Defaults to the [BorderStyle.SlightRound] style.
+     * The [`BorderStyle`](BorderStyle) that the widget renders.
+     * Defaults to the [`BorderStyle.SlightRound`](BorderStyle.SlightRound) style.
      */
     public var borderStyle: BorderStyle by _borderStyle
 
     /**
-     * The Catch color [ThemeVariant]. If no theme is set, the theme set globally on the
-     * [Catch] object will be used, which defaults to [ThemeVariant.Light].
+     * The Catch color [`ThemeVariant`](ThemeVariant). If no theme is set, the theme set on the
+     * [`Catch`](com.getcatch.android.Catch) object will be used, which defaults to
+     * [`ThemeVariant.Light`](ThemeVariant.Light).
      */
     public var theme: ThemeVariant? by _theme
 

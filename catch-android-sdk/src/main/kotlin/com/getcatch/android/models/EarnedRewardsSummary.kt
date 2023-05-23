@@ -19,7 +19,7 @@ internal data class EarnedRewardsSummary(
     /** Amount of rewards (in US cents) that the user can earn. */
     val earnedRewardsTotal: Int?,
 
-    /** Rewards rules used for the earnings breakdown modal */
+    /** Rewards rules used for the earnings breakdown modal. */
     val earnedRewardBreakdown: List<EarnedRewardRuleDetail>? = null,
 ) : Parcelable {
     companion object {

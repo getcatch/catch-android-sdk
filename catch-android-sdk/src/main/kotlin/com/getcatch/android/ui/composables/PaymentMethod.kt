@@ -44,15 +44,15 @@ import com.getcatch.android.viewmodels.EarnRedeemViewModel
 import org.koin.androidx.compose.koinViewModel
 
 /**
- * The PaymentMethod widget displays similar messaging and informational content as the Callout,
- * but is designed specifically to be displayed in checkout UI where a consumer may select Catch as
- * their payment method.
+ * The `PaymentMethod` widget displays similar messaging and informational content as the
+ * [`Callout`](Callout) but is designed specifically to be displayed in checkout UI where a consumer
+ * may select Catch as their payment method.
  *
- * The widget may be placed in a "selected" state when Catch is selected as a payment method. The
- * widget may also be placed in a "disabled" state, when the application wants to disable Catch as a
- * payment method while still showing the widget greyed-out.
+ * The widget may be placed in a "disabled" state when the cart contains items that cannot be
+ * purchased with Catch (e.g. gift cards). The disable state grays out the contents of the widget
+ * and provides a small tooltip that explains why Catch cannot be selected.
  *
- * The PaymentMethod widget also makes use of its price, items, and userCohorts attributes to
+ * The `PaymentMethod` widget makes use of its `price`, `items`, and `userCohorts` params to
  * calculate rewards the user will earn on the current purchase.
  *
  * @param price The cost in cents that a consumer would pay for the item(s)
@@ -65,14 +65,15 @@ import org.koin.androidx.compose.koinViewModel
  *
  * @param disabled Whether or not the widget is in a disabled state.
  *
- * @param variant The PaymentMethod has several variants that allow you to customize what content
- * is rendered in the widget. The [PaymentMethodVariant] options are:
- *  - [PaymentMethodVariant.Standard] - displays the logo, filler text, and reward text
- *  - [PaymentMethodVariant.Compact] - displays the filler text and reward text
- *  - [PaymentMethodVariant.LogoCompact] - displays the logo and reward text
+ * @param variant The `PaymentMethod` has several variants that allow you to customize what content
+ * is rendered in the widget. The [`PaymentMethodVariant`](PaymentMethodVariant) options are:
+ *  - [`Standard`](PaymentMethodVariant.Standard) - displays the logo, filler text, and reward text
+ *  - [`Compact`](PaymentMethodVariant.Compact) - displays the filler text and reward text
+ *  - [`LogoCompact`](PaymentMethodVariant.LogoCompact) - displays the logo and reward text
  *
- * @param theme The Catch color [ThemeVariant]. If no theme is set, the theme set globally on the
- * [Catch] object will be used, which defaults to [ThemeVariant.Light].
+ * @param theme The Catch color [`ThemeVariant`](ThemeVariant). If no theme is set, the theme set
+ * globally on the [`Catch`](Catch) object will be used, which defaults to
+ * [`ThemeVariant.Light`](ThemeVariant.Light).
  *
  * @param styleOverrides Style overrides which can be used to override the widget's default
  * appearance (ex. font size, color, weight, etc.).

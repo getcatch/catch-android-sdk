@@ -4,7 +4,7 @@ import android.os.Parcelable
 import kotlinx.parcelize.Parcelize
 import kotlinx.serialization.Serializable
 
-/** Breakdown of the order total */
+/** Breakdown of the order total. */
 @Parcelize
 @Serializable
 public data class Amounts(

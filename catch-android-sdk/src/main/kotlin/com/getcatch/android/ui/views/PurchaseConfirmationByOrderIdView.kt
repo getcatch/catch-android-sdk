@@ -17,8 +17,9 @@ import com.getcatch.android.utils.getBorderStyle
 import com.getcatch.android.utils.getThemeVariant
 
 /**
- * The PurchaseConfirmationByOrderId widget serves the same purpose as the [PurchaseConfirmationView]
- * widget but is to be used for purchases made with Catch's virtual card integration.
+ * The `PurchaseConfirmationByOrderId` widget serves the same purpose as the
+ * [`PurchaseConfirmationView`](PurchaseConfirmationView) widget but is to
+ * be used for purchases made with Catch's virtual card integration.
  */
 public class PurchaseConfirmationByOrderIdView @JvmOverloads constructor(
     context: Context,
@@ -37,14 +38,15 @@ public class PurchaseConfirmationByOrderIdView @JvmOverloads constructor(
     public var orderId: String? by _orderId
 
     /**
-     * The [BorderStyle] that the widget renders.
-     * Defaults to the [BorderStyle.SlightRound] style.
+     * The [`BorderStyle`](BorderStyle) that the widget renders.
+     * Defaults to the [`BorderStyle.SlightRound`](BorderStyle.SlightRound) style.
      */
     public var borderStyle: BorderStyle by _borderStyle
 
     /**
-     * The Catch color [ThemeVariant]. If no theme is set, the theme set globally on the
-     * [Catch] object will be used, which defaults to [ThemeVariant.Light].
+     * The Catch color [`ThemeVariant`](ThemeVariant). If no theme is set, the theme set globally on
+     * the [`Catch`](com.getcatch.android.Catch) object will be used, which defaults to
+     * [`ThemeVariant.Light`](ThemeVariant.Light).
      */
     public var themeVariant: ThemeVariant? by _themeVariant
 

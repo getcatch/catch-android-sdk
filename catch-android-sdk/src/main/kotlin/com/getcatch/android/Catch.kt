@@ -46,8 +46,10 @@ public object Catch {
     internal val colorTheme: State<ThemeVariant> = _colorTheme
 
     /**
-     * Initializes the Catch SDK. Must be called from the `onStart` method of your
-     * [Application](https://developer.android.com/reference/android/app/Application) class.
+     * Initializes the Catch SDK. Must be called from the
+     * [`onStart`](https://developer.android.com/reference/android/app/Application#onCreate())
+     * method of your
+     * [`Application`](https://developer.android.com/reference/android/app/Application) class.
      *
      * @param context The Android Context of the application.
      *
@@ -90,8 +92,9 @@ public object Catch {
     }
 
     /**
-     * Changes the current value of the global theme variant. The themeVariant parameter accepts the
-     * same enumeration of values that can be used for the theme option when initializing the SDK.
+     * Changes the current value of the global theme variant. The `themeVariant` parameter accepts
+     * the same enumeration of values that can be used for the theme option when initializing the
+     * SDK.
      *
      * @param themeVariant The Catch preset color theme.
      */
