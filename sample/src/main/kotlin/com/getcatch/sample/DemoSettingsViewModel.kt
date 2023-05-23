@@ -5,22 +5,22 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import com.getcatch.android.Catch
-import com.getcatch.android.ui.theming.ThemeVariant
+import com.getcatch.android.ui.theming.CatchColorTheme
 
 class DemoSettingsViewModel : ViewModel() {
-    var themeVariant by mutableStateOf<ThemeVariant>(ThemeVariant.Light)
+    var colorTheme by mutableStateOf<CatchColorTheme>(CatchColorTheme.Light)
         private set
 
     var price by mutableStateOf(0)
         private set
 
     init {
-        updateThemeVariant(variant = ThemeVariant.Light)
+        updateCatchColorTheme(colorTheme = CatchColorTheme.Light)
     }
 
-    fun updateThemeVariant(variant: ThemeVariant) {
-        themeVariant = variant
-        Catch.setColorTheme(variant)
+    fun updateCatchColorTheme(colorTheme: CatchColorTheme) {
+        this.colorTheme = colorTheme
+        Catch.setColorTheme(colorTheme)
     }
 
     fun clearPrice() {

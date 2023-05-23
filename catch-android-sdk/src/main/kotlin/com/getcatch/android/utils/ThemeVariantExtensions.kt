@@ -1,12 +1,12 @@
 package com.getcatch.android.utils
 
 import com.getcatch.android.R
-import com.getcatch.android.ui.theming.ThemeVariant
+import com.getcatch.android.ui.theming.CatchColorTheme
 
-internal val ThemeVariant.logoResId: Int
+internal val CatchColorTheme.logoResId: Int
     get() = when (this) {
-        ThemeVariant.Light -> R.drawable.ic_catch_logo_dark
-        ThemeVariant.LightMono -> R.drawable.ic_catch_logo_mono_dark
-        ThemeVariant.Dark -> R.drawable.ic_catch_logo_white
-        ThemeVariant.DarkMono -> R.drawable.ic_catch_logo_mono_white
+        CatchColorTheme.Light -> R.drawable.ic_catch_logo_dark
+        CatchColorTheme.LightMono -> R.drawable.ic_catch_logo_mono_dark
+        CatchColorTheme.Dark -> R.drawable.ic_catch_logo_white
+        CatchColorTheme.DarkMono -> R.drawable.ic_catch_logo_mono_white
     }

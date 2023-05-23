@@ -36,8 +36,8 @@ import com.getcatch.android.ui.composables.elements.InlineLogo
 import com.getcatch.android.ui.composables.elements.WidgetTooltip
 import com.getcatch.android.ui.styles.InfoWidgetStyle
 import com.getcatch.android.ui.styles.StyleResolver
+import com.getcatch.android.ui.theming.CatchColorTheme
 import com.getcatch.android.ui.theming.CatchTheme
-import com.getcatch.android.ui.theming.ThemeVariant
 import com.getcatch.android.utils.Constants
 import com.getcatch.android.viewmodels.EarnRedeemUiState
 import com.getcatch.android.viewmodels.EarnRedeemViewModel
@@ -71,9 +71,9 @@ import org.koin.androidx.compose.koinViewModel
  *  - [`Compact`](PaymentMethodVariant.Compact) - displays the filler text and reward text
  *  - [`LogoCompact`](PaymentMethodVariant.LogoCompact) - displays the logo and reward text
  *
- * @param theme The Catch color [`ThemeVariant`](ThemeVariant). If no theme is set, the theme set
+ * @param colorTheme The Catch color [`CatchColorTheme`](CatchColorTheme). If no theme is set, the theme set
  * globally on the [`Catch`](Catch) object will be used, which defaults to
- * [`ThemeVariant.Light`](ThemeVariant.Light).
+ * [`CatchColorTheme.Light`](CatchColorTheme.Light).
  *
  * @param styleOverrides Style overrides which can be used to override the widget's default
  * appearance (ex. font size, color, weight, etc.).
@@ -85,7 +85,7 @@ public fun PaymentMethod(
     userCohorts: List<String>? = null,
     disabled: Boolean = false,
     variant: PaymentMethodVariant = PaymentMethodVariant.Standard,
-    theme: ThemeVariant? = null,
+    colorTheme: CatchColorTheme? = null,
     styleOverrides: InfoWidgetStyle? = null,
 ) {
     Catch.assertInitialized()
@@ -102,7 +102,7 @@ public fun PaymentMethod(
         userCohorts = userCohorts,
         disabled = disabled,
         variant = variant,
-        theme = theme,
+        colorTheme = colorTheme,
         styleOverrides = styleOverrides,
         viewModel = koinViewModel(key = viewModelKey),
     )
@@ -116,7 +116,7 @@ internal fun PaymentMethodInternal(
     userCohorts: List<String>? = null,
     disabled: Boolean = false,
     variant: PaymentMethodVariant = PaymentMethodVariant.Standard,
-    theme: ThemeVariant? = null,
+    colorTheme: CatchColorTheme? = null,
     styleOverrides: InfoWidgetStyle? = null,
     viewModel: EarnRedeemViewModel,
 ) {
@@ -127,12 +127,12 @@ internal fun PaymentMethodInternal(
     }
     val uiState by viewModel.uiState.collectAsStateWithLifecycle()
 
-    CatchTheme(theme) {
-        val themeVariant = CatchTheme.variant
-        val styles by remember(variant, themeVariant, styleOverrides) {
+    CatchTheme(colorTheme) {
+        val themeColors = CatchTheme.colors
+        val styles by remember(variant, CatchTheme.colorTheme, styleOverrides) {
             mutableStateOf(
                 StyleResolver.infoWidgetStyles(
-                    theme = themeVariant,
+                    themeColors = themeColors,
                     instanceOverrides = styleOverrides,
                     infoWidgetType = InfoWidgetType.PaymentMethod(variant)
                 )

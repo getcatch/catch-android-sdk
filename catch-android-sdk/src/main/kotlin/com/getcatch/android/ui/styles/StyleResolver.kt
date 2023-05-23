@@ -5,14 +5,14 @@ import androidx.compose.ui.unit.dp
 import com.getcatch.android.Catch
 import com.getcatch.android.ui.ActionWidgetType
 import com.getcatch.android.ui.InfoWidgetType
-import com.getcatch.android.ui.theming.ThemeVariant
+import com.getcatch.android.ui.theming.color.CatchComposeColors
 import com.getcatch.android.ui.typography.CatchTextStyles
 import com.getcatch.android.utils.Constants
 
 internal object StyleResolver {
 
     fun infoWidgetStyles(
-        theme: ThemeVariant,
+        themeColors: CatchComposeColors,
         instanceOverrides: InfoWidgetStyle?,
         infoWidgetType: InfoWidgetType,
     ): InfoWidgetStyle.Resolved {
@@ -20,13 +20,13 @@ internal object StyleResolver {
             widgetTextStyle = WidgetTextStyle.Resolved(
                 fontSize = infoWidgetType.defaultTextStyle.fontSize,
                 lineHeight = infoWidgetType.defaultTextStyle.lineHeight,
-                fontColor = theme.composeColors.foreground,
+                fontColor = themeColors.foreground,
                 fontWeight = FontWeight.W400,
             ),
             benefitTextStyle = BenefitTextStyle.Resolved(
                 fontWeight = FontWeight.W700,
-                earnFontColor = theme.composeColors.accent,
-                redeemFontColor = theme.composeColors.secondaryAccent,
+                earnFontColor = themeColors.accent,
+                redeemFontColor = themeColors.secondaryAccent,
             )
         )
         val globalOverrides = Catch.styleConfig.let { globalConfig ->
@@ -59,7 +59,7 @@ internal object StyleResolver {
     }
 
     fun actionWidgetStyles(
-        theme: ThemeVariant,
+        themeColors: CatchComposeColors,
         instanceOverrides: ActionWidgetStyle?,
         actionWidgetType: ActionWidgetType,
     ): ActionWidgetStyle.Resolved {
@@ -67,24 +67,24 @@ internal object StyleResolver {
             widgetTextStyle = WidgetTextStyle.Resolved(
                 fontSize = CatchTextStyles.bodyRegular.fontSize,
                 lineHeight = CatchTextStyles.bodyRegular.lineHeight,
-                fontColor = theme.composeColors.foreground,
+                fontColor = themeColors.foreground,
                 fontWeight = FontWeight.W400,
             ),
             benefitTextStyle = BenefitTextStyle.Resolved(
                 fontWeight = FontWeight.W700,
-                earnFontColor = theme.composeColors.accent,
-                redeemFontColor = theme.composeColors.secondaryAccent,
+                earnFontColor = themeColors.accent,
+                redeemFontColor = themeColors.secondaryAccent,
             ),
             actionButtonStyle = ActionButtonStyle.Resolved(
                 fontSize = CatchTextStyles.buttonLabel.fontSize,
-                fontColor = theme.composeColors.buttonText,
+                fontColor = themeColors.buttonText,
                 height = Constants.DEFAULT_BUTTON_HEIGHT.dp,
                 lineHeight = CatchTextStyles.buttonLabel.lineHeight,
                 fontWeight = FontWeight.W500,
                 letterSpacing = null,
                 elevation = Constants.DEFAULT_BUTTON_ELEVATION.dp,
                 borderRadius = Constants.DEFAULT_BUTTON_BORDER_RADIUS.dp,
-                backgroundColor = theme.composeColors.accent,
+                backgroundColor = themeColors.accent,
                 textTransform = null,
             )
         )

@@ -28,7 +28,7 @@
                 app:customBorderColor="@color/accent_turquoise"
                 app:customBorderRadius="1"
                 app:hasOrPrefix="true"
-                app:themeVariant="light_mono" />
+                app:colorTheme="light_mono" />
 
             <com.getcatch.android.ui.views.PaymentMethodView
                 android:id="@+id/basic_payment_method"
@@ -42,7 +42,7 @@
                 android:layout_height="wrap_content"
                 android:padding="16dp"
                 app:paymentMethodVariant="logo_compact"
-                app:themeVariant="light_mono" />
+                app:colorTheme="light_mono" />
 
             <com.getcatch.android.ui.views.ExpressCheckoutCalloutView
                 android:id="@+id/basic_express_checkout_callout"
@@ -58,7 +58,7 @@
                 app:borderStyle="custom"
                 app:customBorderColor="@color/green_2"
                 app:customBorderRadius="8"
-                app:themeVariant="light_mono" />
+                app:colorTheme="light_mono" />
 
             <com.getcatch.android.ui.views.PurchaseConfirmationView
                 android:id="@+id/basic_purchase_confirmation"
@@ -72,7 +72,7 @@
                 android:layout_height="wrap_content"
                 android:padding="16dp"
                 app:borderStyle="none"
-                app:themeVariant="light_mono"/>
+                app:colorTheme="light_mono"/>
 
             <com.getcatch.android.ui.views.CampaignLinkView
                 android:id="@+id/basic_campaign_link"
@@ -87,7 +87,7 @@
                 android:layout_height="wrap_content"
                 android:padding="16dp"
                 app:borderStyle="none"
-                app:themeVariant="light_mono"/>
+                app:colorTheme="light_mono"/>
 
         </LinearLayout>
     </ScrollView>

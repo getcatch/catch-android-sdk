@@ -20,7 +20,7 @@ import com.getcatch.android.utils.logoResId
 internal fun InlineLogo(fontSize: TextUnit, widgetType: InfoWidgetType, modifier: Modifier = Modifier) {
     val logoHeight = fontSize.value * widgetType.logoToFontSizeRatio
     Image(
-        painter = painterResource(id = CatchTheme.variant.logoResId),
+        painter = painterResource(id = CatchTheme.colorTheme.logoResId),
         contentDescription = stringResource(
             id = R.string.content_description_catch_logo
         ),

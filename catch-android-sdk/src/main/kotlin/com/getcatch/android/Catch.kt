@@ -17,7 +17,7 @@ import com.getcatch.android.network.NetworkResponse
 import com.getcatch.android.repository.MerchantRepository
 import com.getcatch.android.repository.UserRepository
 import com.getcatch.android.ui.styles.CatchStyleConfig
-import com.getcatch.android.ui.theming.ThemeVariant
+import com.getcatch.android.ui.theming.CatchColorTheme
 import com.getcatch.android.ui.typography.CatchFonts
 import com.getcatch.android.ui.typography.CustomFontFamily
 import kotlinx.coroutines.CoroutineScope
@@ -41,9 +41,9 @@ public object Catch {
         mutableStateOf(CatchFonts.circularFontFamily)
     internal val customFontFamily: State<FontFamily> = _customFontFamily
 
-    private val _colorTheme: MutableState<ThemeVariant> =
-        mutableStateOf(ThemeVariant.Light)
-    internal val colorTheme: State<ThemeVariant> = _colorTheme
+    private val _colorTheme: MutableState<CatchColorTheme> =
+        mutableStateOf(CatchColorTheme.Light)
+    internal val colorTheme: State<CatchColorTheme> = _colorTheme
 
     /**
      * Initializes the Catch SDK. Must be called from the
@@ -92,14 +92,14 @@ public object Catch {
     }
 
     /**
-     * Changes the current value of the global theme variant. The `themeVariant` parameter accepts
+     * Changes the current value of the global theme variant. The `colorTheme` parameter accepts
      * the same enumeration of values that can be used for the theme option when initializing the
      * SDK.
      *
-     * @param themeVariant The Catch preset color theme.
+     * @param colorTheme The Catch preset color theme.
      */
-    public fun setColorTheme(themeVariant: ThemeVariant): Unit = synchronized(this) {
-        _colorTheme.value = themeVariant
+    public fun setColorTheme(colorTheme: CatchColorTheme): Unit = synchronized(this) {
+        _colorTheme.value = colorTheme
     }
 
     private fun initKoin(

@@ -27,7 +27,7 @@ import androidx.compose.ui.unit.dp
 import com.getcatch.sample.DemoSettingsViewModel
 import com.getcatch.sample.ui.theming.DarkDemoColors
 import com.getcatch.sample.ui.theming.LightDemoColors
-import com.getcatch.sample.utils.allThemeVariants
+import com.getcatch.sample.utils.allCatchColorThemes
 import com.getcatch.sample.utils.centsToDollarsString
 import com.getcatch.sample.utils.name
 import com.getcatch.sample.utils.roundCentsToDollar
@@ -37,7 +37,7 @@ const val FIVE_HUNDRED_DOLLARS_CENTS = 50000f
 
 @Composable
 fun DemoSettingsSheet(viewModel: DemoSettingsViewModel) {
-    MaterialTheme(colors = if (viewModel.themeVariant.isDarkTheme) DarkDemoColors else LightDemoColors) {
+    MaterialTheme(colors = if (viewModel.colorTheme.isDarkTheme) DarkDemoColors else LightDemoColors) {
         var sliderPosition by remember { mutableStateOf(0f) }
         Column(
             Modifier
@@ -88,10 +88,10 @@ fun DemoSettingsSheet(viewModel: DemoSettingsViewModel) {
                 }
             }
 
-            DemoSettingSheetSection("Theme Variant") {
+            DemoSettingSheetSection("Color Theme") {
                 SegmentedControl(
-                    options = allThemeVariants.map { it.name },
-                    onOptionSelected = { viewModel.updateThemeVariant(allThemeVariants[it]) }
+                    options = allCatchColorThemes.map { it.name },
+                    onOptionSelected = { viewModel.updateCatchColorTheme(allCatchColorThemes[it]) }
                 )
             }
         }

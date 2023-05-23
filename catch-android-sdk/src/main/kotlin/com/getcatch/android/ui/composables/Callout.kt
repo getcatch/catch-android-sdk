@@ -28,8 +28,8 @@ import com.getcatch.android.ui.composables.elements.InfoIcon
 import com.getcatch.android.ui.composables.elements.InlineLogo
 import com.getcatch.android.ui.styles.InfoWidgetStyle
 import com.getcatch.android.ui.styles.StyleResolver
+import com.getcatch.android.ui.theming.CatchColorTheme
 import com.getcatch.android.ui.theming.CatchTheme
-import com.getcatch.android.ui.theming.ThemeVariant
 import com.getcatch.android.utils.border
 import com.getcatch.android.viewmodels.EarnRedeemUiState
 import com.getcatch.android.viewmodels.EarnRedeemViewModel
@@ -69,9 +69,9 @@ import org.koin.androidx.compose.koinViewModel
  * @param borderStyle The [`CalloutBorderStyle`](CalloutBorderStyle) that the widget renders.
  * Defaults to the [`CalloutBorderStyle.None`](CalloutBorderStyle.None) style.
  *
- * @param theme The Catch color [`ThemeVariant`](ThemeVariant). If no theme is set, the theme set
+ * @param colorTheme The Catch color [`CatchColorTheme`](CatchColorTheme). If no theme is set, the theme set
  * globally on the [`Catch`](Catch) object will be used, which defaults to
- * [`ThemeVariant.Light`](ThemeVariant.Light).
+ * [`CatchColorTheme.Light`](CatchColorTheme.Light).
  *
  * @param styleOverrides Style overrides which can be used to override the widget's default
  * appearance (ex. font size, color, weight, etc.).
@@ -83,7 +83,7 @@ public fun Callout(
     userCohorts: List<String>? = null,
     hasOrPrefix: Boolean = false,
     borderStyle: CalloutBorderStyle = CalloutBorderStyle.None,
-    theme: ThemeVariant? = null,
+    colorTheme: CatchColorTheme? = null,
     styleOverrides: InfoWidgetStyle? = null,
 ) {
     Catch.assertInitialized()
@@ -99,7 +99,7 @@ public fun Callout(
         userCohorts = userCohorts,
         hasOrPrefix = hasOrPrefix,
         borderStyle = borderStyle,
-        theme = theme,
+        colorTheme = colorTheme,
         styleOverrides = styleOverrides,
         viewModel = koinViewModel(key = viewModelKey)
     )
@@ -113,7 +113,7 @@ private fun CalloutInternal(
     userCohorts: List<String>? = null,
     hasOrPrefix: Boolean = false,
     borderStyle: CalloutBorderStyle = CalloutBorderStyle.None,
-    theme: ThemeVariant? = null,
+    colorTheme: CatchColorTheme? = null,
     styleOverrides: InfoWidgetStyle? = null,
     viewModel: EarnRedeemViewModel,
 ) {
@@ -124,12 +124,12 @@ private fun CalloutInternal(
     }
     val uiState by viewModel.uiState.collectAsStateWithLifecycle()
 
-    CatchTheme(theme) {
-        val variant = CatchTheme.variant
-        val styles by remember(variant, styleOverrides) {
+    CatchTheme(colorTheme) {
+        val themeColors = CatchTheme.colors
+        val styles by remember(CatchTheme.colorTheme, styleOverrides) {
             mutableStateOf(
                 StyleResolver.infoWidgetStyles(
-                    theme = variant,
+                    themeColors = themeColors,
                     instanceOverrides = styleOverrides,
                     infoWidgetType = InfoWidgetType.Callout
                 )

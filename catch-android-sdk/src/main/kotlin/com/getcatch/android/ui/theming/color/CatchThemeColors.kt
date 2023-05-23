@@ -2,7 +2,7 @@ package com.getcatch.android.ui.theming.color
 
 import androidx.compose.ui.graphics.Color
 
-internal sealed class CatchColorTheme {
+internal sealed class CatchThemeColors {
     abstract val foreground: Long
     abstract val background: Long
     abstract val accent: Long
@@ -19,7 +19,7 @@ internal sealed class CatchColorTheme {
         buttonText = Color(this.buttonText),
     )
 
-    object Light : CatchColorTheme() {
+    object Light : CatchThemeColors() {
         override val foreground = CatchColors.GREY_7
         override val background = CatchColors.WHITE
         override val accent = CatchColors.PINK_2
@@ -28,7 +28,7 @@ internal sealed class CatchColorTheme {
         override val buttonText = CatchColors.WHITE
     }
 
-    object LightMono : CatchColorTheme() {
+    object LightMono : CatchThemeColors() {
         override val foreground = CatchColors.GREY_7
         override val background = CatchColors.WHITE
         override val accent = CatchColors.GREY_7
@@ -37,7 +37,7 @@ internal sealed class CatchColorTheme {
         override val buttonText = CatchColors.WHITE
     }
 
-    object Dark : CatchColorTheme() {
+    object Dark : CatchThemeColors() {
         override val foreground = CatchColors.WHITE
         override val background = CatchColors.BLACK
         override val accent = CatchColors.DARK_MODE_PINK
@@ -46,7 +46,7 @@ internal sealed class CatchColorTheme {
         override val buttonText = CatchColors.BLACK
     }
 
-    object DarkMono : CatchColorTheme() {
+    object DarkMono : CatchThemeColors() {
         override val foreground = CatchColors.WHITE
         override val background = CatchColors.BLACK
         override val accent = CatchColors.WHITE
