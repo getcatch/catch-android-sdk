@@ -16,21 +16,21 @@ import androidx.compose.ui.text.font.FontWeight as ComposeFontWeight
  */
 public data class BenefitTextStyle(
     /** Configures the font weight of the benefit text. */
-    val fontWeight: FontWeight? = null,
+    val fontWeight: ComposeFontWeight? = null,
 
     /**
      * Configures the text color of the benefit text in the case when a user is earning credits.
      * Example: "Earn $x credit"
      */
-    val earnFontColor: ColorValue? = null,
+    val earnFontColor: Color? = null,
 
     /**
      * Configures the text color of the benefit text in the case when a user is redeeming credits.
      * Example: "Redeem $x"
      */
-    val redeemFontColor: ColorValue? = null,
+    val redeemFontColor: Color? = null,
 ) {
-    
+
     internal fun withOverrides(overrides: BenefitTextStyle?): BenefitTextStyle {
         if (overrides == null) return this
         return BenefitTextStyle(
@@ -48,10 +48,27 @@ public data class BenefitTextStyle(
         fun withOverrides(overrides: BenefitTextStyle?): Resolved {
             if (overrides == null) return this
             return Resolved(
-                fontWeight = overrides.fontWeight?.toComposeFontWeight() ?: fontWeight,
-                earnFontColor = overrides.earnFontColor?.value ?: earnFontColor,
-                redeemFontColor = overrides.redeemFontColor?.value ?: redeemFontColor,
+                fontWeight = overrides.fontWeight ?: fontWeight,
+                earnFontColor = overrides.earnFontColor ?: earnFontColor,
+                redeemFontColor = overrides.redeemFontColor ?: redeemFontColor,
             )
         }
+    }
+
+    public companion object {
+        /**
+         * Utility function to replace primary constructor for view based apps that use [ColorValue]
+         * and [FontWeight] instead of the Compose [androidx.compose.ui.graphics.Color] and
+         * [androidx.compose.ui.text.font.FontWeight].
+         */
+        public fun create(
+            fontWeight: FontWeight? = null,
+            earnFontColor: ColorValue? = null,
+            redeemFontColor: ColorValue? = null,
+        ): BenefitTextStyle = BenefitTextStyle(
+            fontWeight = fontWeight?.toComposeFontWeight(),
+            earnFontColor = earnFontColor?.value,
+            redeemFontColor = redeemFontColor?.value,
+        )
     }
 }

@@ -16,10 +16,10 @@ public data class WidgetTextStyle(
     val fontSize: Float? = null,
 
     /** Configures the font color for text components. */
-    val fontColor: ColorValue? = null,
+    val fontColor: Color? = null,
 
     /** Configures the font weight for text components. */
-    val fontWeight: FontWeight? = null,
+    val fontWeight: ComposeFontWeight? = null,
 
     /** Configures the line height for text components. */
     val lineHeight: Float? = null,
@@ -55,12 +55,35 @@ public data class WidgetTextStyle(
             if (overrides == null) return this
             return Resolved(
                 fontSize = overrides.fontSize?.sp ?: fontSize,
-                fontColor = overrides.fontColor?.value ?: fontColor,
-                fontWeight = overrides.fontWeight?.toComposeFontWeight() ?: fontWeight,
+                fontColor = overrides.fontColor ?: fontColor,
+                fontWeight = overrides.fontWeight ?: fontWeight,
                 lineHeight = overrides.lineHeight?.sp ?: lineHeight,
                 letterSpacing = overrides.letterSpacing?.sp ?: letterSpacing,
                 textTransform = overrides.textTransform ?: textTransform,
             )
         }
+    }
+
+    public companion object {
+        /**
+         * Utility function to replace primary constructor for view based apps that use [ColorValue]
+         * and [FontWeight] instead of the Compose [androidx.compose.ui.graphics.Color] and
+         * [androidx.compose.ui.text.font.FontWeight].
+         */
+        public fun create(
+            fontSize: Float? = null,
+            fontColor: ColorValue? = null,
+            fontWeight: FontWeight? = null,
+            lineHeight: Float? = null,
+            letterSpacing: Float? = null,
+            textTransform: TextTransform? = null,
+        ): WidgetTextStyle = WidgetTextStyle(
+            fontSize = fontSize,
+            fontColor = fontColor?.value,
+            fontWeight = fontWeight?.toComposeFontWeight(),
+            lineHeight = lineHeight,
+            letterSpacing = letterSpacing,
+            textTransform = textTransform,
+        )
     }
 }

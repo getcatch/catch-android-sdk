@@ -19,6 +19,7 @@ import com.getcatch.android.repository.UserRepository
 import com.getcatch.android.ui.styles.CatchStyleConfig
 import com.getcatch.android.ui.theming.ThemeVariant
 import com.getcatch.android.ui.typography.CatchFonts
+import com.getcatch.android.ui.typography.CustomFontFamily
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
@@ -84,8 +85,8 @@ public object Catch {
      *
      * @param fontFamily An object containing all the necessary font information.
      */
-    public fun setCustomFontFamily(fontFamily: FontFamily): Unit = synchronized(this) {
-        _customFontFamily.value = fontFamily
+    public fun setCustomFontFamily(fontFamily: CustomFontFamily): Unit = synchronized(this) {
+        _customFontFamily.value = fontFamily.composeFontFamily
     }
 
     /**
@@ -168,7 +169,7 @@ public object Catch {
 
     private fun applyOptions(options: CatchOptions) {
         if (options.customFontFamily != null) {
-            _customFontFamily.value = options.customFontFamily
+            _customFontFamily.value = options.customFontFamily.composeFontFamily
         }
         _colorTheme.value = options.colorTheme
         styleConfig = options.styleConfig

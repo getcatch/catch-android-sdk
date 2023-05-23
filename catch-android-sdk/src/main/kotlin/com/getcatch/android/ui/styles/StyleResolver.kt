@@ -8,7 +8,6 @@ import com.getcatch.android.ui.InfoWidgetType
 import com.getcatch.android.ui.theming.ThemeVariant
 import com.getcatch.android.ui.typography.CatchTextStyles
 import com.getcatch.android.utils.Constants
-import com.getcatch.android.ui.styles.values.FontWeight as CatchFontWeight
 
 internal object StyleResolver {
 
@@ -50,8 +49,8 @@ internal object StyleResolver {
         if (infoWidgetType is InfoWidgetType.ExpressCheckoutCallout) {
             return fullyResolvedStyles.withOverrides(
                 InfoWidgetStyle(
-                    widgetTextStyle = WidgetTextStyle(fontWeight = CatchFontWeight.W400),
-                    benefitTextStyle = BenefitTextStyle(fontWeight = CatchFontWeight.W700)
+                    widgetTextStyle = WidgetTextStyle(fontWeight = FontWeight.W400),
+                    benefitTextStyle = BenefitTextStyle(fontWeight = FontWeight.W700)
                 )
             )
         }

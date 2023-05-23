@@ -17,17 +17,44 @@ public enum class FontWeight {
     W600,
     W700,
     W800,
-    W900;
+    W900,
+
+    /** W100 */
+    THIN,
+
+    /** W200 */
+    EXTRA_LIGHT,
+
+    /** W300 */
+    LIGHT,
+
+    /** W400 */
+    NORMAL,
+
+    /** W500 */
+    MEDIUM,
+
+    /** W600 */
+    SEMI_BOLD,
+
+    /** W700 */
+    BOLD,
+
+    /** W800 */
+    EXTRA_BOLD,
+
+    /** W900 */
+    BLACK;
 
     internal fun toComposeFontWeight(): ComposeFontWeight = when (this) {
-        W100 -> ComposeFontWeight.W100
-        W200 -> ComposeFontWeight.W200
-        W300 -> ComposeFontWeight.W300
-        W400 -> ComposeFontWeight.W400
-        W500 -> ComposeFontWeight.W500
-        W600 -> ComposeFontWeight.W600
-        W700 -> ComposeFontWeight.W700
-        W800 -> ComposeFontWeight.W800
-        W900 -> ComposeFontWeight.W900
+        W100, THIN -> ComposeFontWeight.W100
+        W200, EXTRA_LIGHT -> ComposeFontWeight.W200
+        W300, LIGHT -> ComposeFontWeight.W300
+        W400, NORMAL -> ComposeFontWeight.W400
+        W500, MEDIUM -> ComposeFontWeight.W500
+        W600, SEMI_BOLD -> ComposeFontWeight.W600
+        W700, BOLD -> ComposeFontWeight.W700
+        W800, EXTRA_BOLD -> ComposeFontWeight.W800
+        W900, BLACK -> ComposeFontWeight.W900
     }
 }

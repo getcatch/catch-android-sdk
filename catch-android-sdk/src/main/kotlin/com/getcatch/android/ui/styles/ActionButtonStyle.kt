@@ -15,15 +15,15 @@ import androidx.compose.ui.text.font.FontWeight as ComposeFontWeight
  * The styling for action buttons found in Catch widgets.
  *
  * The following widgets contain action buttons:
- * - [PurchaseConfirmation]
- * - [CampaignLink]
+ * - [com.getcatch.android.ui.composables.PurchaseConfirmation]
+ * - [com.getcatch.android.ui.composables.CampaignLink]
  */
 public data class ActionButtonStyle(
     /** Configures the font size for the button's label. */
     val fontSize: Float? = null,
 
     /** Configures the font color for the button's label. */
-    val fontColor: ColorValue? = null,
+    val fontColor: Color? = null,
 
     /** Configures the button's height. */
     val height: Float? = null,
@@ -32,7 +32,7 @@ public data class ActionButtonStyle(
     val lineHeight: Float? = null,
 
     /** Configures the font weight for the button's label. */
-    val fontWeight: FontWeight? = null,
+    val fontWeight: ComposeFontWeight? = null,
 
     /** Configures the letter spacing for the button's label. */
     val letterSpacing: Float? = null,
@@ -49,11 +49,12 @@ public data class ActionButtonStyle(
     val borderRadius: Float? = null,
 
     /** Configures the background color of the button. */
-    val backgroundColor: ColorValue? = null,
+    val backgroundColor: Color? = null,
 
     /** Transforms casing of text for the button's label. */
     val textTransform: TextTransform? = null,
 ) {
+
     internal fun withOverrides(overrides: ActionButtonStyle?): ActionButtonStyle {
         if (overrides == null) return this
         return ActionButtonStyle(
@@ -86,14 +87,14 @@ public data class ActionButtonStyle(
             if (overrides == null) return this
             return Resolved(
                 fontSize = overrides.fontSize?.sp ?: fontSize,
-                fontColor = overrides.fontColor?.value ?: fontColor,
+                fontColor = overrides.fontColor ?: fontColor,
                 height = overrides.height?.dp ?: height,
                 lineHeight = overrides.lineHeight?.sp ?: lineHeight,
-                fontWeight = overrides.fontWeight?.toComposeFontWeight() ?: fontWeight,
+                fontWeight = overrides.fontWeight ?: fontWeight,
                 letterSpacing = overrides.letterSpacing?.sp ?: letterSpacing,
                 elevation = overrides.elevation?.dp ?: elevation,
                 borderRadius = overrides.borderRadius?.dp ?: borderRadius,
-                backgroundColor = overrides.backgroundColor?.value ?: backgroundColor,
+                backgroundColor = overrides.backgroundColor ?: backgroundColor,
                 textTransform = overrides.textTransform ?: textTransform,
             )
         }
@@ -108,5 +109,36 @@ public data class ActionButtonStyle(
 
         fun applyTextTransform(text: String) =
             textTransform?.transform(text) ?: text
+    }
+
+    public companion object {
+        /**
+         * Utility function to replace primary constructor for view based apps that use [ColorValue]
+         * and [FontWeight] instead of the Compose [androidx.compose.ui.graphics.Color] and
+         * [androidx.compose.ui.text.font.FontWeight].
+         */
+        public fun create(
+            fontSize: Float? = null,
+            fontColor: ColorValue? = null,
+            height: Float? = null,
+            lineHeight: Float? = null,
+            fontWeight: FontWeight? = null,
+            letterSpacing: Float? = null,
+            elevation: Float? = null,
+            borderRadius: Float? = null,
+            backgroundColor: ColorValue? = null,
+            textTransform: TextTransform? = null,
+        ): ActionButtonStyle = ActionButtonStyle(
+            fontSize = fontSize,
+            fontColor = fontColor?.value,
+            height = height,
+            lineHeight = lineHeight,
+            fontWeight = fontWeight?.toComposeFontWeight(),
+            letterSpacing = letterSpacing,
+            elevation = elevation,
+            borderRadius = borderRadius,
+            backgroundColor = backgroundColor?.value,
+            textTransform = textTransform,
+        )
     }
 }
