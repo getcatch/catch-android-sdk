@@ -27,22 +27,21 @@ internal fun BenefitText(
     val color =
         if (reward.redeemable) styles.benefitTextStyle.redeemFontColor
         else styles.benefitTextStyle.earnFontColor
-    val textDecoration =
-        if (reward is CalculatedReward.PercentRate) null
-        else TextDecoration.Underline
+    val tofuPath =
+        if (reward is CalculatedReward.PercentRate) TofuPath.HOW_IT_WORKS
+        else TofuPath.BREAKDOWN
 
     CatchText(
         text = styles.applyTextTransform(message),
         color = color,
         style = styles.benefitComposeTextStyle,
-        textDecoration = textDecoration,
+        textDecoration = TextDecoration.Underline,
         modifier = modifier.clickable(
-            enabled = textDecoration == TextDecoration.Underline,
             indication = null,
             interactionSource = remember {
                 MutableInteractionSource()
             }) {
-            TOFUActivity.open(context, price, summary, path = TofuPath.BREAKDOWN)
+            TOFUActivity.open(context, price, summary, path = tofuPath)
         },
     )
 }
