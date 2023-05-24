@@ -22,7 +22,7 @@ public class TestMerchantsSvcClientImpl {
         val mockClient = MockHttpClient()
         val merchantsSvcClient = MerchantsSvcClientImpl(
             mockClient.client,
-            Environment.PRODUCTION,
+            Environment.LIVE,
         )
 
         mockClient.addResponse(
@@ -46,7 +46,7 @@ public class TestMerchantsSvcClientImpl {
         val mockClient = MockHttpClient()
         val merchantsSvcClient = MerchantsSvcClientImpl(
             mockClient.client,
-            Environment.PRODUCTION,
+            Environment.LIVE,
         )
 
         mockClient.addResponse(
@@ -70,7 +70,7 @@ public class TestMerchantsSvcClientImpl {
         val mockClient = MockHttpClient()
         val merchantsSvcClient = MerchantsSvcClientImpl(
             mockClient.client,
-            Environment.PRODUCTION,
+            Environment.LIVE,
         )
 
         mockClient.addResponse(

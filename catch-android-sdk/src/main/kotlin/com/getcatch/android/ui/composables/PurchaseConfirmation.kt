@@ -189,6 +189,6 @@ internal fun PreviewPurchaseConfirmationInternal() {
         earned = 1000,
         donation = 50,
         merchant = PreviewData.merchant,
-        linkButtonUrl = CatchUrls.signIn(Environment.PRODUCTION)
+        linkButtonUrl = CatchUrls.signIn(Environment.LIVE)
     )
 }
