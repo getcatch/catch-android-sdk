@@ -9,4 +9,5 @@ internal object PostMessageActions {
     const val CHECKOUT_SUCCESS = "CATCH_CHECKOUT_SUCCESS"
     const val CHECKOUT_BACK = "CATCH_CHECKOUT_BACK"
     const val VIRTUAL_CARD_CHECKOUT_DATA = "CATCH_VCN_CHECKOUT_DATA"
+    const val CATCH_DEVICE_TOKEN = "CATCH_DEVICE_TOKEN"
 }

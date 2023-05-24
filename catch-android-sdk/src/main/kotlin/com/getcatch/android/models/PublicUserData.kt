@@ -26,7 +26,7 @@ internal data class PublicUserData(
     val wasReferred: Boolean = false,
 
     /** A list of rewards available for a user to redeem. */
-    val availableRewardBreakdown: List<AvailableRewardDetail>
+    val availableRewardBreakdown: List<AvailableRewardDetail> = emptyList()
 ) {
     companion object {
         val noData = PublicUserData(
