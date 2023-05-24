@@ -25,6 +25,7 @@ import androidx.compose.ui.unit.dp
 import com.getcatch.android.Catch
 import com.getcatch.android.R
 import com.getcatch.android.models.Merchant
+import com.getcatch.android.network.Environment
 import com.getcatch.android.repository.MerchantRepository
 import com.getcatch.android.ui.ActionWidgetType
 import com.getcatch.android.ui.BorderStyle
@@ -35,6 +36,7 @@ import com.getcatch.android.ui.styles.ActionWidgetStyle
 import com.getcatch.android.ui.styles.StyleResolver
 import com.getcatch.android.ui.theming.CatchColorTheme
 import com.getcatch.android.ui.theming.CatchTheme
+import com.getcatch.android.utils.CatchUrls
 import com.getcatch.android.utils.PreviewData
 import com.getcatch.android.utils.border
 import com.getcatch.android.utils.centsToDollarsString
@@ -78,6 +80,7 @@ public fun PurchaseConfirmation(
 ) {
     Catch.assertInitialized()
     val merchantRepo: MerchantRepository = koinInject()
+    val environment: Environment = koinInject()
     val merchant by merchantRepo.activeMerchant.collectAsState()
     PurchaseConfirmationInternal(
         earned = earned,
@@ -86,6 +89,7 @@ public fun PurchaseConfirmation(
         colorTheme = colorTheme,
         styleOverrides = styleOverrides,
         merchant = merchant,
+        linkButtonUrl = CatchUrls.signIn(environment)
     )
 }
 
@@ -97,6 +101,7 @@ internal fun PurchaseConfirmationInternal(
     colorTheme: CatchColorTheme? = null,
     styleOverrides: ActionWidgetStyle? = null,
     merchant: Merchant?,
+    linkButtonUrl: String,
 ) {
     CatchTheme(colorTheme) {
         val themeColors = CatchTheme.colors
@@ -161,7 +166,7 @@ internal fun PurchaseConfirmationInternal(
                 LinkButton(
                     modifier = buttonModifier,
                     label = stringResource(id = R.string.view_your_credit),
-                    link = "https://getcatch.com",
+                    link = linkButtonUrl,
                     styles = styles.actionButtonStyle
                 )
                 if (donation > 0 && merchant != null && merchant.donationRecipient != null) {
@@ -180,5 +185,10 @@ internal fun PurchaseConfirmationInternal(
 @Preview
 @Composable
 internal fun PreviewPurchaseConfirmationInternal() {
-    PurchaseConfirmationInternal(earned = 1000, donation = 50, merchant = PreviewData.merchant)
+    PurchaseConfirmationInternal(
+        earned = 1000,
+        donation = 50,
+        merchant = PreviewData.merchant,
+        linkButtonUrl = CatchUrls.signIn(Environment.PRODUCTION)
+    )
 }

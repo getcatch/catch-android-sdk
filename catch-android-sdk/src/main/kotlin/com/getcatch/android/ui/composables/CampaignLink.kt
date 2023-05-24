@@ -77,8 +77,10 @@ public fun CampaignLink(
     }
     val uiState by viewModel.uiState.collectAsStateWithLifecycle()
     if (uiState is CampaignLinkUiState.Success) {
+        val stateValue = (uiState as CampaignLinkUiState.Success)
         CampaignLinkInternal(
-            rewardCampaign = (uiState as CampaignLinkUiState.Success).rewardCampaign,
+            rewardCampaign = stateValue.rewardCampaign,
+            campaignUrl = stateValue.campaignUrl,
             borderStyle = borderStyle,
             colorTheme = colorTheme,
             styleOverrides = styleOverrides,
@@ -89,6 +91,7 @@ public fun CampaignLink(
 @Composable
 internal fun CampaignLinkInternal(
     rewardCampaign: RewardCampaign,
+    campaignUrl: String,
     borderStyle: BorderStyle = BorderStyle.SlightRound,
     colorTheme: CatchColorTheme? = null,
     styleOverrides: ActionWidgetStyle? = null,
@@ -161,7 +164,7 @@ internal fun CampaignLinkInternal(
                         id = R.string.claim_store_credit,
                         rewardCampaign.amountInDollars
                     ),
-                    link = "https://getcatch.com",
+                    link = campaignUrl,
                     modifier = buttonModifier,
                     styles = styles.actionButtonStyle
                 )
