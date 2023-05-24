@@ -6,7 +6,7 @@ import androidx.compose.runtime.getValue
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.getcatch.android.ui.BorderStyle
 import com.getcatch.android.ui.styles.ActionWidgetStyle
-import com.getcatch.android.ui.theming.ThemeVariant
+import com.getcatch.android.ui.theming.CatchColorTheme
 import com.getcatch.android.viewmodels.RewardsByOrderIdUiState
 import com.getcatch.android.viewmodels.RewardsByOrderIdViewModel
 import org.koin.androidx.compose.koinViewModel
@@ -22,9 +22,9 @@ import org.koin.androidx.compose.koinViewModel
  * @param borderStyle The [`BorderStyle`](BorderStyle) that the widget renders.
  * Defaults to the [`BorderStyle.SlightRound`](BorderStyle.SlightRound) style.
  *
- * @param theme The Catch color [`ThemeVariant`](ThemeVariant). If no theme is set, the theme set
+ * @param colorTheme The Catch color [`CatchColorTheme`](CatchColorTheme). If no theme is set, the theme set
  * globally on the [`Catch`](Catch) object will be used, which defaults to
- * [`ThemeVariant.Light`](ThemeVariant.Light).
+ * [`CatchColorTheme.Light`](CatchColorTheme.Light).
  *
  * @param styleOverrides Style overrides which can be used to override the widget's default
  * appearance (ex. font size, color, weight, etc.).
@@ -33,7 +33,7 @@ import org.koin.androidx.compose.koinViewModel
 public fun PurchaseConfirmationByOrderId(
     orderId: String,
     borderStyle: BorderStyle = BorderStyle.SlightRound,
-    theme: ThemeVariant? = null,
+    colorTheme: CatchColorTheme? = null,
     styleOverrides: ActionWidgetStyle? = null,
 ) {
     val viewModel: RewardsByOrderIdViewModel = koinViewModel(key = orderId)
@@ -47,7 +47,7 @@ public fun PurchaseConfirmationByOrderId(
             earned = state.rewards.earnedRewards,
             donation = state.rewards.userDonationAmountFromReward,
             borderStyle = borderStyle,
-            theme = theme,
+            colorTheme = colorTheme,
             styleOverrides = styleOverrides
         )
     }

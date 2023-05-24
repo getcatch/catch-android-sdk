@@ -12,9 +12,9 @@ import com.getcatch.android.models.Item
 import com.getcatch.android.ui.PaymentMethodVariant
 import com.getcatch.android.ui.composables.PaymentMethod
 import com.getcatch.android.ui.styles.InfoWidgetStyle
-import com.getcatch.android.ui.theming.ThemeVariant
+import com.getcatch.android.ui.theming.CatchColorTheme
+import com.getcatch.android.utils.getCatchColorTheme
 import com.getcatch.android.utils.getPaymentMethodVariant
-import com.getcatch.android.utils.getThemeVariant
 
 /**
  * The `PaymentMethod` widget displays similar messaging and informational content as the
@@ -38,7 +38,7 @@ public class PaymentMethodView @JvmOverloads constructor(
     private val _userCohorts = mutableStateOf<List<String>?>(null)
     private val _variant = mutableStateOf<PaymentMethodVariant>(PaymentMethodVariant.Standard)
     private val _disabled = mutableStateOf(false)
-    private val _theme = mutableStateOf<ThemeVariant?>(null)
+    private val _colorTheme = mutableStateOf<CatchColorTheme?>(null)
     private val _styleOverrides = mutableStateOf<InfoWidgetStyle?>(null)
 
     /**
@@ -69,11 +69,11 @@ public class PaymentMethodView @JvmOverloads constructor(
     public var variant: PaymentMethodVariant by _variant
 
     /**
-     * The Catch color [`ThemeVariant`](ThemeVariant). If no theme is set, the theme set globally on
+     * The Catch color [`CatchColorTheme`](CatchColorTheme). If no theme is set, the theme set globally on
      * the [`Catch`](com.getcatch.android.Catch) object will be used, which defaults to
-     * [`ThemeVariant.Light`](ThemeVariant.Light).
+     * [`CatchColorTheme.Light`](CatchColorTheme.Light).
      */
-    public var theme: ThemeVariant? by _theme
+    public var colorTheme: CatchColorTheme? by _colorTheme
 
     /**
      * Style overrides which can be used to override the widget's default
@@ -85,7 +85,7 @@ public class PaymentMethodView @JvmOverloads constructor(
         context.theme.obtainStyledAttributes(attrs, R.styleable.PaymentMethodView, 0, 0).apply {
             try {
                 getPaymentMethodVariant()?.let { _variant.value = it }
-                _theme.value = getThemeVariant(R.styleable.PaymentMethodView_themeVariant)
+                _colorTheme.value = getCatchColorTheme(R.styleable.PaymentMethodView_colorTheme)
             } finally {
                 recycle()
             }
@@ -100,7 +100,7 @@ public class PaymentMethodView @JvmOverloads constructor(
             userCohorts = _userCohorts.value,
             disabled = _disabled.value,
             variant = _variant.value,
-            theme = _theme.value,
+            colorTheme = _colorTheme.value,
             styleOverrides = _styleOverrides.value,
         )
     }

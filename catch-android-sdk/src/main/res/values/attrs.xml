@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <!--  Attribute value definitions  -->
-    <attr name="themeVariant" format="enum">
+    <attr name="colorTheme" format="enum">
         <enum name="light" value="0" />
         <enum name="light_mono" value="1" />
         <enum name="dark" value="2" />
@@ -34,10 +34,10 @@
         <attr name="hasOrPrefix" format="boolean" />
         <attr name="customBorderRadius" />
         <attr name="customBorderColor" />
-        <attr name="themeVariant" />
+        <attr name="colorTheme" />
     </declare-styleable>
     <declare-styleable name="PaymentMethodView">
-        <attr name="themeVariant" />
+        <attr name="colorTheme" />
         <attr name="paymentMethodVariant" format="enum">
             <enum name="standard" value="0" />
             <enum name="compact" value="1" />
@@ -45,32 +45,32 @@
         </attr>
     </declare-styleable>
     <declare-styleable name="ExpressCheckoutCalloutView">
-        <attr name="themeVariant" />
+        <attr name="colorTheme" />
         <attr name="borderStyle" />
         <attr name="customBorderRadius" />
         <attr name="customBorderColor" />
     </declare-styleable>
     <declare-styleable name="PurchaseConfirmationView">
-        <attr name="themeVariant" />
+        <attr name="colorTheme" />
         <attr name="borderStyle" />
         <attr name="customBorderRadius" />
         <attr name="customBorderColor" />
     </declare-styleable>
     <declare-styleable name="PurchaseConfirmationByOrderIdView">
-        <attr name="themeVariant" />
+        <attr name="colorTheme" />
         <attr name="borderStyle" />
         <attr name="customBorderRadius" />
         <attr name="customBorderColor" />
     </declare-styleable>
     <declare-styleable name="CampaignLinkView">
         <attr name="campaignName" format="string" />
-        <attr name="themeVariant" />
+        <attr name="colorTheme" />
         <attr name="borderStyle" />
         <attr name="customBorderRadius" />
         <attr name="customBorderColor" />
     </declare-styleable>
     <declare-styleable name="CatchLogoView">
         <attr name="catchLogoSize" />
-        <attr name="themeVariant" />
+        <attr name="colorTheme" />
     </declare-styleable>
 </resources>

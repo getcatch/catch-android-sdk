@@ -12,9 +12,9 @@ import com.getcatch.android.R
 import com.getcatch.android.ui.BorderStyle
 import com.getcatch.android.ui.composables.PurchaseConfirmationByOrderId
 import com.getcatch.android.ui.styles.ActionWidgetStyle
-import com.getcatch.android.ui.theming.ThemeVariant
+import com.getcatch.android.ui.theming.CatchColorTheme
 import com.getcatch.android.utils.getBorderStyle
-import com.getcatch.android.utils.getThemeVariant
+import com.getcatch.android.utils.getCatchColorTheme
 
 /**
  * The `PurchaseConfirmationByOrderId` widget serves the same purpose as the
@@ -28,7 +28,7 @@ public class PurchaseConfirmationByOrderIdView @JvmOverloads constructor(
 ) : AbstractComposeView(context, attrs, defStyleAttr) {
     private val _orderId: MutableState<String?> = mutableStateOf(null)
     private val _borderStyle: MutableState<BorderStyle> = mutableStateOf(BorderStyle.SlightRound)
-    private val _themeVariant: MutableState<ThemeVariant?> = mutableStateOf(null)
+    private val _colorTheme: MutableState<CatchColorTheme?> = mutableStateOf(null)
     private val _styleOverrides: MutableState<ActionWidgetStyle?> = mutableStateOf(null)
 
     /**
@@ -44,11 +44,11 @@ public class PurchaseConfirmationByOrderIdView @JvmOverloads constructor(
     public var borderStyle: BorderStyle by _borderStyle
 
     /**
-     * The Catch color [`ThemeVariant`](ThemeVariant). If no theme is set, the theme set globally on
+     * The Catch color [`CatchColorTheme`](CatchColorTheme). If no theme is set, the theme set globally on
      * the [`Catch`](com.getcatch.android.Catch) object will be used, which defaults to
-     * [`ThemeVariant.Light`](ThemeVariant.Light).
+     * [`CatchColorTheme.Light`](CatchColorTheme.Light).
      */
-    public var themeVariant: ThemeVariant? by _themeVariant
+    public var colorTheme: CatchColorTheme? by _colorTheme
 
     /**
      * Style overrides which can be used to override the widget's default
@@ -57,7 +57,12 @@ public class PurchaseConfirmationByOrderIdView @JvmOverloads constructor(
     public var styleOverrides: ActionWidgetStyle? by _styleOverrides
 
     init {
-        context.theme.obtainStyledAttributes(attrs, R.styleable.PurchaseConfirmationByOrderIdView, 0, 0)
+        context.theme.obtainStyledAttributes(
+            attrs,
+            R.styleable.PurchaseConfirmationByOrderIdView,
+            0,
+            0
+        )
             .apply {
                 try {
                     getBorderStyle(
@@ -68,8 +73,8 @@ public class PurchaseConfirmationByOrderIdView @JvmOverloads constructor(
                     )?.let {
                         _borderStyle.value = it
                     }
-                    _themeVariant.value =
-                        getThemeVariant(R.styleable.PurchaseConfirmationByOrderIdView_themeVariant)
+                    _colorTheme.value =
+                        getCatchColorTheme(R.styleable.PurchaseConfirmationByOrderIdView_colorTheme)
                 } finally {
                     recycle()
                 }
@@ -82,7 +87,7 @@ public class PurchaseConfirmationByOrderIdView @JvmOverloads constructor(
             PurchaseConfirmationByOrderId(
                 orderId = it,
                 borderStyle = _borderStyle.value,
-                theme = _themeVariant.value,
+                colorTheme = _colorTheme.value,
                 styleOverrides = _styleOverrides.value,
             )
         }

@@ -1,18 +1,18 @@
 package com.getcatch.sample.utils
 
-import com.getcatch.android.ui.theming.ThemeVariant
+import com.getcatch.android.ui.theming.CatchColorTheme
 
-val allThemeVariants = listOf(
-    ThemeVariant.Light,
-    ThemeVariant.LightMono,
-    ThemeVariant.Dark,
-    ThemeVariant.DarkMono
+val allCatchColorThemes = listOf(
+    CatchColorTheme.Light,
+    CatchColorTheme.LightMono,
+    CatchColorTheme.Dark,
+    CatchColorTheme.DarkMono
 )
 
-val ThemeVariant.name: String
+val CatchColorTheme.name: String
     get() = when (this) {
-        ThemeVariant.Light -> "Light"
-        ThemeVariant.LightMono -> "Light mono"
-        ThemeVariant.Dark -> "Dark"
-        ThemeVariant.DarkMono -> "Dark mono"
+        CatchColorTheme.Light -> "Light"
+        CatchColorTheme.LightMono -> "Light mono"
+        CatchColorTheme.Dark -> "Dark"
+        CatchColorTheme.DarkMono -> "Dark mono"
     }

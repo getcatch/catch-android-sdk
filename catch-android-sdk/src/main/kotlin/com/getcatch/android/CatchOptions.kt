@@ -2,15 +2,15 @@ package com.getcatch.android
 
 import com.getcatch.android.network.Environment
 import com.getcatch.android.ui.styles.CatchStyleConfig
-import com.getcatch.android.ui.theming.ThemeVariant
+import com.getcatch.android.ui.theming.CatchColorTheme
 import com.getcatch.android.ui.typography.CustomFontFamily
 
 /**
  * An object which specifies optional configuration settings to
  * control the global behavior of the Catch SDK.
  *
- * @property colorTheme The default theme to be applied to all
- * Catch widgets. Defaults to `ThemeVariant.Light`.
+ * @property colorTheme The default theme to be applied to all Catch widgets.
+ * Defaults to [`CatchColorTheme.Light`](CatchColorTheme.Light).
  *
  * @property environment The production environment should be used
  * in live applications while the sandbox environment should be
@@ -23,7 +23,7 @@ import com.getcatch.android.ui.typography.CustomFontFamily
  * applied to the elements of all widgets if set. Defaults to null.
  */
 public data class CatchOptions(
-    val colorTheme: ThemeVariant = ThemeVariant.Light,
+    val colorTheme: CatchColorTheme = CatchColorTheme.Light,
     val environment: Environment = Environment.SANDBOX,
     val customFontFamily: CustomFontFamily? = null,
     val styleConfig: CatchStyleConfig? = null,

@@ -12,10 +12,10 @@ import com.getcatch.android.models.Item
 import com.getcatch.android.ui.CalloutBorderStyle
 import com.getcatch.android.ui.composables.Callout
 import com.getcatch.android.ui.styles.InfoWidgetStyle
-import com.getcatch.android.ui.theming.ThemeVariant
+import com.getcatch.android.ui.theming.CatchColorTheme
 import com.getcatch.android.utils.getCalloutBorderStyle
+import com.getcatch.android.utils.getCatchColorTheme
 import com.getcatch.android.utils.getHasOrPrefix
-import com.getcatch.android.utils.getThemeVariant
 
 /**
  * The `Callout` widget shows consumers how much Catch credit they could earn or redeem
@@ -42,7 +42,7 @@ public class CalloutView @JvmOverloads constructor(
     private val _userCohorts = mutableStateOf<List<String>?>(null)
     private val _hasOrPrefix = mutableStateOf(false)
     private val _borderStyle = mutableStateOf<CalloutBorderStyle>(CalloutBorderStyle.None)
-    private val _themeVariant = mutableStateOf<ThemeVariant?>(null)
+    private val _colorTheme = mutableStateOf<CatchColorTheme?>(null)
     private val _styleOverrides = mutableStateOf<InfoWidgetStyle?>(null)
 
     /**
@@ -80,11 +80,11 @@ public class CalloutView @JvmOverloads constructor(
     public var borderStyle: CalloutBorderStyle by _borderStyle
 
     /**
-     * The Catch color [`ThemeVariant`](ThemeVariant). If no theme is set, the theme set globally on
+     * The Catch color [`CatchColorTheme`](CatchColorTheme). If no theme is set, the theme set globally on
      * the [`Catch`](com.getcatch.android.Catch) object will be used, which defaults to
-     * [`ThemeVariant.Light`](ThemeVariant.Light).
+     * [`CatchColorTheme.Light`](CatchColorTheme.Light).
      */
-    public var themeVariant: ThemeVariant? by _themeVariant
+    public var colorTheme: CatchColorTheme? by _colorTheme
 
     /**
      * Style overrides which can be used to override the widget's default
@@ -97,7 +97,7 @@ public class CalloutView @JvmOverloads constructor(
             try {
                 _hasOrPrefix.value = getHasOrPrefix()
                 getCalloutBorderStyle()?.let { _borderStyle.value = it }
-                _themeVariant.value = getThemeVariant(R.styleable.CalloutView_themeVariant)
+                _colorTheme.value = getCatchColorTheme(R.styleable.CalloutView_colorTheme)
             } finally {
                 recycle()
             }
@@ -110,7 +110,7 @@ public class CalloutView @JvmOverloads constructor(
             price = _price.value ?: 0,
             hasOrPrefix = _hasOrPrefix.value,
             borderStyle = _borderStyle.value,
-            theme = _themeVariant.value,
+            colorTheme = _colorTheme.value,
             items = _items.value,
             userCohorts = _userCohorts.value,
             styleOverrides = _styleOverrides.value,

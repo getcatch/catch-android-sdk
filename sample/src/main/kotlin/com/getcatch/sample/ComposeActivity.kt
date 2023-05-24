@@ -85,7 +85,7 @@ class ComposeActivity : ComponentActivity() {
         )
         setContent {
             val viewModel: DemoSettingsViewModel = viewModel()
-            MaterialTheme(colors = if (viewModel.themeVariant.isDarkTheme) DarkDemoColors else LightDemoColors) {
+            MaterialTheme(colors = if (viewModel.colorTheme.isDarkTheme) DarkDemoColors else LightDemoColors) {
                 DemoScaffold(viewModel) {
                     CalloutDemo(price = viewModel.price)
                     ExpressCheckoutCalloutDemo(price = viewModel.price)

@@ -12,9 +12,9 @@ import com.getcatch.android.models.Item
 import com.getcatch.android.ui.BorderStyle
 import com.getcatch.android.ui.composables.ExpressCheckoutCallout
 import com.getcatch.android.ui.styles.InfoWidgetStyle
-import com.getcatch.android.ui.theming.ThemeVariant
+import com.getcatch.android.ui.theming.CatchColorTheme
 import com.getcatch.android.utils.getBorderStyle
-import com.getcatch.android.utils.getThemeVariant
+import com.getcatch.android.utils.getCatchColorTheme
 
 /**
  * The `ExpressCheckoutCallout` widget displays similar informational content as the
@@ -39,7 +39,7 @@ public class ExpressCheckoutCalloutView @JvmOverloads constructor(
     private val _items = mutableStateOf<List<Item>?>(null)
     private val _userCohorts = mutableStateOf<List<String>?>(null)
     private val _borderStyle = mutableStateOf<BorderStyle>(BorderStyle.None)
-    private val _theme = mutableStateOf<ThemeVariant?>(null)
+    private val _colorTheme = mutableStateOf<CatchColorTheme?>(null)
     private val _styleOverrides = mutableStateOf<InfoWidgetStyle?>(null)
 
     /**
@@ -57,11 +57,11 @@ public class ExpressCheckoutCalloutView @JvmOverloads constructor(
     public var borderStyle: BorderStyle by _borderStyle
 
     /**
-     * The Catch color [`ThemeVariant`](ThemeVariant). If no theme is set, the theme set globally on
+     * The Catch color [`CatchColorTheme`](CatchColorTheme). If no theme is set, the theme set globally on
      * the [`Catch`](com.android.getcatch.Catch) object will be used, which defaults to
-     * [`ThemeVariant.Light`](ThemeVariant.Light).
+     * [`CatchColorTheme.Light`](CatchColorTheme.Light).
      */
-    public var theme: ThemeVariant? by _theme
+    public var colorTheme: CatchColorTheme? by _colorTheme
 
     /** A list of all items included in the order. Used to calculate item-based rewards. */
     public var items: List<Item>? by _items
@@ -84,8 +84,8 @@ public class ExpressCheckoutCalloutView @JvmOverloads constructor(
                     )?.let {
                         _borderStyle.value = it
                     }
-                    _theme.value =
-                        getThemeVariant(R.styleable.ExpressCheckoutCalloutView_themeVariant)
+                    _colorTheme.value =
+                        getCatchColorTheme(R.styleable.ExpressCheckoutCalloutView_colorTheme)
                 } finally {
                     recycle()
                 }
@@ -99,7 +99,7 @@ public class ExpressCheckoutCalloutView @JvmOverloads constructor(
             items = _items.value,
             userCohorts = _userCohorts.value,
             borderStyle = _borderStyle.value,
-            theme = _theme.value,
+            colorTheme = _colorTheme.value,
             styleOverrides = _styleOverrides.value,
         )
     }

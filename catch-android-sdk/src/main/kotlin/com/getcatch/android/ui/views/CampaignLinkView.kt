@@ -12,10 +12,10 @@ import com.getcatch.android.R
 import com.getcatch.android.ui.BorderStyle
 import com.getcatch.android.ui.composables.CampaignLink
 import com.getcatch.android.ui.styles.ActionWidgetStyle
-import com.getcatch.android.ui.theming.ThemeVariant
+import com.getcatch.android.ui.theming.CatchColorTheme
 import com.getcatch.android.utils.getBorderStyle
 import com.getcatch.android.utils.getCampaignName
-import com.getcatch.android.utils.getThemeVariant
+import com.getcatch.android.utils.getCatchColorTheme
 
 /**
  * The `CampaignLink` widget is designed to be displayed on your order confirmation page if Catch was
@@ -33,7 +33,7 @@ public class CampaignLinkView @JvmOverloads constructor(
 ) : AbstractComposeView(context, attrs, defStyleAttr) {
     private val _campaignName: MutableState<String?> = mutableStateOf(null)
     private val _borderStyle: MutableState<BorderStyle> = mutableStateOf(BorderStyle.SlightRound)
-    private val _theme: MutableState<ThemeVariant?> = mutableStateOf(null)
+    private val _colorTheme: MutableState<CatchColorTheme?> = mutableStateOf(null)
     private val _styleOverrides: MutableState<ActionWidgetStyle?> = mutableStateOf(null)
 
     /** The name of a valid and active Catch campaign. */
@@ -46,11 +46,11 @@ public class CampaignLinkView @JvmOverloads constructor(
     public var borderStyle: BorderStyle by _borderStyle
 
     /**
-     * The Catch color [`ThemeVariant`](ThemeVariant). If no theme is set, the theme set on the
-     * [`Catch`](com.getcatch.android.Catch) object will be used, which defaults to
-     * [`ThemeVariant.Light`](ThemeVariant.Light).
+     * The Catch color [`CatchColorTheme`](CatchColorTheme). If no theme is set, the theme set on
+     * the [`Catch`](com.getcatch.android.Catch) object will be used, which defaults to
+     * [`CatchColorTheme.Light`](CatchColorTheme.Light).
      */
-    public var theme: ThemeVariant? by _theme
+    public var colorTheme: CatchColorTheme? by _colorTheme
 
     /**
      * Style overrides which can be used to override the widget's default
@@ -71,8 +71,8 @@ public class CampaignLinkView @JvmOverloads constructor(
                     )?.let {
                         _borderStyle.value = it
                     }
-                    _theme.value =
-                        getThemeVariant(R.styleable.CampaignLinkView_themeVariant)
+                    _colorTheme.value =
+                        getCatchColorTheme(R.styleable.CampaignLinkView_colorTheme)
                 } finally {
                     recycle()
                 }
@@ -85,7 +85,7 @@ public class CampaignLinkView @JvmOverloads constructor(
             CampaignLink(
                 campaignName = it,
                 borderStyle = _borderStyle.value,
-                theme = _theme.value,
+                colorTheme = _colorTheme.value,
                 styleOverrides = _styleOverrides.value,
             )
         }

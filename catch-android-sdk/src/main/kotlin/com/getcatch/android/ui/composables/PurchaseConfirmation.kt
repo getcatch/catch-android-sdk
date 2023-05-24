@@ -33,8 +33,8 @@ import com.getcatch.android.ui.composables.elements.DonationMessage
 import com.getcatch.android.ui.composables.elements.LinkButton
 import com.getcatch.android.ui.styles.ActionWidgetStyle
 import com.getcatch.android.ui.styles.StyleResolver
+import com.getcatch.android.ui.theming.CatchColorTheme
 import com.getcatch.android.ui.theming.CatchTheme
-import com.getcatch.android.ui.theming.ThemeVariant
 import com.getcatch.android.utils.PreviewData
 import com.getcatch.android.utils.border
 import com.getcatch.android.utils.centsToDollarsString
@@ -61,9 +61,9 @@ import org.koin.compose.koinInject
  * @param borderStyle The [`BorderStyle`](BorderStyle) that the widget renders.
  * Defaults to the [`BorderStyle.SlightRound`](BorderStyle.SlightRound) style.
  *
- * @param theme The Catch color [`ThemeVariant`](ThemeVariant). If no theme is set, the theme set
+ * @param colorTheme The Catch color [`CatchColorTheme`](CatchColorTheme). If no theme is set, the theme set
  * globally on the [`Catch`](Catch) object will be used, which defaults to
- * [`ThemeVariant.Light`](ThemeVariant.Light).
+ * [`CatchColorTheme.Light`](CatchColorTheme.Light).
  *
  * @param styleOverrides Style overrides which can be used to override the widget's default
  * appearance (ex. font size, color, weight, etc.).
@@ -73,7 +73,7 @@ public fun PurchaseConfirmation(
     earned: Int,
     donation: Int? = null,
     borderStyle: BorderStyle = BorderStyle.SlightRound,
-    theme: ThemeVariant? = null,
+    colorTheme: CatchColorTheme? = null,
     styleOverrides: ActionWidgetStyle? = null,
 ) {
     Catch.assertInitialized()
@@ -83,7 +83,7 @@ public fun PurchaseConfirmation(
         earned = earned,
         donation = donation ?: 0,
         borderStyle = borderStyle,
-        theme = theme,
+        colorTheme = colorTheme,
         styleOverrides = styleOverrides,
         merchant = merchant,
     )
@@ -94,16 +94,16 @@ internal fun PurchaseConfirmationInternal(
     earned: Int,
     donation: Int,
     borderStyle: BorderStyle = BorderStyle.SlightRound,
-    theme: ThemeVariant? = null,
+    colorTheme: CatchColorTheme? = null,
     styleOverrides: ActionWidgetStyle? = null,
     merchant: Merchant?,
 ) {
-    CatchTheme(theme) {
-        val themeVariant = CatchTheme.variant
-        val styles by remember(themeVariant, styleOverrides) {
+    CatchTheme(colorTheme) {
+        val themeColors = CatchTheme.colors
+        val styles by remember(CatchTheme.colorTheme, styleOverrides) {
             mutableStateOf(
                 StyleResolver.actionWidgetStyles(
-                    theme = themeVariant,
+                    themeColors = themeColors,
                     instanceOverrides = styleOverrides,
                     actionWidgetType = ActionWidgetType.PurchaseConfirmation
                 )
@@ -128,7 +128,7 @@ internal fun PurchaseConfirmationInternal(
             val fullWidthButton = maxWidth < 479.dp
             Column {
                 Image(
-                    painter = painterResource(id = themeVariant.logoResId),
+                    painter = painterResource(id = CatchTheme.colorTheme.logoResId),
                     contentDescription = stringResource(id = R.string.content_description_catch_logo),
                     modifier = Modifier.height(28.dp),
                 )

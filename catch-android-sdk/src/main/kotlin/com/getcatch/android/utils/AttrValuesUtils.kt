@@ -9,7 +9,7 @@ import com.getcatch.android.ui.CalloutBorderStyle
 import com.getcatch.android.ui.CatchLogoSize
 import com.getcatch.android.ui.PaymentMethodVariant
 import com.getcatch.android.ui.styles.values.ColorValue
-import com.getcatch.android.ui.theming.ThemeVariant
+import com.getcatch.android.ui.theming.CatchColorTheme
 
 internal fun TypedArray.getHasOrPrefix() = getBoolean(R.styleable.CalloutView_hasOrPrefix, false)
 
@@ -28,7 +28,7 @@ internal object BorderStyleAttrEnum {
     const val NONE = 3
 }
 
-internal object ThemeVariantAttrEnum {
+internal object CatchColorThemeAttrEnum {
     const val LIGHT = 0
     const val LIGHT_MONO = 1
     const val DARK = 2
@@ -102,12 +102,12 @@ internal fun TypedArray.getBorderStyle(
         else -> null
     }
 
-internal fun TypedArray.getThemeVariant(@StyleableRes styleableResId: Int): ThemeVariant? =
+internal fun TypedArray.getCatchColorTheme(@StyleableRes styleableResId: Int): CatchColorTheme? =
     when (getInt(styleableResId, -1)) {
-        ThemeVariantAttrEnum.LIGHT -> ThemeVariant.Light
-        ThemeVariantAttrEnum.LIGHT_MONO -> ThemeVariant.LightMono
-        ThemeVariantAttrEnum.DARK -> ThemeVariant.Dark
-        ThemeVariantAttrEnum.DARK_MONO -> ThemeVariant.DarkMono
+        CatchColorThemeAttrEnum.LIGHT -> CatchColorTheme.Light
+        CatchColorThemeAttrEnum.LIGHT_MONO -> CatchColorTheme.LightMono
+        CatchColorThemeAttrEnum.DARK -> CatchColorTheme.Dark
+        CatchColorThemeAttrEnum.DARK_MONO -> CatchColorTheme.DarkMono
         else -> null
     }
 
@@ -118,7 +118,6 @@ internal fun TypedArray.getPaymentMethodVariant(): PaymentMethodVariant? =
         PaymentMethodVariantAttrEnum.LOGO_COMPACT -> PaymentMethodVariant.LogoCompact
         else -> null
     }
-
 
 internal fun TypedArray.getCampaignName(): String? =
     getString(R.styleable.CampaignLinkView_campaignName)

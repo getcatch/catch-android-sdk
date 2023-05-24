@@ -12,8 +12,8 @@ import com.getcatch.android.Catch
 import com.getcatch.android.ui.theming.color.CatchComposeColors
 import com.getcatch.android.ui.typography.CatchFonts
 
-internal val LocalThemeVariant =
-    staticCompositionLocalOf<ThemeVariant> { error("No theme variant provided") }
+internal val LocalCatchColorTheme =
+    staticCompositionLocalOf<CatchColorTheme> { error("No catch color theme provided") }
 internal val LocalColors = staticCompositionLocalOf<CatchComposeColors> { error("No colors provided") }
 
 internal object CatchTheme {
@@ -22,26 +22,26 @@ internal object CatchTheme {
         @ReadOnlyComposable
         get() = LocalColors.current
 
-    val variant: ThemeVariant
+    val colorTheme: CatchColorTheme
         @Composable
         @ReadOnlyComposable
-        get() = LocalThemeVariant.current
+        get() = LocalCatchColorTheme.current
 }
 
 @Composable
 internal fun CatchTheme(
-    variant: ThemeVariant = ThemeVariant.Light,
+    colorTheme: CatchColorTheme = CatchColorTheme.Light,
     defaultFontFamily: FontFamily = CatchFonts.circularFontFamily,
     content: @Composable () -> Unit
 ) {
     val rememberedColors = remember {
-        variant.composeColors.copy()
+        colorTheme.composeColors.copy()
     }.apply {
-        updateColorsFrom(variant.composeColors)
+        updateColorsFrom(colorTheme.composeColors)
     }
 
     CompositionLocalProvider(
-        LocalThemeVariant provides variant,
+        LocalCatchColorTheme provides colorTheme,
         LocalColors provides rememberedColors,
     ) {
         MaterialTheme(
@@ -53,11 +53,11 @@ internal fun CatchTheme(
 
 @Composable
 internal fun CatchTheme(
-    themeOverride: ThemeVariant? = null,
+    themeOverride: CatchColorTheme? = null,
     content: @Composable () -> Unit
 ) {
     CatchTheme(
-        variant = themeOverride ?: Catch.colorTheme.value,
+        colorTheme = themeOverride ?: Catch.colorTheme.value,
         defaultFontFamily = Catch.customFontFamily.value,
         content = content
     )

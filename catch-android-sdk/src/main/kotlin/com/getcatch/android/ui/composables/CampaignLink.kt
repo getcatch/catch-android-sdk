@@ -32,8 +32,8 @@ import com.getcatch.android.ui.composables.elements.CatchText
 import com.getcatch.android.ui.composables.elements.LinkButton
 import com.getcatch.android.ui.styles.ActionWidgetStyle
 import com.getcatch.android.ui.styles.StyleResolver
+import com.getcatch.android.ui.theming.CatchColorTheme
 import com.getcatch.android.ui.theming.CatchTheme
-import com.getcatch.android.ui.theming.ThemeVariant
 import com.getcatch.android.utils.Constants
 import com.getcatch.android.utils.border
 import com.getcatch.android.utils.logoResId
@@ -56,9 +56,9 @@ import org.koin.androidx.compose.koinViewModel
  * @param borderStyle The [`BorderStyle`](BorderStyle) that the widget renders.
  * Defaults to the [`BorderStyle.SlightRound`](BorderStyle.SlightRound) style.
  *
- * @param theme The Catch color [`ThemeVariant`](ThemeVariant). If no theme is set, the theme set
+ * @param colorTheme The Catch color [`CatchColorTheme`](CatchColorTheme). If no theme is set, the theme set
  * globally on the [`Catch`](Catch) object will be used, which defaults to
- * [`ThemeVariant.Light`](ThemeVariant.Light).
+ * [`CatchColorTheme.Light`](CatchColorTheme.Light).
  *
  * @param styleOverrides Style overrides which can be used to override the widget's default
  * appearance (ex. font size, color, weight, etc.).
@@ -67,7 +67,7 @@ import org.koin.androidx.compose.koinViewModel
 public fun CampaignLink(
     campaignName: String,
     borderStyle: BorderStyle = BorderStyle.SlightRound,
-    theme: ThemeVariant? = null,
+    colorTheme: CatchColorTheme? = null,
     styleOverrides: ActionWidgetStyle? = null,
 ) {
     Catch.assertInitialized()
@@ -80,7 +80,7 @@ public fun CampaignLink(
         CampaignLinkInternal(
             rewardCampaign = (uiState as CampaignLinkUiState.Success).rewardCampaign,
             borderStyle = borderStyle,
-            theme = theme,
+            colorTheme = colorTheme,
             styleOverrides = styleOverrides,
         )
     }
@@ -90,15 +90,15 @@ public fun CampaignLink(
 internal fun CampaignLinkInternal(
     rewardCampaign: RewardCampaign,
     borderStyle: BorderStyle = BorderStyle.SlightRound,
-    theme: ThemeVariant? = null,
+    colorTheme: CatchColorTheme? = null,
     styleOverrides: ActionWidgetStyle? = null,
 ) {
-    CatchTheme(theme) {
-        val themeVariant = CatchTheme.variant
-        val styles by remember(themeVariant, styleOverrides) {
+    CatchTheme(colorTheme) {
+        val themeColors = CatchTheme.colors
+        val styles by remember(CatchTheme.colorTheme, styleOverrides) {
             mutableStateOf(
                 StyleResolver.actionWidgetStyles(
-                    theme = themeVariant,
+                    themeColors = themeColors,
                     instanceOverrides = styleOverrides,
                     actionWidgetType = ActionWidgetType.PurchaseConfirmation
                 )
@@ -123,7 +123,7 @@ internal fun CampaignLinkInternal(
             val fullWidthButton = maxWidth < 479.dp
             Column(verticalArrangement = Arrangement.spacedBy(16.dp)) {
                 Image(
-                    painter = painterResource(id = themeVariant.logoResId),
+                    painter = painterResource(id = CatchTheme.colorTheme.logoResId),
                     contentDescription = stringResource(id = R.string.content_description_catch_logo),
                     modifier = Modifier.height(28.dp),
                 )
