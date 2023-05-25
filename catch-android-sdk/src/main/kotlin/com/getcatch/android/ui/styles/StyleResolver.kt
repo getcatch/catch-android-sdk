@@ -80,7 +80,7 @@ internal object StyleResolver {
                 fontColor = themeColors.buttonText,
                 height = Constants.DEFAULT_BUTTON_HEIGHT.dp,
                 lineHeight = CatchTextStyles.buttonLabel.lineHeight,
-                fontWeight = FontWeight.W500,
+                fontWeight = FontWeight.W700,
                 letterSpacing = null,
                 elevation = Constants.DEFAULT_BUTTON_ELEVATION.dp,
                 borderRadius = Constants.DEFAULT_BUTTON_BORDER_RADIUS.dp,

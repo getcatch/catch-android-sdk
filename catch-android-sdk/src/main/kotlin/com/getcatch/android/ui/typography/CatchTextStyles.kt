@@ -72,7 +72,7 @@ internal object CatchTextStyles {
     val buttonLabel = TextStyle(
         fontSize = 18.sp,
         lineHeight = 28.sp,
-        fontWeight = FontWeight.W500,
+        fontWeight = FontWeight.W700,
     )
 
     val buttonLabelCompact = TextStyle(

@@ -9,4 +9,5 @@ internal object Constants {
     const val DEFAULT_BUTTON_ELEVATION = 2
     const val CLAIM_NOW_FONT_SIZE_RATIO = 0.875f
     const val CLAIM_NOW_FONT_SIZE_TO_LINE_HEIGHT_RATIO = 14f / 20f
+    const val EXTERNAL_LINK_ICON_SIZE_RATIO = 16f / 18f
 }
