@@ -20,7 +20,7 @@ enum class CheckoutDemoOption {
 
     val buttonLabel: String
         get() = when (this) {
-            DIRECT_OPEN -> "Open Direct Checkout"
+            DIRECT_OPEN -> "Open Checkout"
             VIRTUAL_CARD_CREATE -> "Create and Open Virtual Card Checkout"
             VIRTUAL_CARD_OPEN -> "Open Virtual Card Checkout"
         }
