@@ -14,7 +14,7 @@ class App : Application() {
             publicKey = Constants.CATCH_PUBLIC_KEY,
             context = this,
             options = CatchOptions(
-                environment = Environment.PRODUCTION,
+                environment = Environment.SANDBOX,
             )
         )
     }

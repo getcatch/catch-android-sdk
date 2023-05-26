@@ -16,7 +16,6 @@ internal class DirectCheckoutActivity : CheckoutActivity<DirectCheckoutResult>()
     private val publicKey: PublicKey by inject()
     private val merchantRepo: MerchantRepository by inject()
 
-
     override fun generateUrl() {
         val args = DirectCheckoutContract.Args.fromIntent(intent)
         if (args == null) {

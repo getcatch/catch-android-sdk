@@ -6,11 +6,18 @@ import android.os.Bundle
 import android.util.Log
 import androidx.activity.addCallback
 import com.getcatch.android.exceptions.WebViewError
+import com.getcatch.android.models.CatchDeviceTokenPayload
+import com.getcatch.android.repository.UserRepository
 import com.getcatch.android.ui.activities.WebViewActivity
 import com.getcatch.android.web.PostMessageActions
 import com.getcatch.android.web.PostMessageBody
+import kotlinx.serialization.json.Json
+import kotlinx.serialization.json.decodeFromJsonElement
+import org.koin.core.component.KoinComponent
+import org.koin.core.component.inject
 
-internal abstract class CheckoutActivity<T> : WebViewActivity() {
+internal abstract class CheckoutActivity<T> : WebViewActivity(), KoinComponent {
+    private val userRepo: UserRepository by inject()
 
     protected abstract val canceledResult: T
 
@@ -38,6 +45,15 @@ internal abstract class CheckoutActivity<T> : WebViewActivity() {
 
             PostMessageActions.CHECKOUT_READY -> {
                 handleCheckoutReady()
+            }
+
+            PostMessageActions.CATCH_DEVICE_TOKEN -> {
+                try {
+                    val deviceTokenPayload: CatchDeviceTokenPayload = Json.decodeFromJsonElement(message.data!!)
+                    deviceTokenPayload.deviceToken?.let { userRepo.updateDeviceToken(it) }
+                } catch (ex: Exception) {
+                    Log.e(this::class.simpleName, "Error updating device token", ex)
+                }
             }
 
             else -> Log.d(this::class.simpleName, "Unhandled post message: ${message.action}")
