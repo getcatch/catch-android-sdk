@@ -103,7 +103,6 @@ internal class TOFUActivity : WebViewActivity(), KoinComponent {
         }
     }
 
-
     override fun handleError(
         error: WebViewError?
     ) {
