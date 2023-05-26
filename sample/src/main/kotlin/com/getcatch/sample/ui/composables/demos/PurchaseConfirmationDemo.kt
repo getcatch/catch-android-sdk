@@ -31,7 +31,6 @@ fun PurchaseConfirmationDemo(price: Int) {
         val result = calculateEarnedAndDonatedRewards(price, REWARDS_RATE)
         earned = result.earned
         donatedAmount = result.donated
-
     }
 
     DemoSection(title = "Purchase Confirmation", widgetContent = {
