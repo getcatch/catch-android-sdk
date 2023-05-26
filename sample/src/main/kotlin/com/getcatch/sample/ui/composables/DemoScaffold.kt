@@ -22,6 +22,7 @@ import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
+import com.getcatch.sample.Constants.VIRTUAL_CARD_INTEGRATION_ENABLED
 import com.getcatch.sample.DemoSettingsViewModel
 import kotlinx.coroutines.launch
 
@@ -50,7 +51,10 @@ fun DemoScaffold(viewModel: DemoSettingsViewModel, content: @Composable ColumnSc
                     Modifier
                         .height(48.dp)
                         .fillMaxWidth()
-                        .background(MaterialTheme.colors.secondary)
+                        .background(
+                            if (VIRTUAL_CARD_INTEGRATION_ENABLED) MaterialTheme.colors.secondary
+                            else MaterialTheme.colors.surface
+                        )
                 )
             }
             Box(

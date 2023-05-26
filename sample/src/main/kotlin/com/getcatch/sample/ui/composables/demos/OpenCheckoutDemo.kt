@@ -28,6 +28,7 @@ import androidx.compose.ui.text.input.KeyboardCapitalization
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
 import com.getcatch.android.models.checkout.CheckoutPrefill
+import com.getcatch.sample.Constants.VIRTUAL_CARD_INTEGRATION_ENABLED
 import com.getcatch.sample.ui.composables.DemoSection
 import com.getcatch.sample.ui.theming.demoCheckboxColors
 import com.getcatch.sample.utils.CheckoutDemoOption
@@ -123,7 +124,9 @@ fun OpenCheckoutDemo(
                 }
             }
         },
-        settingsContent = {
+        settingsContent =
+        if (!VIRTUAL_CARD_INTEGRATION_ENABLED) null
+        else ({
             Column(Modifier.fillMaxWidth(), horizontalAlignment = Alignment.Start) {
                 Text("Integration Type", fontWeight = FontWeight.SemiBold)
                 Row(verticalAlignment = Alignment.CenterVertically) {
@@ -153,6 +156,6 @@ fun OpenCheckoutDemo(
                     Text(CheckoutDemoOption.VIRTUAL_CARD_CREATE.label)
                 }
             }
-        }
+        })
     )
 }

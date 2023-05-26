@@ -48,7 +48,6 @@ class ComposeActivity : ComponentActivity() {
                 catchCheckoutController.openVirtualCardCheckout(id, prefill = checkoutPrefill)
             }
         }
-
     }
 
     private fun onCheckoutCanceled() {
