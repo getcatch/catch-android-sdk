@@ -12,9 +12,9 @@ import com.getcatch.android.ui.typography.CustomFontFamily
  * @property colorTheme The default theme to be applied to all Catch widgets.
  * Defaults to [`CatchColorTheme.Light`](CatchColorTheme.Light).
  *
- * @property environment The production environment should be used
- * in live applications while the sandbox environment should be
- * used for development and testing. Defaults to sandbox.
+ * @property environment The `LIVE` environment should be used in
+ * production applications while the `SANDBOX` environment should be
+ * used for development and testing. Defaults to `SANDBOX`.
  *
  * @property customFontFamily An optional font family that will be
  * applied to all text in widgets if set. Defaults to null.

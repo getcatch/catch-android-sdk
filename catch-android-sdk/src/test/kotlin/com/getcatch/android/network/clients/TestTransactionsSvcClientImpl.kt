@@ -24,7 +24,7 @@ public class TestTransactionsSvcClientImpl {
     private val transactionsSvcClient = TransactionsSvcClientImpl(
         mockClient.client,
         testPublicKey,
-        Environment.PRODUCTION,
+        Environment.LIVE,
     )
 
     private val testDeviceId = "TEST_DEVICE_ID"

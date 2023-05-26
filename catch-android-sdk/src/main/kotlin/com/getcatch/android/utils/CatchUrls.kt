@@ -23,8 +23,8 @@ internal object CatchUrls {
         get() = setOf(
             "${Environment.SANDBOX.baseUrl}/c/",
             "${Environment.SANDBOX.baseUrl}/t/",
-            "${Environment.PRODUCTION.baseUrl}/c/",
-            "${Environment.PRODUCTION.baseUrl}/t/",
+            "${Environment.LIVE.baseUrl}/c/",
+            "${Environment.LIVE.baseUrl}/t/",
         )
 
     fun tofu(environment: Environment, publicKey: PublicKey, merchant: Merchant, path: TofuPath) =
