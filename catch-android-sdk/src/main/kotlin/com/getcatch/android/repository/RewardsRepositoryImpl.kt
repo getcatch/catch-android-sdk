@@ -22,7 +22,8 @@ internal class RewardsRepositoryImpl(
         items: List<Item>?,
         userCohorts: List<String>?
     ): CalculateRewardsResult {
-        val merchant = merchantRepo.activeMerchant.value ?: return CalculateRewardsResult.NoRewardsSummary
+        val merchant =
+            merchantRepo.activeMerchant.value ?: return CalculateRewardsResult.NoRewardsSummary
 
         val earnedRewardsSummary = fetchEarnedRewardSummary(
             price = price,
@@ -30,7 +31,7 @@ internal class RewardsRepositoryImpl(
             userCohorts = userCohorts,
             merchant = merchant,
             user = user,
-        ) ?: return CalculateRewardsResult.NoRewardsSummary
+        ) ?: return CalculateRewardsResult.merchantDefaultRewardSummary(merchant)
 
         val calculatedReward = getPrioritizedReward(
             earnedRewardsSummary = earnedRewardsSummary,
