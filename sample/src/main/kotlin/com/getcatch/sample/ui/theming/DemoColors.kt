@@ -14,6 +14,7 @@ const val LIGHT_SECONDARY = 0xFFF7F7F7
 const val DARK_SURFACE = 0xFF232639
 const val DARK_BACKGROUND = 0xFF1C1311
 const val DARK_SECONDARY = 0xFF121212
+const val DARK_ON_SECONDARY = 0xFFCCCCCC
 
 val LightDemoColors = lightColors(
     surface = Color(LIGHT_SURFACE),
@@ -25,12 +26,11 @@ val DarkDemoColors = darkColors(
     surface = Color(DARK_SURFACE),
     background = Color(DARK_BACKGROUND),
     secondary = Color(DARK_SECONDARY),
+    onSecondary = Color(DARK_ON_SECONDARY)
 )
 
-
 val demoCheckboxColors: CheckboxColors
-    @Composable
-    get() = CheckboxDefaults.colors(
+    @Composable get() = CheckboxDefaults.colors(
         checkedColor = MaterialTheme.colors.primary,
-        uncheckedColor = MaterialTheme.colors.onSecondary
+        uncheckedColor = MaterialTheme.colors.onSecondary,
     )
