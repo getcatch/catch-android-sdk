@@ -4,5 +4,8 @@ import com.getcatch.android.models.RewardCampaign
 
 internal sealed interface CampaignLinkUiState {
     object Loading : CampaignLinkUiState
-    class Success(val rewardCampaign: RewardCampaign) : CampaignLinkUiState
+    class Success(
+        val rewardCampaign: RewardCampaign,
+        val campaignUrl: String,
+    ) : CampaignLinkUiState
 }

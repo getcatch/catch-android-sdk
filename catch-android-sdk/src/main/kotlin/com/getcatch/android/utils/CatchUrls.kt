@@ -74,7 +74,8 @@ internal object CatchUrls {
         parameter("prefillUserEmail", prefill.userEmail)
         parameter("integration", "vcn")
     }
-     fun createAndOpenVirtualCardCheckout(
+
+    fun createAndOpenVirtualCardCheckout(
         environment: Environment,
         publicKey: PublicKey,
         merchant: Merchant,
@@ -90,4 +91,10 @@ internal object CatchUrls {
         parameter("prefillUserEmail", prefill.userEmail)
         parameter("integration", "vcn")
     }
+
+    private const val REWARD_ID_PREFIX_LENGTH = 3 // Number of chars in "rc-"
+    fun rewardCampaign(environment: Environment, rewardCampaignId: String) =
+        "${environment.baseUrl}/u/e/${rewardCampaignId.substring(REWARD_ID_PREFIX_LENGTH)}"
+
+    fun signIn(environment: Environment) = "${environment.baseUrl}/u/sign-in"
 }
