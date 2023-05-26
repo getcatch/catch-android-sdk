@@ -1,5 +1,6 @@
 package com.getcatch.android.test.helpers
 
+import com.getcatch.android.models.AvailableRewardDetail
 import com.getcatch.android.models.EarnedRewardsSummary
 import com.getcatch.android.models.Item
 import com.getcatch.android.models.Merchant
@@ -34,7 +35,7 @@ internal object FakeDataProvider {
         firstPurchaseBonusEligibility = false,
         isCatchEmployee = false,
         wasReferred = false,
-        availableRewardBreakdown = emptyList(),
+        availableRewardBreakdown = generateSimpleAvailableReward(1000),
     )
 
     fun randomItem() = Item(
@@ -61,7 +62,7 @@ internal object FakeDataProvider {
             userFirstName = "First",
             rewardAmount = 1500,
             firstPurchaseBonusEligibility = false,
-                availableRewardBreakdown = emptyList(),
+            availableRewardBreakdown = generateSimpleAvailableReward(1500),
         )
 
         val New = PublicUserData(
@@ -75,7 +76,7 @@ internal object FakeDataProvider {
             userFirstName = "First",
             rewardAmount = amount,
             firstPurchaseBonusEligibility = true,
-            availableRewardBreakdown = emptyList(),
+            availableRewardBreakdown = generateSimpleAvailableReward(amount),
         )
     }
 
@@ -124,4 +125,15 @@ internal object FakeDataProvider {
                 earnedRewardBreakdown = emptyList()
             )
     }
+
+    fun generateSimpleAvailableReward(amount: Int) = listOf(
+        AvailableRewardDetail(
+            rewardIds = listOf("test-reward-id"),
+            amount = amount,
+            rewardAmounts = listOf(amount),
+            expirations = emptyList(),
+            redeemableFlatOrderTotalMin = null,
+            redeemablePercentageOrderTotalMax = null
+        )
+    )
 }

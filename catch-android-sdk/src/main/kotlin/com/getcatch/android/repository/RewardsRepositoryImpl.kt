@@ -2,6 +2,7 @@ package com.getcatch.android.repository
 
 import android.util.Log
 import com.getcatch.android.models.CalculateRewardsResult
+import com.getcatch.android.models.CalculatedAvailableRewardsBreakdown
 import com.getcatch.android.models.CalculatedReward
 import com.getcatch.android.models.EarnedRewardsSummary
 import com.getcatch.android.models.Item
@@ -25,19 +26,23 @@ internal class RewardsRepositoryImpl(
         val merchant =
             merchantRepo.activeMerchant.value ?: return CalculateRewardsResult.NoRewardsSummary
 
+        val calculatedAvailableRewardsBreakdown =
+            CalculatedAvailableRewardsBreakdown.calculate(price, user.availableRewardBreakdown)
+
         val earnedRewardsSummary = fetchEarnedRewardSummary(
             price = price,
             items = items,
             userCohorts = userCohorts,
             merchant = merchant,
-            user = user,
+            redeemableRewardsTotal = calculatedAvailableRewardsBreakdown.redeemableRewardsTotal,
+            firstPurchaseBonusEligibility = user.firstPurchaseBonusEligibility,
         ) ?: return CalculateRewardsResult.merchantDefaultRewardSummary(merchant)
 
         val calculatedReward = getPrioritizedReward(
             earnedRewardsSummary = earnedRewardsSummary,
             price = price,
-            existingUserRewardAmount = user.rewardAmount ?: 0,
             defaultMerchantRewardRate = merchant.defaultEarnedRewardsRate,
+            calculatedAvailableRewardsBreakdown = calculatedAvailableRewardsBreakdown,
         )
         return CalculateRewardsResult(
             reward = calculatedReward,
@@ -50,22 +55,23 @@ internal class RewardsRepositoryImpl(
         items: List<Item>?,
         userCohorts: List<String>?,
         merchant: Merchant,
-        user: PublicUserData,
+        redeemableRewardsTotal: Int,
+        firstPurchaseBonusEligibility: Boolean,
     ): EarnedRewardsSummary? {
         if (!merchant.enableConfigurableRewards) {
             return EarnedRewardsSummary.generateLocally(
                 merchant = merchant,
                 price = price,
-                userRewardAmount = user.rewardAmount ?: 0,
-                firstPurchaseBonusEligibility = user.firstPurchaseBonusEligibility
+                userRewardAmount = redeemableRewardsTotal,
+                firstPurchaseBonusEligibility = firstPurchaseBonusEligibility
             )
         }
 
-        val amountEligible = (price - (user.rewardAmount ?: 0)).coerceAtLeast(0)
+        val amountEligible = (price - (redeemableRewardsTotal)).coerceAtLeast(0)
         val response = transactionsSvcClient.calculateEarnedRewards(
             merchantId = merchant.id,
             amountEligibleForEarnedRewards = amountEligible,
-            isNewCatchUser = user.firstPurchaseBonusEligibility,
+            isNewCatchUser = firstPurchaseBonusEligibility,
             items = items,
             userCohorts = userCohorts,
         )
@@ -81,7 +87,7 @@ internal class RewardsRepositoryImpl(
     private fun getPrioritizedReward(
         earnedRewardsSummary: EarnedRewardsSummary,
         price: Int,
-        existingUserRewardAmount: Int,
+        calculatedAvailableRewardsBreakdown: CalculatedAvailableRewardsBreakdown,
         defaultMerchantRewardRate: Double
     ): CalculatedReward {
         // Take the larger of the rewards rates between
@@ -94,17 +100,19 @@ internal class RewardsRepositoryImpl(
             return CalculatedReward.PercentRate(effectiveRewardRate)
         }
 
+        val availableRewardsAmount = calculatedAvailableRewardsBreakdown.redeemableRewardsTotal
+
         val earnedRewardsTotal = earnedRewardsSummary.earnedRewardsTotal ?: 0
         val discountAmount = earnedRewardsSummary.signUpDiscountAmount
-        val savedAmount = discountAmount + existingUserRewardAmount
+        val savedAmount = discountAmount + availableRewardsAmount
 
         return when {
             // For the sign up discount experiment
             discountAmount > 0 -> CalculatedReward.Saved(min(savedAmount, price))
 
             // If the user has rewards to redeem, return redeemable credits up to the price amount
-            existingUserRewardAmount > 0 -> CalculatedReward.RedeemableCredits(
-                min(existingUserRewardAmount, price)
+            availableRewardsAmount > 0 -> CalculatedReward.RedeemableCredits(
+                min(availableRewardsAmount, price)
             )
 
             // Return the earned rewards only if earned rewards > 0.

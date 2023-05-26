@@ -1,5 +1,6 @@
 package com.getcatch.android.repository
 
+import com.getcatch.android.models.CalculatedAvailableRewardsBreakdown
 import com.getcatch.android.models.CalculatedReward
 import com.getcatch.android.models.EarnedRewardsSummary
 import com.getcatch.android.network.NetworkResponse
@@ -37,6 +38,7 @@ public class TestRewardsRepositoryImpl {
                     assertThat(result.reward.percent).isEqualTo(FakeDataProvider.merchant.defaultEarnedRewardsRate)
                     assertThat(result.rewardsSummary).isNotNull()
                 }
+
                 else -> fail(
                     "Calculate earned rewards should fall back to merchant's default rate due to invalid price"
                 )
@@ -62,6 +64,7 @@ public class TestRewardsRepositoryImpl {
                     assertThat(result.reward.amount).isEqualTo(totalEarnedRewards)
                     assertThat(result.rewardsSummary).isNotNull()
                 }
+
                 else -> fail("Calculate earned rewards should have returned earned credits equal")
             }
         }
@@ -89,6 +92,7 @@ public class TestRewardsRepositoryImpl {
                     assertThat(result.reward.amount).isEqualTo(totalAvailableRewards)
                     assertThat(result.rewardsSummary).isNotNull()
                 }
+
                 else -> fail("Calculate earned rewards should have returned earned credits equal to price")
             }
         }
@@ -115,6 +119,7 @@ public class TestRewardsRepositoryImpl {
                     assertThat(result.reward.amount).isEqualTo(tenDollars)
                     assertThat(result.rewardsSummary).isNotNull()
                 }
+
                 else -> fail("Calculate earned rewards should have returned earned credits equal to price")
             }
         }
@@ -141,6 +146,7 @@ public class TestRewardsRepositoryImpl {
                     assertThat(result.reward.percent).isEqualTo(earnedRewards.percentageRewardRate)
                     assertThat(result.rewardsSummary).isNotNull()
                 }
+
                 else -> fail("Calculate earned rewards should have returned the max percentage rate")
             }
         }
@@ -153,12 +159,18 @@ public class TestRewardsRepositoryImpl {
         val mockTxnSvcClient = mock<TransactionsSvcClient>()
         val rewardsRepo = RewardsRepositoryImpl(mockMerchantRepo, mockTxnSvcClient)
         runBlocking {
+            val user = FakeDataProvider.user
+            val calculatedReward = CalculatedAvailableRewardsBreakdown.calculate(
+                tenDollars,
+                user.availableRewardBreakdown
+            )
             rewardsRepo.fetchEarnedRewardSummary(
                 price = tenDollars,
                 items = null,
                 userCohorts = null,
                 merchant = merchant,
-                user = FakeDataProvider.user,
+                redeemableRewardsTotal = calculatedReward.redeemableRewardsTotal,
+                firstPurchaseBonusEligibility = user.firstPurchaseBonusEligibility,
             )
             verifyNoInteractions(mockTxnSvcClient)
         }
