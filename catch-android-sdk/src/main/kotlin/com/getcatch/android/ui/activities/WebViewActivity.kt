@@ -1,7 +1,6 @@
 package com.getcatch.android.ui.activities
 
 import android.os.Bundle
-import android.util.Log
 import android.webkit.WebSettings
 import android.webkit.WebView
 import androidx.activity.ComponentActivity
@@ -92,15 +91,12 @@ internal abstract class WebViewActivity : ComponentActivity() {
                 )
             }
         }
-
     }
 
     protected fun postMessage(message: PostMessageBody) {
         val jsonString = Json.encodeToString(message)
         webView?.evaluateJavascript(
             "window.postMessage($jsonString)"
-        ) {
-            Log.d(this::class.simpleName, it)
-        }
+        ) { }
     }
 }
