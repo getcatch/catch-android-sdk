@@ -21,6 +21,7 @@ internal fun BenefitText(
     summary: EarnedRewardsSummary?,
     styles: InfoWidgetStyle.Resolved,
     capitalize: Boolean = true,
+    disabled: Boolean = false,
 ) {
     val context = LocalContext.current
     val message = reward.getMessage(capitalize)
@@ -38,6 +39,7 @@ internal fun BenefitText(
         textDecoration = TextDecoration.Underline,
         modifier = modifier.clickable(
             indication = null,
+            enabled = !disabled,
             interactionSource = remember {
                 MutableInteractionSource()
             }) {

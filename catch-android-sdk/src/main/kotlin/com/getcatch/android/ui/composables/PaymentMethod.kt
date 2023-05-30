@@ -184,6 +184,7 @@ internal fun PaymentMethodInternal(
                             modifier = disabledModifier,
                             price = price,
                             summary = summary,
+                            disabled = disabled,
                         )
                         Spacer(modifier = Modifier.width(2.dp))
                         InfoIcon(
