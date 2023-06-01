@@ -11,7 +11,7 @@ import com.getcatch.android.network.Environment
  * Helper functions for generating the URLs for web views and assets
  */
 internal object CatchUrls {
-    private const val ASSETS_BASE_URL = "https://dev.assets.getcatch.com"
+    private const val ASSETS_BASE_URL = "https://assets.getcatch.com"
 
     fun assetUrl(merchantId: String, assetType: MerchantAssetType) =
         "$ASSETS_BASE_URL/merchant-assets/$merchantId/${assetType.fileName}"

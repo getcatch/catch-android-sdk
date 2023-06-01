@@ -19,8 +19,8 @@ package com.getcatch.android.network
  */
 public enum class Environment(internal val baseUrl: String) {
     /** The environment which should be used for development and testing. */
-    SANDBOX("https://dev.app-sandbox.getcatch.com"),
+    SANDBOX("https://app-sandbox.getcatch.com"),
 
     /** The environment which should be used for production releases. */
-    LIVE("https://dev.app.getcatch.com");
+    LIVE("https://app.getcatch.com");
 }
