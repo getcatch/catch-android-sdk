@@ -1,98 +1,52 @@
+⚠️ This SDK is a work in progress. Please contact merchant-support@getcatch.com before using.
+
 # Catch Android SDK
 
-The project contains 3 modules:
+![Catch](https://user-images.githubusercontent.com/74115740/207220638-ef31c835-9a06-49d3-a8e5-d4e49acaae10.png)
 
-- `catch-android-sdk`: This is the library module containing all of the SDK source code.
-- `sample`: This is a sample Android app (it depends directly on `:catch-android-sdk`), meant for
-  prototyping, testing, and demonstration.
-- `buildSrc`: This module contains shared gradle configuration files.
+[![Maven Central](https://maven-badges.herokuapp.com/maven-central/com.getcatch/catch-android-sdk/badge.svg)](https://maven-badges.herokuapp.com/maven-central/com.getcatch/catch-android-sdk)
+[![License](https://img.shields.io/badge/license-MIT-lightgray)](https://github.com/getcatch/catch-android-sdk/blob/main/LICENSE)
 
-# Versions and Specifications
+The Catch Android SDK allows you to integrate [Catch](https://www.getcatch.com) as a payment option in your native Android apps.
 
-- The project depends on gradle 7.4.1.
-- You need JDK Version 11 (>=) to build and use this project.
-- It targets java version 8.
+Table of contents
+=================
 
-# Setup
+<!--ts-->
+* [Documentation](#documentation)
+* [Installation](#installation)
+* [Example](#example)
+<!--te-->
 
-## Install Android Studio
+## Documentation
 
-Go to [this link](https://developer.android.com/studio) and click "Download Android Studio".
+Read the [integration guide](https://catch.readme.io/reference) or [browse the API reference](https://getcatch.github.io/catch-android-sdk/).
 
-Scroll through the terms and conditions, check the box once you've "read" them, and then make sure you click the download button corresponding to your computer's chip.
+## Installation
 
-Once it is installed, open it. The first time you open it, there should be a brief setup wizard. It will likely have you install a bunch of things, hopefully including:
-- Android SDK
-- Android OS versions (choose the latest released version)
-- Android Emulator
-- `adb` - command line tool for Android things
+### Requirements
 
-## Add `adb` to your path
+The Catch Android SDK is compatible with the following versions:
 
-`adb` is frequently useful for running Android emulator related tasks, so it is good to have it in your path.
+- Android 5.0 (API level 21) and above
+- [Android Gradle Plugin](https://developer.android.com/build/releases/gradle-plugin) 4.1.3+
+- [Gradle](https://gradle.org/releases/) 6.8.3+
 
-Assuming it got installed by Android Studio into the right spot, put the following in your bash profile to make `adb` accessible in the command line:
+### Configuration
 
-```shell
-# Android path
-export PATH=~/Library/Android/sdk/tools:$PATH
-export PATH=~/Library/Android/sdk/platform-tools:$PATH
+Add the `catch-android-sdk` to your `build.gradle` dependencies.
+
+```
+dependencies {
+  implementation 'com.getcatch:catch-android-sdk:1.0.0'
+}
 ```
 
-## Import the project
+## Getting Started
 
-Import the whole directory you clone from git into Android Studio, let Gradle sync and build.
+### Example
 
-## Create an emulator
-
-To create a new emulator, click the Android Virtual Device (AVD) manager icon in the top right of the Android Studio window.
-
-![](./readme-assets/avd-manager.png)
-
-When that window/panel opens, click the "Create device" button.
-
-![](./readme-assets/avd-manager-create-device.png)
-
-Run through the setup wizard (you should be able to without changing any of the default options) and when finished, you will have a new emulator. 
-
-## Run the sample app
-
-By default, there should be a `sample` run configuration. If you have created an emulator or if you have an Android device connected to your computer, you should be able to click the play button next to it or run it by pressing `⌃ + R`.
-
-![](readme-assets/run-sample.png)
-
-If you can't run the app from initial setup, ping Clark.
-
-## Install git hooks
-
-We have [a custom pre-commit hook](hooks/pre-commit) that will run detekt (read more below) to help
-you be catch linting and formatting errors before pushing up code.
-
-In order for you to enable that git hook, run the following command:
-
-```shell
-git config core.hooksPath hooks/
-```
-
-# Detekt
-
-We use [detekt](https://detekt.dev) for static code analysis.
-
-You can run detekt from the command line with the following command:
-
-```shell
-./gradlew detekt
-```
-
-You can also pass it the flag `--auto-correct` and it will fix any simple formatting issues that it
-can for you.
-
-```shell
-./gradlew detekt --auto-correct
-```
-
-**Note:** Even if all the issues are auto-fixable, it will let you know what errors you came across.
-Run it twice to see if errors remain after auto-fixing.
-
-It is recommended to run `dependencyUpdates` to check what is updated and what not (Gradle version,
-plugin, kotlin version and dependencies).
+A demo app is included in this project. To run it you will need to do the following:
+- Clone this repository
+- Open this project in Android Studio
+- Run the `sample` app
