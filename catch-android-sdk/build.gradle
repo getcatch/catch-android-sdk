@@ -27,7 +27,7 @@ project.ext.set("module_${ext.module_name}", new ModuleArtifactCoordinates(
         "catch-android-sdk",
         
         // PUBLISH_VERSION
-        "1.0.0",
+        "1.0.1",
         
         // PUBLISH_ARTIFACT_DESC
         "Android SDK for Catch",
@@ -51,7 +51,7 @@ apply plugin: "io.gitlab.arturbosch.detekt"
 android {
     namespace = "com.getcatch.android"
     defaultConfig {
-        versionName "1.0.0"
+        versionName "1.0.1"
         versionCode 1
     }
     buildFeatures {
