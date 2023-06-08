@@ -2,7 +2,7 @@
 
 ![Catch](https://user-images.githubusercontent.com/74115740/207220638-ef31c835-9a06-49d3-a8e5-d4e49acaae10.png)
 
-[![Maven Central](https://maven-badges.herokuapp.com/maven-central/com.getcatch/catch-android-sdk/badge.svg)](https://maven-badges.herokuapp.com/maven-central/com.getcatch/catch-android-sdk)
+[![Maven Central](https://img.shields.io/maven-central/v/com.getcatch/catch-android-sdk.svg?label=Maven%20Central)](https://search.maven.org/search?q=g:%22com.getcatch%22%20AND%20a:%22catch-android-sdk%22)
 [![License](https://img.shields.io/badge/license-MIT-lightgray)](https://github.com/getcatch/catch-android-sdk/blob/main/LICENSE)
 
 The Catch Android SDK allows you to integrate [Catch](https://www.getcatch.com) as a payment option in your native Android apps.
@@ -36,7 +36,7 @@ Add the `catch-android-sdk` to your `build.gradle` dependencies.
 
 ```
 dependencies {
-  implementation 'com.getcatch:catch-android-sdk:1.0.0'
+  implementation 'com.getcatch:catch-android-sdk:1.0.1'
 }
 ```
 
