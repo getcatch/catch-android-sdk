@@ -1,6 +1,5 @@
 package com.getcatch.android.ui.activities.checkout
 
-import android.util.Log
 import androidx.activity.ComponentActivity
 import androidx.activity.result.ActivityResultLauncher
 import androidx.fragment.app.Fragment
@@ -10,6 +9,7 @@ import com.getcatch.android.ui.activities.checkout.direct.DirectCheckoutContract
 import com.getcatch.android.ui.activities.checkout.direct.DirectCheckoutResult
 import com.getcatch.android.ui.activities.checkout.virtualcard.VirtualCardCheckoutContract
 import com.getcatch.android.ui.activities.checkout.virtualcard.VirtualCardCheckoutResult
+import timber.log.Timber
 
 /**
  * The CatchCheckoutController manages launching and handling checkout activities.
@@ -30,8 +30,9 @@ public class CatchCheckoutController(
                 when (it) {
                     DirectCheckoutResult.Canceled -> onCancel?.onCancel()
                     DirectCheckoutResult.Confirmed -> onCheckoutConfirmed?.onCheckoutConfirmed()
-                    is DirectCheckoutResult.Failed -> Log.e(
-                        this::class.simpleName, "Direct checkout failed.", it.error
+                    is DirectCheckoutResult.Failed -> Timber.e(
+                        t = it.error,
+                        message = "Direct checkout failed."
                     )
                 }
             }
@@ -45,10 +46,9 @@ public class CatchCheckoutController(
                         )
                     }
 
-                    is VirtualCardCheckoutResult.Failed -> Log.e(
-                        this::class.simpleName,
-                        "Virtual card checkout failed.",
-                        it.error
+                    is VirtualCardCheckoutResult.Failed -> Timber.e(
+                        t = it.error,
+                        message = "Virtual card checkout failed.",
                     )
                 }
             }

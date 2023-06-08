@@ -21,10 +21,15 @@ import com.getcatch.android.ui.typography.CustomFontFamily
  *
  * @property styleConfig An optional style config that will be
  * applied to the elements of all widgets if set. Defaults to null.
+ *
+ * @property enableLogging A boolean flag to allow developers to control
+ * the SDK's logging. The SDK does not handle nor log any personal data.
+ * Recommended to only be enabled in debug builds. Defaults to false.
  */
 public data class CatchOptions(
     val colorTheme: CatchColorTheme = CatchColorTheme.Light,
     val environment: Environment = Environment.SANDBOX,
     val customFontFamily: CustomFontFamily? = null,
     val styleConfig: CatchStyleConfig? = null,
+    val enableLogging: Boolean = false,
 )

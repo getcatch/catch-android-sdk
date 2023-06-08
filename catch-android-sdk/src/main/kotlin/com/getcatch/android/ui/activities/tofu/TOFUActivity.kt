@@ -2,7 +2,6 @@ package com.getcatch.android.ui.activities.tofu
 
 import android.content.Context
 import android.content.Intent
-import android.util.Log
 import androidx.lifecycle.lifecycleScope
 import com.getcatch.android.exceptions.WebViewError
 import com.getcatch.android.models.EarnedRewardsSummary
@@ -26,6 +25,7 @@ import kotlinx.serialization.json.contentOrNull
 import kotlinx.serialization.json.jsonPrimitive
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
+import timber.log.Timber
 
 internal class TOFUActivity : WebViewActivity(), KoinComponent {
 
@@ -99,7 +99,7 @@ internal class TOFUActivity : WebViewActivity(), KoinComponent {
                 tofuReady.value = true
             }
 
-            else -> Log.d(this::class.simpleName, "Unhandled post message: $message")
+            else -> Timber.d("Unhandled post message: $message")
         }
     }
 

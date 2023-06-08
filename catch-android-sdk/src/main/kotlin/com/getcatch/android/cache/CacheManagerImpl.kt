@@ -1,12 +1,12 @@
 package com.getcatch.android.cache
 
 import android.content.Context
-import android.util.Log
 import com.getcatch.android.models.Merchant
 import com.getcatch.android.serialization.SnakeCaseSerializer
 import kotlinx.serialization.SerializationException
 import kotlinx.serialization.decodeFromString
 import kotlinx.serialization.encodeToString
+import timber.log.Timber
 
 internal class CacheManagerImpl(val context: Context) : CacheManager {
     private val sharedPrefs = context.getSharedPreferences(
@@ -20,11 +20,17 @@ internal class CacheManagerImpl(val context: Context) : CacheManager {
             return try {
                 SnakeCaseSerializer.decodeFromString(merchantJsonString)
             } catch (ex: SerializationException) {
-                Log.w(this::class.simpleName, "Error deserializing cached merchant.", ex)
+                Timber.w(
+                    ex,
+                    "Error deserializing cached merchant.",
+                )
                 merchant = null
                 null
             } catch (ex: IllegalArgumentException) {
-                Log.w(this::class.simpleName, "Error deserializing cached merchant.", ex)
+                Timber.w(
+                    ex,
+                    "Error deserializing cached merchant.",
+                )
                 merchant = null
                 null
             }

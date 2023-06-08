@@ -1,9 +1,9 @@
 package com.getcatch.android.web
 
-import android.util.Log
 import android.webkit.JavascriptInterface
 import com.getcatch.android.ui.activities.WebViewActivity
 import kotlinx.serialization.SerializationException
+import timber.log.Timber
 
 internal class CatchWebViewInterface(val webViewActivity: WebViewActivity) {
 
@@ -16,10 +16,9 @@ internal class CatchWebViewInterface(val webViewActivity: WebViewActivity) {
             val deserializedMessage = PostMessageBody.fromJsonString(message)
             webViewActivity.handlePostMessage(deserializedMessage)
         } catch (ex: SerializationException) {
-            Log.w(
-                this::class.simpleName,
-                "Error deserializing a post message body",
-                ex
+            Timber.w(
+                t = ex,
+                message = "Error deserializing a post message body",
             )
         }
     }

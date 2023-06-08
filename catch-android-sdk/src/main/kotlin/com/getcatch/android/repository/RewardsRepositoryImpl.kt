@@ -1,6 +1,5 @@
 package com.getcatch.android.repository
 
-import android.util.Log
 import com.getcatch.android.models.CalculateRewardsResult
 import com.getcatch.android.models.CalculatedAvailableRewardsBreakdown
 import com.getcatch.android.models.CalculatedReward
@@ -10,6 +9,7 @@ import com.getcatch.android.models.Merchant
 import com.getcatch.android.models.PublicUserData
 import com.getcatch.android.network.NetworkResponse
 import com.getcatch.android.network.clients.transactions.TransactionsSvcClient
+import timber.log.Timber
 import kotlin.math.max
 import kotlin.math.min
 
@@ -81,7 +81,7 @@ internal class RewardsRepositoryImpl(
         return when (response) {
             is NetworkResponse.Success -> response.body
             is NetworkResponse.Failure -> {
-                Log.e("RewardsRepositoryImpl", response.message, response.error)
+                Timber.e(t = response.error, message = response.message)
                 null
             }
         }
