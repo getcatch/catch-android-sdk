@@ -1,7 +1,6 @@
 package com.getcatch.android
 
 import android.content.Context
-import android.util.Log
 import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.State
 import androidx.compose.runtime.mutableStateOf
@@ -30,6 +29,7 @@ import org.koin.android.ext.koin.androidContext
 import org.koin.core.KoinApplication
 import org.koin.core.context.startKoin
 import org.koin.dsl.module
+import timber.log.Timber
 import java.util.concurrent.atomic.AtomicBoolean
 
 /** The Catch SDK global interface. */
@@ -64,6 +64,11 @@ public object Catch {
         publicKey: String,
         options: CatchOptions = CatchOptions(),
     ): Unit = synchronized(this) {
+        // Setup Timber logging
+        if (options.enableLogging) {
+            Timber.plant(Timber.DebugTree())
+        }
+
         // Setup dependency injection
         val koinApp = initKoin(
             context = context,
@@ -124,7 +129,7 @@ public object Catch {
         val response = merchantRepo.loadMerchant()
 
         if (response is NetworkResponse.Failure) {
-            Log.e("CatchSDK", "Failed to fetch merchant.")
+            Timber.e("Failed to fetch merchant.")
             // Assume a new user so rewards can be calculated
             userRepo.fallbackToNewUser()
         }
@@ -148,25 +153,26 @@ public object Catch {
         val backgroundScope = CoroutineScope(Dispatchers.IO + applicationJob)
         var refreshMerchantJob: Job? = null
         var refreshUserJob: Job? = null
-        ProcessLifecycleOwner.get().lifecycle.addObserver(LifecycleEventObserver { _, event ->
-            when (event) {
-                Lifecycle.Event.ON_START -> {
-                    refreshMerchantJob = backgroundScope.launch {
-                        refreshMerchant(merchantRepo, userRepo)
+        ProcessLifecycleOwner.get().lifecycle.addObserver(
+            LifecycleEventObserver { _, event ->
+                when (event) {
+                    Lifecycle.Event.ON_START -> {
+                        refreshMerchantJob = backgroundScope.launch {
+                            refreshMerchant(merchantRepo, userRepo)
+                        }
+                        refreshUserJob = backgroundScope.launch {
+                            refreshUser(merchantRepo, userRepo)
+                        }
                     }
-                    refreshUserJob = backgroundScope.launch {
-                        refreshUser(merchantRepo, userRepo)
+
+                    Lifecycle.Event.ON_STOP -> {
+                        refreshMerchantJob?.cancel()
+                        refreshUserJob?.cancel()
                     }
-                }
 
-                Lifecycle.Event.ON_STOP -> {
-                    refreshMerchantJob?.cancel()
-                    refreshUserJob?.cancel()
+                    else -> { /* No-op */ }
                 }
-
-                else -> { /* No-op */ }
             }
-        }
         )
     }
 

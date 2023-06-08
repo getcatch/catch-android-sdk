@@ -4,8 +4,8 @@ import android.content.ActivityNotFoundException
 import android.content.Context
 import android.content.Intent
 import android.net.Uri
-import android.util.Log
 import io.ktor.http.URLBuilder
+import timber.log.Timber
 
 /**
  * A utility method for building urls.
@@ -34,13 +34,12 @@ internal val Uri.baseUrl: String
 internal fun URLBuilder.parameter(key: String, value: Any?): Unit =
     value?.let { parameters.append(key, it.toString()) } ?: Unit
 
-
 internal fun launchUrlIntent(context: Context, url: String) {
     try {
         val intent = Intent(Intent.ACTION_VIEW, Uri.parse(ensureUrlPrefix(url)))
         context.startActivity(intent)
     } catch (ex: ActivityNotFoundException) {
-        Log.e("CatchSDK", "Invalid url: $url", ex)
+        Timber.e(t = ex, message = "CatchSDK", "Invalid url: $url")
     }
 }
 
