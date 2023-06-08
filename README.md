@@ -36,7 +36,7 @@ Add the `catch-android-sdk` to your `build.gradle` dependencies.
 
 ```
 dependencies {
-  implementation 'com.getcatch:catch-android-sdk:1.0.1'
+  implementation 'com.getcatch:catch-android-sdk:1.0.2'
 }
 ```
 
