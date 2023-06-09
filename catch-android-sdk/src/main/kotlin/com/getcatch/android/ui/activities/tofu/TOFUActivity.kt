@@ -3,7 +3,6 @@ package com.getcatch.android.ui.activities.tofu
 import android.content.Context
 import android.content.Intent
 import androidx.lifecycle.lifecycleScope
-import com.getcatch.android.exceptions.WebViewError
 import com.getcatch.android.models.EarnedRewardsSummary
 import com.getcatch.android.models.PublicKey
 import com.getcatch.android.models.tofu.MerchantDefaults
@@ -101,14 +100,6 @@ internal class TOFUActivity : WebViewActivity(), KoinComponent {
 
             else -> Timber.d("Unhandled post message: $message")
         }
-    }
-
-    override fun handleError(
-        error: WebViewError?
-    ) {
-        // Do nothing as the user can easily close TOFU if they are
-        // in a broken state and we aren't certain that the error is
-        // a sure indicator of a broken state.
     }
 
     companion object {
