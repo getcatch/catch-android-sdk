@@ -23,6 +23,7 @@ import com.google.accompanist.web.WebView
 import com.google.accompanist.web.rememberWebViewState
 import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
+import timber.log.Timber
 
 internal abstract class WebViewActivity : ComponentActivity() {
     protected var webView: WebView? = null
@@ -40,7 +41,10 @@ internal abstract class WebViewActivity : ComponentActivity() {
 
     abstract fun handlePostMessage(message: PostMessageBody)
 
-    abstract fun handleError(error: WebViewError?)
+    open fun handleError(error: WebViewError?) {
+        Timber.e(error)
+        finish()
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
