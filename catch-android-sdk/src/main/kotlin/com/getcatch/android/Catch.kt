@@ -64,6 +64,10 @@ public object Catch {
         publicKey: String,
         options: CatchOptions = CatchOptions(),
     ): Unit = synchronized(this) {
+        if (initialized.get()) {
+            return
+        }
+
         // Setup Timber logging
         if (options.enableLogging) {
             Timber.plant(Timber.DebugTree())
@@ -184,7 +188,7 @@ public object Catch {
         styleConfig = options.styleConfig
     }
 
-    internal fun assertInitialized() {
+    internal fun assertInitialized() = synchronized(this) {
         if (!initialized.get()) {
             throw CatchNotInitializedException()
         }
