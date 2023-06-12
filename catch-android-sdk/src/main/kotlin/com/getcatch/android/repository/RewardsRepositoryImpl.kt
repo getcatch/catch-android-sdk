@@ -27,7 +27,10 @@ internal class RewardsRepositoryImpl(
             merchantRepo.activeMerchant.value ?: return CalculateRewardsResult.NoRewardsSummary
 
         val calculatedAvailableRewardsBreakdown =
-            CalculatedAvailableRewardsBreakdown.calculate(price, user.availableRewardBreakdown)
+            CalculatedAvailableRewardsBreakdown.calculate(
+                price,
+                user.availableRewardBreakdown ?: emptyList()
+            )
 
         val earnedRewardsSummary = fetchEarnedRewardSummary(
             price = price,

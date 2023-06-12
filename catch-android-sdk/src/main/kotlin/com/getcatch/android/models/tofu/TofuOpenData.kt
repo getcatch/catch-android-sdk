@@ -23,7 +23,7 @@ internal data class TofuOpenData(
     fun toJsonObject(): JsonObject {
         val availableRewardsBreakdown = CalculatedAvailableRewardsBreakdown.calculate(
             price,
-            publicUserData.availableRewardBreakdown
+            publicUserData.availableRewardBreakdown ?: emptyList()
         )
         return buildJsonObject {
             put(

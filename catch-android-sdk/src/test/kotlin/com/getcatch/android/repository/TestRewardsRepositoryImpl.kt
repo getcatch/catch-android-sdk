@@ -162,7 +162,7 @@ public class TestRewardsRepositoryImpl {
             val user = FakeDataProvider.user
             val calculatedReward = CalculatedAvailableRewardsBreakdown.calculate(
                 tenDollars,
-                user.availableRewardBreakdown
+                user.availableRewardBreakdown ?: emptyList()
             )
             rewardsRepo.fetchEarnedRewardSummary(
                 price = tenDollars,
