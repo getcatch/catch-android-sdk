@@ -3,7 +3,6 @@ package com.getcatch.android.ui.activities.checkout
 import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import androidx.activity.addCallback
 import com.getcatch.android.exceptions.WebViewError
 import com.getcatch.android.models.CatchDeviceTokenPayload
@@ -15,6 +14,7 @@ import kotlinx.serialization.json.Json
 import kotlinx.serialization.json.decodeFromJsonElement
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
+import timber.log.Timber
 
 internal abstract class CheckoutActivity<T> : WebViewActivity(), KoinComponent {
     private val userRepo: UserRepository by inject()
@@ -34,7 +34,7 @@ internal abstract class CheckoutActivity<T> : WebViewActivity(), KoinComponent {
                 try {
                     setActivityResult(generateSuccessResult(message))
                 } catch (ex: Exception) {
-                    Log.e(this::class.simpleName, "Error setting success result for checkout.", ex)
+                    Timber.e(t = ex, message = "Error setting success result for checkout.")
                 }
                 finish()
             }
@@ -52,11 +52,11 @@ internal abstract class CheckoutActivity<T> : WebViewActivity(), KoinComponent {
                     val deviceTokenPayload: CatchDeviceTokenPayload = Json.decodeFromJsonElement(message.data!!)
                     deviceTokenPayload.deviceToken?.let { userRepo.updateDeviceToken(it) }
                 } catch (ex: Exception) {
-                    Log.e(this::class.simpleName, "Error updating device token", ex)
+                    Timber.e(t = ex, message = "Error updating device token")
                 }
             }
 
-            else -> Log.d(this::class.simpleName, "Unhandled post message: ${message.action}")
+            else -> Timber.d("Unhandled post message: ${message.action}")
         }
     }
 

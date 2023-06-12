@@ -1,7 +1,6 @@
 package com.getcatch.android.utils
 
 import android.content.res.TypedArray
-import android.util.Log
 import androidx.annotation.StyleableRes
 import com.getcatch.android.R
 import com.getcatch.android.ui.BorderStyle
@@ -10,6 +9,7 @@ import com.getcatch.android.ui.CatchLogoSize
 import com.getcatch.android.ui.PaymentMethodVariant
 import com.getcatch.android.ui.styles.values.ColorValue
 import com.getcatch.android.ui.theming.CatchColorTheme
+import timber.log.Timber
 
 internal fun TypedArray.getHasOrPrefix() = getBoolean(R.styleable.CalloutView_hasOrPrefix, false)
 
@@ -61,17 +61,13 @@ internal fun TypedArray.getCalloutBorderStyle(): CalloutBorderStyle? =
                     color = ColorValue(color),
                 )
             } else {
-                Log.w(
-                    "CalloutView",
-                    "Border style set to custom, but radius or color not specified."
-                )
+                Timber.w("Border style set to custom, but radius or color not specified.")
                 null
             }
         }
         CalloutBorderStyleAttrEnum.NONE -> CalloutBorderStyle.None
         else -> null
     }
-
 
 internal fun TypedArray.getBorderStyle(
     widgetName: String,
@@ -91,9 +87,8 @@ internal fun TypedArray.getBorderStyle(
                     color = ColorValue(color),
                 )
             } else {
-                Log.w(
-                    widgetName,
-                    "Border style set to custom, but radius or color not specified."
+                Timber.w(
+                    "$widgetName: Border style set to custom, but radius or color not specified."
                 )
                 null
             }

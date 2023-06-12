@@ -15,6 +15,7 @@ class App : Application() {
             context = this,
             options = CatchOptions(
                 environment = Environment.SANDBOX,
+                enableLogging = true,
             )
         )
     }
