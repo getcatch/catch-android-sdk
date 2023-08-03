@@ -82,6 +82,10 @@ internal class TOFUActivity : WebViewActivity(), KoinComponent {
 
     override fun handlePostMessage(message: PostMessageBody) = runOnUiThread {
         when (message.action) {
+            PostMessageActions.TOFU_LISTENING -> {
+                postMessage(PostMessageBody(PostMessageActions.TOFU_LOAD))
+            }
+
             PostMessageActions.TOFU_BACK -> {
                 finish()
             }
