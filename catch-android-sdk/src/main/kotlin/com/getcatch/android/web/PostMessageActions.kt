@@ -1,6 +1,8 @@
 package com.getcatch.android.web
 
 internal object PostMessageActions {
+    const val TOFU_LISTENING = "CATCH_TOFU_LISTENING"
+    const val TOFU_LOAD = "CATCH_TOFU_LOAD"
     const val TOFU_READY = "CATCH_TOFU_READY"
     const val TOFU_OPEN = "CATCH_TOFU_OPEN"
     const val TOFU_BACK = "CATCH_TOFU_BACK"

@@ -1,5 +1,6 @@
 package com.getcatch.android.web
 
+import android.graphics.Bitmap
 import android.net.Uri
 import android.os.Build
 import android.webkit.WebResourceError
@@ -20,8 +21,8 @@ internal class CatchSDKWebClient(private val webViewActivity: WebViewActivity) :
     AccompanistWebViewClient(), KoinComponent {
     private val environment: Environment by inject()
 
-    override fun onPageFinished(view: WebView?, url: String?) {
-        super.onPageFinished(view, url)
+    override fun onPageStarted(view: WebView?, url: String?, favicon: Bitmap?) {
+        super.onPageStarted(view, url, favicon)
         if (view != null) {
             registerPostMessageListener(view)
         }
