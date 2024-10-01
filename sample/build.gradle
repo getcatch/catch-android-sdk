@@ -22,7 +22,7 @@ apply plugin: "io.gitlab.arturbosch.detekt"
 android {
     namespace = "com.getcatch.sample"
     defaultConfig {
-        versionName "1.0.1-app-sample"
+        versionName "1.0.2-app-sample"
         versionCode 1
         
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
